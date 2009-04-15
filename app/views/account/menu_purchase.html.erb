@@ -1,0 +1,39 @@
+<h2>Sklad materiálu</h2>
+<table>
+    <tr>
+        <th rowspan="2" width="100">název</th>
+        <th rowspan="2" width="70">nakoupeno</th>
+        <th rowspan="2" width="70">chybí</th>
+        <th rowspan="2" width="70">sklad</th>
+        <th colspan="4" width="210">cena</th>
+    </tr>
+    <tr>
+        <th width="70">naše</th>
+        <th width="70">nejnižší</th>
+        <th width="70">nejvyšší</th>
+        <th width="70">průměrná</th>
+    </tr>
+<% summary_price = 0 -%>
+<% for tape_type in @tape_types %>
+   <tr class="<%= cycle("even", "odd") %>">
+       <% bought_tapes = tape_type.bought_tapes -%>
+       <% operation_tapes_sum = Operation.sum("value" ,:conditions=> [ "finished is true AND tape_type_id = :id  AND their_tape IS NOT true", {:id => tape_type.id}] ) -%>
+       <% bought_tapes_sum = bought_tapes.sum("value") -%>
+       <% missing_tapes_sum = MissingTape.sum("value" ,:conditions=> [ "tape_type_id = :id ", {:id => tape_type.id}] ) -%>
+       <% sum = bought_tapes_sum - operation_tapes_sum - missing_tapes_sum %>
+       <th <% if sum < tape_type.limit %>class="red"<% end %>><%= tape_type.name %></th>
+       <td><%= bought_tapes_sum %></td>
+       <td><%= missing_tapes_sum > 0 ? "-" : "" %><%= missing_tapes_sum %></td>
+       <td <% if sum < tape_type.limit %>class="red"<% end %>><%= sum %></td>
+       <td><%= tape_type.tape_price %></td>
+       <td><%= bought_tapes.minimum("price") %></td>
+       <td><%= bought_tapes.maximum("price") %></td>
+       <td><%= bought_tapes.average("price") %></td>
+       <% summary_price += sum * tape_type.tape_price -%>
+   </tr>
+<% end %>
+</table>
+
+<p>
+    Celkem je ve skladu: <%= summary_price %> Kč
+</p>

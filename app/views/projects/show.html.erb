@@ -1,0 +1,93 @@
+<h2>
+    <div class="menu_small">
+        <%= link_to 'upravit projekt', edit_project_path(@project) %>
+    </div>
+    Projekt: <%=h project_name(@project)%>
+</h2>
+<table>
+    <% if not @project.project.blank? %>
+        <tr><td>Hlavní projekt: </td><td><strong>  <%= link_to @project.project.name, @project.project %></strong></td></tr>
+    <% end %>
+    <tr><td>firma: </td><td><strong>  <%= link_to @project.company.name, @project.company %></strong></td></tr>
+    <tr><td>zadal: </td><td><strong>  <%= link_to @project.user.fullname, @project.user %></strong></td></tr>
+    <tr><td>Stav: </td><td><strong><%= project_status @project %></strong></td></tr>
+    <tr><td>poznámka: </td><td>
+        <%=h @project.note %>
+    </td></tr>
+ </table>
+
+
+<% if @project.project_id.blank? %>
+<h3>
+    <div class="menu_small">
+        <%= link_to 'přidat podprojekt', new_project_project_path(@project) %>
+    </div>
+    Seznam subprojektů
+</h3>
+<ul>
+ <% for proj in @project.projects %>
+      <li><%= link_to proj.name, proj  %></li>
+
+<% end %>
+</ul>
+
+<% end %>
+
+
+
+<h3>
+    <% if @project.status == 1 %>
+        <div class="menu_small">
+            <%= link_to 'naplánovat práci', new_project_plan_work_path(@project) %>
+            <%= link_to 'naplánovat práci na teď', new_now_project_plan_works_path(@project) %>
+        </div>
+    <% else  %>
+        <div class="menu_small red">
+            projekt nelze naplánovat: není ve stavu <i>zakázka</i>
+        </div>
+    <% end %>
+    Práce
+</h3>
+
+
+<table class="odstavec2">
+  <tr>
+    <th>datum</th>
+    <th width="90">od - do</th>
+    <th width="100">pracovnik</th>
+    <th>typ prace</th>
+    <th>pracoviště</th>
+    <th width="250">úkony</th>
+    <th>rezervace</th>
+    <th>upravit</th>
+
+  </tr>
+
+<% for work in @project.works.find(:all, :conditions => ["deleted is null"]).sort_by {|u| u.time} %>
+  <tr>
+    <td><%= my_date work.time  %></td>
+    <td><%= my_hour work.time  %> -
+        <%= my_hour ( work.time + work.length.minutes ) %></td>
+    <td><%=h work.user.blank? ? "" : work.user.fullname %></td>
+    <td><%=h work.job_type.blank? ? "" : work.job_type.name %></td>
+    <td><%=h work.place.blank? ? "" : work.place.name %></td>
+    <td>
+        <% for operation in work.operations %>
+            <%= operation.operation_type.name %>,
+        <% end %>
+    </td>
+    <td><%= work.reserved == true ? "rezervováno" : " " %></td>
+
+    <td><%= link_to "upravit", edit_project_plan_work_path(@project.id , work.id) %></td>
+
+  </tr>
+
+<% end %>
+</table>
+
+
+<h3>Source information &amp; media</h3>
+<div><a href="">documentation.pdf</a>, <a href="">video.iso</a></div>
+
+
+

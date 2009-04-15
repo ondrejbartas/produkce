@@ -1,0 +1,13 @@
+<p>
+  <b>Date:</b>
+  <%=h @history.date %>
+</p>
+
+<p>
+  <b>Deleted:</b>
+  <%=h @history.deleted %>
+</p>
+
+
+<%= link_to 'Edit', edit_history_path(@history) %> |
+<%= link_to 'Back', histories_path %>

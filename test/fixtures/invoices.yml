@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  project_id: 1
+  note: MyString
+  date: 2009-03-30 09:30:51
+  price: 1
+  company_id: 1
+
+two:
+  project_id: 1
+  note: MyString
+  date: 2009-03-30 09:30:51
+  price: 1
+  company_id: 1

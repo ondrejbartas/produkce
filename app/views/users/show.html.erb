@@ -1,0 +1,36 @@
+  
+<h2> 
+     <div class="menu_small">
+      <%= link_to 'upravit', edit_user_path(@user) %>
+      <%= link_to 'smazat', @user, :confirm => 'Jste si opravdu jistí se smazáním uživatele: '+@user.name+' '+@user.surname+'?', :method => :delete %>
+     </div>
+   UŽIVATEL: <%= @user.name.blank? ? "" : @user.name  %> <%= @user.surname.blank? ? "" : @user.surname  %>
+</h2>
+ <ul>
+     <li>firma: <%= @user.company.blank? ? " " : (link_to @user.company.name, @user.company) %>   </li>
+     <li>práva uživatele:
+        <% for role in Role.find(:all)  %>
+          <%  if !@user.blank? && @user.role % role.idd == 0  %>
+            <%= role.comment.downcase %>,
+          <% end %>
+        <% end %>
+      </li>
+      <li>kategorie:
+        <% for category in @user.categories  %>
+            <%= category.name %>,
+        <% end %>
+      </li>
+ </ul>
+
+ <h2>
+   <% if @current_user.id == @user.id || @current_user.admin? || @current_user.produce? %>
+     <div class="menu_small">
+       <%= link_to 'přidat kontakt', new_user_contact_path(@user)  %>
+     </div>
+   <% end %>
+   KONTAKT NA UŽIVATELE
+ </h2>
+ 
+ <div id="contacts"><%= link_to_remote "zobrazit", :update => 'contacts', :url => { :controller => 'contacts', :action => 'render_index', :id => @user.id } %></div>
+
+  

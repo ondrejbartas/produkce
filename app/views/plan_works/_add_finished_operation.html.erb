@@ -1,0 +1,21 @@
+    <div class="operation">
+        <li>
+            <% cas = Time.now.strftime("%s") %>
+          úkon:<%= collection_select 'work[operations_attributes][new_'+cas+']', :operation_type_id , @operation_types,
+              :id, :name, {:include_blank => true},
+              {:onchange => remote_function( :update => "operation_type_id_container_"+cas, :url =>
+                      add_operation_type_parameters_plan_works_path, :with =>
+                        "'cas="+cas+"&operation_type_id=' +
+                      escape(value)" )}%>
+
+          <span id="operation_type_id_container_<%= cas %>">
+          </span>
+        </li>
+
+         <li>poznámka operátora:<%= text_field 'work[operations_attributes][new_'+cas+']', :note_operator , :size=> 80%></li>
+         <%= hidden_field 'work[operations_attributes][new_'+cas+']', :finished , :value=>"true" %>
+         <li>
+               <%= link_to_function "smazat úkon", "$(this).up('.operation').remove(); " %>
+         </li>
+
+     </div>

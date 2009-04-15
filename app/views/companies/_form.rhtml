@@ -1,0 +1,17 @@
+<%= error_messages_for :company  %>
+<p>
+    <%= label :company, 'name', 'jméno firmy', :required => true %><br />
+    <%= text_field :company, :name %>
+</p>
+<p>
+    <%= label :company, 'ico', 'IČO', :required => false %><br />
+    <%= text_field :company, :ico %>
+</p>
+<p>
+    <%= label :company, 'dic', 'DIČ', :required => false %><br />
+    <%= text_field :company, :dic %>
+</p>
+<p>
+    <%= label :company, 'account', 'číslo účtu', :required => false %><br />
+    <%= text_field :company, :account %>
+</p>

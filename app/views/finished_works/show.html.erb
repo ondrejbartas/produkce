@@ -1,0 +1,23 @@
+<p>
+  <b>Note:</b>
+  <%=h @finished_work.note %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @finished_work.status %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%=h @finished_work.value %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @finished_work.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_finished_work_path(@finished_work) %> |
+<%= link_to 'Back', finished_works_path %>

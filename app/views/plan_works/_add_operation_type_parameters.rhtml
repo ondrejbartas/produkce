@@ -1,0 +1,94 @@
+<% if @operation.blank? %>
+    <% if not @operation_type.blank? %>
+            <%  if @operation_type.value == 0 %>
+
+               počet minut:<%= text_field 'work[operations_attributes][new_'+@cas+']', :value, :size => 3%>
+
+            <% elsif @operation_type.value == 1 %>
+
+               čas:<%= select 'work[operations_attributes][new_'+@cas+']', :value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
+
+            <% elsif @operation_type.value == 2 %>
+
+               počet kusů:<%= text_field 'work[operations_attributes][new_'+@cas+']', :count , :size => 3 %>
+
+            <% elsif @operation_type.value == 3%>
+               použitý materiál : <%= collection_select('work[operations_attributes][new_'+@cas+']', :tape_type_id ,
+                    TapeType.find(:all),
+                    :id, :name, {:include_blank => true} )%>,
+                    počet kusů:<%= text_field 'work[operations_attributes][new_'+@cas+']', :count ,  {:type =>"text", :value => "1", :size => 3}  %>,
+                    vlastní materiál:<%= check_box 'work[operations_attributes][new_'+@cas+']',:their_tape,  :value => "true" %>
+
+      		 <% elsif (@operation_type.value == 5 || @operation_type.value == 6) %>
+               použitý materiál : <%= collection_select('work[operations_attributes][new_'+@cas+']', :tape_type_id ,
+                    TapeType.find(:all),
+                    :id, :name, {:include_blank => true} )%>,
+                    počet kusů:<%= text_field 'work[operations_attributes][new_'+@cas+']', :count ,  {:type =>"text", :value => "1", :size => 3}  %>,
+
+			 <% elsif @operation_type.value == 4 %>
+               <% machines = Machine.find(:all) %>
+                ze stroje:  <%= collection_select('work[operations_attributes][new_'+@cas+']', :player_machine_id ,
+                    machines,
+                    :id, :name, {:include_blank => true} )%>,
+                -> na stroj:  <%= collection_select('work[operations_attributes][new_'+@cas+']', :record_machine_id ,
+                    machines,
+                    :id, :name, {:include_blank => true} )%>
+
+                -> použitý materiál: <%= collection_select('work[operations_attributes][new_'+@cas+']', :tape_type_id ,
+                    TapeType.find(:all),
+                    :id, :name, {:include_blank => true} )%>,
+                počet kusů:<%= text_field 'work[operations_attributes][new_'+@cas+']', :count ,  {:type =>"text", :value => "1", :size => 3}  %>
+                vlastní materiál:<%= check_box 'work[operations_attributes][new_'+@cas+']', :their_tape, :value => "true" %>, 
+                délka přepisu:<%= select 'work[operations_attributes][new_'+@cas+']',  :value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
+
+            <% end %>
+
+        &mdash;<span class="note"><%= @operation_type.note %></span>
+    <% end %>
+<% else %>
+    <% if not @operation_type.blank? %>
+            <%  if @operation_type.value == 0 %>
+
+               počet minut:<%= text_field :operation, :value, :size => 3%>
+
+            <% elsif @operation_type.value == 1 %>
+
+               čas:<%= select :operation, :value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
+
+            <% elsif @operation_type.value == 2 %>
+
+               počet kusů:<%= text_field :operation, :count , :size => 3 %>
+
+            <% elsif @operation_type.value == 3%>
+               použitý materiál : <%= collection_select(:operation, :tape_type_id ,
+                    TapeType.find(:all),
+                    :id, :name, {:include_blank => true} )%>,
+                    počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :value => "1", :size => 3}  %>
+                    vlastní materiál:<%= check_box :operation,:their_tape,  :value => "true" %>
+			 <% elsif (@operation_type.value == 5 || @operation_type.value == 6)%>
+               použitý materiál : <%= collection_select(:operation, :tape_type_id ,
+                    TapeType.find(:all),
+                    :id, :name, {:include_blank => true} )%>,
+                    počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :value => "1", :size => 3}  %>
+            <% elsif @operation_type.value == 4 %>
+               <% machines = Machine.find(:all) %>
+                ze stroje:  <%= collection_select(:operation, :player_machine_id ,
+                    machines,
+                    :id, :name, {:include_blank => true} )%><br />
+                -> na stroj:  <%= collection_select(:operation, :record_machine_id ,
+                    machines,
+                    :id, :name, {:include_blank => true} )%><br />
+
+                -> použitý materiál: <%= collection_select(:operation, :tape_type_id ,
+                    TapeType.find(:all),
+                    :id, :name, {:include_blank => true} )%><br />
+                počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :value => "1", :size => 3}  %><br />
+                vlastní materiál:<%= check_box :operation, :their_tape, :value => "true" %><br />
+                délka přepisu:<%= select :operation, :value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
+
+            <% end %>
+
+        <br />&ndash; <span class="note"><%= @operation_type.note %></span>
+    <% end %>
+
+<% end %>

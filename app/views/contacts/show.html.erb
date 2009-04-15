@@ -1,0 +1,15 @@
+<h2><%= @contact.name %></h2>
+<div class="menu_small">
+  <%= link_to 'Edit', edit_contact_path(@contact) %> |
+  <%= link_to 'Back', contacts_path %>
+</div>
+
+<table>
+  <tr><td>telefon: </td><td><%= @contact.phone %></td></tr>
+  <tr><td>email: </td><td><%= mail_to @contact.email %></td></tr>
+  <tr><td>adresa: </td><td class="top"><%= @contact.address %></td></tr>
+  <tr><td>poznámka: </td><td><%= @contact.note %></td></tr>
+  <td>
+</table>
+
+     

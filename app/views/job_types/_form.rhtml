@@ -1,0 +1,9 @@
+<%= error_messages_for :job_type  %>
+<p>
+    <%= label :job_type, 'name', 'jméno', :required => true %><br />
+    <%= text_field :job_type, :name %>
+</p>
+<p>
+    <%= label :job_type, 'note', 'poznámka', :required => false %><br />
+    <%= text_area :job_type, :note, :cols=>30, :rows=>5 %>
+</p>

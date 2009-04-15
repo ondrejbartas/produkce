@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  warehouse_control_id: 1
+  tape_type: 1
+  value: 1
+
+two:
+  warehouse_control_id: 1
+  tape_type: 1
+  value: 1

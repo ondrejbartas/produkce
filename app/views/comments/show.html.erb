@@ -1,0 +1,18 @@
+<p>
+  <b>Date:</b>
+  <%=h @comment.date %>
+</p>
+
+<p>
+  <b>Text:</b>
+  <%=h @comment.text %>
+</p>
+
+<p>
+  <b>Deleted:</b>
+  <%=h @comment.deleted %>
+</p>
+
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>

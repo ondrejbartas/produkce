@@ -1,0 +1,23 @@
+<h2>Listing contacts</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Note</th>
+  </tr>
+
+<% for contact in @contacts %>
+  <tr>
+    <td><%= link_to contact.user.name, contact %></td>
+    <td><%=h contact.address %></td>
+    <td><%=h contact.email %></td>
+    <td><%=h contact.phone %></td>
+    <td><%=h contact.note %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

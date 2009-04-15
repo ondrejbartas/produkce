@@ -1,0 +1,32 @@
+<% if not @places.blank? %>
+      <% if  @places.size > 0 %>
+        <%= label :work, 'place_id', 'pracovní místo:', :required => false %>
+        <%  if @selected.blank? %>
+            <%= collection_select(:work, :place_id ,
+              @places,
+              :id, :name, {:include_blank => false} )%>
+        <%  else %>
+            <%= collection_select(:work, :placet_id ,
+              @places,
+              :id, :name, {:selected_value => @selected, :include_blank => true})%>
+        <% end %>
+      <% end %>
+
+    <% end %>
+
+
+<% if not @operation_types.blank? %>
+<h3>úkony</h3>
+<ul id="operations">
+            <%= render :partial => 'add_finished_operation'  %>
+</ul>
+
+<ul><li>    <%= link_to_remote "+ přidat úkon +",
+           :url => { :action => "add_finished_operation", :job_type_id => @job_type.id},
+           :update =>  "operations" , :position => :bottom %>
+</li></ul>
+<% end %>
+
+
+
+

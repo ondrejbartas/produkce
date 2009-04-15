@@ -1,0 +1,10 @@
+<h2>úprava přístupových práv</h2>
+<% form_for(@right) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'rights/form' %>
+
+  <p>
+    <%= f.submit 'upravit' %>
+  </p>
+<% end %>

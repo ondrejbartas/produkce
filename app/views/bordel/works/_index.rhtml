@@ -1,0 +1,37 @@
+<table class="odstavec2">
+  <tr>
+    <th>upravení</th>
+    <% if @current_user.produce? && @action == "check" %>
+       <td>potvrzení</td>
+    <% end %>
+    <th>projekt</th>
+    <th>pracovnik</th>
+    <th>typ prace</th>
+    <th>pracoviště</th>
+    <th>Status</th>
+    <th>Startdate</th>
+    <th>Enddate</th>
+     
+  </tr>
+
+<% for work in works %>
+  <tr>
+    <% if (@current_user.mine?(work)|| @current_user.produce?|| @current_user.admin?) && @action != "planned"  %>
+       <td><%= link_to 'upravit', edit_work_path(work) %></td>
+    <% end %>
+    <% if @current_user.produce? && @action == "planned" %>
+       <td><%= link_to 'upravit plán', edit_planned_url(:id => work.id) %></td>
+    <% end %>
+    <td><%= link_to project_name(work.project) , work.project %></td>
+
+    <td><%=h work.user.blank? ? "" : work.user.name %></td>
+    <td><%=h work.job_type.blank? ? "" : work.job_type.name %></td>
+    <td><%=h work.place.blank? ? "" : work.place.name %></td>
+    <td><%= status work %></td>
+    <td><%= my_time  work.start_date %></td>
+    <td><%= my_time  work.end_date %></td>
+    
+  </tr>
+
+<% end %>
+</table>

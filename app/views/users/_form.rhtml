@@ -1,0 +1,68 @@
+<%= error_messages_for :user  %>
+
+<p>
+    <%= label :user, 'name', 'jméno', :required => true %><br />
+    <%= text_field :user, :name %>
+</p>
+<p>
+    <%= label :user, 'surname', 'přijmení', :required => true %><br />
+    <%= text_field :user, :surname %>
+</p>
+<p>
+    <%= label :user, 'login', 'přihlašovací jméno', :required => true %> <br />
+    <%= text_field :user, :login %> <i>zadávejte bez háčků a čárek</i>
+</p>
+
+<p>	<% password = Digest::SHA1.hexdigest("--#{Time.now.to_s}---")[0,6] %>
+    <%= label :user, 'password', 'pro vytvoření či změnu hesla', :required => true %><br />
+    <%= password_field :user, :password_new_comf, :value=> password %> <i>náhodné heslo: <%= password  %></i>
+</p>
+
+<p>
+    <%= label :user, 'password_new', 'zadejte heslo podruhé', :required => true %><br />
+    <%= password_field :user, :password_new, :value=> password %>
+</p>
+
+
+
+
+ <% if @current_user.admin? || @current_user.produce? %>
+
+    <p>
+        <%= label :user, 'company_id', 'vyberte firmu:', :required => true %><br />
+        <%= select(:user, "company_id", Company.find(:all, :conditions => "deleted is null"  ).sort_by {|u| u.name.downcase}.collect {|p| [ p.name, p.id ] }, {:include_blank => ''}) %>
+    </p>
+    <p>
+        <%= label :user, 'access', 'zakázat přístup uživateli do systému?', :required => false %><br />
+        <%= check_box_tag "user[access]", :access, @user.access == false %>
+    </p>
+   <p>
+    <%= label :user, 'role', 'vyberte role', :required => true %><br />
+
+    <% for role in Role.find(:all)  %>
+    
+    <%  if !@user.blank? && !@user.role.blank?  %>
+
+      <%  if !@user.blank? && @user.role % role.idd == 0  %>
+        <input type="checkbox" name="role<%= role.idd  %>" value="true" checked />: <%= role.comment  %><br />
+      <% else %>
+        <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
+      <% end %>
+
+     <% else %>
+       <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
+    <% end %>
+   <% end %>
+   </p>
+  <% end %>
+
+
+
+<% if @current_user.admin? || @current_user.produce? %>
+    <%= label :user, 'role', 'vyberte kategorie', :required => false %><br />
+
+   <% for category in Category.find(:all, :order => :name) %>
+                <%= check_box_tag "user[category_ids][]", category.id, @user.categories.include?(category) %>
+                <%= category.name %>
+   <% end %>
+<% end %>

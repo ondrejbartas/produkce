@@ -1,0 +1,119 @@
+<h2>Nový podklad k fakturaci</h2>
+
+<ul>
+	<li>pro projekt: <%=  project_name @project %></li>
+	<li>pro firmu: <%=  @project.company.name %></li>
+</ul>
+<% form_for(@invoice) do |f| %>
+  <%= f.error_messages %>
+
+
+
+  <table>
+        <tr>
+            <th rowspan="2">datum</th>
+            <th width="400" colspan="5">úkony</th>
+        </tr>
+        <tr>
+            <th width="80">úkon</th>
+            <th width="200">parametry</th>
+           	<th width="100">poznámka prod.</th>
+           	<th width="100">poznámka oper.</th>
+            <th width="60">cena</th>
+        </tr>
+    
+    <% for work in @project.works %>
+        <% first = true %>
+		  <% operations = work.operations.find(:all , :conditions => [" operation_type_id != '24' AND operation_type_id != '25' "]) %>
+        <% zacatek = "<td rowspan="+operations.size.to_s+">" %>
+        <% for operation in operations %>
+                <tr height="30">
+                            <% if first == true %>
+                                <% if work.time.beginning_of_day < Time.now.beginning_of_day %>
+                                    <td rowspan="<%=work.operations.size.to_s %>" class="red"><%= my_date work.time  %></td>
+                                <% else %>
+                                    <%= zacatek %><%= my_date work.time  %></td>
+                                <% end %>
+                            <%  end %>
+
+                            <td style="text-align:left">
+										   <% @operation_type = operation.operation_type %>
+											<%= @operation_type.name %>
+									 </td>
+                            <td style="text-align:left">
+	                             
+	                               <%  if operation.operation_type.value == 0 %>
+	                                   počet minut:<%= operation.value %>
+	                                <% elsif operation.operation_type.value == 1 %>
+	                                   čas:<%= length_values operation.value %>
+	                                <% elsif operation.operation_type.value == 2 %>
+	                                   počet kusů:<%= operation.value %>
+	                               <% elsif operation.operation_type.value == 3 %>
+	                                   použitý materiál : <%=  operation.tape_type.name %><%= operation.their_tape == true ? " vlastní" : ""%><br />
+	                                   počet kusů:<%= operation.value %>
+	                                <% elsif operation.operation_type.value == 4 %>
+	                                    <%= Machine.find_by_id(operation.player_machine_id).name %>
+	                                    -><%= Machine.find_by_id(operation.record_machine_id).name %><br />
+	                                    materiál : <%=  operation.tape_type.name %><%= operation.their_tape == true ? " vlastní" : "" %><br />
+	                                    kusů:<%= operation.value %>
+	                                <% end %>
+
+                            </td>
+                            <td style="text-align:left">
+                                <%= operation.note %>
+                            </td>
+									 <td>
+                               <%= operation.note_operator %>
+									 </td>
+									
+									 <td>
+										  <%  if operation.operation_type.value == 0 %>
+	                                <%= operation.value * @operation_type.price %>
+	                             <% elsif operation.operation_type.value == 1 %>
+                                   <%= length_values operation.value * @operation_type.price %>
+                                <% elsif operation.operation_type.value == 2 %>
+                                	  <%= operation.value * @operation_type.price %>
+                                <% elsif operation.operation_type.value == 3 %>
+												<% if operation.their_tape == true %>
+                                  		<%=  operation.value * (operation.tape_type.master_price ) %>
+												<% else %>
+                               			<%=  operation.value * (operation.tape_type.master_price + operation.tape_type.tape_price) %>
+												<% end %>
+                                <% elsif operation.operation_type.value == 4 %>
+												<% if operation.their_tape == true %>
+													<% tape_price = 0 %>
+                                    <% else %>
+													<% tape_price = operation.tape_type.tape_price %>
+												<% end %>
+                                    <% player = Machine.find_by_id(operation.player_machine_id).price %>
+                                    <% recorder =Machine.find_by_id(operation.record_machine_id).price %>
+												<% if player > recorder %>
+													<%= operation.value * ( player + tape_price) %>
+												<% else %>
+													<%= operation.value * ( recorder + tape_price) %>
+												<% end %>
+                                <% end %>
+									 </td>
+            </tr>
+            <% first = false %>
+       <% end %>
+	<% end %>
+	</table>
+
+
+  <p>
+	 <%= label :invoice, 'note', 'poznámka', :required => true %><br />
+    <%= f.text_field :note %>
+  </p>
+  <p>
+	 <%= label :invoice, 'date', 'datum', :required => true %><br />
+    <%= f.date_select :date %>
+  </p>
+  <p>
+	 <%= label :invoice, 'price', 'cena', :required => true %><br />
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.submit "vytvořit" %>
+  </p>
+<% end %>

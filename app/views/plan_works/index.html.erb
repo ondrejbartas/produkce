@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <th>datum</th>
+        <th>operátor</th>
+        <th>pracoviště</th>
+        <th>poznámka</th>
+        <th>úkony</th>
+    </tr>
+
+    <% for work in @project.works %>
+        <tr>
+            <td><%= my_time work.time %> - <%= my_time work.time+work.length.minutes %> <%= my_date work.time %> </td>
+            <td><%= work.user.fullname %>  </td>
+            <td><%= work.place.name %>  </td>
+            <td><%= work.note %>  </td>
+            <td><% for operation in work.operations %>
+                <%=  operation.name -%>,
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

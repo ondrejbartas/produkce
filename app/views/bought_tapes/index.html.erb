@@ -1,0 +1,27 @@
+<h1>Listing bought_tapes</h1>
+
+<table>
+  <tr>
+    <th>Tape type</th>
+    <th>Price</th>
+    <th>Value</th>
+    <th>Note</th>
+    <th>Purchase date</th>
+  </tr>
+
+<% for bought_tape in @bought_tapes %>
+  <tr>
+    <td><%=h bought_tape.tape_type_id %></td>
+    <td><%=h bought_tape.price %></td>
+    <td><%=h bought_tape.value %></td>
+    <td><%=h bought_tape.note %></td>
+    <td><%= link_to 'Show', bought_tape %></td>
+    <td><%= link_to 'Edit', edit_bought_tape_path(bought_tape) %></td>
+    <td><%= link_to 'Destroy', bought_tape, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New bought_tape', new_bought_tape_path %>

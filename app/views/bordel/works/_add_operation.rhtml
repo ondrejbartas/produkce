@@ -1,0 +1,23 @@
+    <div class="operation">
+    <ul>
+        <li>
+            <% cas = Time.now.strftime("%s") %>
+          úkon:<%= collection_select 'work[operations_attributes][new_'+cas+']', :operation_type_id , @operation_types,
+              :id, :name, {:include_blank => true},
+              {:onchange => remote_function( :update => "operation_type_id_container_"+cas, :url =>
+                      add_operation_type_parameters_works_path, :with =>
+                        "'active_type="+@active_type+"&cas="+cas+"&operation_type_id=' +
+                      escape(value)" )}%>
+
+          <span id="operation_type_id_container_<%= cas %>">
+          </span>
+        </li>
+
+         <li>poznámka:<%= text_field 'work[operations_attributes][new_'+cas+']', :note , :size=> 80%></li>
+         <% if @active_plan == "edit" %> <li>hotovo: <%= check_box 'work[operations_attributes][new_'+cas+']', :finished , :vlaue=>"1" %></li><% end %>
+         <li>
+               <%= link_to_function "smazat úkon", "$(this).up('.operation').remove(); " %>
+         </li>
+
+     </ul>
+     </div>

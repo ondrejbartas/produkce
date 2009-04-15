@@ -1,0 +1,55 @@
+<% work = @operation.work %>
+<% form_for @operation do |operation_form| -%>
+<%= operation_form.error_messages %>
+<ul>
+        <% if work.time.beginning_of_day < Time.now.beginning_of_day %>
+            <li class="red">datum: <%= my_date work.time  %></li>
+        <% else %>
+            <li>datum: <%= my_date work.time  %></li>
+        <% end %>
+        <li>čas: <%= my_hour work.time  %> -
+            <%= my_hour ( work.time + work.length.minutes ) %></li>
+        <li>projekt: <%= work.project.blank? ? "" :  ( link_to project_name(work.project), work.project ) %></li>
+        <li>typ práce: <%=h work.job_type.blank? ? "" : work.job_type.name %></li>
+        <li>pracovní místo: <%=h work.place.blank? ? "" : work.place.name %></li>
+    	  <li>poznámka podukčního:<%= @operation.note %></li>
+ 	<li >
+        <%= @operation.operation_type.name %>
+    </li>
+
+	
+    <li style="text-align:left">
+        <% @operation_type = @operation.operation_type %>
+        <% if @operation.finished == true %>
+               <%  if @operation.operation_type.value == 0 %>
+                   počet minut:<%= @operation.value %>
+                <% elsif @operation.operation_type.value == 1 %>
+                   čas:<%= length_values @operation.value %>
+                <% elsif @operation.operation_type.value == 2 %>
+                   počet kusů:<%= @operation.count %>
+               <% elsif @operation.operation_type.value == 3 %>
+                   použitý materiál : <%=   operation.tape_type_id.blank? ? " " : operation.tape_type.name %><%= operation.their_tape == true ? " vlastní" : ""%><br />
+                   počet kusů:<%= operation.count %>
+                <% elsif @operation.operation_type.value == 4 %>
+                    <%= @operation.player_machine_id.blank? ? " " : Machine.find_by_id(@operation.player_machine_id).name %>
+                    -><%= @operation.record_machine_id.blank? ? " " : Machine.find_by_id(@operation.record_machine_id).name %><br />
+                    materiál : <%=  @operation.tape_type_id.blank? ? " " : @operation.tape_type.name %><%= @operation.their_tape == true ? " vlastní" : "" %><br />
+                    kusů:<%= @operation.count %>
+                <% end %>
+        <% else %>
+            <%= render :partial => 'plan_works/add_operation_type_parameters' %>
+        <% end %>
+    </li>
+	 <li>poznámka operátora:<%= operation_form.text_area :note_operator %></li>
+    <li>
+        <% if @operation.finished == true %>
+            hotovo, čeká na zapsání celkové doby
+             <%= operation_form.hidden_field :finished , :value=>"" %>
+             <%= operation_form.submit 'opravit'  %>
+        <% else %>
+         <%= operation_form.hidden_field :finished , :value=>"true" %>
+         <%= operation_form.submit 'hotovo'  %>
+        <% end %>
+    </li>
+</ul>
+<% end %>

@@ -1,0 +1,19 @@
+<h2>New history</h2>
+
+<% form_for(@history) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :date %><br />
+    <%= f.datetime_select :date %>
+  </p>
+  <p>
+    <%= f.label :deleted %><br />
+    <%= f.check_box :deleted %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', histories_path %>

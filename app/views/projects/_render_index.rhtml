@@ -1,0 +1,24 @@
+<% if  @company.projects.size > 0 %>
+    <% for proj in @company.projects %>
+        <h3>Projekt: <%=h proj.name %>
+          <% if @current_user.mine?(proj) || @current_user.admin? || @current_user.produce? %>
+            <div class="menu_small">
+                <%= link_to 'upravit projekt', edit_project_path(proj) %>
+            </div>
+          <% end %>
+        </h3>
+            <table class="odstavec2">
+                <tr><td>poznámka: </td><td><strong>
+                    <%=h proj.note %>
+                </strong></td></tr>
+                <tr><td>Stav: </td><td><strong><%=h proj.status %></strong></td></tr>
+            </table>
+
+
+            <h3>PRÁCE</h3>
+              <%= render :partial => 'works/index',:locals => {:works => proj.works} %>
+
+            <h3>Source information &amp; media</h3>
+            <div><a href="">documentation.pdf</a>, <a href="">video.iso</a></div>
+    <% end %>
+<% end %>

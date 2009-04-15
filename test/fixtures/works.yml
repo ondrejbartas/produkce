@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  status: MyString
+  startdate: 2008-12-17 08:55:50
+  enddate: 2008-12-17 08:55:50
+  deleted: false
+
+two:
+  name: MyString
+  status: MyString
+  startdate: 2008-12-17 08:55:50
+  enddate: 2008-12-17 08:55:50
+  deleted: false

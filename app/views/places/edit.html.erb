@@ -1,0 +1,14 @@
+<h2>Upravení pracovního místa</h2>
+<div class="menu_small">
+  <%= link_to 'Show', @place %>
+</div>
+<% form_for(@place) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'places/form' %>
+
+  <p>
+    <%= f.submit "upravit" %>
+  </p>
+<% end %>
+

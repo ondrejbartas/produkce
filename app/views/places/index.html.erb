@@ -1,0 +1,33 @@
+<h2>
+    <div class="menu_small">
+      <%= link_to 'vytvořit nové místo', new_place_path %>
+    </div>
+    Pracovní místa
+</h2>
+
+
+<table>
+  <tr>
+    <th>název</th>
+    <th>poznámka</th>
+    <th>pracovní činnosti</th>
+    <th colspan="2">administrace</th>
+  </tr>
+
+<% for place in @places %>
+  <tr class="<%= cycle("even", "odd") %>" height="30">
+    <th><%=h  place.name%></th>
+    <td><%=h place.note %></td>
+    <td><% for job_type in place.job_types  %>
+            <%= job_type.name %>,
+        <% end %>
+    </td>
+    <td><%= link_to 'upravit', edit_place_path(place) %></td>
+    <td><%= link_to 'smazat', place, :confirm => 'Are you sure?', :method => :delete %></td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+

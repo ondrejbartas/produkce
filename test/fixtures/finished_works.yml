@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  note: MyString
+  status: 1
+  value: 1
+  user_id: 1
+
+two:
+  note: MyString
+  status: 1
+  value: 1
+  user_id: 1

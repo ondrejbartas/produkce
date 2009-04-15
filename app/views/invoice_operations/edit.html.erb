@@ -1,0 +1,8 @@
+<h2>Upravit předdefinovaný úkon k fakturaci</h2>
+
+<% form_for(@invoice_operation) do |f| %>
+  <%= render :partial => 'invoice_operations/form' %>
+  <p>
+    <%= f.submit "upravit" %>
+  </p>
+<% end %>

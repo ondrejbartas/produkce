@@ -1,0 +1,12 @@
+<h2>Nové pracovní místo</h2>
+
+
+<% form_for(@place) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'places/form' %>
+
+  <p>
+    <%= f.submit "Vytvořit" %>
+  </p>
+<% end %>

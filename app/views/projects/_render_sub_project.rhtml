@@ -1,0 +1,20 @@
+<% if not @project.blank? %>
+    <% project = @project %>
+<% end %>
+
+<% if not @selected.blank? %>
+    <% selected = @selected %>
+<% end %>
+
+<% if not project.blank? %>
+  <% if  project.projects.size > 0 %>
+    <%= label :work, 'sub_project_id', 'sub projekt', :required => false %>
+    <%  if selected.blank? %>
+      <%= collection_select(:work, :sub_project_id, (project.blank? ? [] : project.projects), :id, :name, :include_blank => false) %>
+    <%  else %>
+      <%= collection_select(:work, :sub_project_id, (project.blank? ? [] : project.projects), :id, :name, :include_blank => false, :selected => selected) %>
+    <% end %>
+  <% else %>
+        <%= hidden_field :work, :sub_project_id, :value=> "" %>
+  <% end %>
+<% end %>

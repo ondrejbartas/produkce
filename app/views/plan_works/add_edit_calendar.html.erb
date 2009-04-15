@@ -1,0 +1,100 @@
+
+<% @places = @job_type.places %>
+<%= hidden_field( :work, :place_id, :value=> @plan_work.place_id ) %>
+<%= hidden_field( :work, :date, :value=> @plan_work.date ) %>
+
+<h3><%= @start_date %>
+    <div class="menu_small">
+        <%= link_to_remote "+ přidat předchozí týden +",
+                   :url => { :action => "add_edit_calendar", :work_id => @plan_work.id, :user_id => @user.id, 'substract_week' => true},
+                   :update =>  "calendar_container" , :position => :top %>
+        <%= link_to_remote "+ přidat týden +",
+                   :url => { :action => "add_edit_calendar", :work_id => @plan_work.id, :user_id => @user.id, 'add_week' => true},
+                   :update =>  "calendar_container" , :position => :bottom %>
+    </div>
+<%= my_date @plan_work.time.beginning_of_week + @start_date.days %> - <%= my_date @plan_work.time.beginning_of_week + @start_date.days + 7.days %> </h3>
+
+<table class="calendar">
+
+    <tr>
+        <th width="70">datum</th>
+        <th width="100"><%= @user.fullname  %></th>
+        <th width="100">projekt</th>
+
+        <% for place in @places %>
+            <th width="90"><%= place.name %></th>
+        <% end %>
+    </tr>
+
+    <%  7.times { |n|  %>
+        <% table_day = @plan_work.time.beginning_of_week + @start_date.days + n.days %>
+        <tr height="30" <% if Time.today ==  table_day -%>
+                class="today"
+            <%  elsif n > 4 -%>
+                class="weekend"
+            <%  else %>
+                class="<%= cycle("even", "odd") -%>"
+            <% end -%>
+            >
+            <th><%= day_names(n) %> <%= my_date table_day %>  </th>
+                 <td>
+                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND user_id = :user AND time > :morning_date AND time < :evening_date ', {:user => @user.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+
+                    <% if planed_works.size > 0 %>
+                        <% for planed_work in planed_works %>
+                            <%= my_hour planed_work.time  %> -
+                            <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
+                        <% end %>
+                    <% end %>
+                </td>
+                <td>
+                    <% planed_works_project = Work.find(:all , :conditions => ['deleted is null AND project_id = :project AND time > :morning_date AND time < :evening_date ', {:project => @project.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+
+                    <% if planed_works_project.size > 0 %>
+                        <% for planed_work in planed_works_project %>
+                            <%= my_hour planed_work.time  %> -
+                            <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
+                            <%= planed_work.job_type.name  %><br />
+                        <% end %>
+                    <% end %>
+                </td>
+
+            <% for place in @places %>
+                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND time > :morning_date AND time < :evening_date ', {:place => place.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+                    <td id="calendar_<%= table_day.strftime("%s") -%>_<%= place.id %>"
+                    <% if @plan_work.time.strftime("%d.%m.%Y") == table_day.strftime("%d.%m.%Y") && @plan_work.place_id == place.id %>
+                        class="actual_place"
+                    <% end %>
+                    >
+                 
+                        <% if planed_works.size > 0 %>
+                            <% for planed_work in planed_works %>
+                                <span
+                                <% if @project.id == planed_work.project_id  && planed_work.reserved == true %>
+                                    class="own_reserved"
+                                <% elsif @project.id == planed_work.project_id  && planed_work.reserved == false %>
+                                    class="own"
+                                <% elsif  planed_work.reserved == true %>
+                                    class="reserved"
+                                <%  end %>
+                                >
+                                    <%= my_hour planed_work.time  %> -
+                                    <%= my_hour ( planed_work.time + planed_work.length.minutes ) %>
+                                </span><br />
+                            <% end %>
+                        <% end %>
+
+
+                         <% if not ( @plan_work.time.strftime("%d.%m.%Y") == table_day.strftime("%d.%m.%Y") && @plan_work.place_id == place.id ) %>
+                            <%= link_to_remote "změnit na toto místo a den",
+                               :url => { :action => "add_edit_calendar", :place_id => place.id, :date => table_day,  :work_id => @plan_work.id , :start_date => 0 },
+                               :update =>  "calendar_container", :with => "'user_id='+ document.getElementById(\'work_user_id\').value" %>
+                        <% end %>
+                    </td>
+            <% end %>
+
+        </tr>
+    <% } %>
+</table>
+
+

@@ -1,0 +1,37 @@
+<div class="menu_small">
+  <%= link_to 'Edit', edit_work_path(@work) %>
+</div>
+
+<p>
+  <b>projekt:</b>
+  <%= link_to project_name( @work.project), @work.project %>
+</p>
+
+<p>
+  <b>pracovník:</b>
+  <%=h @work.user.blank? ? "" : @work.user.name %>
+  </p>
+
+<p>
+  <b>typ pracovní činnosti:</b>
+  <%=h @work.job_type.blank? ? "" : @work.job_type.name %>
+  </p>
+
+<p>
+  <b>pracovní místo:</b>
+  <%=h @work.place.blank? ? "" : @work.place.name %>
+</p>
+
+<h3>ukony</h3>
+
+<ul>
+  <% @work.operations.each do |operation| %>
+    <li><%= operation.operation_type.name %> -
+        <%= operation.value %> -
+        <%= operation.note %></li>
+  <% end %>
+</ul>
+
+
+
+

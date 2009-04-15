@@ -1,0 +1,24 @@
+<div class="operation">
+  <p>
+
+   
+        <%= f.collection_select :operation_type_id ,
+          OperationType.find(:all),
+          :id, :name, {:include_blank => true} %>
+
+    poznámka: <%= f.text_field :note %>
+
+    <!-- Uses JS to hide this `task' and set a hidden_field with the name
+         `_delete' to "1" which causes the record to be deleted. -->
+    <% if f.object.new_record? %>
+       <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>
+     <% else %>
+      <%= f.hidden_field(:_delete) %>
+      <%= link_to_function "Smazat", "$(this).previous().value = '1'; $(this).up('.operation').hide(); " %>
+     <% end %>
+
+  </p>
+</div>
+
+
+

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  note: MyString
+  tape_price: 1
+  master_price: 1
+  master: false
+
+two:
+  name: MyString
+  note: MyString
+  tape_price: 1
+  master_price: 1
+  master: false

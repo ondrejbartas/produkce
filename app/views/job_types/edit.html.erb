@@ -1,0 +1,9 @@
+<h2>Upravení typu pracovní činnosti</h2>
+
+<% form_for(@job_type) do |f| %>
+
+  <%= render :partial => 'job_types/form' %>
+  <p>
+    <%= f.submit "upravit" %>
+  </p>
+<% end %>

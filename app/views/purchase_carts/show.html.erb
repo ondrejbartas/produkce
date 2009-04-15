@@ -1,0 +1,42 @@
+<h2>Nákup</h2>
+<p>
+  <b>Obchod:</b>
+  <%=h @purchase_cart.store %>
+</p>
+
+<p>
+  <b>Web:</b>
+  <%=h @purchase_cart.url %>
+</p>
+
+<p>
+  <b>Den nákupu:</b>
+  <%=h @purchase_cart.purchase_date %>
+</p>
+
+<p>
+  <b>Nákupu provedl:</b>
+  <%=h @purchase_cart.user.fullname %>
+</p>
+
+<p>
+  <b>Poznámka:</b>
+  <%=h @purchase_cart.note %>
+</p>
+
+<table>
+    <tr>
+        <th>typ kazety</th>
+        <th>počet kusů</th>
+        <th>cena za kus</th>
+        <th>poznámka</th>
+    </tr>
+  <% @purchase_cart.bought_tapes.each do |bought_tape| %>
+      <tr>
+        <th><%= TapeType.find_by_id(bought_tape.tape_type_id).name %></th>
+        <td><%= bought_tape.value %></td>
+        <td><%= bought_tape.price %></td>
+        <td><%= bought_tape.note %></td>
+    </tr>
+  <% end %>
+</table>

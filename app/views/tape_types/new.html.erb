@@ -1,0 +1,12 @@
+<h2>Nový typ kazety</h2>
+
+
+<% form_for(@tape_type) do |f| %>
+  <%= f.error_messages %>
+
+  <%= render :partial => 'tape_types/form' %>
+
+  <p>
+    <%= f.submit "Vytvořit" %>
+  </p>
+<% end %>

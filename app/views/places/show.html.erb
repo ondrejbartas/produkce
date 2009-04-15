@@ -1,0 +1,20 @@
+<h2>Typ pracovní činnosti</h2>
+<div class="menu_small">
+  <%= link_to 'upravit', edit_place_path(@place) %>
+  <%= link_to 'smazat', @place, :confirm => 'Are you sure?', :method => :delete %>
+</div>
+  <%= print_field(@place.name, "název místa: ", "h3") %>
+
+<ul>
+  <%= print_simple_field(@place.note, "poznámka", "li") %>
+  <%= print_simple_field(@place.startDate, "den vzniku pracoviště", "li") %>
+  <%= print_simple_field(@place.endDate, "den zázniku pracoviště", "li") %>
+    <li>pracovní typy:
+        <% for job_type in @place.job_types  %>
+            <%= job_type.name %>,
+        <% end %>
+    </li>
+</ul>
+
+
+

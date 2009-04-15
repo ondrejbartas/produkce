@@ -1,0 +1,27 @@
+<h2>
+    <div class="menu_small">
+        <%= link_to 'přidat kontrolu skladu' , new_warehouse_control_path  %>
+    </div>
+    Seznam kontrol skladu
+</h2>
+
+<table>
+  <tr>
+    <th>datum</th>
+    <th>uživatel</th>
+    <th>stav</th>
+    <th>administrace</th>
+  </tr>
+
+<% for warehouse_control in @warehouse_controls %>
+  <tr class="<%= cycle("even", "odd") %>" height="30">
+    <td><%= my_time  warehouse_control.created_at %></td>
+    <td><%=h warehouse_control.user.name %></td>
+    <%= warehouse_control.missing_tapes.size > 0 ? "<td class='red'>chybí materiál</td>" : "<td>OK</td>" %>
+    <td><%= link_to 'zobrazit', warehouse_control %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

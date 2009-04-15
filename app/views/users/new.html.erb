@@ -1,0 +1,16 @@
+<h2>Nový uživatel</h2>
+
+<% form_for(@user) do |f| %>
+
+  <%= render :partial => 'users/form' %>
+
+  <div id="contact">
+    <h2>Přidání kontaktu (nepovinné)</h2>
+    <%= render :partial => 'contacts/form',
+    :locals => {:contact => @contacts} %>
+  </div>
+
+  <p>
+    <%= f.submit "vytvořit" %>
+  </p>
+<% end %>

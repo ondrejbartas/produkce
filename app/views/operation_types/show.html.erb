@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @operation_type.name %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%=h @operation_type.note %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @operation_type.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_operation_type_path(@operation_type) %> |
+<%= link_to 'Back', operation_types_path %>

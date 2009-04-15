@@ -1,0 +1,66 @@
+<h2>seznam vyúčtování</h2>
+
+    <% finished_works = @current_user.finished_works.find(:all,  :order => "created_at DESC") %>
+	<table>
+		<tr>
+			<th rowspan="2">datum</th>
+			<th rowspan="2">čas</th>
+			<th colspan="4">úkony</th>
+		</tr>
+		<tr>
+			<th width="200">projekt</th>
+			<th width="80">úkon</th>
+			<th width="220">parametry</th>
+			<th>poznámka</th>
+
+		</tr>
+
+
+   <% for work in finished_works %>
+        <% first = true %>
+        <% zacatek = "<td rowspan="+work.operations.size.to_s+">" %>
+        <% for operation in work.operations %>
+                <tr height="30">
+							<% if first == true %>
+				              <%= zacatek %>
+				                  <%= my_time work.created_at %>
+				              </td>
+				              <%= zacatek %>
+				                  <%= length_values work.value %>
+				              </td>
+                 		<% end %>
+			              <td >
+			                  <%= operation.work.project_id.blank? ?  "<span class='red'>bez udání projektu</span>" : project_name(operation.work.project)  %>
+			              </td>
+							  <td >
+			                  <%= operation.operation_type.name %>
+			              </td>
+			              <td style="text-align:left">
+			                  <% @operation_type = operation.operation_type %>
+			                  <% @operation = operation %>
+			                  <%= operation.note %>
+
+			                 <%  if operation.operation_type.value == 0 %>
+			                     počet minut: <%= operation.value %>
+			                  <% elsif operation.operation_type.value == 1 %>
+			                     čas: <%= length_values operation.value %>
+			                  <% elsif operation.operation_type.value == 2 %>
+			                     počet kusů: <%= operation.value %>
+			                 <% elsif operation.operation_type.value == 3 %>
+			                     použitý materiál : <%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name %><%= operation.their_tape == true ? " vlastní" : ""%><br />
+			                     počet kusů: <%= operation.value %>
+			                  <% elsif operation.operation_type.value == 4 %>
+			                      	  <%= operation.player_machine_id.blank? ? " " : Machine.find_by_id(operation.player_machine_id).name %>
+                                 -><%= operation.record_machine_id.blank? ? " " : Machine.find_by_id(operation.record_machine_id).name %><br />
+                                 materiál : <%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name %><%= operation.their_tape == true ? " vlastní" : "" %><br />
+                                 kusů:<%= operation.value %>
+			                  <% end %>
+			              </td>
+							  <td><%= operation.note %>
+							  </td>
+            		</tr>
+            		<% first = false %>
+       	 <% end %>
+    <% end %>
+
+</table>

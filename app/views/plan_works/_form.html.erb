@@ -1,0 +1,60 @@
+
+<% form_for(@plan_work) do |f| %>
+  <%= f.error_messages %>
+
+ <% if @plan_work.project_id.blank? %>
+      <p>
+         <%= f.label 'project_id', 'projekt', :required => true %>
+                <%= f.collection_select :project_id ,
+                  Project.find(:all, :conditions=> "status = 1 AND project_id IS null"),
+                  :id, :name, {:include_blank => true },
+                  {:onchange => remote_function( :update => 'sub_project_id_container', :url =>
+                  render_sub_project_projects_path, :with =>
+                    "'project_id=' +
+                      escape(value)" )}
+                %>
+
+      </p>
+      <span id="sub_project_id_container">
+
+      </span>
+<%  else %>
+    <p>
+        plánujete práci pro projekt: <b><%= project_name(@plan_work.project) %><b>
+        <% @main_project = Project.find_by_id(@plan_work.project.id) %>
+        <% if not @main_project.project.blank? %>
+            <%= f.hidden_field(:project_id, :value=> @main_project.project_id ) %>
+            <%= f.hidden_field(:sub_project_id, :value=> @plan_work.project_id ) %>
+        <% else %>
+            <%= f.hidden_field(:project_id, :value=> @plan_work.project_id) %>
+            <%= f.hidden_field(:sub_project_id, :value=> "" ) %>
+        <% end %>
+    </p>
+<%  end %>
+
+
+<p>
+    <%= f.label 'job_type_id', 'typ práce', :required => true %>
+    <%= f.collection_select( :job_type_id , JobType.find(:all),
+          :id, :name, {:include_blank => true},
+          {:onchange => remote_function( :update => 'job_type_container' ,:url =>
+          add_user_operation_plan_works_path, :with =>
+            "'plan_type=plan&job_type_id=' + escape(value)")} )%>
+</p>
+
+
+<div id="job_type_container">
+
+
+</div>
+
+
+<div id="calendar_container">
+
+
+</div>
+
+<%= f.submit "naplánovat" %>
+
+
+<% end %>

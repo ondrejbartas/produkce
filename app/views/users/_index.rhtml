@@ -1,0 +1,12 @@
+<div class="user_list">
+<% letter = "z" %>
+<% for user in users %>
+      <% if letter.downcase != user.surname[0,1].downcase %>
+    <% if letter != "z" %> </ul> <% end %>
+        <%  letter = user.surname[0,1] %>
+        <h3> <%=  letter.capitalize %></h3>
+        <ul>
+      <% end %>
+      <li><%= link_to user.surname+" "+user.name, user %> <span id="contacts_<%= user.id%>"><%= link_to_remote "- kontakt", :update => "contacts_"+user.id.to_s, :url => { :controller => 'contacts', :action => 'render_index', :id => user.id } %></span>  </li>
+<% end %>
+</ul>

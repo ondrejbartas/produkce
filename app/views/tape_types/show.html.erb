@@ -1,0 +1,33 @@
+<p>
+  <b>Name:</b>
+  <%=h @tape_type.name %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%=h @tape_type.note %>
+</p>
+
+<p>
+  <b>Tape price:</b>
+  <%=h @tape_type.tape_price %>
+</p>
+
+<p>
+  <b>Master price:</b>
+  <%=h @tape_type.master_price %>
+</p>
+
+<p>
+  <b>Master:</b>
+  <%=h @tape_type.master %>
+</p>
+
+<p>
+  <b>limit:</b>
+  <%=h @tape_type.limit %>
+</p>
+
+
+<%= link_to 'Edit', edit_tape_type_path(@tape_type) %> |
+<%= link_to 'Back', tape_types_path %>

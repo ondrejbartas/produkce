@@ -1,0 +1,36 @@
+<h2>
+    <div class="menu_small">
+        <%= link_to 'nový typ úkonu', new_operation_type_path %>
+    </div>
+    Seznam úkonů
+</h2>
+
+<table>
+  <tr>
+    <th width="150">název</th>
+    <th width="330">poznámka</th>
+    <th>typ sazby</th>
+    <th>cena</th>
+    <th>pracovní činnost</th>
+    <th colspan="2">administrace</th>
+  </tr>
+
+<% for operation_type in @operation_types %>
+  <tr class="<%= cycle("even", "odd") %>" height="30">
+    <th><%=h operation_type.name %></th>
+    <td><%=h operation_type.note %></td>
+    <td><%=h value(operation_type) %></td>
+    <td><%=h operation_type.price %></td>
+    <td><% for job_type in operation_type.job_types  %>
+            <%= job_type.name %>,
+        <% end %>
+    </td>
+    <td><%= link_to 'upravit', edit_operation_type_path(operation_type) %></td>
+    <td><%= link_to 'smazat', operation_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

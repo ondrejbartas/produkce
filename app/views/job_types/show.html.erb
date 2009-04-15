@@ -1,0 +1,16 @@
+<h2>Typ pracovní činnosti</h2>
+<div class="menu_small">
+  <%= link_to 'upravit', edit_job_type_path(@job_type) %>
+  <%= link_to 'smazat', @job_type, :confirm => 'Are you sure?', :method => :delete %>
+</div>
+<p>
+  <b>Name:</b>
+  <%=h @job_type.name %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%=h @job_type.note %>
+</p>
+
+

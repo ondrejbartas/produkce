@@ -1,0 +1,31 @@
+<%= error_messages_for :tape_type  %>
+<p>
+    <%= label :tape_type, 'name', 'název kazety', :required => true %><br />
+    <%= text_field :tape_type, :name %>
+</p>
+<p>
+    <%= label :user, 'access', 'je kazeta vysílačkou?', :required => false %><br />
+   ano:<%=  radio_button_tag "tape_type[master]",  true, @tape_type.master %>
+   ne:<%=  radio_button_tag "tape_type[master]",  false, !@tape_type.master %>
+</p>
+<p>
+    <%= label :tape_type, 'note', 'poznámka', :required => false %><br />
+    <%= text_field :tape_type, :note %>
+</p>
+<p>
+    <%= label :tape_type, 'tape_price', 'cena kazety', :required => true %><br />
+    <%= text_field :tape_type, :tape_price %>
+</p>
+<p>
+    <%= label :tape_type, 'master_price', 'cena vysílačky', :required => false %><br />
+    <%= text_field :tape_type, :master_price %>
+</p>
+<p>
+    <%= label :tape_type, 'limit', 'počet kdy sklad začne ukazovat červeně', :required => true %><br />
+    <%= text_field :tape_type, :limit %>
+</p>
+
+<p>
+    <%= label :tape_type, 'order', 'pořadí v řazení', :required => true %><br />
+    <%= text_field :tape_type, :order %><i>  0 je úplně nahoře</i>
+</p>

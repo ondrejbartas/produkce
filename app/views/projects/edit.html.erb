@@ -1,0 +1,9 @@
+<h2>Úprava projektu</h2>
+
+<% form_for(@project) do |f| %>
+ <%= render :partial => 'projects/form' %>
+
+  <p>
+    <%= f.submit "upravit" %>
+  </p>
+<% end %>

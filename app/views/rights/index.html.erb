@@ -1,0 +1,41 @@
+<h2>Seznam práv pro uživatele</h2>
+
+<table>
+  <tr>
+	<th>kontroler</th>
+	<th>akce</th>
+	<th>doplněk</th>
+	<th>vlastník</th>
+	<% for role in Role.find(:all)  %>
+      <th><%= role.comment.downcase %></th>
+  	<% end %>
+  </tr>
+
+<% @rights.each do |right| %>
+  <tr>
+	 <td><%= right.controller -%></td>
+	 <td><%= right.action -%></td>
+	 <td><%= right.sub -%></td>
+	 <td><%= right.mine == true ? "X" : "-" -%></td>
+
+		<% for role in Role.find(:all)  %>
+			<td>
+	        <%  if !right.value.blank? && right.value % role.idd == 0  %>
+	          X
+			  <% else %>
+				 -
+	        <% end %>
+			</td>
+      <% end %>
+
+
+    <td><%= link_to 'Show', right %></td>
+    <td><%= link_to 'Edit', edit_right_path(right) %></td>
+    <td><%= link_to 'Destroy', right, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New right', new_right_path %>

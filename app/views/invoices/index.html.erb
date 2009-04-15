@@ -1,0 +1,27 @@
+<h2>Seznam faktur</h2>
+
+<table>
+  <tr>
+    <th>firma</th>
+    <th>projekt</th>
+    <th>datum</th>
+    <th>poznámka</th>
+    <th>cena</th>
+    <th colspan="2">administrace</th>
+  </tr>
+
+<% for invoice in @invoices %>
+  <tr>
+    <td><%=h link_to invoice.project.company.name, invoice.project.company %></td>
+    <td><%=h link_to project_name(invoice.project), invoice.project %></td>
+    <td><%= my_date invoice.date %></td>
+    <td><%=h invoice.note %></td>
+    <td><%=h invoice.price %></td>
+    <td><%= link_to 'zobrazit', invoice %></td>
+    <td><%= link_to 'upravit', edit_invoice_path(invoice) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

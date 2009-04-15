@@ -1,0 +1,10 @@
+<h2>Úprava uživatele</h2>
+
+<% form_for(@user) do |f| %>
+
+  <%= render :partial => 'users/form' %>
+
+  <p>
+    <%= f.submit "upravit" %>
+  </p>
+<% end %>

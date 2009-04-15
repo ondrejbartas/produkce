@@ -1,0 +1,25 @@
+<div class="bought_tape">
+  <p>
+    <%= f.label 'tape_type_id', "kazeta:" %>
+    <%= f.collection_select :tape_type_id ,
+          TapeType.find(:all).sort_by {|u| u.order},
+        :id, :name, {:include_blank => true} %>
+
+    <%= f.label 'value', "počet kusů:" %>
+    <%= f.text_field :value, :size=>5 %>
+
+    <%= f.label 'price', "cena za kus:" %>
+    <%= f.text_field :price, :size=>5 %>
+
+    <%= f.label 'note', "poznámka:" %>
+    <%= f.text_field :note, :size=>25 %>
+
+    <% if f.object.new_record? %>
+        <%= link_to_function "Smazat", "$(this).up('.bought_tape').remove(); " %>
+    <% else %>
+        <%= f.hidden_field(:_delete) %>
+        <%= link_to_function "Smazat", "$(this).previous().value = '1'; $(this).up('.bought_tape').hide(); " %>
+    <% end %>
+
+  </p>
+</div>

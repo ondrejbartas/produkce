@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  store: MyString
+  url: MyString
+  purchase_date: 2009-02-28 18:34:34
+  note: MyString
+
+two:
+  store: MyString
+  url: MyString
+  purchase_date: 2009-02-28 18:34:34
+  note: MyString

@@ -1,0 +1,19 @@
+<% if operation.blank? %>
+    <li  class="operation">
+         <% cas = Time.now.strftime("%s") %>
+         úkon:<%= collection_select 'work[operations_attributes][new_'+cas+']', :operation_type_id , @operation_types,
+              :id, :name, {:include_blank => true} %>
+         poznámka:<%= text_field 'work[operations_attributes][new_'+cas+']', :note , :size=> 50%>
+               <%= link_to_function "smazat úkon", "$(this).up('.operation').remove(); " %>
+    </li>
+<% else %>
+    <%=   %>
+    <li  class="operation">
+         úkon:<%= collection_select 'work[operations_attributes]['+operation.id.to_s+']', :operation_type_id , @operation_types,
+              :id, :name, {:include_blank => true, :selected => operation.operation_type_id} %>
+         poznámka:<%= text_field 'work[operations_attributes]['+operation.id.to_s+']', :note , :size=> 50%>
+
+        <%= hidden_field( 'work[operations_attributes]['+operation.id.to_s+']', :_delete) %>
+        <%= link_to_function "Smazat úkon", "$(this).previous().value = '1'; $(this).up('.operation').hide(); " %>
+    </li>
+<% end %>

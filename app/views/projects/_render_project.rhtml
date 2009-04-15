@@ -1,0 +1,36 @@
+<% if not @company.blank? %>
+<p>
+  <% if  @company.users.size > 0 %>
+    <%= label :work, 'user_id', 'projekt zadal', :required => true %>
+    <%  if @selected_user.blank? %>
+        <%= collection_select(:project, :user_id ,
+          (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
+          :id, :fullname, {:include_blank => false} )%>
+    <%  else %>
+        <%= collection_select(:project, :project_id ,
+          (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
+          :id, :name, {:selected_value => @selected_user, :include_blank => true})%>
+    <% end %>
+    
+  <% end %>
+</p>
+<p>
+  <% if  @company.projects.size > 0 %>
+    <%= label :work, 'project_id', 'hlavní projekt', :required => true %>
+    <%  if @selected.blank? %>
+        <%= collection_select(:project, :project_id ,
+          (@company.blank? ? [] : @company.projects.find(:all, :conditions => "deleted is null AND project_id is null")),
+          :id, :name, {:include_blank => true} )%>
+    <%  else %>
+        <%= collection_select(:project, :project_id ,
+          (@company.blank? ? [] : @company.projects.find(:all, :conditions => "deleted is null AND project_id is null")),
+          :id, :name, {:selected_value => @selected, :include_blank => true})%>
+    <% end %>
+    <i> vybrat hlavní projekt nebo zadat název projektu na další řádce</i>
+  <% end %>
+</p>
+<p>
+   <span id="sub_project_id_container">
+   </span>
+</p>
+<% end %>

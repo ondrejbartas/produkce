@@ -1,0 +1,385 @@
+@CHARSET "UTF-8";
+body{
+    padding:0px;
+	margin: 0px;
+	font-size: small;
+	font-family: Arial, Helvetica, sans;
+	background-color: white;
+}
+h1, h2, h3, h4, h5{
+	font-family: Calibri, Arial, Helvetica, sans;
+	color: rgb(0,127,255);
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+h1, h5{
+	color: gray;
+}
+h4{
+	margin-bottom:5px;
+}
+
+h2 {
+    margin-top: 15px;
+    padding: 3px;
+    background: #eee;
+}
+h3 {
+    margin-left: 2em;
+    padding: 3px;
+    background: #ccc;
+}
+.odstavec2 {
+    margin-left: 3em;
+}
+a{
+	color: gray;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+	color:rgb(0,127,255);
+}
+#header{
+	color: white;
+	background-color: gray;
+	border: 1px solid gray;
+	margin-bottom: 20px;
+	padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#header h1{
+	color: white;
+}
+#role{
+	border-bottom: 1px solid gray;
+	padding: 0 20px 0;
+}
+#role span{
+	margin-right: 5px;
+}
+#role span.active{
+	padding: 2px 6px 2px;
+	position:relative;
+	top: -2px;
+	color: gray;
+	font-weight: bold;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid white;
+	background-color: white;
+}
+#role span.inactive{
+	position:relative;
+	top: -1px;
+	border: 1px solid rgb(200,200,200);
+	border-bottom-color: white;
+	padding: 1px 5px 0px;
+	background-color: white;
+}
+#role span.inactive a{
+	color: rgb(200,200,200);
+}
+#role span.inactive:hover{
+	
+}
+#content{
+	background-color: white;
+    min-height: 500px;
+    background: url(../images/pokrokman2.jpg) no-repeat bottom right;
+}
+#menu{
+	float: left;
+	padding-top: 1px;
+	width: 150px;
+	padding-left: 25px;
+}
+#page{
+	margin: 0px 100px 20px 200px;
+	padding-top: 1px;
+}
+#user_info{
+	float: right;
+	color: gray;
+}
+#footer{
+	border-top: 1px solid gray;
+	text-align: center;
+	padding: 10px;
+	color: gray;
+}
+.top{
+	vertical-align: top;
+}
+hr{
+	margin: 20px 0 20px;
+	border-style: solid;
+}
+#login{
+	margin: 0px;
+	width: 250px;
+	padding-left: 250px;
+    padding-top: 100px;
+    padding-bottom:190px;
+    background: url(../images/pokrokman.jpg) no-repeat;
+}
+#login td:first-child{
+	text-align: right;
+}
+input[type="submit"] {
+	border-width: 0;
+	background-color: rgb(0,127,255);
+	color: white;
+    font-size: 110%;
+	padding: 2px 20px 2px;
+	display: block;
+	outline: none;
+	margin-left: 7px;
+}
+/* ----------------- MENU ------------------ */
+div.menu_in{
+	margin-bottom: 10px;
+}
+div.menu_small{
+    margin-bottom: 5px;
+    float: right;
+    margin-top: 0.2em;
+    font-size: 9pt;
+    font-weight:normal;
+}
+div.menu_in a, div.menu_small a{
+	color: white;
+	background-color: gray;
+	margin-right: 2px;
+	display: inline-block;
+	padding: 1px 6px 1px;
+}
+#menu li{
+	list-style-type: none;
+}
+#menu li a{
+	display: block;
+	padding: 10px 0px 10px 10px;
+	text-decoration: none;
+	color: gray;
+	font-weight: bold;
+}
+#menu li a:hover{
+	background: rgb(230,230,230);
+}
+#menu ul{
+	padding: 0;
+	position: relative;
+	right: 8px;
+}
+/* ----------------- USERS --------------- */
+div.user_list{
+}
+/* ----------------- Project accountant --------- */
+.menu_project_status{
+	color: white;
+	background-color: gray;
+	margin-right: 3px;
+	display: inline-block;
+	padding: 1px 6px 1px;
+	position: relative;
+	left: -3px;
+}
+.menu_project_status:hover{
+	color: white;
+}
+.project_acct{
+	padding: 0px 3px 0px;
+	margin: 2px;
+}
+.overdue{
+	color: white;
+	background: #E32636;
+}
+div.overdue:hover{
+	color: white;
+	background: #E32636;
+}
+.project_acct:hover{
+	background-color: rgb(230,230,230);
+}
+.project_acct a{
+	color: black;
+}
+/* ------------- comments -------------- */
+.comment{
+	margin-top: 20px;
+}
+.comment_author{
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+.comment_text{
+	margin-left: 90px;
+	padding: 10px 20px 9px;
+	width: 400px;
+	background-image: url('../pages/comment.gif');
+	text-align: justify;
+}
+.comment_label{
+	color: gray;
+	font-size: 10px;
+	margin-top: 5px;
+}
+textarea.textarea_comment{
+	padding: 3px;
+	font-family: Arial, Helvetica, sans;
+	font-size: small;
+	width: 517px;
+	height: 70px;
+}
+
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+.fieldWithErrors {
+    display: inline;
+    border: 2px solid red;
+   
+}
+
+.note {
+    font-size: 9pt;
+    font-style: italic;
+}
+
+ul {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+table {
+    margin-top: 1em;
+    border-collapse: collapse;
+    border: solid 1px #515151;
+}
+
+th {
+    padding: 3px;
+    border: solid 1px #515151;
+    background: #777777;
+    color: white;
+}
+
+th a {
+    color: #eeeeee;
+    text-decoration: underline;
+}
+td {
+    padding: 3px;
+    text-align: center;
+    border: solid 1px #515151;
+}
+
+.red {
+    color: #ff0000;
+}
+.today {
+    background: #bbbbff;
+}
+
+.weekend {
+    background: #ffddbb;
+}
+.even {
+    background: #eee;
+}
+.odd {
+    background: #ccc;
+}
+
+.own {
+    color: #00AA00;
+}
+.own_reserved {
+    color: #88AA88;
+}
+.reserved {
+    color: #777777;
+}
+
+.calendar td {
+	text-align:left;
+    font-size: 8pt;
+}
+
+.actual_place {
+    background: #Fbb;
+}
+
+.div_with_float:hover .floating_div {
+	display:block;
+}
+
+.left_align {
+	text-align:left;
+}
+
+.floating_div {
+	text-align:left;
+	width:265px;
+	font-weight: normal;
+	text-decoration:none;
+	color: black;
+	margin-left:-25px;
+	margin-top:-6px;
+	position:absolute;
+	padding:5px;
+	font-size:110%;
+	z-index: 2;
+}
+.floating_div_close {
+	float:right;
+	margin-right:5px;
+	margin-top: -3px;
+}	
+
+
+.floating_div_top {
+	height: 33px;
+	background: url('../images/float_div_top.png');
+}	
+.floating_div_body {
+	padding-left: 10px;
+	background: url('../images/float_div_body.png');
+}
+.floating_div_bottom {
+	height: 18px;
+	background: url('../images/float_div_bottom.png');
+}	

@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tape_type_id: 1
+  price: 1
+  value: 1
+  note: MyString
+  purchase_date: 2009-02-28 17:34:25
+
+two:
+  tape_type_id: 1
+  price: 1
+  value: 1
+  note: MyString
+  purchase_date: 2009-02-28 17:34:25

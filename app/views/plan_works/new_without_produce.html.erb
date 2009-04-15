@@ -1,0 +1,41 @@
+<h2>Přidat práce bez produkčního</h2>
+
+
+<% form_for(@plan_work) do |f| %>
+  <%= f.error_messages %>
+
+
+<ul>
+    <% cas = Time.now.strftime("%s") %>
+    <% myTime = (((Time.now - Time.now.beginning_of_day)/30.minutes).round ) * 30 %>
+    <%= hidden_field_tag "days["+cas+"][date]", Time.now.beginning_of_day  %>
+    <%= hidden_field_tag "days["+cas+"][length]",  '30' %>
+    <li>datum: <%= my_date Time.now.beginning_of_day %> <%= time_values myTime %> <%= hidden_field_tag "days["+cas+"][time]", myTime %></li>
+    <li>pracovník: <%= @current_user.fullname %> <%= f.hidden_field :user_id, :value=> @current_user.id %> </li>
+</ul>
+
+<p>
+    <%= f.label  'note', 'zadejte jméno a kontakt na objednavatele práce', :required => false %><br />
+    <%= f.text_area  :note, :cols=>30, :rows=>5 %>
+</p>
+
+<p>
+    <%= f.label 'job_type_id', 'typ práce', :required => true %>
+    <%= f.collection_select( :job_type_id , JobType.find(:all),
+          :id, :name, {:include_blank => true},
+          {:onchange => remote_function( :update => 'job_type_container', :url =>
+          add_place_finished_operation_plan_works_path, :with =>
+            "'job_type_id=' + escape(value)")} )%>
+</p>
+
+
+<div id="job_type_container">
+
+
+</div>
+
+
+<%= f.submit "přidat" %>
+
+
+<% end %>

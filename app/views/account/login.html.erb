@@ -1,0 +1,27 @@
+<div id="login">
+    		<h2>Login</h2>
+
+
+<% form_tag(:action => 'login') do %>
+  <% unless flash[:error].blank? %>
+    <p class="error"><%= flash[:error] %></p>
+  <% end %>
+  	<p>
+		<label for="user_login">Uživatelské jméno: </label>
+    </p>
+	<p>
+		<%= text_field 'user', 'login', 'style' => 'width: 10em; font-size: 130%;'  %>
+	</p>
+	<p>
+		<label for="user_password">Heslo: </label>
+    </p>
+	<p>
+		<%= password_field 'user', 'password', 'style' => 'width: 10em; font-size: 130%;' %>
+	</p>
+  <p>	<%= submit_tag 'Přihlásit' %>
+  </p>
+
+<% end %>
+
+
+</div>

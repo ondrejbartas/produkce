@@ -1,0 +1,38 @@
+<h2>Přiřadit projekt k práci zadanou operátorem</h2>
+
+<% form_for(@plan_work) do |f| %>
+  <%= f.error_messages %>
+
+<ul>
+	<li>datum: <%= my_time @plan_work.created_at %></li>
+	<li>operátor: <%= @plan_work.user.name %></li>
+	<li>poznámka: <%= @plan_work.note %></li>
+	<li>úkony:<ul>
+		<% for operation in @plan_work.operations %>
+			<li><%= operation.operation_type.name %></li>
+		<% end %>
+		</ul>
+	</li>
+</ul>
+<%= f.hidden_field :without_project, :value=>"true" %>
+	 <p>
+        <%= f.label 'project_id', 'projekt', :required => true %>
+               <%= f.collection_select :project_id ,
+                 @projects,
+                 :id, :name, {:include_blank => true },
+                 {:onchange => remote_function( :update => 'sub_project_id_container', :url =>
+                 render_sub_project_projects_path, :with =>
+                   "'project_id=' +
+                     escape(value)" )}
+               %>
+
+     </p>
+     <span id="sub_project_id_container">
+
+     </span>
+
+<%= hidden_field :add_operation , "true"%>
+<%= f.submit "upravit" %>
+
+
+<% end %>

@@ -1,0 +1,8 @@
+<h2>Úprava pracovní činnosti</h2>
+<% form_for(@operation_type) do |f| %>
+  <%= render :partial => 'operation_types/form' %>
+
+  <p>
+    <%= f.submit "upravit" %>
+  </p>
+<% end %>

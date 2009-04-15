@@ -1,0 +1,33 @@
+<h2>
+    <div class="menu_small">
+        <%= link_to 'nový nákup', new_purchase_cart_path %>
+    </div>
+    Nákupy kazet
+</h2>
+
+<table>
+  <tr>
+    <th>obchod</th>
+    <th>web</th>
+    <th>datum nákupu</th>
+    <th>provedl</th>
+    <th>poznámka</th>
+    <th colspan="3">administrace</th>
+  </tr>
+
+<% for purchase_cart in @purchase_carts %>
+  <tr class="<%= cycle("even", "odd") %>" height="30">
+    <td><%=h purchase_cart.store %></td>
+    <td><%=h purchase_cart.url %></td>
+    <td><%= my_date(purchase_cart.purchase_date) %></td>
+    <td><%= link_to purchase_cart.user.fullname, purchase_cart.user %></td>
+    <td><%=h purchase_cart.note %></td>
+    <td><%= link_to 'zobrazit', purchase_cart %></td>
+    <td><%= link_to 'upravit', edit_purchase_cart_path(purchase_cart) %></td>
+    <td><%= link_to 'smazat', purchase_cart, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

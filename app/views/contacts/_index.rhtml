@@ -1,0 +1,16 @@
+<% for contact in @user.contacts %>
+    <% if contact.deleted.blank? %>
+     <% if @current_user.mine?(contact) || @current_user.admin? || @current_user.produce? %>
+        <div class="menu_small">
+           <%= link_to 'upravit kontakt', edit_user_contact_path(@user, contact) %>
+           <%= link_to 'smazat kontakt', user_contact_path(@user, contact), :confirm => 'Jste si opravdu jisti ke smazani '+contact.user.name+' kontaktu?', :method => :delete %>
+        </div>
+      <% end %>
+      <ul class="odstavec2">
+        <%=  print_field( contact.phone , "telefon: ", "li") %>
+        <%=  print_mail_field( contact.email , "email: ", "li") %>
+        <%=  print_address_field(contact.address, "adresa:  ", "li" )%>
+        <%=  print_field( contact.note , "poznámka: ", "li") %>
+      </ul>
+    <% end %>
+<% end %>

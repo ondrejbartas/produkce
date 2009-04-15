@@ -1,0 +1,10 @@
+<h2>Vytvoření nového typu pracovní činnosti</h2>
+
+<% form_for(@job_type) do |f| %>
+
+  <%= render :partial => 'job_types/form' %>
+  <p>
+    <%= f.submit "vytvořit" %>
+  </p>
+<% end %>
+

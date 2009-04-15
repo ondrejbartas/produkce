@@ -1,0 +1,10 @@
+<h2>Nový předdefinovaný úkon k fakturaci</h2>
+
+<% form_for(@invoice_operation) do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => 'invoice_operations/form' %>
+
+  <p>
+    <%= f.submit "vytvořit" %>
+  </p>
+<% end %>

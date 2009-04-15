@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @machine.name %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%=h @machine.note %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%=h @machine.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_machine_path(@machine) %> |
+<%= link_to 'Back', machines_path %>

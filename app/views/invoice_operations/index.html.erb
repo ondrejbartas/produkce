@@ -1,0 +1,28 @@
+<h2>
+    <div class="menu_small">
+        <%= link_to 'nový předdefinovaný úkon k fakturaci', new_invoice_operation_path %>
+    </div>
+    Seznam předdefinovaných úkonů k fakturaci
+</h2>
+
+<table>
+  <tr>
+    <th>název</th>
+    <th>cena</th>
+    <th>poznámka</th>
+    <th colspan="2">administrace</th>
+  </tr>
+
+<% for invoice_operation in @invoice_operations %>
+  <tr class="<%= cycle("even", "odd") %>" height="30">
+    <td><%=h invoice_operation.name %></td>
+    <td><%=h invoice_operation.price %></td>
+    <td><%=h invoice_operation.note %></td>
+    <td><%= link_to 'upravit', edit_invoice_operation_path(invoice_operation) %></td>
+    <td><%= link_to 'smazat', invoice_operation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
