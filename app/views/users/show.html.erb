@@ -1,7 +1,7 @@
   
 <h2> 
      <div class="menu_small">
-      <%= right_owner_link "users", "edit",  'upravit', edit_user_path(@user) %>
+      <%= right_owner_link "users", "edit", @user.user_id, 'upravit', edit_user_path(@user) %>
       <%= right_delete_link "user", "delete", 'smazat', @user %>
      </div>
    UŽIVATEL: <%= @user.name.blank? ? "" : @user.name  %> <%= @user.surname.blank? ? "" : @user.surname  %>
