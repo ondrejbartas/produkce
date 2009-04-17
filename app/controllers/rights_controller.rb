@@ -2,7 +2,7 @@ class RightsController < ApplicationController
   # GET /rights
   # GET /rights.xml
   def index
-    @rights = Right.all
+    @rights = Right.all.sort_by {|u| u.controller.downcase}
 
     respond_to do |format|
       format.html # index.html.erb
