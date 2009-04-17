@@ -1,11 +1,9 @@
 <% if  @company.projects.size > 0 %>
     <% for proj in @company.projects %>
         <h3>Projekt: <%=h proj.name %>
-          <% if @current_user.mine?(proj) || @current_user.admin? || @current_user.produce? %>
             <div class="menu_small">
-                <%= link_to 'upravit projekt', edit_project_path(proj) %>
+                <%= right_link "projects", "edit", 'upravit projekt', edit_project_path(proj) %>
             </div>
-          <% end %>
         </h3>
             <table class="odstavec2">
                 <tr><td>poznámka: </td><td><strong>

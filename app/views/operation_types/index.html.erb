@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= link_to 'nový typ úkonu', new_operation_type_path %>
+        <%= right_link "operation_types", "new", 'nový typ úkonu', new_operation_type_path %>
     </div>
     Seznam úkonů
 </h2>
@@ -25,8 +25,8 @@
             <%= job_type.name %>,
         <% end %>
     </td>
-    <td><%= link_to 'upravit', edit_operation_type_path(operation_type) %></td>
-    <td><%= link_to 'smazat', operation_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= right_link "operation_types", "edit",  'upravit', edit_operation_type_path(operation_type) %></td>
+    <td><%= right_delete_link "operation_types", "delete",  'smazat', operation_type %></td>
   </tr>
 <% end %>
 </table>

@@ -1,5 +1,7 @@
 <h2>Seznam práv pro uživatele</h2>
-
+<div class="menu_small">
+	<%= right_link "rights", "new", 'přidat práva', new_right_path %>
+</div>
 <table>
   <tr>
 	<th>kontroler</th>
@@ -12,7 +14,7 @@
   </tr>
 
 <% @rights.each do |right| %>
-  <tr>
+  <tr  class="<%= cycle("even", "odd") %>">
 	 <td><%= right.controller -%></td>
 	 <td><%= right.action -%></td>
 	 <td><%= right.sub -%></td>
@@ -29,13 +31,12 @@
       <% end %>
 
 
-    <td><%= link_to 'Show', right %></td>
-    <td><%= link_to 'Edit', edit_right_path(right) %></td>
-    <td><%= link_to 'Destroy', right, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= right_link "rights", "show", 'zobrazit', right %></td>
+    <td><%= right_link "rights", "edit", 'upravit', edit_right_path(right) %></td>
+    <td><%= right_delete_link "rights", "delete", 'smazat', right %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New right', new_right_path %>

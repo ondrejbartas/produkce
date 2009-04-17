@@ -295,15 +295,16 @@ class PlanWorksController < ApplicationController
   # PUT /works/1.xml
   def update
       @plan_work = Work.find(params[:id])
-      @operations = @plan_work.operations
 
       if not @current.user.admin? || @current_user.produce?
           @plan_work.edited = true;
       end
 
       respond_to do |format|
-        if @work.attributes(params[:work])
+        if @work.update_attributes(params[:work])
           if params['add_operation'].blank?
+            @operations = @plan_work.operations
+            
               flash[:notice] = 'Work was successfully updated.aa'+params['add_operation']
               format.html { redirect_to(@work) }
               format.xml  { head :ok }

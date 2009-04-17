@@ -1,11 +1,5 @@
 
-
-<%= link_to_remote "+ přidat předchozí týden +",
-           :url => { :action => "add_week_calendar", 'substract_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
-           :update =>  "calendar_container" , :position => :top %>
-<%= link_to_remote "+ přidat týden +",
-           :url => { :action => "add_week_calendar", 'add_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
-           :update =>  "calendar_container" , :position => :bottom %>
+<h2>Kalendář</h2>
 
 <% form_tag(week_plans_path, :method => :post) do %>
 
@@ -42,6 +36,26 @@
 <% end %>
 
 
+<h2>
+	<%= link_to_remote "+ přidat předchozí týden +",
+           :url => { :action => "add_week_calendar", 'substract_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
+           :update =>  "calendar_container" , :position => :top %>
+</h2>
+
+
+	
 <div id="calendar_container">
-	<%= render :partial => 'plans/add_week_calendar' %>
+	<% count = 0 %>
+	<% ((session[:calendar_end_date]*(-1) + session[:calendar_start_date] + 7 )/7).times do %>
+		<% @start_date = session[:calendar_end_date] + count * 7 %>
+		<%= render :partial => 'plans/add_week_calendar' %>
+		<% count += 1 %>
+	<% end %>
+
 </div>
+
+<h2>
+	<%= link_to_remote "+ přidat týden +",
+           :url => { :action => "add_week_calendar", 'add_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
+           :update =>  "calendar_container" , :position => :bottom %>
+</h2>

@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-      <%= link_to 'vytvořit nové místo', new_place_path %>
+      <%= right_link "places", "new", 'vytvořit nové místo', new_place_path %>
     </div>
     Pracovní místa
 </h2>
@@ -22,12 +22,9 @@
             <%= job_type.name %>,
         <% end %>
     </td>
-    <td><%= link_to 'upravit', edit_place_path(place) %></td>
-    <td><%= link_to 'smazat', place, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= right_link "places", "edit", 'upravit', edit_place_path(place) %></td>
+    <td><%= right_delete_link "places", "delete", 'smazat', place %></td>
 
   </tr>
 <% end %>
 </table>
-
-<br />
-

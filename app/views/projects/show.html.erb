@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= link_to 'upravit projekt', edit_project_path(@project) %>
+        <%= right_link "projects", "edit", 'upravit projekt', edit_project_path(@project) %>
     </div>
     Projekt: <%=h project_name(@project)%>
 </h2>
@@ -20,7 +20,7 @@
 <% if @project.project_id.blank? %>
 <h3>
     <div class="menu_small">
-        <%= link_to 'přidat podprojekt', new_project_project_path(@project) %>
+        <%= right_link "projects", "new", 'přidat podprojekt', new_project_project_path(@project) %>
     </div>
     Seznam subprojektů
 </h3>
@@ -38,8 +38,7 @@
 <h3>
     <% if @project.status == 1 %>
         <div class="menu_small">
-            <%= link_to 'naplánovat práci', new_project_plan_work_path(@project) %>
-            <%= link_to 'naplánovat práci na teď', new_now_project_plan_works_path(@project) %>
+            <%= right_link "works", "new", 'naplánovat práci', new_project_work_path(@project) %>
         </div>
     <% else  %>
         <div class="menu_small red">
@@ -78,16 +77,12 @@
     </td>
     <td><%= work.reserved == true ? "rezervováno" : " " %></td>
 
-    <td><%= link_to "upravit", edit_project_plan_work_path(@project.id , work.id) %></td>
+    <td><%= right_link "works", "edit", "upravit", edit_project_work_path(@project.id , work.id) %></td>
 
   </tr>
 
 <% end %>
 </table>
-
-
-<h3>Source information &amp; media</h3>
-<div><a href="">documentation.pdf</a>, <a href="">video.iso</a></div>
 
 
 

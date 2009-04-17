@@ -1,0 +1,19 @@
+<% if @job_type.blank? %>
+	<% @job_type = job_type %>
+<% end %>
+
+<% index = "work[operations_attributes][new_"+Time.now.strftime("%s")+"]" %>
+<div class="operation">
+  <p>
+    <%= label index, 'opertion_type_id', "úkon" %>
+    <%= collection_select index,:operation_type_id ,
+          @job_type.operation_types,
+        :id, :name, {:include_blank => true} %>
+
+    <%= label index, 'note', "poznámka produkce" %>
+    <%= text_field index, :note, :size=>25 %>
+
+		
+    <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>
+  </p>
+</div>

@@ -1,7 +1,6 @@
 <h2>
     <div class="menu_small">
-      <%= link_to 'upravit', edit_company_path(@company) %>
-      <%= link_to 'smazat', @company, :confirm => 'Jste si opravdu jistí se smazáním uživatele: '+@company.name+'?', :method => :delete %>
+      <%= right_link ("companies", "edit", "upravit", edit_company_path(@company)) %>
     </div>
   Firma : <%=h @company.name %>
 </h2>
@@ -23,7 +22,7 @@
 
 <h3>
      <div class="menu_small">
-       <%= link_to 'přidat kontakt', new_company_contact_path(@company)  %>
+       <%= right_link ("contacts", "new", 'přidat kontakt', new_company_contact_path(@company) ) %>
      </div>
      KONTAKT NA FIRMU
  </h3>
@@ -33,8 +32,8 @@
     <% if contact.deleted.blank? %>
      <% if @current_user.mine?(contact) || @current_user.admin? || @current_user.produce? %>
         <div class="menu_small">
-           <%= link_to 'upravit kontakt', edit_company_contact_path(@company, contact) %>
-           <%= link_to 'smazat kontakt', company_contact_path(@company, contact), :confirm => 'Jste si opravdu jisti ke smazani '+contact.company.name+' kontaktu?', :method => :delete %>
+           <%= right_owner_link ("contacts", "edit", contact.user_id, 'upravit kontakt', edit_company_contact_path(@company, contact)) %>
+           <%= right_delete_link ("contacts", "delete", 'smazat kontakt', company_contact_path(@company, contact) ) %>
         </div>
       <% end %>
       <ul class="odstavec2">
@@ -50,28 +49,28 @@
 
 <h3>
     <div class="menu_small">
-       <%= link_to 'přidat uživatele', new_company_user_path(@company)  %>
+       <%= right_link ("users", "new",  'přidat uživatele', new_company_user_path(@company) )  %>
      </div>
     členové firmy
 </h3>
 <ul>
 <% for user in User.find(:all ,:conditions => ["deleted is null AND company_id = :comp ", {:comp => @company.id}]).sort_by{|u| u.surname.downcase} %>
-  <li><%= link_to user.fullname, user %></li>
+  <li><%= right_show_link ("users", "show",  user.fullname, user ) %></li>
 <% end %>
 </ul>
 
 <h3>
     <div class="menu_small">
-        <%= link_to 'přidat projekt', new_company_project_path(@company) %>
+        <%= right_link ("projects", "new", 'přidat projekt', new_company_project_path(@company) ) %>
     </div>
     projekty firmy</h3>
 <ul>
   <% for project in Project.find(:all,  :conditions => ["project_id is null AND company_id = :comp", {:comp => @company.id}]) %>
-  <li><%= link_to project.name, project %>
+  <li><%= right_show_link ("projects", "show", project.name, project) %>
     <% if project.projects.size > 0 %>
         <ul>
             <% for subproject in project.projects %>
-                <li><%= link_to subproject.name, subproject %></li>
+                <li><%= right_show_link ("projects", "show", subproject.name, subproject ) %></li>
             <% end %>
         </ul>
     <% end %>

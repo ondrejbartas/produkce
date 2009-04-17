@@ -1,7 +1,7 @@
 <% if @plan_type == "plan" %>
     <p>
         <%= label 'work', 'user_id', 'operátor', :required => false %>
-        <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ),
+        <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
               :id, :fullname, {:include_blank => true},
               {:onchange => remote_function( :update => 'calendar_container', :url =>
               add_calendar_plan_works_path, :with =>
@@ -18,7 +18,7 @@
 <% elsif @plan_type == "now" %>
     <p id="user_container">
         <%= label 'work', 'user_id', 'operátor', :required => false %>
-        <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ),
+        <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
               :id, :fullname, {:include_blank => true} ) %>
 
         <%= select_tag "chosed_role", options_for_select({ "externi" => "17", "interní" => "5" }, @chosed_role.to_s),

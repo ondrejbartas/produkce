@@ -1,0 +1,79 @@
+<%= error_messages_for :work %>
+
+<% form_for @work do |work_form| -%>
+
+
+<% if @work.project_id.blank? %>
+      <p>
+         <%= work_form.label 'project_id', 'projekt', :required => true %>
+                <%= work_form.collection_select :project_id ,
+                  Project.find(:all, :conditions=> "status = 1 AND project_id IS null"),
+                  :id, :name, {:include_blank => true },
+                  {:onchange => remote_function( :update => 'sub_project_id_container', :url =>
+                  render_sub_project_projects_path, :with =>
+                    "'project_id=' +
+                      escape(value)" )}
+                %>
+      </p>
+      <span id="sub_project_id_container">
+      </span>
+<%  else %>
+    <p>
+        plánujete práci pro projekt: <b><%= project_name(@work.project) %><b>
+        <% @main_project = Project.find_by_id(@work.project.id) %>
+        <% if not @main_project.project.blank? %>
+            <%= work_form.hidden_field(:project_id, :value=> @main_project.project_id ) %>
+            <%= work_form.hidden_field(:sub_project_id, :value=> @work.project_id ) %>
+        <% else %>
+            <%= work_form.hidden_field(:project_id, :value=> @work.project_id) %>
+            <%= work_form.hidden_field(:sub_project_id, :value=> "" ) %>
+        <% end %>
+    </p>
+<%  end %>
+
+
+
+
+<p>
+    <%= work_form.label 'job_type_id', 'typ práce', :required => true %>
+    <%= work_form.collection_select( :job_type_id , JobType.find(:all),
+          :id, :name, {:include_blank => true},
+          {:onChange => remote_function( :update => 'job_type_container' ,:url =>
+          add_user_works_path, :with =>
+            "'type_create=false&job_type_id=' + escape(value)")} )%>
+</p>
+
+<div id="job_type_container">
+	<% if !@work.job_type_id.blank? %>	
+		<% if !@work.user_id.blank? && @work.user.is_worker? %>
+			<% chosed_role = "5" %>
+		<% else %>
+			<% chosed_role = "17" %>
+		<% end %>
+		<%= render :partial => "add_user", :locals =>{ :job_type => @work.job_type, :user_id => @work.user_id, :chosed_role => chosed_role, :type_create => false } %>
+	<% end %>
+</div>
+
+<div id="operations">
+  <% work_form.fields_for :operations do |operation_form| %>
+	      <%= render :partial => 'operation', :locals => { :f => operation_form } %>
+  <% end %>
+</div>
+
+<div id="calendar_container">
+	<% if !@work.user_id.blank? %>
+		<% if controller.action_name != "edit" %>
+			<%= render :partial => 'plans/add_calendar_work', 
+							:locals => { :start_date => 0, :job_type_id => @work.job_type_id, 
+							:user_id => @work.user_id, :project_id => @work.project_id
+								} %>
+		<% end %>
+	<% end %>
+</div>
+
+
+<p>
+  <%= work_form.submit "přidat" %>
+</p>
+
+<% end -%>

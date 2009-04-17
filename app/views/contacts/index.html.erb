@@ -1,17 +1,17 @@
-<h2>Listing contacts</h2>
+<h2>Seznam kontaktů</h2>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Note</th>
+    <th>jméno</th>
+    <th>adresa</th>
+    <th>e-m@il</th>
+    <th>telefon</th>
+    <th>poznámka</th>
   </tr>
 
 <% for contact in @contacts %>
   <tr>
-    <td><%= link_to contact.user.name, contact %></td>
+    <td><%= right_owner_link ( "contacts", "show", contact.user_id, contact.user.name, contact) %></td>
     <td><%=h contact.address %></td>
     <td><%=h contact.email %></td>
     <td><%=h contact.phone %></td>

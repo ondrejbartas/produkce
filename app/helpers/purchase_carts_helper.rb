@@ -11,7 +11,7 @@ module PurchaseCartsHelper
         html = render(:partial => options[:partial], :locals => { options[:form_builder_local] => f })
         page << %{
           $('#{options[:insert]}').insert({
-            bottom: '#{escape_javascript(html)}'.replace(/new_2/g, 'new_'+(new Date().getTime())) });
+            bottom: '#{escape_javascript(html)}'.replace(/NEW_RECORD/g, 'new_'+(new Date().getTime())) });
         }
       end
     end

@@ -1,0 +1,68 @@
+<% if @job_type.blank? %>
+	<% @job_type = job_type %>
+<% end %>
+
+<% if @user_id.blank? %>
+	<% @user_id = user_id %>
+<% end %>
+
+<% if @chosed_role.blank? %>
+	<% @chosed_role = chosed_role %>
+<% end %>
+<% if @change_user.blank? %>
+	<% @change_user = false	 %>
+<% end %>
+<% if @type_create.blank? %>
+	<% @type_create = false	 %>
+<% end %>
+
+<p id="user_container">
+      <%= label 'work', 'user_id', 'operátor', :required => false %>
+      <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
+            :id, :fullname, {:include_blank => true ,:selected => @user_id } ,
+				 {:onchange => remote_function( :update => 'calendar_container', :url =>
+              add_calendar_work_plans_path, :with =>
+                "'start_date=0&job_type_id="+@job_type.id.to_s+"&user_id=' + escape(value) + '&project_id='+ document.getElementById(\'work_project_id\').value+ '&sub_project_id='+ document.getElementById(\'work_sub_project_id\').value")} ) %>
+
+      <%= select_tag "chosed_role", options_for_select({ "interní" => "5" , "externi" => "17", }, @chosed_role.to_s),
+              {:onchange => remote_function( :update => 'user_container', :url =>
+                add_user_works_path, :with =>
+                  "'change_user=true&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
+      %>
+
+		<%= link_to_remote "+práce bez zadání operátora+", 
+					:url => { :controller => "plans", :action => "add_calendar_work"
+					 }, :update => "calendar_container", 
+					 :with =>
+	                "'start_date=0&no_user=true&job_type_id="+@job_type.id.to_s+"&project_id='+ document.getElementById(\'work_project_id\').value+ '&sub_project_id='+ document.getElementById(\'work_sub_project_id\').value"
+				 %>
+</p>
+
+<% if @change_user == false %>
+
+  <% if not @places.blank? %>
+    <% if  @places.size > 0 %>
+      <%= label :work, 'place_id', 'pracovní místo:', :required => false %>
+      <%  if @selected.blank? %>
+          <%= collection_select(:work, :place_id ,
+            @places,
+            :id, :name, {:include_blank => false} )%>
+      <%  else %>
+          <%= collection_select(:work, :placet_id ,
+            @places,
+            :id, :name, {:selected_value => @selected, :include_blank => true})%>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
+<%= link_to_remote "+ přidat úkon +",
+           :url => { :action => "add_operation", :job_type_id => @job_type.id},
+           :update =>  "operations" , :position => :bottom %>
+
+	<% if @work.blank? %>
+		<%= render :partial => 'add_operation' , :locals => { :job_type => @job_type } %>
+	<% end %>
+	
+	
+<% end %>

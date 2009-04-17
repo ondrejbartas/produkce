@@ -16,7 +16,20 @@
         <th width="100">projekt</th>
 
         <% for place in @places %>
-            <th width="90"><%= place.name %></th>
+            <th width="90">
+						<div class="div_with_float">
+							<a onMouseOver="show_float_div('float_place_<%= place.id -%>');" onMouseOut="show_float_div('float_place_<%= place.id -%>');">
+								<%= place.name %>
+							</a>
+							<div style="margin-top:10px;margin-left:-60px;display:none" class="floating_div" id="float_place_<%= place.id -%>">
+								<div class='floating_div_top'></div>
+								<div class='floating_div_body'>
+									<%= place.note %>
+								</div>
+								<div class='floating_div_bottom'></div>
+							</div>
+						</div>
+				</th>
         <% end %>
     </tr>
 

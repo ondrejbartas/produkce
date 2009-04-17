@@ -127,10 +127,34 @@ end
          if rights.first.check?(@current_user, 0 )
             link_to text, path
          end
-       else
-          link_to text, path
        end
  end
+ 
+ def right_owner_link (controller, action, user_id, text, path)
+
+        rights = Right.find(:all, :conditions => [" controller = ? AND action = ? ", controller, action])
+
+        if rights.size > 0
+          if rights.first.check?(@current_user, user_id )
+             link_to text, path
+          end
+        end
+  end
+ 
+ def right_show_link (controller, action, text, path)
+
+        rights = Right.find(:all, :conditions => [" controller = ? AND action = ? ", controller, action])
+
+        if rights.size > 0
+          if rights.first.check?(@current_user, 0 )
+             link_to text, path
+          else 
+             text
+          end
+        else 
+          text
+        end
+  end
 
  def right_delete_link (controller, action, text, path)
 
@@ -138,10 +162,8 @@ end
 
        if rights.size > 0
          if rights.first.check?(@current_user, 0 )
-            link_to text, path
-         end
-       else
-          link_to text, path
+            link_to text, path, :confirm => 'Jste si opravdu jisti ke smazani ', :method => :delete
+         end      
        end
  end
  

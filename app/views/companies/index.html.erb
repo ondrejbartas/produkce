@@ -1,5 +1,5 @@
 <h2>
-    Listing companies
+    Seznam firem
 </h2>
 
 <div class="company_list">
@@ -11,7 +11,7 @@
         <h3> <%=  letter.capitalize %></h3>
         <ul>
       <% end %>
-      <li><%= link_to company.name, company %></li>
+      <li><%=  right_show_link ("companies", "show", company.name, company) %></li>
 <% end %>
 </ul>
 

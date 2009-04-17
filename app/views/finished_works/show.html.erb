@@ -1,23 +1,22 @@
 <p>
-  <b>Note:</b>
+  <b>poznámka:</b>
   <%=h @finished_work.note %>
 </p>
 
 <p>
-  <b>Status:</b>
+  <b>stav:</b>
   <%=h @finished_work.status %>
 </p>
 
 <p>
-  <b>Value:</b>
+  <b>hodnota:</b>
   <%=h @finished_work.value %>
 </p>
 
 <p>
-  <b>User:</b>
+  <b>operátor:</b>
   <%=h @finished_work.user_id %>
 </p>
 
 
-<%= link_to 'Edit', edit_finished_work_path(@finished_work) %> |
-<%= link_to 'Back', finished_works_path %>
+<%= right_owner_link ("finished_works" "edit", @finished_work.user_id ,'Edit', edit_finished_work_path(@finished_work)) %> |

@@ -10,6 +10,7 @@ class Work < ActiveRecord::Base
   accepts_nested_attributes_for :operations, :allow_destroy => true, :reject_if => proc { |a| a['operation_type_id'].blank? }
   
   validates_presence_of :time
+  validates_numericality_of :length, :greater_than => 0
 
   attr_accessor :sub_project_id, :date, :without_project
 
@@ -35,7 +36,6 @@ class Work < ActiveRecord::Base
   }
 
   LENGTH_VALUES = {
-    0 => "???",
     30 => "00:30", 60 => "01:00",
     90 => "01:30", 120 => " 02:00",
     150 => "02:30", 180 => " 03:00",

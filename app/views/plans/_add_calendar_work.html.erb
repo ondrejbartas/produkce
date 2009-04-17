@@ -1,0 +1,132 @@
+
+<% if @job_type.blank? %>
+	<% @job_type = JobType.find(job_type_id) %>
+<% end %>
+<% if @project.blank? %>
+	<% @project = Project.find(project_id) %>
+<% end %>
+<% if @user.blank? && params[:no_user].blank? %>
+	<% @user = User.find(user_id) %>
+<% end %>
+<% if @start_date.blank? %>
+	<% @start_date = start_date %>
+<% end %>
+
+
+<% @places = @job_type.places %>
+
+<h3>
+    <div class="menu_small">
+		<% if params[:no_user].blank? %>
+        	<%= link_to_remote "+ přidat týden +",
+                   :url => { :controller => "plans", :action => "add_calendar_work", :job_type_id => @job_type.id, :project_id => @project.id, 'add_week' => true, :user_id =>@user.id },
+                   :update =>  "calendar_container" , :position => :bottom %>
+		<% else %>
+     		<%= link_to_remote "+ přidat týden +",
+                :url => { :controller => "plans", :action => "add_calendar_work", :job_type_id => @job_type.id, :project_id => @project.id, 'add_week' => true, :no_user =>true },
+                :update =>  "calendar_container" , :position => :bottom %>
+		<% end %>
+    </div>
+<%= my_date Time.now.beginning_of_week + @start_date.days %> - <%= my_date Time.now.beginning_of_week + @start_date.days + 7.days %> </h3>
+
+<table class="calendar">
+
+    <tr>
+        <th width="70">datum</th>
+		  <% if params[:no_user].blank? %>
+        		<th width="100"><%= @user.fullname  %></th>
+		  <% end %>
+        <th width="100">projekt</th>
+
+        <% for place in @places %>
+            <th width="90">
+						<div class="div_with_float">
+							<a onMouseOver="show_float_div('float_place_<%= place.id -%>');" onMouseOut="show_float_div('float_place_<%= place.id -%>');">
+								<%= place.name %>
+							</a>
+							<div style="margin-top:10px;margin-left:-60px;display:none" class="floating_div" id="float_place_<%= place.id -%>">
+								<div class='floating_div_top'></div>
+								<div class='floating_div_body'>
+									<%= place.note %>
+								</div>
+								<div class='floating_div_bottom'></div>
+							</div>
+						</div>
+				</th>
+        <% end %>
+    </tr>
+
+    <%  7.times { |n|  %>
+        <% table_day = Time.now.beginning_of_week + @start_date.days + n.days %>
+        <tr height="30" <% if Time.today ==  table_day -%>
+                class="today"
+            <%  elsif n > 4 -%>
+                class="weekend"
+            <%  else %>
+                class="<%= cycle("even", "odd") -%>"
+            <% end -%>
+            >
+            <th><%= day_names(n) %> <%= my_date table_day %>  </th>
+
+					<% if params[:no_user].blank? %>
+					
+	                <td>
+	                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND user_id = :user AND time > :morning_date AND time < :evening_date ', {:user => @user.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+
+	                    <% if planed_works.size > 0 %>
+	                        <% for planed_work in planed_works %>
+	                            <%= my_hour planed_work.time  %> -
+	                            <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
+	                        <% end %>
+	                    <% end %>
+	                </td>
+		  			 <% end %>
+                
+
+					 <td>
+                    <% planed_works_project = Work.find(:all , :conditions => ['deleted is null AND project_id = :project AND time > :morning_date AND time < :evening_date ', {:project => @project.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+
+                    <% if planed_works_project.size > 0 %>
+                        <% for planed_work in planed_works_project %>
+                            <%= my_hour planed_work.time  %> -
+                            <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
+                            <%= planed_work.job_type.name  %><br />
+                        <% end %>
+                    <% end %>
+                </td>
+
+            <% for place in @places %>
+                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND time > :morning_date AND time < :evening_date ', {:place => place.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+                    <td id="calendar_<%= table_day.strftime("%s") -%>_<%= place.id %>">
+
+                        <% if planed_works.size > 0 %>
+                            <% for planed_work in planed_works %>
+                                <span
+                                <% if @project.id == planed_work.project_id  && planed_work.reserved == true %>
+                                    class="own_reserved"
+                                <% elsif @project.id == planed_work.project_id  && planed_work.reserved == false %>
+                                    class="own"
+                                <% elsif  planed_work.reserved == true %>
+                                    class="reserved"
+                                <%  end %>
+                                >
+                                    <%= my_hour planed_work.time  %> -
+                                    <%= my_hour ( planed_work.time + planed_work.length.minutes ) %>
+                                </span><br />
+                            <% end %>
+                        <% end %>
+
+
+								<% if controller.action_name == "new" %>
+	                        <%= link_to_remote "+",
+	                           :url => { :controller => "plans", :action => "add_date", :place_id => place.id, :date => table_day },
+	                           :position => "bottom" ,:update =>  "calendar_"+table_day.strftime("%s")+"_"+place.id.to_s %>
+								<% end %>
+                    </td>
+            <% end %>
+
+        </tr>
+    <% } %>
+</table>
+
+

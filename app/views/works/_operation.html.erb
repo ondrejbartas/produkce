@@ -1,0 +1,19 @@
+<div class="operation">
+  <p>
+    <%= f.label 'opertion_type_id', "úkon" %>
+    <%= f.collection_select :operation_type_id ,
+          OperationType.find(:all),
+        :id, :name, {:include_blank => true} %>
+
+    <%= f.label 'note', "poznámka produkce" %>
+    <%= f.text_field :note, :size=>25 %>
+
+		
+		<% if f.object.new_record? %>
+        <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>
+		<% else %>
+        <%= f.hidden_field( :_delete) %>
+        <%= link_to_function "Smazat", "$(this).previous().value = '1'; $(this).up('.operation').hide(); " %>
+		<% end %>
+  </p>
+</div>

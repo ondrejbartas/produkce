@@ -1,7 +1,6 @@
 <h2><%= @contact.name %></h2>
 <div class="menu_small">
-  <%= link_to 'Edit', edit_contact_path(@contact) %> |
-  <%= link_to 'Back', contacts_path %>
+  <%=  right_owner_link ( "contacts", "edit", @contact.user_id, 'upravit',  edit_contact_path(@contact) ) %>
 </div>
 
 <table>

@@ -50,6 +50,14 @@ class User < ActiveRecord::Base
  #   cli = Role.create(:idd=> "13", :name => "CLIENT", :comment => "klient")
  #   exw = Role.create(:idd=> "17", :name => "EXTWORKER", :comment => "externí pracovník")
 
+  def is_worker?
+      if( self.role % 5 == 0 )
+        true
+      else
+        false
+      end
+  end
+
 
   def worker?
       if( self.active_role == 5 )

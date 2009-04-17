@@ -337,6 +337,7 @@ td {
 .calendar td {
 	text-align:left;
     font-size: 8pt;
+	padding: 5px;
 }
 
 .actual_place {
@@ -369,6 +370,26 @@ td {
 	margin-right:5px;
 	margin-top: -3px;
 }	
+
+.calendar_event {
+	width: 90px;
+	margin-bottom: 3px;
+}
+.calendar_event a {
+	color: black;
+}
+.calendar_event .top {
+	height: 5px;
+	background: url('../images/date_top.png');
+}	
+.calendar_event .body {
+	padding-left: 3px;
+	background: url('../images/date_body.png');
+}
+.calendar_event .bottom {
+	height: 5px;
+	background: url('../images/date_bottom.png');
+}
 
 
 .floating_div_top {

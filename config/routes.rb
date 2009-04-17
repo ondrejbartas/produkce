@@ -23,7 +23,9 @@ ActionController::Routing::Routes.draw do |map|
               :week => [:get, :post] , 
               :change_place_date => [:get, :post] , 
               :month => [:get, :post], 
-              :add_week_calendar => [:get, :post] }
+              :add_week_calendar => [:get, :post],
+              :add_date => [:get, :post],
+              :add_calendar_work => [:get, :post]  }
 
   map.resources :users, :collection => { :change_atributes => [:get, :post]}
 
@@ -47,28 +49,34 @@ ActionController::Routing::Routes.draw do |map|
                 :render_sub_project => [:get, :post] , 
                 :render_project => [:get, :post] }
 
-  map.resources :plan_works, :member => { 
-          :edit_without_project => [:get, :post] }, 
-          :collection => {:index_without_project => [:get, :post], 
-          :add_place_finished_operation => [:get, :post], 
-          :add_operation_type_parameters => [:get, :post], 
-          :new_without_produce => [:get, :post] , 
-          :new_now => [:get, :post], 
-          :add_user_operation => [:get, :post], 
-          :add_user => [:get, :post], 
-          :add_operation => [:get, :post],  
-          :add_finished_operation => [:get, :post], 
-          :add_calendar => [:get, :post], 
-          :add_edit_calendar => [:get, :post], 
-          :add_date => [:get, :post]  }
+
+  
+
+  #map.resources :plan_works, :member => { 
+  #        :edit_without_project => [:get, :post] }, 
+  #        :collection => {:index_without_project => [:get, :post], 
+  #        :add_place_finished_operation => [:get, :post], 
+  #        :add_operation_type_parameters => [:get, :post], 
+  #        :new_without_produce => [:get, :post] , 
+  #        :new_now => [:get, :post], 
+  #        :add_user_operation => [:get, :post], 
+  #        :add_user => [:get, :post], 
+  #        :add_operation => [:get, :post],  
+  #        :add_finished_operation => [:get, :post], 
+  #        :add_calendar => [:get, :post], 
+  #        :add_edit_calendar => [:get, :post], 
+  #        :add_date => [:get, :post]  }
    
   map.resources :projects, :has_many => [ :projects, :invoices]
 
   map.resources :projects do |project|
-     project.resources :plan_works, :collection => { :new_now => [:get, :post] }
+     project.resources :works, :collection => { :new_now => [:get, :post] }
   end
 
-  map.resources :works, :has_many => [:operations]
+  map.resources :works, :has_many => [:operations],
+                        :collection => { :add_operation => [:get, :post],
+                                    :add_user => [:get, :post]
+                                    }
 
   map.resources :users, :has_many => [:contacts, :works]
 

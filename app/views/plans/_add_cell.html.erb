@@ -1,32 +1,37 @@
 <% id = "planed_work_"+Time.now.strftime("%s")+"_"+planed_work.id.to_s %>
 <div id="<%= id %>" class="planed_work_<%= planed_work.job_type_id %>"
-  <% if  planed_work.reserved == true %>
-      class="reserved"
-  <%  end %>
-  >
-      <div class="div_with_float">
-			<a onClick="show_float_div('float_<%= id %>');">
-				<% if !@filtr_show_type["1"].blank? %>
-					<%= shorten((project_name planed_work.project), 20) %><br />
-			   <% end %>
-				<% if !@filtr_show_type["2"].blank? %>
-					<%= planed_work.user.fullname %><br />
-			   <% end %>
-				<% if !@filtr_show_type["3"].blank? %>
-					<%= my_hour planed_work.time  %> - <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
-			   <% end %>
-			</a>
-			<div class="floating_div" style="display:none" id="float_<%= id %>">
-				<div class='floating_div_top'></div>
-				<div class='floating_div_body'>
-					<div class='floating_div_close'><a onClick="show_float_div('float_<%= id %>');">(X)</a></div>
-					čas: <%= my_hour planed_work.time  %> - <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
-					projekt: <%= project_name planed_work.project %><br />
-					operátor: <%= planed_work.user.fullname %><br />
-					<%= link_to "upravit" , edit_plan_work_path(planed_work.id) %>
+	<div class="calendar_event">
+	  <div class="top"></div>
+		
+		<div class="body">
+	  		<% if  planed_work.reserved == true %>
+		      class="reserved"
+		  <%  end %>
+		      <div class="div_with_float">
+					<a onClick="show_float_div('float_<%= id %>');">
+						<% if !@filtr_show_type["1"].blank? %>
+							<%= shorten((project_name planed_work.project), 20) %><br />
+					   <% end %>
+						<% if !@filtr_show_type["2"].blank? %>
+							<%= planed_work.user_id.blank? ? " " : planed_work.user.fullname %><br />
+					   <% end %>
+						<% if !@filtr_show_type["3"].blank? %>
+							<%= my_hour planed_work.time  %> - <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
+					   <% end %>
+					</a>
+					<div class="floating_div" style="display:none" id="float_<%= id %>">
+						<div class='floating_div_top'></div>
+						<div class='floating_div_body'>
+							<div class='floating_div_close'><a onClick="show_float_div('float_<%= id %>');">(X)</a></div>
+							čas: <%= my_hour planed_work.time  %> - <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
+							projekt: <%= project_name planed_work.project %><br />
+							operátor: <%= planed_work.user_id.blank? ? " " : planed_work.user.fullname%><br />
+							<%= link_to "upravit" , edit_work_path(planed_work.id) %>
+						</div>
+						<div class='floating_div_bottom'></div>
+					</div>
 				</div>
-				<div class='floating_div_bottom'></div>
 			</div>
-		</div>
-</div>
-<%= draggable_element(id, :revert=>false ) %>
+		<div class="bottom"></div>
+	</div>
+</div>	<%= draggable_element(id, :revert=>true ) %>

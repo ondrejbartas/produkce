@@ -12,10 +12,10 @@
 
 <% for project in @projects %>
   <tr>
-    <td><%= link_to project.company.name, project.company %></td>
-    <td class="left_align"><%= link_to project.user.fullname, project.user %></td>
-    <td class="left_align"><%= link_to project_name(project), project %></td>
-    <td><%= link_to "vytvořit podklad k fakturaci", new_project_invoice_path(project) %></td>
+    <td><%= right_show_link ( "companies", "show", project.company.name, project.company )%></td>
+    <td class="left_align"><%= right_show_link ( "users", "show", project.user.fullname, project.user ) %></td>
+    <td class="left_align"><%= right_show_link ( "projects", "show", project_name(project), project )%></td>
+    <td><%= right_link ( "invoices", "new", "vytvořit podklad k fakturaci", new_project_invoice_path(project) )%></td>
    </tr>
 <% end %>
 </table>

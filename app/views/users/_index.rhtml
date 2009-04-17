@@ -7,6 +7,13 @@
         <h3> <%=  letter.capitalize %></h3>
         <ul>
       <% end %>
-      <li><%= link_to user.surname+" "+user.name, user %> <span id="contacts_<%= user.id%>"><%= link_to_remote "- kontakt", :update => "contacts_"+user.id.to_s, :url => { :controller => 'contacts', :action => 'render_index', :id => user.id } %></span>  </li>
+      <li><%= right_show_link "users", "show", user.surname+" "+user.name, user %>
+					<span id="contacts_<%= user.id%>">
+							<%= link_to_remote "- kontakt", 
+										:update => "contacts_"+user.id.to_s, 
+										:url => { :controller => 'contacts', 
+														:action => 'render_index', :id => user.id } %>
+					</span>
+  		</li>
 <% end %>
 </ul>

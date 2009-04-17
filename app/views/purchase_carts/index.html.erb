@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= link_to 'nový nákup', new_purchase_cart_path %>
+        <%= right_link "purchase_carts", "new", 'nový nákup', new_purchase_cart_path %>
     </div>
     Nákupy kazet
 </h2>
@@ -22,9 +22,9 @@
     <td><%= my_date(purchase_cart.purchase_date) %></td>
     <td><%= link_to purchase_cart.user.fullname, purchase_cart.user %></td>
     <td><%=h purchase_cart.note %></td>
-    <td><%= link_to 'zobrazit', purchase_cart %></td>
-    <td><%= link_to 'upravit', edit_purchase_cart_path(purchase_cart) %></td>
-    <td><%= link_to 'smazat', purchase_cart, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= right_link "purchase_carts", "show", 'zobrazit', purchase_cart %></td>
+    <td><%= right_link "purchase_carts", "edit", 'upravit', edit_purchase_cart_path(purchase_cart) %></td>
+    <td><%= right_delete_link "purchase_carts", "delete", 'smazat', purchase_cart %></td>
   </tr>
 <% end %>
 </table>

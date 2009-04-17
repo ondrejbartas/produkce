@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-      <%= link_to 'přidat kategorii', new_category_path %>
+      <%= right_link ("categories", "new", 'přidat kategorii', new_category_path ) %>
     </div>
     Seznam kategorií
 </h2>
@@ -14,7 +14,7 @@
 <% for category in @categories %>
   <tr class="<%= cycle("even", "odd") %>" height="30">
     <td><%= category.name  %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
+    <td><%= right_link ("categorie", "edit", "upravit", edit_category_path(category) ) %></td>
   </tr>
 <% end %>
 </table>

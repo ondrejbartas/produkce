@@ -18,8 +18,7 @@
     <td><%=h invoice_operation.name %></td>
     <td><%=h invoice_operation.price %></td>
     <td><%=h invoice_operation.note %></td>
-    <td><%= link_to 'upravit', edit_invoice_operation_path(invoice_operation) %></td>
-    <td><%= link_to 'smazat', invoice_operation, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= right_link ("invoice_operatons", "edit", 'upravit', edit_invoice_operation_path(invoice_operation) )%></td>
   </tr>
 <% end %>
 </table>

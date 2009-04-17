@@ -1,7 +1,7 @@
 <h2>Typ pracovní činnosti</h2>
 <div class="menu_small">
-  <%= link_to 'upravit', edit_place_path(@place) %>
-  <%= link_to 'smazat', @place, :confirm => 'Are you sure?', :method => :delete %>
+  	<%= right_link "places", "edit", 'upravit', edit_place_path(place) %>
+   <%= right_delete_link "places", "delete", 'smazat', place %>
 </div>
   <%= print_field(@place.name, "název místa: ", "h3") %>
 

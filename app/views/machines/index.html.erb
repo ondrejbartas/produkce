@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= link_to 'New machine', new_machine_path %>
+        <%= right_link "machines", "new", 'New machine', new_machine_path %>
     </div>
     Seznam strojů
 </h2>
@@ -18,11 +18,8 @@
     <th><%=h machine.name %></th>
     <td><%=h machine.note %></td>
     <td><%=h machine.price %></td>
-    <td><%= link_to 'upravit', edit_machine_path(machine) %></td>
-    <td><%= link_to 'smazat', machine, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= right_link "machines", "edit", 'upravit', edit_machine_path(machine) %></td>
+    <td><%= right_delete_link "machines", "delete", 'smazat', machine %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-

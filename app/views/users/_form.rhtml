@@ -13,7 +13,13 @@
     <%= text_field :user, :login %> <i>zadávejte bez háčků a čárek</i>
 </p>
 
-<p>	<% password = Digest::SHA1.hexdigest("--#{Time.now.to_s}---")[0,6] %>
+<p>	
+
+	 <% if @user.password.blank? %>
+		<% password = Digest::SHA1.hexdigest("--#{Time.now.to_s}---")[0,6] %>
+	 <% else %>
+		<% password = "" %>
+	 <% end %> 
     <%= label :user, 'password', 'pro vytvoření či změnu hesla', :required => true %><br />
     <%= password_field :user, :password_new_comf, :value=> password %> <i>náhodné heslo: <%= password  %></i>
 </p>

@@ -24,11 +24,9 @@
             <%= operation_type.name %>,
         <% end %>
     </td>
-    <td><%= link_to 'upravit', edit_job_type_path(job_type) %></td>
-    <td><%= link_to 'smazat', job_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= right_link ( "job_types", "edit",'upravit', edit_job_type_path(job_type)) %></td>
+    <td><%= right_delete_link ("job_types", "delete", 'smazat', job_type ) %></td>
 
   </tr>
 <% end %>
 </table>
-
-<br />
