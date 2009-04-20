@@ -58,15 +58,13 @@
 
     <%  7.times { |n|  %>
         <% table_day = Time.now.beginning_of_week + @start_date.days + n.days %>
-        <tr height="30" <% if Time.today ==  table_day -%>
-                class="today"
-            <%  elsif n > 4 -%>
-                class="weekend"
-            <%  else %>
-                class="<%= cycle("even", "odd") -%>"
-            <% end -%>
-            >
-            <th><%= day_names(n) %> <%= my_date table_day %>  </th>
+        <tr height="30">
+            <th <% if Time.today ==  table_day -%>
+		                class="today"
+		            <%  elsif n > 4 -%>
+		                class="weekend"
+		            <% end -%>
+				><%= day_names(n) %> <%= my_date table_day %>  </th>
 
 					<% if params[:no_user].blank? %>
 					
@@ -117,11 +115,9 @@
                         <% end %>
 
 
-								<% if controller.action_name == "new" %>
 	                        <%= link_to_remote "+",
 	                           :url => { :controller => "plans", :action => "add_date", :place_id => place.id, :date => table_day },
 	                           :position => "bottom" ,:update =>  "calendar_"+table_day.strftime("%s")+"_"+place.id.to_s %>
-								<% end %>
                     </td>
             <% end %>
 
@@ -130,3 +126,4 @@
 </table>
 
 
+	

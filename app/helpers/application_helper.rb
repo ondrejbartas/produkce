@@ -168,6 +168,17 @@ end
  end
  
  
+ def right_show (controller, action, text)
+
+         rights = Right.find(:all, :conditions => [" controller = ? AND action = ? ", controller, action])
+
+         if rights.size > 0
+           if rights.first.check?(@current_user, 0 )
+              text
+           end
+         end
+   end
+ 
 
 
  def my_hour(item)

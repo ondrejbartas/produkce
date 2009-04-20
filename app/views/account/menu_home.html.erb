@@ -3,7 +3,7 @@ home
 	<h2>
 		<div class="menu_small">
 			<%= link_to 'zaúčtovat hotovou práci', new_finished_work_path %>
-			<%= link_to 'vyúčtování práce', finished_works_path %>
+			<%= link_to 'seznam zaúčtované práce', finished_works_path %>
 		</div>
 		Seznam úkonů
 	</h2>
@@ -15,7 +15,6 @@ home
 
 <% if @current_user.produce? %>
 
-	 <%= render :partial => "plan_works/index_without_project"%>
 
     <h2>Chybějící kazety</h2>
     <table>

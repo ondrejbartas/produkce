@@ -80,6 +80,43 @@ class PlansController < ApplicationController
                   
   end
 
+
+  def change_reservation
+      
+      if params[:job_type].blank? 
+         @filtr_type = { "1" => "true" }
+      else
+         @filtr_type = params[:job_type]
+      end
+      
+     
+      if params[:show_type].blank? 
+         @filtr_show_type = { "1" => "true" }
+      else
+         @filtr_show_type = params[:show_type]
+      end
+        
+      @work = Work.find(params[:work_id])
+      
+      @work.reserved = params[:reservation]
+      
+      
+      @work.save
+      render :partial => 'plans/add_cell', :locals => {:planed_work => @work}
+                  
+  end
+  
+  def delete_work
+        
+      @work = Work.find(params[:work_id])
+      
+      @work.deleted = true
+      @work.save
+      render  :inline =>""
+  end
+  
+
+
   def add_week_calendar
         if not params[:start_date].blank?
             @start_date = params[:start_date].to_i

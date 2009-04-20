@@ -311,11 +311,11 @@ td {
     color: #ff0000;
 }
 .today {
-    background: #bbbbff;
+    background: #7777ff;
 }
 
 .weekend {
-    background: #ffddbb;
+    background: #ff7777;
 }
 .even {
     background: #eee;
@@ -340,8 +340,8 @@ td {
 	padding: 5px;
 }
 
-.actual_place {
-    background: #Fbb;
+.clanedar_hover {
+   background: #cFc;
 }
 
 .div_with_float:hover .floating_div {
@@ -362,7 +362,7 @@ td {
 	margin-top:-6px;
 	position:absolute;
 	padding:5px;
-	font-size:110%;
+	font-size:120%;
 	z-index: 2;
 }
 .floating_div_close {
@@ -371,6 +371,21 @@ td {
 	margin-top: -3px;
 }	
 
+.floating_no_user {
+	float:right;
+	position:relative;
+	top: -2px;
+	left:2px;
+}
+.calendar_cell_menu a {
+	color: white;
+	background-color: gray;
+	margin-right: 2px;
+	display: inline-block;
+	margin-top: 5px;
+	padding: 1px 6px 1px;
+}
+
 .calendar_event {
 	width: 90px;
 	margin-bottom: 3px;
@@ -378,18 +393,72 @@ td {
 .calendar_event a {
 	color: black;
 }
-.calendar_event .top {
+.calendar_event .unfinished .top {
 	height: 5px;
 	background: url('../images/date_top.png');
 }	
-.calendar_event .body {
+.calendar_event .unfinished .body {
 	padding-left: 3px;
 	background: url('../images/date_body.png');
 }
-.calendar_event .bottom {
+.calendar_event .unfinished .bottom {
 	height: 5px;
 	background: url('../images/date_bottom.png');
 }
+
+.calendar_event .reserved .top {
+	height: 5px;
+	background: url('../images/date_reserved_top.png');
+}	
+.calendar_event .reserved .body {
+	padding-left: 3px;
+	background: url('../images/date_reserved_body.png');
+}
+.calendar_event .reserved .bottom {
+	height: 5px;
+	background: url('../images/date_reserved_bottom.png');
+}
+
+
+.calendar_event .nooperations .top {
+	height: 5px;
+	background: url('../images/date_nooperations_top.png');
+}	
+.calendar_event .nooperations .body {
+	padding-left: 3px;
+	background: url('../images/date_nooperations_body.png');
+}
+.calendar_event .nooperations .bottom {
+	height: 5px;
+	background: url('../images/date_nooperations_bottom.png');
+}
+.calendar_event .finished .top {
+	height: 5px;
+	background: url('../images/date_finished_top.png');
+}	
+.calendar_event .finished .body {
+	padding-left: 3px;
+	background: url('../images/date_finished_body.png');
+}
+.calendar_event .finished .bottom {
+	height: 5px;
+	background: url('../images/date_finished_bottom.png');
+}
+
+.calendar_event .unfinished .top {
+	height: 5px;
+	background: url('../images/date_unfinished_top.png');
+}	
+.calendar_event .unfinished .body {
+	padding-left: 3px;
+	background: url('../images/date_unfinished_body.png');
+}
+.calendar_event .unfinished .bottom {
+	height: 5px;
+	background: url('../images/date_unfinished_bottom.png');
+}
+
+
 
 
 .floating_div_top {

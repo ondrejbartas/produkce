@@ -1,0 +1,25 @@
+<h2>přidání úkonu k projektu: <%= project_name(@work.project) %></h2>
+
+<%= error_messages_for :work %>
+
+<% form_for @work do |work_form| -%>
+
+
+<div id="operations">
+	<%= render :partial => 'add_operation' , :locals => { :operation_types => OperationType.find(:all) } %>
+
+
+</div>
+	
+<%= link_to_remote "+ přidat úkon +",
+           :url => { :action => "add_operation", :job_type_id => 0 },
+           :update =>  "operations" , :position => :bottom %>
+
+
+<%= hidden_field_tag "add_operation_from_user",  "true" %>
+
+<p>
+  <%= work_form.submit "přidat" %>
+</p>
+
+<% end -%>

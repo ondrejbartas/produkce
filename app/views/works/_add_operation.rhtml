@@ -1,5 +1,10 @@
-<% if @job_type.blank? %>
-	<% @job_type = job_type %>
+<% if @operation_types.blank? %>
+	<% if operation_types.nil? %>
+		<% @job_type = job_type %>
+		<% @operation_types = @job_type.operation_types %>
+	<% else %>
+		<% @operation_types = operation_types %>
+	<% end %>
 <% end %>
 
 <% index = "work[operations_attributes][new_"+Time.now.strftime("%s")+"]" %>
@@ -7,7 +12,7 @@
   <p>
     <%= label index, 'opertion_type_id', "úkon" %>
     <%= collection_select index,:operation_type_id ,
-          @job_type.operation_types,
+          @operation_types,
         :id, :name, {:include_blank => true} %>
 
     <%= label index, 'note', "poznámka produkce" %>

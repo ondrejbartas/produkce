@@ -10,4 +10,8 @@ class Right < ActiveRecord::Base
       false
     end  
   end
+  
+  def right?
+    true
+  end
 end

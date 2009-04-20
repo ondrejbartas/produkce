@@ -22,10 +22,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :plans, :collection => { 
               :week => [:get, :post] , 
               :change_place_date => [:get, :post] , 
+              :change_reservation => [:get, :post] , 
+              :delete_work => [:get, :post] , 
               :month => [:get, :post], 
               :add_week_calendar => [:get, :post],
               :add_date => [:get, :post],
               :add_calendar_work => [:get, :post]  }
+              
 
   map.resources :users, :collection => { :change_atributes => [:get, :post]}
 
@@ -75,8 +78,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :works, :has_many => [:operations],
                         :collection => { :add_operation => [:get, :post],
-                                    :add_user => [:get, :post]
-                                    }
+                                    :add_user => [:get, :post] },
+                        :member => { :add_operation_from_worker => [:get, :post] 
+                        }
 
   map.resources :users, :has_many => [:contacts, :works]
 

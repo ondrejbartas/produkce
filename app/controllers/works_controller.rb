@@ -92,8 +92,13 @@ class WorksController < ApplicationController
     respond_to do |format|
       if @work.update_attributes(params[:work])
         flash[:notice] = 'Work was successfully updated.'
-        format.html { redirect_to :controller => "plans", :action => "week" }
-        format.xml  { head :ok }
+        if !params[:add_operation_from_user].blank?
+          format.html { redirect_to :controller => "account", :action => "menu_home" }
+          format.xml  { head :ok }
+        else
+          format.html { redirect_to :controller => "plans", :action => "week" }
+          format.xml  { head :ok }
+        end
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @work.errors, :status => :unprocessable_entity }
@@ -116,9 +121,18 @@ class WorksController < ApplicationController
   
   def add_operation
       if !params[:job_type_id].blank?
-        @job_type = JobType.find(params[:job_type_id])
+        if params[:job_type_id] == "0"
+          @operation_types = OperationType.find(:all)
+        else 
+          @job_type = JobType.find(params[:job_type_id])
+          @operation_types = @job_type.operation_types
+        end
       end
       render(:layout=>false)                  
+  end
+  
+  def add_operation_from_user
+      @work = Work.find(params[:id])
   end
   
   

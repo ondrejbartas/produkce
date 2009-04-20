@@ -61,7 +61,7 @@
            :update =>  "operations" , :position => :bottom %>
 
 	<% if @work.blank? %>
-		<%= render :partial => 'add_operation' , :locals => { :job_type => @job_type } %>
+		<%= render :partial => 'add_operation' , :locals => { :operation_types => @job_type.operation_types } %>
 	<% end %>
 	
 	

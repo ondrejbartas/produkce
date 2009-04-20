@@ -8,10 +8,10 @@
     <%= f.label 'note', "poznámka produkce" %>
     <%= f.text_field :note, :size=>25 %>
 
-		
+
 		<% if f.object.new_record? %>
         <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>
-		<% else %>
+		<% elsif f.object.finished != true %>
         <%= f.hidden_field( :_delete) %>
         <%= link_to_function "Smazat", "$(this).previous().value = '1'; $(this).up('.operation').hide(); " %>
 		<% end %>

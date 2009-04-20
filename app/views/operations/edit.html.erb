@@ -37,7 +37,7 @@
                     kusů:<%= @operation.count %>
                 <% end %>
         <% else %>
-            <%= render :partial => 'plan_works/add_operation_type_parameters' %>
+            <%= render :partial => 'add_operation_type_parameters' %>
         <% end %>
     </li>
 	 <li>poznámka operátora:<%= operation_form.text_area :note_operator %></li>

@@ -59,3 +59,34 @@
            :url => { :action => "add_week_calendar", 'add_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
            :update =>  "calendar_container" , :position => :bottom %>
 </h2>
+
+
+Legenda: 
+<div  class="calendar_event">
+    <div class="reserved" style="width:90px">
+	  	 <div class="top"></div>
+		 <div class="body">rezervováno</div>
+		 <div class="bottom"></div>
+	 </div>
+</div>
+<div  class="calendar_event">
+ 	 <div class="nooperations" style="width:90px">
+	  	 <div class="top"></div>
+		 <div class="body">bez úkonů</div>
+		 <div class="bottom"></div>
+	 </div>
+</div>
+<div  class="calendar_event">
+	 <div class="unfinished" style="width:90px">
+	  	 <div class="top"></div>
+		 <div class="body">neukončeno</div>
+		 <div class="bottom"></div>
+	 </div>
+</div>
+<div class="calendar_event">
+ 	 <div class="finished" style="width:90px">
+	  	 <div class="top"></div>
+		 <div class="body">ukončeno</div>
+		 <div class="bottom"></div>
+	 </div>
+</div>
