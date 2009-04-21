@@ -48,6 +48,23 @@
              <%= operation_form.submit 'opravit'  %>
         <% else %>
          <%= operation_form.hidden_field :finished , :value=>"true" %>
+
+
+
+
+
+
+			<div id="operations">
+			
+			</div>
+
+			<%= link_to_remote "+ přidat úkon +",
+			           :url => { :controller => "works", :action => "add_operation",:from_user => true, :job_type_id => 0 },
+			           :update =>  "operations",  :position => :bottom %>
+
+
+
+
          <%= operation_form.submit 'hotovo'  %>
         <% end %>
     </li>

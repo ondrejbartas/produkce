@@ -1,25 +1,12 @@
 <h2>
 <div class="menu_small">
-<%= link_to 'přidat koment', new_system_comment_path %>
+<%= right_link "system_comments", "new", 'přidat koment', new_system_comment_path %>
 </div>
 komenty k systému</h2>
 
-<table>
-  <tr>
-  	 <th>datum</th>
-    <th>uživatel</th>
-    <th>poznámka</th>
-    <th>provedeno</th>
-    <th>administrace</th>
-  </tr>
-
+<ul class="comments">
 <% @system_comments.each do |system_comment| %>
-  <tr>
-  	 <td><%= my_date system_comment.created_at %></td>
-    <td><%= system_comment.user.fullname if !system_comment.user_id.blank? %></td>
-    <td><%=h system_comment.note %></td>
-    <td><%=h system_comment.finished %></td>
-    <td><%= right_link "system_comments", "edit", 'Edit', edit_system_comment_path(system_comment) %></td>
-  </tr>
+
+	<%= system_comment_show(system_comment, false) %>
 <% end %>
-</table>
+</ul>

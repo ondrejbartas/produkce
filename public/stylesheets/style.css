@@ -386,20 +386,20 @@ td {
 	padding: 1px 6px 1px;
 }
 
-.work .unfinished {
-	background: #88F;
+.work .finished {
+	background: #93cbff;
 }
 
-.work .finished {
-	background: #8F8;
+.work .unfinished {
+	background: #bae1b0;
 }
 
 .work .nooperations {
-	background: #F88;
+	background: #e4adb0;
 }
 
 .work .reserved {
-	background: #888;
+	background: #c8c8c8;
 }
 
 .calendar_event {
@@ -489,3 +489,36 @@ td {
 	height: 18px;
 	background: url('../images/float_div_bottom.png');
 }	
+
+.comments li{
+	list-style:none;
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+.comments ul {
+	margin-left: 15px;
+	padding-left: 0px;
+	border: 1px solid #000;
+}
+.comments .name {
+	background: #DDD;
+	padding: 2px;
+}
+.comments .text {
+	padding: 4px;
+}
+
+.comments .odkazy a {
+	background: #888;
+	color: white;
+	margin-left:10px;
+	padding:2px;
+}
+
+.comments .finished {
+	background: #93cbff;
+}
+.comment {
+	margin-top: 10px;
+}

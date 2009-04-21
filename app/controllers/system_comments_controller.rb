@@ -2,7 +2,7 @@ class SystemCommentsController < ApplicationController
   # GET /system_comments
   # GET /system_comments.xml
   def index
-    @system_comments = SystemComment.all
+    @system_comments = SystemComment.find(:all, :conditions => "system_comment_id is null").sort_by {|u| u.created_at}.reverse
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +25,9 @@ class SystemCommentsController < ApplicationController
   # GET /system_comments/new.xml
   def new
     @system_comment = SystemComment.new
-
+    if !params[:system_comment_id].blank?
+      @system_comment_id = params[:system_comment_id]
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @system_comment }

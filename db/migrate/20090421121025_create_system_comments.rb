@@ -2,6 +2,7 @@ class CreateSystemComments < ActiveRecord::Migration
   def self.up
     create_table :system_comments do |t|
       t.integer :user_id
+      t.integer :system_comment_id
       t.string :note
       t.boolean :finished
 

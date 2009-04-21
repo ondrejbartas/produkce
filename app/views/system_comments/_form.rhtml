@@ -1,0 +1,22 @@
+<%= error_messages_for :system_comment %>
+
+<% form_for @system_comment do |system_comment_form| -%>
+
+
+	<% if !@system_comment_id.blank? %>
+  		<%= system_comment_form.hidden_field :system_comment_id, :value=>@system_comment_id %>
+	<% end %>
+  <%= system_comment_form.hidden_field :user_id, :value=>@current_user.id %>
+  <p>
+    <%= system_comment_form.label 'note', 'poznámka' %><br />
+    <%= system_comment_form.text_area  :note, :cols=>30, :rows=>5 %>
+  </p>
+
+	<% if @current_user.admin? %>
+		provedeno: <%= system_comment_form.check_box :finished, :value=>true %>
+	<% end %>
+
+  <p>
+    <%= system_comment_form.submit "přidat" %>
+  </p>
+<% end -%>
