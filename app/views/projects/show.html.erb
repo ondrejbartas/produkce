@@ -49,7 +49,7 @@
 </h3>
 
 
-<table class="odstavec2">
+<table class="work">
   <tr>
     <th>datum</th>
     <th width="90">od - do</th>
@@ -63,7 +63,24 @@
   </tr>
 
 <% for work in @project.works.find(:all, :conditions => ["deleted is null"]).sort_by {|u| u.time} %>
-  <tr>
+	<% if  work.reserved == true %>
+	    <tr class="reserved">
+	  <% elsif work.operations.size == 0 %>
+ 		 <tr class="nooperations">
+	  <% else %>
+			<% finished = true %>
+	   	<% for operation in work.operations -%>
+				<% if operation.finished.blank? -%>
+					<% finished = false -%>
+				<% end -%>
+			<% end -%>
+			<% if finished == true %>
+				<tr class="finished">
+ 			<% else %>
+				<tr class="unfinished">
+			<% end %>
+	  <%  end %>
+	
     <td><%= my_date work.time  %></td>
     <td><%= my_hour work.time  %> -
         <%= my_hour ( work.time + work.length.minutes ) %></td>

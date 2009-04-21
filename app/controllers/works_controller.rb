@@ -128,10 +128,14 @@ class WorksController < ApplicationController
           @operation_types = @job_type.operation_types
         end
       end
+      if !params[:from_user].blank? 
+        @from_user = true
+      end
       render(:layout=>false)                  
   end
   
   def add_operation_from_user
+      @from_user = true
       @work = Work.find(params[:id])
   end
   

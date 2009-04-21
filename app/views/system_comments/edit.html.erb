@@ -1,0 +1,20 @@
+<h2>uprava komentare</h2>
+
+<% form_for(@system_comment) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+		Uzivatel:<%= @system_comment.user.fullname if !@system_comment.user_id.blank? %>
+  </p>
+  <p>
+   text<br />
+    <%= f.text_field :note %>
+  </p>
+  <p>
+    provedeno<br />
+    <%= f.check_box :finished %>
+  </p>
+  <p>
+    <%= f.submit 'upravit' %>
+  </p>
+<% end %>

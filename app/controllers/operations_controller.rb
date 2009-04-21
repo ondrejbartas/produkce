@@ -86,4 +86,13 @@ class OperationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+  def add_operation_type_parameters
+       if !params[:operation_type_id].blank?
+           @operation_type = OperationType.find(params[:operation_type_id])
+       end
+       @index = params[:index]
+       render(:layout=>false)                  
+   end
 end

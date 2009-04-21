@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
    has_many :projects
    has_many :contacts
    has_many :jobs
+   has_many :system_comments
    has_many :comments
    has_many :histories
    has_many :works

@@ -12,8 +12,8 @@
 </div>
 	
 <%= link_to_remote "+ přidat úkon +",
-           :url => { :action => "add_operation", :job_type_id => 0 },
-           :update =>  "operations" , :position => :bottom %>
+           :url => { :action => "add_operation",:from_user => true, :job_type_id => 0 },
+           :update =>  "operations",  :position => :bottom %>
 
 
 <%= hidden_field_tag "add_operation_from_user",  "true" %>

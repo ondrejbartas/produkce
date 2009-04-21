@@ -1,6 +1,9 @@
-<br /> <% cas = Time.now.strftime("%s") %>
+<% cas = Time.now.strftime("%s") %>
+<div class="add_date"> 
       od:<%= select_tag "days["+cas+"][time]", options_for_select(Work::TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]})%><br />
       na:<%= select_tag "days["+cas+"][length]", options_for_select(Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]})%>
       rezervace:<%= check_box_tag "days["+cas+"][reserved]" ,  true%>
       <%= hidden_field_tag "days["+cas+"][place_id]", @place_id  %>
       <%= hidden_field_tag "days["+cas+"][date]", @date  %>
+      <%= link_to_function "smazat", "$(this).up('.add_date').remove(); " %>
+</div>

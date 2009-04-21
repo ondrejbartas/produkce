@@ -32,10 +32,10 @@
                                     <%= my_hour ( work.time + work.length.minutes ) %></td>
                                 <%= zacatek %>
 												<%= work.project.blank? ? "" :  ( link_to project_name(work.project), work.project ) %>
-												<%= link_to "+ přidat úkon +", { :controller => 'works', 
+												<%= right_show ("works", "add_operation_form_user", link_to( "+ přidat úkon +",{ :controller => 'works', 
 																							:action => 'add_operation_from_user' ,
 																							:id => work.id
-													 										},  :post => true %>
+													 										},  :post => true ) )%>
 										  </td>
                                 <%= zacatek %><%=h work.place.blank? ? "" : work.place.name %></td>
                             <%  end %>

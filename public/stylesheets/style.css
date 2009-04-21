@@ -386,6 +386,22 @@ td {
 	padding: 1px 6px 1px;
 }
 
+.work .unfinished {
+	background: #88F;
+}
+
+.work .finished {
+	background: #8F8;
+}
+
+.work .nooperations {
+	background: #F88;
+}
+
+.work .reserved {
+	background: #888;
+}
+
 .calendar_event {
 	width: 90px;
 	margin-bottom: 3px;

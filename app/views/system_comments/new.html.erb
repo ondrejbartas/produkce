@@ -1,0 +1,15 @@
+<h2>Koment k systému</h2>
+
+<% form_for(@system_comment) do |f| %>
+  <%= f.error_messages %>
+
+    <%= f.hidden_field :user_id, :value=>@current_user.id %>
+  </p>
+  <p>
+    text<br />
+    <%= f.text_area :note %>
+  </p>
+  <p>
+    <%= f.submit 'přidat' %>
+  </p>
+<% end %>

@@ -24,7 +24,7 @@
        <th <% if sum < tape_type.limit %>class="red"<% end %>><%= tape_type.name %></th>
        <td><%= bought_tapes_sum %></td>
        <td><%= missing_tapes_sum > 0 ? "-" : "" %><%= missing_tapes_sum %></td>
-       <td <% if sum < tape_type.limit %>class="red"<% end %>><%= sum %></td>
+       <td <% if sum < tape_type.limit %>class="red"><%= sum %> (<%= tape_type.limit %>) <% else %>><%= sum %><% end %></td>
        <td><%= tape_type.tape_price %></td>
        <td><%= bought_tapes.minimum("price") %></td>
        <td><%= bought_tapes.maximum("price") %></td>

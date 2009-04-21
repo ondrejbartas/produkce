@@ -1,6 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :rights
+  map.resources :system_comments
 
+
+
+ 
 
   
   
@@ -105,10 +108,13 @@ ActionController::Routing::Routes.draw do |map|
                       :finished_projects => [:get, :post] }
   map.resources :tape_types
   map.resources :machines
-  map.resources :operations
+  map.resources :operations, :collection => { :add_operation_type_parameters => [:get, :post] }
   map.resources :categories
 
   map.resources :finished_works
+
+
+   map.resources :rights
 
   # The priority is based upon order of creation: first created -> highest priority.
 

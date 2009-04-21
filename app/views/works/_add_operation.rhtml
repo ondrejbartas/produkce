@@ -6,18 +6,38 @@
 		<% @operation_types = operation_types %>
 	<% end %>
 <% end %>
-
-<% index = "work[operations_attributes][new_"+Time.now.strftime("%s")+"]" %>
+<% cas = Time.now.strftime("%s") %>
+<% index = "work[operations_attributes][new_"+cas+"]" %>
 <div class="operation">
   <p>
     <%= label index, 'opertion_type_id', "úkon" %>
+
+	<% if @from_user == true %>
+		<%= collection_select index, :operation_type_id , @operation_types,
+           :id, :name, {:include_blank => true},
+           {:onchange => remote_function( :update => "operation_type_id_container_"+cas, :url =>
+                   add_operation_type_parameters_operations_path, :with =>
+                     "'index="+index+"&operation_type_id=' +
+                   escape(value)" )}%>
+
+       <span id="operation_type_id_container_<%= cas %>">
+       </span>
+	<% else %>
     <%= collection_select index,:operation_type_id ,
           @operation_types,
         :id, :name, {:include_blank => true} %>
 
+	<% end %>
+	<% if @current_user.produce? %>
     <%= label index, 'note', "poznámka produkce" %>
     <%= text_field index, :note, :size=>25 %>
-
+	<% else %>
+	   <%= label index, 'note_operator', "poznámka operátora" %>
+	   <%= text_field index, :note_operator, :size=>25 %>
+	<% end %>
+	   
+		<%= label index, 'finished', "provedeno" %>
+		<%= check_box index, :finished, :value=>true %>
 		
     <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>
   </p>

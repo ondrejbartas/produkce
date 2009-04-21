@@ -39,6 +39,7 @@
                    <% if @activePage == "menu_home" %>
                        <li><%= sub_menu( "user", "show", "profil: "+current_user.name+" "+current_user.surname , user_path(current_user) ) %></li>
                        <li><%= sub_menu( "user", "change_atributes", "změna nastavení", change_atributes_users_path)  %></li>
+                       <li><%= sub_menu( "system_comments", "index", "systémové chyby a možná zlepšení", system_comments_path)  %></li>
                    <% elsif @activePage == "menu_contact" %>
                       <li><%= sub_menu( "companies", "new", 'přidat firmu', new_company_path )%></li>
                       <li><%= sub_menu( "users", "new", 'přidat uživatele', new_user_path )%></li>
