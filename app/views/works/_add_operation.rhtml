@@ -36,8 +36,7 @@
 	   <%= text_field index, :note_operator, :size=>25 %>
 	<% end %>
 	   
-		<%= label index, 'finished', "provedeno" %>
-		<%= check_box index, :finished, :value=>true %>
+		<%= hidden_field index, :finished, :value=>true %>
 		
     <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>
   </p>

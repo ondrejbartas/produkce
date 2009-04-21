@@ -62,7 +62,7 @@
 
   </tr>
 
-<% for work in @project.works.find(:all, :conditions => ["deleted is null"]).sort_by {|u| u.time} %>
+<% for work in @project.works.find(:all, :conditions => ["deleted is null"], :order => "time") %>
 	<% if  work.reserved == true %>
 	    <tr class="reserved">
 	  <% elsif work.operations.size == 0 %>
@@ -81,7 +81,11 @@
 			<% end %>
 	  <%  end %>
 	
-    <td><%= my_date work.time  %></td>
+	 <% if finished != true && work.time < Time.now.beginning_of_day %>
+		<td style="color:red"><%= my_date work.time  %></td>
+	 <% else %>
+    	<td><%= my_date work.time  %></td>
+	 <% end %>
     <td><%= my_hour work.time  %> -
         <%= my_hour ( work.time + work.length.minutes ) %></td>
     <td><%=h work.user.blank? ? "" : work.user.fullname %></td>

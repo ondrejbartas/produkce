@@ -40,7 +40,7 @@
             <%= render :partial => 'add_operation_type_parameters' %>
         <% end %>
     </li>
-	 <li>poznámka operátora:<%= operation_form.text_area :note_operator %></li>
+	 <li>poznámka operátora:<%= operation_form.text_field :note_operator %></li>
     <li>
         <% if @operation.finished == true %>
             hotovo, čeká na zapsání celkové doby

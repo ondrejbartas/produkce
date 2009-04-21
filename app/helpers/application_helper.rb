@@ -213,4 +213,69 @@ end
    end
  end
  
+ def legend
+   "		Legenda: 
+				<div  class='calendar_event'>
+				    <div class='reserved' style='width:90px'>
+					  	 <div class='top'></div>
+						 <div class='body'>rezervováno</div>
+						 <div class='bottom'></div>
+					 </div>
+				</div>
+				<div  class='calendar_event'>
+				 	 <div class='nooperations' style='width:90px'>
+					  	 <div class='top'></div>
+						 <div class='body'>bez úkonů</div>
+						 <div class='bottom'></div>
+					 </div>
+				</div>
+				<div  class='calendar_event'>
+					 <div class='unfinished' style='width:90px'>
+					  	 <div class='top'></div>
+						 <div class='body'>neukončeno</div>
+						 <div class='bottom'></div>
+					 </div>
+				</div>
+				<div class='calendar_event'>
+				 	 <div class='finished' style='width:90px'>
+					  	 <div class='top'></div>
+						 <div class='body'>ukončeno</div>
+						 <div class='bottom'></div>
+					 </div>
+				</div>'
+			"
+ end
+ 
+ def legend_project
+    "		Legenda: 
+ 				<div  class='calendar_event'>
+ 				    <div class='reserved' style='width:90px'>
+ 					  	 <div class='top'></div>
+ 						 <div class='body'>žádná práce</div>
+ 						 <div class='bottom'></div>
+ 					 </div>
+ 				</div>
+ 				<div  class='calendar_event'>
+ 				 	 <div class='nooperations' style='width:90px'>
+ 					  	 <div class='top'></div>
+ 						 <div class='body'>neprovedená práce</div>
+ 						 <div class='bottom'></div>
+ 					 </div>
+ 				</div>
+ 				<div  class='calendar_event'>
+ 					 <div class='unfinished' style='width:90px'>
+ 					  	 <div class='top'></div>
+ 						 <div class='body'>neukončený</div>
+ 						 <div class='bottom'></div>
+ 					 </div>
+ 				</div>
+ 				<div class='calendar_event'>
+ 				 	 <div class='finished' style='width:90px'>
+ 					  	 <div class='top'></div>
+ 						 <div class='body'>všechny práce hotové</div>
+ 						 <div class='bottom'></div>
+ 					 </div>
+ 				</div>'
+ 			"
+  end
 end

@@ -50,39 +50,11 @@
                   	<li>naplanovat praci na ted /admin</li>
 						 	 <li><%= sub_menu( "plans", "week", 'kalednář', week_plans_path) %></li>
                       <li><%= sub_menu( "works", "new", 'naplánovat práci', new_work_path) %></li>
-
-									Legenda: 
-									<div  class="calendar_event">
-									    <div class="reserved" style="width:90px">
-										  	 <div class="top"></div>
-											 <div class="body">rezervováno</div>
-											 <div class="bottom"></div>
-										 </div>
-									</div>
-									<div  class="calendar_event">
-									 	 <div class="nooperations" style="width:90px">
-										  	 <div class="top"></div>
-											 <div class="body">bez úkonů</div>
-											 <div class="bottom"></div>
-										 </div>
-									</div>
-									<div  class="calendar_event">
-										 <div class="unfinished" style="width:90px">
-										  	 <div class="top"></div>
-											 <div class="body">neukončeno</div>
-											 <div class="bottom"></div>
-										 </div>
-									</div>
-									<div class="calendar_event">
-									 	 <div class="finished" style="width:90px">
-										  	 <div class="top"></div>
-											 <div class="body">ukončeno</div>
-											 <div class="bottom"></div>
-										 </div>
-									</div>
+							 <%= legend %>
                    <% elsif @activePage == "menu_project" %>
                       <li><%= sub_menu( "projects", "new", 'přidat projekt', new_project_path) %></li>
                       <li><%= sub_menu( "projects", "index", 'seznam projektů', projects_path) %></li>
+							 <%= legend_project %>
                    <% elsif @activePage == "menu_work" %>
 							<li>splnit praci /admin</li>
 							<li>zauctovat praci /admin</li>
@@ -123,7 +95,7 @@
 </div> 
 </div>
 <div id="footer">
-              2009 (c) Ondřej Bartas
+              2009 (c) Ondřej Bartas - verze systemu ke dni updatu: 21.4.2009 18:00
 </div>
 
 <% if !@current_user.blank? && @current_user.admin? %>

@@ -9,7 +9,7 @@ class Operation < ActiveRecord::Base
         self.finished = ""
     elsif self.operation_type.value == 1 && ( self.value.blank? || self.value == 0 )
         self.finished = ""
-    elsif self.operation_type.value == 2 && ( self.value.blank? || self.value == 0 )
+    elsif self.operation_type.value == 2 && ( self.count.blank? || self.count == 0 )
         self.finished = ""
     elsif (self.operation_type.value == 3 || self.operation_type.value == 5 ||self.operation_type.value == 6 ) && ( self.count.blank? || self.tape_type_id.blank? )
         self.finished = ""
@@ -26,7 +26,7 @@ class Operation < ActiveRecord::Base
       elsif self.operation_type.value == 1 && ( self.value.blank? || self.value == 0 )
           self.finished = ""
           errors.add_to_base("Zadejte čas")
-      elsif self.operation_type.value == 2 && ( self.value.blank? || self.value == 0 )
+      elsif self.operation_type.value == 2 && ( self.count.blank? || self.count == 0 )
           self.finished = ""
           errors.add_to_base("Zadejte počet kusů")
       elsif (self.operation_type.value == 3 || self.operation_type.value == 5 ||self.operation_type.value == 6 ) && ( self.count.blank? || self.tape_type_id.blank? )

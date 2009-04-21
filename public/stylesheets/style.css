@@ -330,10 +330,9 @@ td {
 .own_reserved {
     color: #88AA88;
 }
-.reserved {
-    color: #777777;
+.reserved a , .nooperations a, .unfinished a, .finished a{
+	color: #333;
 }
-
 .calendar td {
 	text-align:left;
     font-size: 8pt;

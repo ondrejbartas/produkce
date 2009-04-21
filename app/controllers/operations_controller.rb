@@ -63,6 +63,10 @@ class OperationsController < ApplicationController
   def update
     @operation = Operation.find(params[:id])
 
+    if !params[:work].blank? 
+      @work = Work.find(@operation.work_id)
+      @work.update_attributes(params[:work])
+    end
     respond_to do |format|
       if @operation.update_attributes(params[:operation])
         flash[:notice] = 'Operation was successfully updated.'

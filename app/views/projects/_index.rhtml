@@ -1,0 +1,64 @@
+<h2>
+    <div class="menu_small">
+      <%= link_to 'vytvořit nový projekt', new_project_path %>
+    </div>
+    Seznam projektů
+</h2>
+
+<% form_tag(projects_path, :method => :get) do %>
+	hledat výraz:<%= text_field_tag 'search_for' , @search_for , :size => 40%><br />
+	<%= filter_helper @filter , "0" , "v jednání" %>
+	<%= filter_helper @filter , "1" , "zakázka" %>
+	<%= filter_helper @filter , "2" , "ukončen" %>
+	<%= filter_helper @filter , "3" , "k fakturaci" %>
+	<%= filter_helper @filter , "4" , "vyfakturován" %>
+	<%= filter_helper @filter , "5" , "zaplacen" %>
+	<%= filter_helper @filter , "6" , "stornován" %>
+	<%= submit_tag 'filtrovat' %>
+<% end %>
+
+
+<table class="work">
+  <tr>
+    <th>firma</th>
+    <th>zadal</th>
+    <th>projekt</th>
+    <th>stav</th>
+    <th>poznámka</th>
+ </tr>
+
+<% for project in @projects %>
+
+<% finished = true %>
+<% problem = false %>
+<% if project.works.size > 0 %>
+	<% for work in project.works %>
+		<% for operation in work.operations %>
+			<% if operation.finished != true %>
+				<% if work.time.strftime("%s") < Time.now.beginning_of_day.strftime("%s") %>
+					<% problem = true %>
+				<% end %>
+				<% finished = false %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% else %>
+	<% finished = ""%>
+<% end %>
+	<% if problem == true %>
+	 	<tr class="nooperations">
+	<% elsif finished == false %>
+		<tr class="unfinished">
+	<% elsif finished == true %>
+		<tr class="finished">
+	<% else %>
+  		<tr class="reserved">
+	<% end %>
+    <td><%= right_show_link "companies", "show", project.company.name, project.company %></td>
+    <td class="left_align"><%=  right_show_link "users", "show", project.user.fullname, project.user %></td>
+    <td class="left_align"><%=  right_show_link "projects", "show", project_name(project), project %></td>
+    <td><%= project_status project %></td>
+    <td class="left_align"><%=h project.note %></td>
+      </tr>
+<% end %>
+</table>
