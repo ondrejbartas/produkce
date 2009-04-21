@@ -8,7 +8,7 @@
 	<% end %>
   <%= system_comment_form.hidden_field :user_id, :value=>@current_user.id %>
   <p>
-    <%= system_comment_form.label 'note', 'poznámka' %><br />
+    <%= system_comment_form.label 'note', 'text' %><br />
     <%= system_comment_form.text_area  :note, :cols=>60, :rows=>5 %>
   </p>
 

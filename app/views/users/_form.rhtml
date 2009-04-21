@@ -65,10 +65,15 @@
 
 
 <% if @current_user.admin? || @current_user.produce? %>
-    <%= label :user, 'role', 'vyberte kategorie', :required => false %><br />
+   <%= label :user, 'role', 'vyberte kategorie', :required => false %><br />
 
+	<div class="categories">
    <% for category in Category.find(:all, :order => :name) %>
+				<div class="category">
                 <%= check_box_tag "user[category_ids][]", category.id, @user.categories.include?(category) %>
-                <%= category.name %>
+                <%= category.name %>	
+				</div>
    <% end %>
+		<div class="clear_both"></div>
+	</div>
 <% end %>

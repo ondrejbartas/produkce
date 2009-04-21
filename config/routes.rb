@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :system_comments, :has_many => [ :system_comments ]
+  map.resources :system_comments, :has_many => [ :system_comments ],
+                                  :member => [:add_form, :finished ]
 
 
 

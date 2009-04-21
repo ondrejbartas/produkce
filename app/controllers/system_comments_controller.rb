@@ -84,4 +84,22 @@ class SystemCommentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+  
+  def add_form
+      @system_comment = SystemComment.new
+      if !params[:id].blank?
+        @system_comment_id = params[:id]
+      end
+      render(:layout=>false)                  
+   end
+   
+   def finished
+       @system_comment = SystemComment.find(params[:id])
+       @system_comment.finished = true
+       @system_comment.save
+       
+       redirect_to(system_comments_url)
+    end
 end
