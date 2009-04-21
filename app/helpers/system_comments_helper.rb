@@ -15,7 +15,7 @@ module SystemCommentsHelper
   	xm << ", "+my_date(system_comment.created_at)
   	xm << "<span class='odkazy'>"
   	if !(system_comment.finished == true || finished == true)
-  	  xm << " "+right_link("system_comments", "new", 'odpovědět', new_system_comment_system_comment_path(system_comment.id)).to_sG
+  	  xm << " "+right_link("system_comments", "new", 'odpovědět', new_system_comment_system_comment_path(system_comment.id)).to_s
   	else 
   	  finished = true
   	end
