@@ -86,7 +86,7 @@ ActionController::Routing::Routes.draw do |map|
                         :member => { :add_operation_from_worker => [:get, :post] 
                         }
 
-  map.resources :users, :has_many => [:contacts, :works]
+  map.resources :users, :has_many => [:contacts, :works, :system_comments]
 
   map.resources :companies, :has_many => [:projects, :contacts, :users ]
 

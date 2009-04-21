@@ -19,7 +19,7 @@ module SystemCommentsHelper
   	else 
   	  finished = true
   	end
-  	xm << " "+ right_owner_link("system_comments", "edit", system_comment.user_id, 'upravit', edit_system_comment_path(system_comment)).to_s
+  	xm << " "+ right_owner_link("system_comments", "edit", system_comment.user_id, 'upravit', edit_user_system_comment_url(@current_user.id, system_comment)).to_s
   	if system_comment.finished != true
   	  xm << " "+ right_link("system_comments", "finished", 'provedeno', finished_system_comment_path(system_comment)).to_s
   	end
