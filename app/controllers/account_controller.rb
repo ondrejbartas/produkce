@@ -38,6 +38,14 @@ class AccountController < ApplicationController
     end
   end
 
+  def menu_stats
+    session[:activePage] = "menu_stats"
+    @activePage = session[:activePage]
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
+  
    def menu_home
     session[:activePage] = "menu_home"
     @activePage = session[:activePage]
@@ -63,10 +71,9 @@ class AccountController < ApplicationController
    def menu_plan
     session[:activePage] = "menu_plan"
     @activePage = session[:activePage]
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @categories }
-    end
+    
+    
+    redirect_to(:controller=>"plans", :action => "week")
   end
 
     def menu_project

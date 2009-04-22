@@ -6,6 +6,9 @@ komenty k systému</h2>
 
 <ul class="comments">
 <% @system_comments.each do |system_comment| %>
-	<%= system_comment_show(system_comment, false) %>
+	<% if system_comment.showed != true %>
+		<% id = system_comment.get_parrent %>
+		<%= system_comment_show( id, false) %>
+	<% end %>
 <% end %>
 </ul>

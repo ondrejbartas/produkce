@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
     m.menu_project 'menu_project',   :action => 'menu_project'
     m.menu_accountant 'menu_accountant',   :action => 'menu_accountant'
     m.menu_admin 'menu_admin',   :action => 'menu_admin'
+    m.menu_stats 'menu_stats',   :action => 'menu_stats'
     m.menu_work 'menu_work',   :action => 'menu_work'
     m.menu_purchase 'menu_purchase',   :action => 'menu_purchase'
   end

@@ -1,7 +1,8 @@
 module SystemCommentsHelper
 
 
-  def system_comment_show(system_comment, finished)
+  def system_comment_show(id, finished)
+    system_comment = SystemComment.find(id)
     xm = Builder::XmlMarkup.new
   	xm << "<ul class='comment "
   	if system_comment.finished == true
@@ -29,6 +30,13 @@ module SystemCommentsHelper
     
     if system_comment.system_comments.size > 0
         for comment in system_comment.system_comments.sort_by {|u| u.created_at}
+          for showed_comment in @system_comments
+            if showed_comment.id == comment.id
+              showed_comment.showed = true
+            elsif showed_comment.id == id
+              showed_comment.showed = true
+            end
+          end
           xm << system_comment_show(comment, finished)
         end
     end  

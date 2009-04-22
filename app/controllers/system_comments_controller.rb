@@ -2,7 +2,7 @@ class SystemCommentsController < ApplicationController
   # GET /system_comments
   # GET /system_comments.xml
   def index
-    @system_comments = SystemComment.find(:all, :conditions => "system_comment_id is null").sort_by {|u| u.created_at}.reverse
+    @system_comments = SystemComment.find(:all).sort_by {|u| u.created_at}.reverse
 
     respond_to do |format|
       format.html # index.html.erb
