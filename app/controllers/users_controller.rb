@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       if !params[:filter].blank?
          @filter_role = params[:filter]
          session[:filter_role] = @filter_role
-       elsif session[:filter].blank?
+       elsif !session[:filter].blank?
           @filter_role = session[:filter_role]
        else
          @filter_role = { "3" => "true","5" => "true","7" => "true","11" => "true", "13" => "true", "17" => "true", "23" => "true" }
