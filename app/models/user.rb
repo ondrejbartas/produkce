@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
    after_validation :fill_fullname
    after_validation :fill_logout_time
 
-   attr_accessor  :password_new, :password_new_comf, :role3,:role5,:role7,:role11,:role13
+   attr_accessor  :password_new, :password_new_comf, :role3,:role5,:role7,:role11,:role13,:role17:role23
 
   def self.authenticate(login, password)
     find_by_login_and_password(login, Digest::SHA1.hexdigest(password))
@@ -130,7 +130,7 @@ class User < ActiveRecord::Base
 
 
    def crypt_password
-      if not password_new.blank?
+      if !password_new_comf.blank? && !password_new.blank?
        self.password = Digest::SHA1.hexdigest(password_new)
       end
    end
@@ -139,10 +139,9 @@ class User < ActiveRecord::Base
     def password_validation
       if password_new_comf.blank? && password_new.blank?
 
-      else if ( password_new != password_new_comf)
+      elsif ( password_new != password_new_comf)
           errors.add_to_base("zadaná hesla se nerovnají")
           false
-        end
       end
     end
     

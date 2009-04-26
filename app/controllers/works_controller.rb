@@ -160,11 +160,16 @@ class WorksController < ApplicationController
              @change_user = params[:change_user]
           end
           
-            if params[:type_create].blank?
-                 @type_create = false
-              else
-                 @type_create = params[:type_create]
-              end
+         if params[:type_create].blank?
+           @type_create = false
+         else
+           @type_create = params[:type_create]
+         end
+         if params[:no_calendar].blank?
+            @no_calendar = false
+         else
+            @no_calendar = params[:no_calendar]
+         end
          @user_id = "0"
          @plan_type = params[:plan_type]
          render(:layout=>false)

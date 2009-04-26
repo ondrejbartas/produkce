@@ -18,7 +18,7 @@
 
 <p id="user_container">
 	
-	<% if controller.action_name != "edit" &&  controller.action_name != "add_user"%>
+	<% if controller.action_name != "edit" && @no_calendar == false%>
 	
       <%= label 'work', 'user_id', 'operátor', :required => false %>
       <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
@@ -47,7 +47,7 @@
 	   <%= select_tag "chosed_role", options_for_select({ "interní" => "5" , "externi" => "17", }, @chosed_role.to_s),
 	           {:onchange => remote_function( :update => 'user_container', :url =>
 	             add_user_works_path, :with =>
-	               "'change_user=true&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
+	               "'no_calendar=true&change_user=true&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
 	   %>
 	
 	<% end %>
