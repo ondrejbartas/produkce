@@ -28,7 +28,7 @@
         :id, :name, {:include_blank => true} %>
 
 	<% end %>
-	<% if @current_user.produce? %>
+	<% if @current_user.produce? || @current_user.admin? %>
     <%= label index, 'note', "poznámka produkce" %>
     <%= text_field index, :note, :size=>25 %>
 	<% else %>

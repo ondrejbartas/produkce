@@ -9,7 +9,9 @@ module SystemCommentsHelper
   	  xm << "finished"
   	end
   	xm << "'>\n"
-  	if system_comment.created_at > Time.now - 1.day	  
+    if @current_user.id == system_comment.user_id 
+  	  xm << "<li class='name more_days'>\n"
+  	elsif system_comment.created_at > Time.now - 1.day	  
   	  xm << "<li class='name first_day'>\n"
   	elsif system_comment.created_at > Time.now - 2.day	  
   	  xm << "<li class='name second_day'>\n"
