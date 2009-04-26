@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
    has_many :purchase_carts
    has_many :warehouse_controls
    
-   belongs_to :company
    has_and_belongs_to_many :categories
+   has_and_belongs_to_many :companies, :join_table => "companies_users",  :readonly => true
 
    before_validation :password_validation
    before_validation :role_validation

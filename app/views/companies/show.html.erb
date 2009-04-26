@@ -54,7 +54,7 @@
     členové firmy
 </h3>
 <ul>
-<% for user in User.find(:all ,:conditions => ["deleted is null AND company_id = :comp ", {:comp => @company.id}]).sort_by{|u| u.surname.downcase} %>
+<% for user in @company.users.sort_by{|u| u.surname.downcase} %>
   <li><%= right_show_link ("users", "show",  user.fullname, user ) %></li>
 <% end %>
 </ul>

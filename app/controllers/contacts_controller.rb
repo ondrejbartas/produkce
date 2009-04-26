@@ -93,9 +93,12 @@ class ContactsController < ApplicationController
 
       respond_to do |format|
         if @contact.update_attributes(params[:contact])
-
           flash[:notice] = 'Kontakt byl úspěšně upraven.'
-          format.html { redirect_to user_url(@contact.user) }
+          if @contact.company_id.blank?
+            format.html { redirect_to user_url(@contact.user) }
+          else
+            format.html { redirect_to company_url(@contact.company) }
+          end
           format.xml  { head :ok }
         else
           format.html { render :action => "edit" }

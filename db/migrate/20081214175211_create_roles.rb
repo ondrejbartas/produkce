@@ -14,6 +14,7 @@ class CreateRoles < ActiveRecord::Migration
     acc = Role.create(:idd=> "11", :name => "ACCOUNTANT", :comment => "účetní")
     cli = Role.create(:idd=> "13", :name => "CLIENT", :comment => "klient")
     exw = Role.create(:idd=> "17", :name => "EXTWORKER", :comment => "externí pracovník")
+    rec = Role.create(:idd=> "23", :name => "RECEPCE", :comment => "recepční")
 
   end
 

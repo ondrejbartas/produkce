@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090426172815) do
+ActiveRecord::Schema.define(:version => 20090426222723) do
 
   create_table "bought_tapes", :force => true do |t|
     t.integer  "purchase_cart_id"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(:version => 20090426172815) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "companies_users", :id => false, :force => true do |t|
+    t.integer "company_id"
+    t.integer "user_id"
+  end
+
+  add_index "companies_users", ["company_id"], :name => "index_companies_users_on_company_id"
+  add_index "companies_users", ["user_id"], :name => "index_companies_users_on_user_id"
 
   create_table "contacts", :force => true do |t|
     t.string   "address"
@@ -266,7 +274,6 @@ ActiveRecord::Schema.define(:version => 20090426172815) do
     t.string   "login",       :limit => 40
     t.string   "password",    :limit => 40
     t.integer  "role"
-    t.integer  "company_id"
     t.boolean  "deleted"
     t.datetime "created_at"
     t.datetime "updated_at"

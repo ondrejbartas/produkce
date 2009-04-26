@@ -76,18 +76,6 @@ class WorksController < ApplicationController
     end 
     respond_to do |format|
       if saved == true
-        if !@work.user_id.blank?
-          mail = ""
-          for contact in @work.user.contacts
-              if !contact.email.blank?
-                mail = contact.email
-                break
-              end
-          end
-          if mail.size > 0 
-            Postoffice.deliver_new_work(@work.user.fullname, "o.bartas@gmail.com")
-          end
-        end
         
         flash[:notice] = 'Work was successfully created.'
         if params[:commit] == "přidat"

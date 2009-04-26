@@ -9,13 +9,12 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :logout_time
       t.integer :role
       t.integer :active_role
-      t.integer :company_id
       t.boolean :access
       t.boolean :deleted
       t.timestamps
     end
 
-    us = User.create(:name => "admin", :surname=> "admin", :login => "admin", :password_new_comf => "admin", :password_new => "admin", :password => "admin", :role => 255255)
+    us = User.create(:name => "admin", :surname=> "admin", :login => "admin", :password_new_comf => "admin", :password_new => "admin", :password => "admin", :role => 3)
   end
 
   def self.down

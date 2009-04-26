@@ -74,9 +74,6 @@ class UsersController < ApplicationController
   def new
    
        @user = User.new
-       if not params[:company_id].blank?
-          @user.company_id = params[:company_id]
-       end
        @user.access = false
        respond_to do |format|
          format.html # new.html.erb
@@ -96,7 +93,7 @@ class UsersController < ApplicationController
    
         @user = User.new(params[:user])
 
-         if not params[:contact][:phone].blank?
+         if !params[:contact][:phone].blank?
            @user.contacts.build(params[:contact])
            @contacts = Contact.new(params[:contact])
          end
@@ -104,6 +101,11 @@ class UsersController < ApplicationController
          if not params[:user][:category_ids].blank?
             @user.category_ids = params[:user][:category_ids]
          end
+
+         if not params[:user][:company_ids].blank?
+            @user.company_ids = params[:user][:company_ids]
+         end
+
 
          if params[:user][:active_role].blank?
             @user.role = 1
@@ -135,6 +137,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
+    
     @user = User.find(params[:id])
    
 
@@ -142,9 +145,7 @@ class UsersController < ApplicationController
           if @user.update_attributes(params[:user])
 
           if  @current_user.admin? || @current_user.produce?
-              if not params[:user][:category_ids].blank?
-                  @user.category_ids = params[:user][:category_ids]
-               end
+             @user.save
 
                if params[:user][:active_role].blank?
                   @user.role = 1
@@ -157,8 +158,8 @@ class UsersController < ApplicationController
                   if !params[:role23].blank? then @user.role *= 23 end
                end
           end
+           @user.save
             
-            @user.save
             flash[:notice] = 'User was successfully updated.'
 
             format.html { redirect_to(@user) }

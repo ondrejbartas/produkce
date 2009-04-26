@@ -20,13 +20,14 @@
 	 <% else %>
 		<% password = "" %>
 	 <% end %> 
+	
     <%= label :user, 'password', 'pro vytvoření či změnu hesla', :required => true %><br />
-    <%= password_field :user, :password_new_comf, :value=> password %> <i>náhodné heslo: <%= password  %></i>
+    <%= f.password_field :password_new_comf, :value=> password %> <i>náhodné heslo: <%= password  %></i>
 </p>
 
 <p>
     <%= label :user, 'password_new', 'zadejte heslo podruhé', :required => true %><br />
-    <%= password_field :user, :password_new, :value=> password %>
+    <%= f.password_field  :password_new, :value=> password %>
 </p>
 
 
@@ -35,9 +36,26 @@
  <% if @current_user.admin? || @current_user.produce? %>
 
     <p>
-        <%= label :user, 'company_id', 'vyberte firmu:', :required => true %><br />
-        <%= select(:user, "company_id", Company.find(:all, :conditions => "deleted is null"  ).sort_by {|u| u.name.downcase}.collect {|p| [ p.name, p.id ] }, {:include_blank => ''}) %>
+		  <%= label :user, 'company_id', 'vyberte firmu:', :required => true %><br />
+		
+		<div id="companies">
+		 <% for company in @user.companies %>
+				<div class="company">
+			  		<%= collection_select :user, :company_ids, Company.find(:all, :conditions => "deleted is null"  ).sort_by {|u| u.name.downcase}, :id, :name, { :selected => company.id, :include_blank => true }, {  :name => 'user[company_ids][]' } -%>
+				</div>
+		<% end %>
+		<% if @user.companies.empty? %>
+			<div class="company">
+		  		<%= collection_select :user, :company_ids, Company.find(:all, :conditions => "deleted is null"  ).sort_by {|u| u.name.downcase}, :id, :name, {:include_blank => true }, {  :name => 'user[company_ids][]' } -%>
+			</div>
+		<% end %>
+		</div>
+	</p>
+	<p>
+		<%= add_company_link( f , :companies, "přidat další firmu") %>
     </p>
+
+
     <p>
         <%= label :user, 'access', 'povolit přístup uživateli do systému?', :required => false %><br />
         <%= check_box :user , :access , {}, "true" , "false"%>

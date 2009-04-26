@@ -2,7 +2,7 @@
 
 <% form_for(@user) do |f| %>
 
-  <%= render :partial => 'users/form' %>
+  <%= render :partial => 'users/form', :locals => { :f => f } %>
 
   <div id="contact">
     <h2>Přidání kontaktu (nepovinné)</h2>

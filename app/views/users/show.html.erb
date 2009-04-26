@@ -7,7 +7,11 @@
    UŽIVATEL: <%= @user.name.blank? ? "" : @user.name  %> <%= @user.surname.blank? ? "" : @user.surname  %>
 </h2>
  <ul>
-     <li>firma: <%= @user.company.blank? ? " " : (right_show_link( "companies", "show", @user.company.name, @user.company)) %>   </li>
+ 	<% for company in @user.companies  %>
+	 	<li>firma:
+		       <b><%= right_show_link "companies", "show",  company.name, company %></b>
+	 	</li>
+	 <% end %>
      <li>práva uživatele:
         <% for role in Role.find(:all)  %>
           <%  if !@user.blank? && @user.role % role.idd == 0  %>

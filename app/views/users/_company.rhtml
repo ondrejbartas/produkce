@@ -1,0 +1,7 @@
+<div class="company">
+  <p>
+  		<%= collection_select :user, :company_ids, Company.find(:all, :conditions => "deleted is null"  ).sort_by {|u| u.name.downcase}, :id, :name, { :include_blank => true }, {  :name => 'user[company_ids][]' } -%>
+
+        <%= link_to_function "Smazat", "$(this).up('.company').remove(); " %>
+  </p>
+</div>
