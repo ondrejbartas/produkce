@@ -1,5 +1,5 @@
 
-<% if @current_user.worker? || @current_user.admin? || @current_user.produce? || @current_user.reception? %>
+<% if @current_user.worker? || @current_user.admin? || @current_user.produce? || @current_user.recepce? %>
 <h2>kalendář recepce</h2>
 	<%= render :partial => 'reception_events/calendar' %>
 <% end %>

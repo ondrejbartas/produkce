@@ -1,4 +1,6 @@
 <% form_tag(users_path, :method => :get) do %>
+	<%= filter_helper @filter_role , "0" , "všechny" %>
+	<%= filter_helper @filter_role , "1" , "bez role" %>
 	<%= filter_helper @filter_role , "3" , "admin" %>
 	<%= filter_helper @filter_role , "7" , "produkční" %>
 	<%= filter_helper @filter_role , "5" , "pracovník" %>

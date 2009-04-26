@@ -7,24 +7,33 @@ class UsersController < ApplicationController
       if !params[:filter].blank?
          @filter_role = params[:filter]
          session[:filter_role] = @filter_role
-       elsif !session[:filter].blank?
+       elsif !session[:filter_role].blank?
           @filter_role = session[:filter_role]
        else
-         @filter_role = { "3" => "true","5" => "true","7" => "true","11" => "true", "13" => "true", "17" => "true", "23" => "true" }
+         @filter_role = { "1" => "true", "3" => "true","5" => "true","7" => "true","11" => "true", "13" => "true", "17" => "true", "23" => "true" }
          session[:filter_role] = @filter_role
       end
       
-      filter_text = ""
+      filter_text = " AND ( "
+      all = false
       @filter_role.each { |key ,value|
         if value == "true" 
-          if filter_text.size > 0
+          if filter_text.size > 9
               filter_text += " OR "
           end 
+          
+          if key == "0"
+            all = true
+          end
+          
           filter_text += "role % "+key+" = 0 "
         end
       }
+      filter_text += " )"
       
-      @users = User.find(:all , :conditions => "deleted is null AND ("+ filter_text+")").sort_by {|u| u.surname.downcase}
+      filter_text =  "" if filter_text.size < 11 || all == true
+      
+      @users = User.find(:all , :conditions => "deleted is null "+ filter_text).sort_by {|u| u.surname.downcase}
 
       
     respond_to do |format|

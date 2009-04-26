@@ -20,6 +20,7 @@
 
 <table class="work">
   <tr>
+  	 <th>datum</th>
     <th>firma</th>
     <th>zadal</th>
     <th>projekt</th>
@@ -54,6 +55,7 @@
 	<% else %>
   		<tr>
 	<% end %>
+    <td class="left_align"><%= my_date project.created_at %></td>
     <td><%= right_show_link "companies", "show", project.company.name, project.company %></td>
     <td class="left_align"><%=  right_show_link "users", "show", project.user.fullname, project.user %></td>
     <td class="left_align"><%=  right_show_link "projects", "show", project_name(project), project %></td>
