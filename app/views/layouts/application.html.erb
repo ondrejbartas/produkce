@@ -11,19 +11,22 @@
 <body>
 
 <div id="header">
-<div class="change_role">
-	změnit roli na:
-	<% sql = " " %>
-	<% for role in Role.find(:all) %>
-	   <% if @current_user.role % role.idd == 0 %>
-	        <% sql.size > 2 ? sql += " OR " : " "%>
-	        <% sql += " idd % "+role.idd.to_s+ " = 0 " %>
-	    <% end %>
-	<% end %>
-	<% for role in Role.find(:all, :conditions => sql) %>
-		<%= link_to role.comment, :controller => "users", :action => "change_role", :id=> @current_user.id, :role => role.idd %>
-	<% end %>
-</div>
+
+<% if !@current_user.blank? %>
+	<div class="change_role">
+		změnit roli na:
+		<% sql = " " %>
+		<% for role in Role.find(:all) %>
+		   <% if @current_user.role % role.idd == 0 %>
+		        <% sql.size > 2 ? sql += " OR " : " "%>
+		        <% sql += " idd % "+role.idd.to_s+ " = 0 " %>
+		    <% end %>
+		<% end %>
+		<% for role in Role.find(:all, :conditions => sql) %>
+			<%= link_to role.comment, :controller => "users", :action => "change_role", :id=> @current_user.id, :role => role.idd %>
+		<% end %>
+	</div>
+<% end %>
 <h1>Studio Pokrok</h1>
 
 </div>
