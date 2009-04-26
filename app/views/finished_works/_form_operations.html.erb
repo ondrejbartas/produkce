@@ -23,8 +23,8 @@
         <% for operation in work.operations %>
                 <tr height="30">
                             <% if first == true %>
-                                <% if work.time.beginning_of_day < Time.now.beginning_of_day %>
-                                    <td rowspan="<%=work.operations.size.to_s %>" class="red"><%= my_date work.time  %></td>
+                                <% if work.date < Time.now.beginning_of_day %>
+                                    <td rowspan="<%=work.operations.size.to_s %>" class="red"><%= my_date work.date  %></td>
                                 <% else %>
                                     <%= zacatek %><%= my_date work.date  %></td>
                                 <% end %>
