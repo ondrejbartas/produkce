@@ -21,7 +21,7 @@ Recepce: kontakty</h2>
     <td><%=h reception_contact.phone %></td>
     <td><%=h reception_contact.address %></td>
     <td><%= link_to( image_tag("mail_icon.png"), "mailto:"+reception_contact.email ) if reception_contact.email.size > 4 %></td>
-    <td><%= link_to( image_tag("web_icon.png"), "http://"+reception_contact.web ) if reception_contact.web.size > 4  %></td>
+    <td><%= link_to( image_tag("web_icon.png"), "http://"+reception_contact.web ,:target=>'_new') if reception_contact.web.size > 4  %></td>
     <td><%=h reception_contact.note %></td>
     <td><%= right_link "reception_contacts", "edit", 'upravit', edit_reception_contact_path(reception_contact) %>
     <%= right_show "reception_contacts", "delete", link_to('smazat', reception_contact, :confirm => 'jste si jistí se smazáním?', :method => :delete ) %></td>

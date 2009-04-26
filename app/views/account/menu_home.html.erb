@@ -33,7 +33,7 @@
         </tr>
     <% for tape_type in TapeType.find(:all) %>
            <% bought_tapes = tape_type.bought_tapes -%>
-           <% operation_tapes_sum = Operation.sum("value" ,:conditions=> [ "finished is true AND tape_type_id = :id AND their_tape IS NOT true ", {:id => tape_type.id}] ) -%>
+           <% operation_tapes_sum = Operation.sum("count" ,:conditions=> [ "finished is true AND tape_type_id = :id AND their_tape IS NOT true ", {:id => tape_type.id}] ) -%>
            <% bought_tapes_sum = bought_tapes.sum("value") -%>
            <% missing_tapes_sum = MissingTape.sum("value" ,:conditions=> [ "tape_type_id = :id ", {:id => tape_type.id}] ) -%>
            <% sum = bought_tapes_sum - operation_tapes_sum - missing_tapes_sum %>
