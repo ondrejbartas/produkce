@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
    after_validation :fill_fullname
    after_validation :fill_logout_time
 
-   attr_accessor  :password_new, :password_new_comf, :role3,:role5,:role7,:role11,:role13,:role17:role23
+   attr_accessor  :password_new, :password_new_comf, :role3,:role5,:role7,:role11,:role13,:role17,:role23
 
   def self.authenticate(login, password)
     find_by_login_and_password(login, Digest::SHA1.hexdigest(password))
