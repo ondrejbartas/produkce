@@ -26,10 +26,10 @@
                                 <% if work.time.beginning_of_day < Time.now.beginning_of_day %>
                                     <td rowspan="<%=work.operations.size.to_s %>" class="red"><%= my_date work.time  %></td>
                                 <% else %>
-                                    <%= zacatek %><%= my_date work.time  %></td>
+                                    <%= zacatek %><%= my_date work.date  %></td>
                                 <% end %>
-                                <%= zacatek %><%= my_hour work.time  %> -
-                                    <%= my_hour ( work.time + work.length.minutes ) %></td>
+                                <%= zacatek %><%= my_hour work.get_from  %> -
+                                    <%= my_hour work.get_to %></td>
                                 <%= zacatek %>
 												<%= work.project.blank? ? "" :  ( link_to project_name(work.project), work.project ) %>
 	<% right_show ("works", "add_operation_form_user", link_to( "+ přidat úkon +",{ :controller => 'works', 
