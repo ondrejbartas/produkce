@@ -39,8 +39,8 @@
         <%= select(:user, "company_id", Company.find(:all, :conditions => "deleted is null"  ).sort_by {|u| u.name.downcase}.collect {|p| [ p.name, p.id ] }, {:include_blank => ''}) %>
     </p>
     <p>
-        <%= label :user, 'access', 'zakázat přístup uživateli do systému?', :required => false %><br />
-        <%= check_box :user , :access %>
+        <%= label :user, 'access', 'povolit přístup uživateli do systému?', :required => false %><br />
+        <%= check_box :user , :access , {}, "true" , "false"%>
     </p>
 
 	<div class="user_role_categories">
