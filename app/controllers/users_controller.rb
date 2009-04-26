@@ -2,8 +2,31 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.find(:all , :conditions => "deleted is null").sort_by {|u| u.surname.downcase}
 
+
+      if !params[:filter].blank?
+         @filter_role = params[:filter]
+         session[:filter_role] = @filter_role
+       elsif session[:filter].blank?
+          @filter_role = session[:filter_role]
+       else
+         @filter_role = { "3" => "true","5" => "true","7" => "true","11" => "true", "13" => "true", "17" => "true", "23" => "true" }
+         session[:filter_role] = @filter_role
+      end
+      
+      filter_text = ""
+      @filter_role.each { |key ,value|
+        if value == "true" 
+          if filter_text.size > 0
+              filter_text += " OR "
+          end 
+          filter_text += "role % "+key+" = 0 "
+        end
+      }
+      
+      @users = User.find(:all , :conditions => "deleted is null AND ("+ filter_text+")").sort_by {|u| u.surname.downcase}
+
+      
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
@@ -12,6 +35,18 @@ class UsersController < ApplicationController
 
   def change_atributes
      
+  end
+  
+  def change_role
+     if !params[:role].blank?
+       if @current_user.role% params[:role].to_i == 0
+          @current_user.active_role = params[:role].to_i
+          @current_user.save
+          flash[:notice] = 'Role změněna.'
+
+       end
+     end
+     redirect_to session['saved_location']
   end
 
   # GET /users/1

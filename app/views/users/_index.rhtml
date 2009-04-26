@@ -1,4 +1,9 @@
 <div class="user_list">
+
+<% if @current_user.admin? %>
+	<%= render (:partial => 'users/filter') %>
+<% end %>
+
 <% letter = "z" %>
 <% for user in users %>
       <% if letter.downcase != user.surname[0,1].downcase %>

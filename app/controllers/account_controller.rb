@@ -56,6 +56,16 @@ class AccountController < ApplicationController
     end
   end
 
+   def menu_reception
+    session[:activePage] = "menu_reception"
+    @activePage = session[:activePage]
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @categories }
+    end
+  end
+
+
   def menu_purchase
     session[:activePage] = "menu_purchase"
 

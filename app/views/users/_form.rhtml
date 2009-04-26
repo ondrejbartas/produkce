@@ -45,7 +45,7 @@
 
 	<div class="user_role_categories">
    	<div class="role"> 
-	    <div><%= label :user, 'role', 'vyberte role', :required => true %></div>
+	    <div><%= label :user, 'role', 'vyberte práva uživatele', :required => true %></div>
 			<div class="column">
 	    <% for role in Role.find(:all)  %>
     
@@ -66,7 +66,7 @@
 
 
 		<div class="categories">
-	   	<div><%= label :user, 'role', 'vyberte kategorie', :required => false %></div>
+	   	<div><%= label :user, 'role', 'vyberte profese uživatele', :required => false %></div>
 
 				<div class="column">
 				<% n = 0 %>

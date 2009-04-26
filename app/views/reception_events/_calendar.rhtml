@@ -1,0 +1,31 @@
+<table class="calendar">
+
+    <tr>
+    <tr height="30" >
+    <%  7.times { |n|  %>
+        <% table_day = Time.now.beginning_of_week + n.days %>
+            <th width="100" <% if Time.today ==  table_day -%>
+		                class="today"
+		            <%  elsif n > 4 -%>
+		                class="weekend"
+		            <% end -%>
+				><%= day_names(n) %> <%= my_date table_day %> </th>
+	 <% } %>
+	</tr>
+	<tr height="30">
+    <%  7.times { |n|  %>
+    	<% table_day = Time.now.beginning_of_week + n.days %>
+
+			<% events = ReceptionEvent.find(:all , :conditions => ['"from" <= ? AND  "to" >= ? ',  table_day.strftime("%Y-%m-%d"), (table_day).strftime("%Y-%m-%d") ]) %>
+			<td>
+			    <% if events.size > 0 %>
+			        <% for event in events %>
+			            <%= render :partial => 'reception_events/add_cell', :locals => {:event => event} %>
+			        <% end %>
+			    <% end %>
+			</td>
+
+
+    <% } %>
+   </tr>
+</table>

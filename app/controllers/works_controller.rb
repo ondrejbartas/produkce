@@ -71,9 +71,24 @@ class WorksController < ApplicationController
       end
     end
 
-    @work = @work_error
+    if !@work_error.blank?
+      @work = @work_error
+    end 
     respond_to do |format|
       if saved == true
+        if !@work.user_id.blank?
+          mail = ""
+          for contact in @work.user.contacts
+              if !contact.email.blank?
+                mail = contact.email
+                break
+              end
+          end
+          if mail.size > 0 
+            Postoffice.deliver_new_work(@work.user.fullname, "o.bartas@gmail.com")
+          end
+        end
+        
         flash[:notice] = 'Work was successfully created.'
         if params[:commit] == "přidat"
           format.html { redirect_to :controller => "plans", :action => "week" }
@@ -177,4 +192,8 @@ class WorksController < ApplicationController
          render  :inline =>"chyba při zadávání! Nechte si znovu stránku načíst."
       end
   end
+  
+  
+  
+  
 end

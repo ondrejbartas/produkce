@@ -1,14 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :system_comments, :has_many => [ :system_comments ],
-                                  :member => [:add_form, :finished ]
+  map.resources :reception_events
 
-
+  map.resources :reception_contacts
 
  
-
-  
-  
-    
+ 
+ 
+  map.resources :system_comments, :has_many => [ :system_comments ],
+                                  :member => [:add_form, :finished, :storno ]
+   
   map.with_options :controller => 'account' do |m|
     m.login   'login',     :action => 'login'
     m.logout  'logout',    :action => 'logout'
@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
     m.menu_admin 'menu_admin',   :action => 'menu_admin'
     m.menu_stats 'menu_stats',   :action => 'menu_stats'
     m.menu_work 'menu_work',   :action => 'menu_work'
+    m.menu_work 'menu_reception',   :action => 'menu_reception'
     m.menu_purchase 'menu_purchase',   :action => 'menu_purchase'
   end
 
@@ -35,7 +36,6 @@ ActionController::Routing::Routes.draw do |map|
               :add_calendar_work => [:get, :post]  }
               
 
-  map.resources :users, :collection => { :change_atributes => [:get, :post]}
 
  # map.connect 'view/:action', :controller => 'users', :action => { 'client', 'worker' }
 
@@ -87,7 +87,9 @@ ActionController::Routing::Routes.draw do |map|
                         :member => { :add_operation_from_worker => [:get, :post] 
                         }
 
-  map.resources :users, :has_many => [:contacts, :works, :system_comments]
+  map.resources :users, :has_many => [:contacts, :works, :system_comments, :finished_works],
+                        :member => {:change_role => [:get, :post] },
+                        :collection => { :change_atributes => [:get, :post]}
 
   map.resources :companies, :has_many => [:projects, :contacts, :users ]
 

@@ -1,5 +1,10 @@
-home
-<% if @current_user.worker? %>
+
+<% if @current_user.worker? || @current_user.admin? || @current_user.produce? || @current_user.reception? %>
+<h2>kalendář recepce</h2>
+	<%= render :partial => 'reception_events/calendar' %>
+<% end %>
+
+<% if @current_user.is_worker? %>
 	<h2>
 		<div class="menu_small">
 			<%= link_to 'zaúčtovat hotovou práci', new_finished_work_path %>
@@ -13,7 +18,10 @@ home
 	
 <% end %>
 
-<% if @current_user.produce? %>
+<% if @current_user.is_produce? %>
+
+	 <h2>Zaúčtované práce ke kontrole</h2>
+    	<%= render :partial=>"finished_works/check_finished_works" %>
 
 
     <h2>Chybějící kazety</h2>

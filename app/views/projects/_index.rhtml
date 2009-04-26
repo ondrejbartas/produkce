@@ -52,7 +52,7 @@
 	<% elsif finished == true %>
 		<tr class="finished">
 	<% else %>
-  		<tr class="reserved">
+  		<tr>
 	<% end %>
     <td><%= right_show_link "companies", "show", project.company.name, project.company %></td>
     <td class="left_align"><%=  right_show_link "users", "show", project.user.fullname, project.user %></td>

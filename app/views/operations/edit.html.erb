@@ -1,24 +1,24 @@
 <% work = @operation.work %>
+
+<h2>provedenápráce pro projekt: <%= work.project.blank? ? "" :  ( link_to project_name(work.project), work.project ) %></h2>
 <% form_for @operation do |operation_form| -%>
 <%= operation_form.error_messages %>
 <ul>
-        <% if work.time.beginning_of_day < Time.now.beginning_of_day %>
-            <li class="red">datum: <%= my_date work.time  %></li>
+		<li>typ práce: <b><%=h work.job_type.blank? ? "" : work.job_type.name %></b></li>
+		<li>pracovní místo: <b><%=h work.place.blank? ? "" : work.place.name %></b></li>
+        <% if work.date < Time.now.beginning_of_day %>
+            <li class="red">datum: <b><%= my_date work.date  %></b></li>
         <% else %>
-            <li>datum: <%= my_date work.time  %></li>
+            <li>datum: <b><%= my_date work.date  %></b></li>
         <% end %>
-        <li>čas: <%= my_hour work.time  %> -
-            <%= my_hour ( work.time + work.length.minutes ) %></li>
-        <li>projekt: <%= work.project.blank? ? "" :  ( link_to project_name(work.project), work.project ) %></li>
-        <li>typ práce: <%=h work.job_type.blank? ? "" : work.job_type.name %></li>
-        <li>pracovní místo: <%=h work.place.blank? ? "" : work.place.name %></li>
-    	  <li>poznámka podukčního:<%= @operation.note %></li>
- 	<li >
-        <%= @operation.operation_type.name %>
-    </li>
+        <li>čas: <b><%= my_hour work.get_from  %> -
+            <%= my_hour work.get_to %></b></li>
+    	  <li>poznámka podukčního: <b><%= @operation.note %></b></li>
+</ul>
 
-	
-    <li style="text-align:left">
+
+
+<b>úkon: <%= @operation.operation_type.name %></b>
         <% @operation_type = @operation.operation_type %>
         <% if @operation.finished == true %>
                <%  if @operation.operation_type.value == 0 %>
@@ -39,9 +39,7 @@
         <% else %>
             <%= render :partial => 'add_operation_type_parameters' %>
         <% end %>
-    </li>
-	 <li>poznámka operátora:<%= operation_form.text_field :note_operator %></li>
-    <li>
+	 <b>poznámka operátora:</b> <%= operation_form.text_field :note_operator %>
         <% if @operation.finished == true %>
             hotovo, čeká na zapsání celkové doby
              <%= operation_form.hidden_field :finished , :value=>"" %>
@@ -53,19 +51,20 @@
 
 
 
-
 			<div id="operations">
 			
 			</div>
 
-			<%= link_to_remote "+ přidat úkon +",
+		<h3><%= link_to_remote "+ přidat úkon +",
 			           :url => { :controller => "works", :action => "add_operation",:from_user => true, :job_type_id => 0 },
 			           :update =>  "operations",  :position => :bottom %>
+		</h3>
 
 
 
-
+		<p>
          <%= operation_form.submit 'hotovo'  %>
+		</p>
         <% end %>
     </li>
 </ul>

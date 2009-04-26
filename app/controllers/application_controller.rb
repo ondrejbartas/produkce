@@ -74,4 +74,6 @@ class ApplicationController < ActionController::Base
         redirect_to :controller => 'account', :action => 'menu_home'
     end 
   end
+  
+  
 end

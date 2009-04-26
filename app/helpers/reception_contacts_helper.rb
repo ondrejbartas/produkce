@@ -1,0 +1,2 @@
+module ReceptionContactsHelper
+end

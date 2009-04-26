@@ -10,7 +10,23 @@
 </head>
 <body>
 
-<div id="header"><h1>Studio Pokrok</h1></div>
+<div id="header">
+<div class="change_role">
+	změnit roli na:
+	<% sql = " " %>
+	<% for role in Role.find(:all) %>
+	   <% if @current_user.role % role.idd == 0 %>
+	        <% sql.size > 2 ? sql += " OR " : " "%>
+	        <% sql += " idd % "+role.idd.to_s+ " = 0 " %>
+	    <% end %>
+	<% end %>
+	<% for role in Role.find(:all, :conditions => sql) %>
+		<%= link_to role.comment, :controller => "users", :action => "change_role", :id=> @current_user.id, :role => role.idd %>
+	<% end %>
+</div>
+<h1>Studio Pokrok</h1>
+
+</div>
 
 <% if @current_user %>
 
@@ -28,6 +44,7 @@
          <%= main_menu(@activePage, "menu_work", "práce") %>
          <%= main_menu(@activePage, "menu_accountant", "vyúčtování") %>
          <%= main_menu(@activePage, "menu_purchase", "sklad") %>
+         <%= main_menu(@activePage, "menu_reception", "recepce") %>
          <%= main_menu(@activePage, "menu_stats", "statistiky") %>
          <%= main_menu(@activePage, "menu_admin", "administrování") %>
 
@@ -62,7 +79,11 @@
 							<li>vyuctovani prace /admin</li>
 							 <li><%= sub_menu( "finished_works", "new", 'zaúčtovat hotovou práci', new_finished_work_path )%></li>
                     	 <li><%= sub_menu( "finished_works", "index", 'seznam zaúčtované práce', finished_works_path )%></li>
-	                <% elsif @activePage == "menu_accountant" %>
+	              	<% elsif @activePage == "menu_reception" %>
+							<li><%= sub_menu( "reception_contacts", "index", 'kontakty recepce', reception_contacts_path )%></li>
+							<li><%= sub_menu( "reception_events", "index", 'události recepce', reception_events_path )%></li>
+							<li>kalendar recepce</li>
+					  	<% elsif @activePage == "menu_accountant" %>
                    	 <li><%= sub_menu( "invoices", "finished_projects", 'ukončené projekty', finished_projects_invoices_path )%></li>
                       <li><%= sub_menu( "invoices", "index", 'zakázky k fakturaci', invoices_path )%></li>
                       <li><%= sub_menu( "invoices", "index", 'seznam vyfakturovaných projektů', invoices_path )%></li>
@@ -96,7 +117,7 @@
 </div> 
 </div>
 <div id="footer">
-              2009 (c) Ondřej Bartas - verze systemu ke dni updatu: 21.4.2009 18:00
+              2009 (c) Ondřej Bartas - verze systemu ke dni updatu: 26.4.2009 21:33
 </div>
 
 <% if !@current_user.blank? && @current_user.admin? %>
@@ -119,6 +140,9 @@
 	  </p>
 	<% end %>
 <% end %>
+
+
+<% store_location if controller.action_name != "edit" &&  controller.action_name != "new" %>
 
 <!-- GOOGLE - analytics - start -->
 <script type="text/javascript">

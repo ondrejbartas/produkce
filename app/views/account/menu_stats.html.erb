@@ -1,0 +1,10 @@
+<h2>statistiky</h2>
+
+
+<ul>
+	<li>počet uživatelů: <%= User.find(:all).size %></li>
+	<li>počet firem: <%= Company	.find(:all).size %></li>
+	<li>počet kontaktů: <%= Contact.find(:all).size %></li>
+	<li>naplánovaných prací: <%= Work.find(:all).size %></li>
+	<li>naplánovaných úkonů: <%= Operation.find(:all).size %></li>
+</ul>

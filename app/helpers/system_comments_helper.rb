@@ -7,10 +7,12 @@ module SystemCommentsHelper
   	xm << "<ul class='comment "
   	if system_comment.finished == true
   	  xm << "finished"
+  	elsif system_comment.storno == true
+  	  xm << "storno"
   	end
   	xm << "'>\n"
     if @current_user.id == system_comment.user_id 
-  	  xm << "<li class='name more_days'>\n"
+  	  xm << "<li class='name mine'>\n"
   	elsif system_comment.created_at > Time.now - 1.day	  
   	  xm << "<li class='name first_day'>\n"
   	elsif system_comment.created_at > Time.now - 2.day	  
@@ -33,6 +35,9 @@ module SystemCommentsHelper
   	xm << " "+ right_owner_link("system_comments", "edit", system_comment.user_id, 'upravit', edit_user_system_comment_url(@current_user.id, system_comment)).to_s
   	if system_comment.finished != true
   	  xm << " "+ right_link("system_comments", "finished", 'provedeno', finished_system_comment_path(system_comment)).to_s
+  	end
+  	if system_comment.storno != true
+  	  xm << " "+ right_link("system_comments", "storno", 'neřešit', storno_system_comment_path(system_comment)).to_s
   	end
   	xm << "</span></li>\n"
   	xm << "<li class='text'>"+system_comment.note+"</li>\n"

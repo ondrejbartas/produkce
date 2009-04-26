@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @reception_event.name %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%=h @reception_event.note %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%=h @reception_event.from %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%=h @reception_event.to %>
+</p>
+
+
+<%= link_to 'Edit', edit_reception_event_path(@reception_event) %> |
+<%= link_to 'Back', reception_events_path %>

@@ -1,6 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  def store_location
+     session['saved_location'] = request.request_uri
+  end
 
 
 # Format a label element for a form field.
@@ -171,13 +174,23 @@ end
  def right_show (controller, action, text)
 
          rights = Right.find(:all, :conditions => [" controller = ? AND action = ? ", controller, action])
-
          if rights.size > 0
            if rights.first.check?(@current_user, 0 )
               text
            end
          end
-   end
+ end
+ 
+ def right_show_sub (controller, action, sub, text)
+
+          rights = Right.find(:all, :conditions => [" controller = ? AND action = ? AND sub = ?", controller, action, sub])
+          if rights.size > 0
+            if rights.first.check?(@current_user, 0 )
+               text
+            end
+          end
+  end
+ 
  
 
 
@@ -251,7 +264,7 @@ end
  				<div  class='calendar_event'>
  				    <div class='reserved' style='width:90px'>
  					  	 <div class='top'></div>
- 						 <div class='body'>žádná práce</div>
+ 						 <div class='body'>rezervace</div>
  						 <div class='bottom'></div>
  					 </div>
  				</div>

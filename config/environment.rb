@@ -52,6 +52,7 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 
+
   config.action_controller.session = {
     :session_key => '_PokrokDb_session',
     :secret      => 'bb795280284d95066d5ae26039f7e8b6517f5a99857b2cf08f0222530b485c548573bedcde88516d698d82b97919118528c9e5c9ddcfb99287d4405db5807afa'

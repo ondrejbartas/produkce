@@ -1,0 +1,42 @@
+<h2>
+<div class="menu_small">
+	<%= right_link "reception_events", "new", 'přidat událost k recepci', new_reception_event_path  %>
+</div>
+Recepce: události</h2>
+
+<h3>aktuální týden</h3>
+
+<%= render :partial => 'reception_events/calendar' %>
+
+<h3>seznam událostí</h3>
+<table>
+  <tr>
+	 <th>typ</th>
+  	 <th>od</th>
+	 <th>do</th>
+    <th>titulek</th>
+    <th>poznámka</th>
+  </tr>
+
+<% @reception_events.each do |reception_event| %>
+  <tr>
+  	  <td>
+		<% if reception_event.alert == true %>
+			<%= image_tag("alert_icon.png") %>
+		<% end %>		
+		<% if reception_event.notice == true %>
+			<%= image_tag("notice_icon.png") %>
+		<% end %>		
+		<% if reception_event.parking == true %>
+			<%= image_tag("parking_icon.png") %>
+		<% end %>		
+	  </td>
+	  <td><%= my_date reception_event.from %></td>
+	  <td><%= my_date reception_event.to %></td>
+	  <td><%=h reception_event.name %></td>
+	  <td><%=h reception_event.note %></td>
+    <td><%= right_link "reception_events", "edit", 'upravit', edit_reception_event_path(reception_event) %>
+    <%= right_show "reception_events", "delete", link_to('smazat', reception_event, :confirm => 'jste si jistí se smazáním?', :method => :delete ) %></td>
+  </tr>
+<% end %>
+</table>

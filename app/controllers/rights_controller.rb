@@ -55,7 +55,7 @@ class RightsController < ApplicationController
     respond_to do |format|
       if @right.save
         flash[:notice] = 'Right was successfully created.'
-        format.html { redirect_to :controller => @right.controller , :action => @right.action }
+        format.html { redirect_to :controller => @right.controller }
         format.xml  { render :xml => @right, :status => :created, :location => @right }
       else
         format.html { render :action => "new" }

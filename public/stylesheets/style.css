@@ -85,6 +85,15 @@ a:hover{
 #role span.inactive:hover{
 	
 }
+
+.change_role {
+	float:right;
+}
+
+.change_role a {
+	background: #DDD;
+	padding: 3px;
+}
 #content{
 	background-color: white;
     min-height: 500px;
@@ -351,7 +360,7 @@ td {
 }
 .user_role_categories .role {
 	float: left;
-	width: 200px;
+	width: 250px;
 }
 .categories .column {
  width: 150px;
@@ -421,7 +430,7 @@ td {
 }
 
 .work .reserved {
-	background: #c8c8c8;
+	background: #d8d8d8;
 }
 
 .calendar_event {
@@ -543,12 +552,22 @@ td {
 .comments .finished {
 	background: #93cbff;
 }
+
+.comments .storno {
+	background: #BBB;
+}
+
+
 .comment {
 	margin-top: 10px;
 }
 
 .add_comment {
 	margin-left: 20px;
+}
+
+.mine {
+	background: #aFa;
 }
 
 .more_days {

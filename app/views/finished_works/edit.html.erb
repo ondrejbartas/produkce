@@ -1,25 +1,70 @@
-<h2>Úprava zaúčtvoaných prací</h1>
+<h2>Úprava zaúčtovaných prací</h2>
 
 <% form_for(@finished_work) do |f| %>
   <%= f.error_messages %>
 
+	<table>
+    <tr>
+        <th rowspan="2">datum zaúčtování</th>
+        <th rowspan="2">projekt</th>
+        <th width="400" colspan="4">úkony</th>
+    </tr>
+    <tr>
+        <th width="80">úkon</th>
+        <th>poz. produkce</th>
+        <th>poz. operátora</th>
+        <th width="220">parametry</th>
+
+    </tr>
+	  <% for operation in @finished_work.operations %>
+		
+			<tr height="30">
+             <td><%= my_date operation.work.date  %></td>
+             <td><%= operation.work.project.blank? ? "" :  ( link_to project_name(operation.work.project), operation.work.project ) %></td>
+
+             <td >
+                 <%= operation.operation_type.name %>
+             </td>
+             <td style="text-align:left">
+             		<%= operation.note %>
+             </td>
+             <td style="text-align:left">
+             		<%= operation.note_operator %>
+             </td>
+             <td style="text-align:left">
+                 <% @operation_type = operation.operation_type %>
+                 <% @operation = operation %>
+
+                <%  if operation.operation_type.value == 0 %>
+                    počet minut:<%= operation.value %>
+                 <% elsif operation.operation_type.value == 1 %>
+                    čas:<%= length_values operation.value %>
+                 <% elsif operation.operation_type.value == 2 %>
+                    počet kusů:<%= operation.count %>
+                <% elsif operation.operation_type.value == 3 %>
+                    použitý materiál : <%=  operation.tape_type.name %><%= operation.their_tape == true ? " vlastní" : ""%><br />
+                    počet kusů:<%= operation.count %>
+                 <% elsif operation.operation_type.value == 4 %>
+                     <%= Machine.find_by_id(operation.player_machine_id).name %>
+                     -><%= Machine.find_by_id(operation.record_machine_id).name %><br />
+                     materiál : <%=  operation.tape_type.name %><%= operation.their_tape == true ? " vlastní" : "" %><br />
+                     kusů:<%= operation.count %><br />
+                     délka přepisu:<%= operation.value %>
+                 <% end %>
+
+             </td>
+        </tr>
+           <% first = false %>
+   <% end %>
+
+</table>
+<p>
+    <%= f.label  'value', 'strávený čas', :required => true %><br />
+    <%= f.select :value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
+</p>
+
+
   <p>
-    <%= f.label :note %><br />
-    <%= f.text_field :note %>
-  </p>
-  <p>
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
-  </p>
-  <p>
-    <%= f.label :value %><br />
-    <%= f.text_field :value %>
-  </p>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
+    <%= f.submit "upravit" %>
   </p>
 <% end %>

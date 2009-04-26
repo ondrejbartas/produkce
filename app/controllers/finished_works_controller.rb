@@ -47,7 +47,11 @@ class FinishedWorksController < ApplicationController
                @finished_work = FinishedWork.new()
                @finished_work.user_id = @current_user.id
                @finished_work.value = params[:finished_work_form][key][:value]
-               
+               if !(@current_user.produce? || @current_user.admin?)
+                     @finished_work.status = 0
+               else 
+                     @finished_work.status = 1
+               end
                if @finished_work.save
                   saved = true
                   params[:finished_work_form][key][:operations].each { |key ,operation_id|
@@ -79,10 +83,16 @@ class FinishedWorksController < ApplicationController
   def update
     @finished_work = FinishedWork.find(params[:id])
 
+     if !(@current_user.produce? || @current_user.admin?)
+        @finished_work.status = 0
+     else 
+        @finished_work.status = 1
+     end
     respond_to do |format|
       if @finished_work.update_attributes(params[:finished_work])
         flash[:notice] = 'FinishedWork was successfully updated.'
-        format.html { redirect_to(@finished_work) }
+        redirect_to session['saved_location']
+        
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

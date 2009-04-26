@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  note: MyString
+  from: 2009-04-26 19:28:15
+  to: 2009-04-26 19:28:15
+
+two:
+  name: MyString
+  note: MyString
+  from: 2009-04-26 19:28:15
+  to: 2009-04-26 19:28:15

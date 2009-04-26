@@ -1,0 +1,33 @@
+<h2>
+<div class="menu_small">
+	<%= right_link "reception_contacts", "new", 'přidat kontakt k recepci', new_reception_contact_path %>
+</div>
+Recepce: kontakty</h2>
+
+<table>
+  <tr>
+    <th>jméno</th>
+    <th>telefon</th>
+    <th>adresa</th>
+    <th>email</th>
+    <th>Web</th>
+    <th>poznámka</th>
+    <th>administrace</th>
+  </tr>
+
+<% @reception_contacts.each do |reception_contact| %>
+  <tr>
+    <td><%=h reception_contact.name %></td>
+    <td><%=h reception_contact.phone %></td>
+    <td><%=h reception_contact.address %></td>
+    <td><%= link_to( image_tag("mail_icon.png"), "mailto:"+reception_contact.email ) if reception_contact.email.size > 4 %></td>
+    <td><%= link_to( image_tag("web_icon.png"), "http://"+reception_contact.web ) if reception_contact.web.size > 4  %></td>
+    <td><%=h reception_contact.note %></td>
+    <td><%= right_link "reception_contacts", "edit", 'upravit', edit_reception_contact_path(reception_contact) %>
+    <%= right_show "reception_contacts", "delete", link_to('smazat', reception_contact, :confirm => 'jste si jistí se smazáním?', :method => :delete ) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

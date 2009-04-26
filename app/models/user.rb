@@ -58,7 +58,22 @@ class User < ActiveRecord::Base
         false
       end
   end
+  
+  def is_admin?
+      if( self.role % 3 == 0 )
+        true
+      else
+        false
+      end
+  end
 
+  def is_produce?
+      if( self.role % 7 == 0 )
+        true
+      else
+        false
+      end
+  end
 
   def worker?
       if( self.active_role == 5 )

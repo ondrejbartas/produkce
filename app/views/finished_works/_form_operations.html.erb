@@ -1,7 +1,7 @@
 <% if type == "home" %>
    <table>
         <tr>
-            <th rowspan="2">datum</th>
+            <th rowspan="2">datum zaúčtování</th>
             <th rowspan="2" width="90">od - do</th>
             <th rowspan="2">projekt</th>
             <th rowspan="2">pracoviště</th>
@@ -32,10 +32,6 @@
                                     <%= my_hour work.get_to %></td>
                                 <%= zacatek %>
 												<%= work.project.blank? ? "" :  ( link_to project_name(work.project), work.project ) %>
-	<% right_show ("works", "add_operation_form_user", link_to( "+ přidat úkon +",{ :controller => 'works', 
-												:action => 'add_operation_from_user' ,
-												:id => work.id
-		 										},  :post => true ) )%>
 										  </td>
                                 <%= zacatek %><%=h work.place.blank? ? "" : work.place.name %></td>
                             <%  end %>
@@ -69,70 +65,73 @@
 		<% zacatek = "<td rowspan="+work.operations.size.to_s+">" %>
         <% for operation in work.operations %>
 					<% if date == 0 %>
-						<% date = operation.work.time.beginning_of_day %>
+						<% date = operation.work.date %>
 						<table>
 					        <tr>
 					            <th rowspan="2">zaúčtovat</th>
 					            <th rowspan="2">datum</th>
 					            <th rowspan="2" width="90">od - do</th>
 					            <th rowspan="2">projekt</th>
-					            <th rowspan="2">typ prace</th>
-					            <th rowspan="2">pracoviště</th>
-					            <th width="400" colspan="2">úkony</th>
+					            <th width="400" colspan="4">úkony</th>
 					        </tr>
 					        <tr>
 					            <th width="80">úkon</th>
+					            <th>poz. produkce</th>
+					            <th>poz. operátora</th>
 					            <th width="220">parametry</th>
 
 					        </tr>
-					<% elsif date != operation.work.time.beginning_of_day %>
+					<% elsif date != operation.work.date %>
 						</table>
 							 <p>
 					            <%= label  'finished_work_form['+date.strftime("%s")+']', 'value', 'strávený čas', :required => true %><br />
 					            <%= select 'finished_work_form['+date.strftime("%s")+']',:value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
 					        </p>
-					   	<% date = operation.work.time.beginning_of_day %>
+					   	<% date = operation.work.date%>
 						   
 						
-						<table>
-					        <tr>
-					            <th rowspan="2">zaúčtovat</th>
-					            <th rowspan="2">datum</th>
-					            <th rowspan="2" width="90">od - do</th>
-					            <th rowspan="2">projekt</th>
-					            <th rowspan="2">typ prace</th>
-					            <th rowspan="2">pracoviště</th>
-					            <th width="400" colspan="2">úkony</th>
-					        </tr>
-					        <tr>
-					            <th width="80">úkon</th>
-					            <th width="220">parametry</th>
+							<table>
+						        <tr>
+						            <th rowspan="2">zaúčtovat</th>
+						            <th rowspan="2">datum</th>
+						            <th rowspan="2" width="90">od - do</th>
+						            <th rowspan="2">projekt</th>
+						            <th width="400" colspan="4">úkony</th>
+						        </tr>
+						        <tr>
+						            <th width="80">úkon</th>
+						            <th>poz. produkce</th>
+						            <th>poz. operátora</th>
+						            <th width="220">parametry</th>
 
-					        </tr>
+						        </tr>
 					<% end %>
                 <tr height="30">
                 	<td>
                     	<%= check_box_tag 'finished_work_form['+date.strftime("%s")+'][operations][]', operation.id, {:checked=>true} %>
                     </td>
                             <% if first == true %>
-                                <% if work.time.beginning_of_day < Time.now.beginning_of_day %>
-                                    <td rowspan="<%=work.operations.size.to_s %>" class="red"><%= my_date work.time  %></td>
+                                <% if work.date < Time.now.beginning_of_day %>
+                                    <td rowspan="<%=work.operations.size.to_s %>" class="red"><%= my_date work.date  %></td>
                                 <% else %>
-                                    <%= zacatek %><%= my_date work.time  %></td>
+                                    <%= zacatek %><%= my_date work.date  %></td>
                                 <% end %>
-                                <%= zacatek %><%= my_hour work.time  %> -
-                                    <%= my_hour ( work.time + work.length.minutes ) %></td>
+                                <%= zacatek %><%= my_hour work.get_from  %> -
+                                    <%= my_hour  work.get_to %></td>
                                 <%= zacatek %><%= work.project.blank? ? "" :  ( link_to project_name(work.project), work.project ) %></td>
-                                <%= zacatek %><%=h work.job_type.blank? ? "" : work.job_type.name %></td>
-                                <%= zacatek %><%=h work.place.blank? ? "" : work.place.name %></td>
                             <%  end %>
                             <td >
                                 <%= operation.operation_type.name %>
                             </td>
                             <td style="text-align:left">
+                            	<%= operation.note %>
+                            </td>
+                            <td style="text-align:left">
+                            	<%= operation.note_operator %>
+                            </td>
+                            <td style="text-align:left">
                                 <% @operation_type = operation.operation_type %>
                                 <% @operation = operation %>
-                                <%= operation.note %>
 
                                <%  if operation.operation_type.value == 0 %>
                                    počet minut:<%= operation.value %>

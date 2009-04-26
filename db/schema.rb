@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090422122754) do
+ActiveRecord::Schema.define(:version => 20090426172815) do
 
   create_table "bought_tapes", :force => true do |t|
     t.integer  "purchase_cart_id"
@@ -198,6 +198,29 @@ ActiveRecord::Schema.define(:version => 20090422122754) do
     t.integer  "user_id"
   end
 
+  create_table "reception_contacts", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "email"
+    t.string   "web"
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reception_events", :force => true do |t|
+    t.string   "name"
+    t.string   "note"
+    t.date     "from"
+    t.date     "to"
+    t.boolean  "parking"
+    t.boolean  "alert"
+    t.boolean  "notice"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rights", :force => true do |t|
     t.string   "controller"
     t.string   "action"
@@ -223,6 +246,7 @@ ActiveRecord::Schema.define(:version => 20090422122754) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "system_comment_id"
+    t.boolean  "storno"
   end
 
   create_table "tape_types", :force => true do |t|
@@ -262,7 +286,6 @@ ActiveRecord::Schema.define(:version => 20090422122754) do
 
   create_table "works", :force => true do |t|
     t.string   "note"
-    t.datetime "time"
     t.integer  "length"
     t.boolean  "reserved"
     t.boolean  "deleted"
@@ -273,7 +296,8 @@ ActiveRecord::Schema.define(:version => 20090422122754) do
     t.integer  "place_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "from_time"
+    t.integer  "time"
+    t.datetime "date"
   end
 
 end
