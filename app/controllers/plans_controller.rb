@@ -15,17 +15,25 @@ class PlansController < ApplicationController
           @start_date = 0
        end
        
-       if params[:job_type].blank? 
+       if !params[:job_type].blank? 
+         @filtr_type = params[:job_type]
+       elsif !session[:job_type].blank?
+         @filtr_type = session[:job_type]
+       else   
          @filtr_type = { "1" => "true" }
-       else
-          @filtr_type = params[:job_type]
        end
+       session[:job_type] = @filtr_type
        
-       if params[:show_type].blank? 
-          @filtr_show_type = { "1" => "true" }
+       
+       
+       if !params[:show_type].blank? 
+         @filtr_show_type = params[:show_type]
+       elsif !session[:show_type].blank?
+         @filtr_show_type = session[:show_type]
        else
-          @filtr_show_type = params[:show_type]
+         @filtr_show_type = { "1" => "true", "4" => "true" }
        end
+       session[:show_type] = @filtr_show_type
        
        
        @places = Place.find(:all).sort_by {|u| u.name.downcase}
@@ -55,23 +63,31 @@ class PlansController < ApplicationController
 
   def change_place_date
       
-      if params[:job_type].blank? 
-         @filtr_type = { "1" => "true" }
-      else
-         @filtr_type = params[:job_type]
+      if !params[:job_type].blank? 
+        @filtr_type = params[:job_type]
+      elsif !session[:job_type].blank?
+        @filtr_type = session[:job_type]
+      else   
+        @filtr_type = { "1" => "true" }
       end
+      session[:job_type] = @filtr_type
       
-     
-      if params[:show_type].blank? 
-         @filtr_show_type = { "1" => "true" }
+      
+      
+      if !params[:show_type].blank? 
+        @filtr_show_type = params[:show_type]
+      elsif !session[:show_type].blank?
+        @filtr_show_type = session[:show_type]
       else
-         @filtr_show_type = params[:show_type]
+        @filtr_show_type = { "1" => "true", "4" => "true" }
       end
-        
+      session[:show_type] = @filtr_show_type
+     
+     
       @planed_work = Work.find(params[:planed_work_id])
       
       @planed_work.place_id = params[:place_id].to_i
-      @planed_work.time = Time.parse(params[:date]) + (@planed_work.time.strftime("%H").to_i * 60 +  @planed_work.time.strftime("%M").to_i ).minutes
+      @planed_work.date = Time.parse(params[:date])
       
       
       
@@ -82,19 +98,27 @@ class PlansController < ApplicationController
 
 
   def change_reservation
-      
-      if params[:job_type].blank? 
-         @filtr_type = { "1" => "true" }
-      else
-         @filtr_type = params[:job_type]
-      end
-      
+     if !params[:job_type].blank? 
+       @filtr_type = params[:job_type]
+     elsif !session[:job_type].blank?
+       @filtr_type = session[:job_type]
+     else   
+       @filtr_type = { "1" => "true" }
+     end
+     session[:job_type] = @filtr_type
      
-      if params[:show_type].blank? 
-         @filtr_show_type = { "1" => "true" }
-      else
-         @filtr_show_type = params[:show_type]
-      end
+     
+     
+     if !params[:show_type].blank? 
+       @filtr_show_type = params[:show_type]
+     elsif !session[:show_type].blank?
+       @filtr_show_type = session[:show_type]
+     else
+       @filtr_show_type = { "1" => "true", "4" => "true" }
+     end
+     session[:show_type] = @filtr_show_type
+   
+   
         
       @work = Work.find(params[:work_id])
       
@@ -129,18 +153,26 @@ class PlansController < ApplicationController
              @start_date = session[:calendar_end_date]
         end
         
-        if params[:job_type].blank? 
-           @filtr_type = { "1" => "true" }
-        else
+         if !params[:job_type].blank? 
            @filtr_type = params[:job_type]
-        end
-        
-       
-        if params[:show_type].blank? 
-           @filtr_show_type = { "1" => "true" }
-        else
+         elsif !session[:job_type].blank?
+           @filtr_type = session[:job_type]
+         else   
+           @filtr_type = { "1" => "true" }
+         end
+         session[:job_type] = @filtr_type
+
+
+
+         if !params[:show_type].blank? 
            @filtr_show_type = params[:show_type]
-        end
+         elsif !session[:show_type].blank?
+           @filtr_show_type = session[:show_type]
+         else
+           @filtr_show_type = { "1" => "true", "4" => "true" }
+         end
+         session[:show_type] = @filtr_show_type
+       
           
         @places = Place.find(:all).sort_by {|u| u.name.downcase}
         for place in Place.find(:all)

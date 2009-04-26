@@ -69,25 +69,28 @@
  		 <tr class="nooperations">
 	  <% else %>
 			<% finished = true %>
+			<% problem = false %>
 	   	<% for operation in work.operations -%>
 				<% if operation.finished.blank? -%>
-					<% finished = false -%>
+					<% if work.date < Time.now.beginning_of_day %>
+						<% problem = true %>
+					<% else %>
+						<% finished = false -%>
+					<% end %>
 				<% end -%>
 			<% end -%>
-			<% if finished == true %>
+			<% if problem == true %>
+ 		 		<tr class="nooperations">
+			<% elsif finished == true %>
 				<tr class="finished">
  			<% else %>
 				<tr class="unfinished">
 			<% end %>
 	  <%  end %>
 	
-	 <% if finished != true && work.time < Time.now.beginning_of_day %>
-		<td style="color:red"><%= my_date work.time  %></td>
-	 <% else %>
-    	<td><%= my_date work.time  %></td>
-	 <% end %>
-    <td><%= my_hour work.time  %> -
-        <%= my_hour ( work.time + work.length.minutes ) %></td>
+    <td><%= my_date work.date  %></td>
+    <td><%= my_hour work.get_from  %> -
+        <%= my_hour work.get_to %></td>
     <td><%=h work.user.blank? ? "" : work.user.fullname %></td>
     <td><%=h work.job_type.blank? ? "" : work.job_type.name %></td>
     <td><%=h work.place.blank? ? "" : work.place.name %></td>

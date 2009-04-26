@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090421121025) do
+ActiveRecord::Schema.define(:version => 20090422122754) do
 
   create_table "bought_tapes", :force => true do |t|
     t.integer  "purchase_cart_id"
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20090421121025) do
     t.boolean  "finished"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "system_comment_id"
   end
 
   create_table "tape_types", :force => true do |t|
@@ -272,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20090421121025) do
     t.integer  "place_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "from_time"
   end
 
 end

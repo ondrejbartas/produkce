@@ -38,7 +38,7 @@
 		            <% end -%>
 				><%= day_names(n) %> <%= my_date table_day %> </th>
             <% for place in @places %>
-                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND time > :morning_date AND time < :evening_date ', {:place => place.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND date = :table_date ', {:place => place.id, :table_date => table_day }]).sort_by {|u| u.time} %>
 							<% day_place_id = "calendar_"+table_day.strftime("%s")+"_"+place.id.to_s %>
                     <td id="<%= day_place_id %>">
                         <% if planed_works.size > 0 %>
@@ -51,6 +51,7 @@
 							  :accept => "planed_work_"+place.job_types[0].id.to_s,                                         # The CSS class of the dropped element
 							  :update => day_place_id,
 							  :position => "bottom",
+							  :confirm => "Chcete opravdu přesunout práci?",
 							  :hoverclass => "clanedar_hover",
 							  :loading => visual_effect(:fade),							
 							  :with   => "'planed_work_id=' + (element.id.split('_').last())",     # The query string parameters

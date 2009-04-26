@@ -33,15 +33,35 @@
 
 
 
+<% if controller.action_name != "edit" %>
+	<p>
+	    <%= work_form.label 'job_type_id', 'typ práce', :required => true %>
+	    <%= work_form.collection_select( :job_type_id , JobType.find(:all),
+	          :id, :name, {:include_blank => true},
+	          {:onChange => remote_function( :update => 'job_type_container' ,:url =>
+	          add_user_works_path, :with =>
+	            "'type_create=false&job_type_id=' + escape(value)")} )%>
+	</p>
+<% else %>
+	<p>
+	   <%= label :work, 'reserved', 'rezervace', :required => false %>
+	   <%= work_form.check_box :reserved ,:value=>"true"%>
+	</p>
+	<p>
+	       <%= label :work, "date", 'datum', :required => false %>
+	       <%= work_form.hidden_field(:date) %>
+			 <%= my_date @work.date %>
+			 <%= label :work, "time", 'od', :required => false %>
+			 <%= work_form.select  :time, Work::TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]} %>
+		    <%= label :work, "length", 'délka frekvence', :required => false %>
+			 <%= work_form.select  :length, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]} %>
+	</ul>
 
-<p>
-    <%= work_form.label 'job_type_id', 'typ práce', :required => true %>
-    <%= work_form.collection_select( :job_type_id , JobType.find(:all),
-          :id, :name, {:include_blank => true},
-          {:onChange => remote_function( :update => 'job_type_container' ,:url =>
-          add_user_works_path, :with =>
-            "'type_create=false&job_type_id=' + escape(value)")} )%>
-</p>
+	<p>
+	   <%= work_form.label 'job_type_id', 'typ práce', :required => false %>
+	   <%= work_form.hidden_field( :job_type_id ) %> <%= @work.job_type.name %>
+	</p>
+<% end %>
 
 <div id="job_type_container">
 	<% if !@work.job_type_id.blank? %>	
@@ -73,7 +93,16 @@
 
 
 <p>
-  <%= work_form.submit "přidat" %>
+   <%= label :work, 'note', 'poznámka', :required => false %>
+   <%= work_form.text_field :note %>
+</p>
+<p>
+	<% if controller.action_name == "edit" %>
+		<%= work_form.submit "upravit	" %>
+	<% else %>
+		<%= work_form.submit "přidat" %><br />
+		<%= work_form.submit "přidat a pokračovat v plánování" %>
+	<% end %>
 </p>
 
 <% end -%>

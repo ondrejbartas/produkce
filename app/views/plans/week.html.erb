@@ -30,6 +30,11 @@
 	<% else %>
 		čas:<%= check_box_tag('show_type[3]', 'true') %>    &nbsp;&nbsp;&nbsp;
 	<% end %>
+	<% if !@filtr_show_type["4"].blank? %>
+		poznámka:<%= check_box_tag('show_type[4]', 'true', true) %>    &nbsp;&nbsp;&nbsp;
+	<% else %>
+		poznámka:<%= check_box_tag('show_type[4]', 'true') %>    &nbsp;&nbsp;&nbsp;
+	<% end %>
 	
 
 	<%= submit_tag 'filtrovat' %>

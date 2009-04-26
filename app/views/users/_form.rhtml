@@ -40,40 +40,54 @@
     </p>
     <p>
         <%= label :user, 'access', 'zakázat přístup uživateli do systému?', :required => false %><br />
-        <%= check_box_tag "user[access]", :access, @user.access == false %>
+        <%= check_box :user , :access %>
     </p>
-   <p>
-    <%= label :user, 'role', 'vyberte role', :required => true %><br />
 
-    <% for role in Role.find(:all)  %>
+	<div class="user_role_categories">
+   	<div class="role"> 
+	    <div><%= label :user, 'role', 'vyberte role', :required => true %></div>
+			<div class="column">
+	    <% for role in Role.find(:all)  %>
     
-    <%  if !@user.blank? && !@user.role.blank?  %>
+	    <%  if !@user.blank? && !@user.role.blank?  %>
 
-      <%  if !@user.blank? && @user.role % role.idd == 0  %>
-        <input type="checkbox" name="role<%= role.idd  %>" value="true" checked />: <%= role.comment  %><br />
-      <% else %>
-        <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
-      <% end %>
+	      <%  if !@user.blank? && @user.role % role.idd == 0  %>
+	        <input type="checkbox" name="role<%= role.idd  %>" value="true" checked />: <%= role.comment  %><br />
+	      <% else %>
+	        <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
+	      <% end %>
 
-     <% else %>
-       <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
-    <% end %>
-   <% end %>
-   </p>
-  <% end %>
+	     <% else %>
+	       <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
+	    <% end %>
+	   <% end %>
+			</div>
+	   </div>
 
 
+		<div class="categories">
+	   	<div><%= label :user, 'role', 'vyberte kategorie', :required => false %></div>
 
-<% if @current_user.admin? || @current_user.produce? %>
-   <%= label :user, 'role', 'vyberte kategorie', :required => false %><br />
-
-	<div class="categories">
-   <% for category in Category.find(:all, :order => :name) %>
-				<div class="category">
-                <%= check_box_tag "user[category_ids][]", category.id, @user.categories.include?(category) %>
-                <%= category.name %>	
+				<div class="column">
+				<% n = 0 %>
+				<% categories = Category.find(:all, :order => :name) %>
+				<% column_size = (categories.size - categories.size%3)/3 + 1 %>
+				<% column_size = 7 if column_size < 7 %>
+			   <% for category in categories %>
+						<% if n % column_size == 0 %>
+							</div>
+							<div class="column">
+						<% end %>
+							<div class="category">
+			                <%= check_box_tag "user[category_ids][]", category.id, @user.categories.include?(category) %>
+			                <%= category.name %>	
+							</div>
+						<% n += 1 %>
+			   <% end %>
 				</div>
-   <% end %>
-		<div class="clear_both"></div>
+				<div class="clear_both"></div>
+		</div>
+
+		<div class="clear_both"></div>	
 	</div>
 <% end %>

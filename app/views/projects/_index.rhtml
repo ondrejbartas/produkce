@@ -35,7 +35,7 @@
 	<% for work in project.works %>
 		<% for operation in work.operations %>
 			<% if operation.finished != true %>
-				<% if work.time.strftime("%s") < Time.now.beginning_of_day.strftime("%s") %>
+				<% if work.date.strftime("%s") < Time.now.beginning_of_day.strftime("%s") %>
 					<% problem = true %>
 				<% end %>
 				<% finished = false %>

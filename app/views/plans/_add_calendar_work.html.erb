@@ -69,12 +69,12 @@
 					<% if params[:no_user].blank? %>
 					
 	                <td>
-	                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND user_id = :user AND time > :morning_date AND time < :evening_date ', {:user => @user.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+	                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND user_id = :user AND date = :table_date ', {:user => @user.id, :table_date => table_day }]).sort_by {|u| u.time} %>
 
 	                    <% if planed_works.size > 0 %>
 	                        <% for planed_work in planed_works %>
-	                            <%= my_hour planed_work.time  %> -
-	                            <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
+	                            <%= my_hour(planed_work.get_from)  %> -
+	                            <%= my_hour(planed_work.get_to) %><br />
 	                        <% end %>
 	                    <% end %>
 	                </td>
@@ -82,19 +82,19 @@
                 
 
 					 <td>
-                    <% planed_works_project = Work.find(:all , :conditions => ['deleted is null AND project_id = :project AND time > :morning_date AND time < :evening_date ', {:project => @project.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+                    <% planed_works_project = Work.find(:all , :conditions => ['deleted is null AND project_id = :project AND date = :table_date', {:project => @project.id, :table_date => table_day  }]).sort_by {|u| u.time} %>
 
                     <% if planed_works_project.size > 0 %>
                         <% for planed_work in planed_works_project %>
-                            <%= my_hour planed_work.time  %> -
-                            <%= my_hour ( planed_work.time + planed_work.length.minutes ) %><br />
+                            <%= my_hour planed_work.get_from   %> -
+                            <%= my_hour planed_work.get_to %><br />
                             <%= planed_work.job_type.name  %><br />
                         <% end %>
                     <% end %>
                 </td>
 
             <% for place in @places %>
-                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND time > :morning_date AND time < :evening_date ', {:place => place.id, :morning_date => table_day , :evening_date => table_day + 24.hours }]).sort_by {|u| u.time} %>
+                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND date = :table_date  ', {:place => place.id, :table_date => table_day }]).sort_by {|u| u.time} %>
                     <td id="calendar_<%= table_day.strftime("%s") -%>_<%= place.id %>">
 
                         <% if planed_works.size > 0 %>
@@ -108,9 +108,9 @@
                                     class="reserved"
                                 <%  end %>
                                 >
-                                    <%= my_hour planed_work.time  %> -
-                                    <%= my_hour ( planed_work.time + planed_work.length.minutes ) %>
-                                </span><br />
+                             		  	<%= my_hour(planed_work.get_from)  %> -
+			                           <%= my_hour(planed_work.get_to) %><br />
+	                             </span><br />
                             <% end %>
                         <% end %>
 

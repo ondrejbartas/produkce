@@ -3,8 +3,9 @@ class CreateWorks < ActiveRecord::Migration
     create_table :works do |t|
       t.string :note
 
-      t.timestamp :time
+      t.timestamp :date
       t.integer :length
+      t.integer :time
 
 
       t.boolean :reserved

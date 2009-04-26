@@ -50,7 +50,8 @@ class WorksController < ApplicationController
     if !params[:days].blank?
         params[:days].each { |key ,day|
           params[:work][:length] = day[:length].to_i
-          params[:work][:time] = Time.parse(day[:date]) + day[:time].to_i.minutes
+          params[:work][:time] = day[:time].to_i
+          params[:work][:date] = Time.parse(day[:date])
           params[:work][:place_id] = day[:place_id]
           params[:work][:reserved] = day[:reserved]
           @work = Work.new(params[:work])
@@ -58,7 +59,7 @@ class WorksController < ApplicationController
             @work_error = @work
             saved = false
           else
-            flash[:notice] +="provedeno naplanovani prace na cas: "+ params[:work][:time].strftime("%H:%M %d.%m.%Y")+"<br />" 
+            flash[:notice] +="provedeno naplanovani prace na cas: "+ params[:work][:date].strftime("%d.%m.%Y")+"<br />" 
             day[:date] = ""
           end
         }
@@ -74,7 +75,11 @@ class WorksController < ApplicationController
     respond_to do |format|
       if saved == true
         flash[:notice] = 'Work was successfully created.'
-        format.html { redirect_to :controller => "plans", :action => "week" }
+        if params[:commit] == "přidat"
+          format.html { redirect_to :controller => "plans", :action => "week" }
+        else 
+          format.html { redirect_to :controller => "works", :action => "new", :job_type=> { @work.job_type_id => true } }
+        end
         format.xml  { render :xml => @work, :status => :created, :location => @work }
       else
         format.html { render :action => "new" }

@@ -343,12 +343,24 @@ td {
    background: #cFc;
 }
 .categories {
- width: 70%;
+ float: left;
+ width: 460;
+}
+.user_role_categories p {
+	float:left;
+}
+.user_role_categories .role {
+	float: left;
+	width: 200px;
+}
+.categories .column {
+ width: 150px;
+ float:left;
 }
 
 .category {
 	float:left;
-	width : 200px;
+	width : 150px;
 }
 
 .clear_both {
@@ -373,7 +385,7 @@ td {
 	position:absolute;
 	padding:5px;
 	font-size:120%;
-	z-index: 2;
+	z-index: 10;
 }
 .floating_div_close {
 	float:right;
@@ -514,7 +526,6 @@ td {
 }
 .comments .name {
 	font-weight: bold;
-	background: #DDD;
 	padding: 2px;
 }
 .comments .text {
@@ -538,4 +549,17 @@ td {
 
 .add_comment {
 	margin-left: 20px;
+}
+
+.more_days {
+	background: #DDD;
+}
+.first_day {
+	background: #F00;
+}
+.second_day {
+	background: #F66;
+}
+.third_day {
+	background: #FAA;
 }

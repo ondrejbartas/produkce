@@ -5,9 +5,13 @@
           OperationType.find(:all),
         :id, :name, {:include_blank => true} %>
 
-    <%= f.label 'note', "poznámka produkce" %>
-    <%= f.text_field :note, :size=>25 %>
-
+	<% if f.object.finished == true %>
+	   <%= f.label 'note', "poznámka produkce" %>
+	   <%= f.object.note %>
+	<% else %>
+	    <%= f.label 'note', "poznámka produkce" %>
+	    <%= f.text_field :note, :size=>25 %>
+	<% end %>
 
 		<% if f.object.new_record? %>
         <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>

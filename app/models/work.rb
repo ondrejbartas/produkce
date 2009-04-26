@@ -12,7 +12,7 @@ class Work < ActiveRecord::Base
   validates_presence_of :time
   validates_numericality_of :length, :greater_than => 0
 
-  attr_accessor :sub_project_id, :date, :without_project
+  attr_accessor :sub_project_id, :without_project
 
   before_validation :project_validation
 
@@ -55,5 +55,13 @@ class Work < ActiveRecord::Base
       if not sub_project_id.blank?
         self.project_id = self.sub_project_id
       end
+   end
+
+   def get_from
+     return self.date+self.time.minutes
+   end
+   
+   def get_to
+     return self.date+self.time.minutes + self.length.minutes
    end
 end
