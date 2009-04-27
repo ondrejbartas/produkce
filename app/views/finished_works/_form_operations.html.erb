@@ -15,7 +15,7 @@
         </tr>
 
 
-    <% works = @current_user.works.find(:all, :include => [:operations], :conditions => ["operations.finished_work_id IS null"]).sort_by{ |u| u.time } %>
+    <% works = @current_user.works.find(:all, :include => [:operations], :conditions => ["operations.finished_work_id IS null AND date < ? ", (Time.now.beginning_of_day+ 3.days).strftime("%Y-%m-%d")]).sort_by{ |u| u.date } %>
 
     <% for work in works %>
         <% first = true %>
@@ -47,9 +47,9 @@
                             <td>
                                 <% if operation.finished == true %>
                                     hotovo, čeká na zapsání celkové doby
-	                                 <%= link_to "opravit", :controller => "operations", :id => operation.id, :action=>"edit", :finished => "repair" %>
-	                             <% else %>
-                                 <%= link_to 'provedeno', edit_operation_path(operation)  %>
+	                                 <%= right_link "operations", "edit", "opravit", :controller => "operations", :id => operation.id, :action=>"edit", :finished => "repair" %>
+	                             <% elsif work.date < Time.now.beginning_of_day + 1.day %>
+                                 	<%= right_link "operations", "edit", 'provedeno', edit_operation_path(operation)  %>
                                 <% end %>
                             </td>
             </tr>

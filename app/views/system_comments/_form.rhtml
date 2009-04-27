@@ -17,6 +17,7 @@
 	<% if @current_user.admin? %>
 		provedeno: <%= system_comment_form.check_box :finished, :value=>true %>
 		neřešit: <%= system_comment_form.check_box :storno, :value=>true %>
+		archiv: <%= system_comment_form.check_box :archiv, :value=>true %>
 	<% end %>
 
 	

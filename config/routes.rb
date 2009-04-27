@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :reception_contacts
  
   map.resources :system_comments, :has_many => [ :system_comments ],
-                                  :member => [:add_form, :finished, :storno ]
+                                  :member => [:add_form, :finished, :storno, :archiv ]
 
   map.resources :plans, :collection => { 
               :week => [:get, :post] , 

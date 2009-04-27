@@ -103,6 +103,14 @@ class SystemCommentsController < ApplicationController
        redirect_to(system_comments_url)
     end
     
+     def archiv
+         @system_comment = SystemComment.find(params[:id])
+         @system_comment.archiv = true
+         @system_comment.save
+
+         redirect_to(system_comments_url)
+      end
+    
     
      def storno
          @system_comment = SystemComment.find(params[:id])
