@@ -14,9 +14,10 @@ module SystemCommentsHelper
                   showed_comment.showed = true
                 end
               end
-           system_comment_show(comment, finished, true)
-        end
-        " "
+              system_comment_show(comment, finished, true)
+            end
+       end
+      " "
     else
         xm = Builder::XmlMarkup.new
       	xm << "<ul class='comment "
