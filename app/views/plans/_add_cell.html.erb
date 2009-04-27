@@ -5,7 +5,7 @@
 	  <% if  planed_work.reserved == true %>
 	    <div class="reserved">
 		 <% movable = true %>
-	  <% elsif planed_work.date < Time.now %>
+	  <% elsif planed_work.date < Time.now.beginning_of_day %>
   		 <div class="nooperations">
 		 <% movable = true %>
 	  <% else %>
