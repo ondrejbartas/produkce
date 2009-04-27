@@ -2,7 +2,7 @@ class ReceptionEventsController < ApplicationController
   # GET /reception_events
   # GET /reception_events.xml
   def index
-    @reception_events = ReceptionEvent.all
+    @reception_events = ReceptionEvent.find(:all, :order => '"from" DESC')
 
     respond_to do |format|
       format.html # index.html.erb

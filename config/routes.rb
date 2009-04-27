@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :reception_categories
+
    
   map.with_options :controller => 'account' do |m|
     m.login   'login',     :action => 'login'

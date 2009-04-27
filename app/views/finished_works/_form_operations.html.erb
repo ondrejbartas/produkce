@@ -58,7 +58,7 @@
 	<% end %>
 	</table>
 <% else %>
-    <% works = @current_user.works.find(:all, :include => [:operations], :conditions => ["operations.finished_work_id IS null AND operations.finished is true"]).sort_by{ |u| u.time } %>
+    <% works = @current_user.works.find(:all, :include => [:operations], :conditions => ["operations.finished_work_id IS null AND operations.finished is true"]).sort_by{ |u| u.date } %>
 	<% date = 0 %>
    <% for work in works %>
         <% first = true %>

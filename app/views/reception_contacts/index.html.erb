@@ -6,6 +6,7 @@ Recepce: kontakty</h2>
 
 <table>
   <tr>
+  	 <th>typ</th>
     <th>jméno</th>
     <th>telefon</th>
     <th>adresa</th>
@@ -17,6 +18,11 @@ Recepce: kontakty</h2>
 
 <% @reception_contacts.each do |reception_contact| %>
   <tr>
+  	 <td>
+		<% for reception_category in reception_contact.reception_categories %>
+			<%= image_tag( reception_category.icon , :alt => reception_category.name ) %>
+		<% end %>
+	 </td>
     <td><%=h reception_contact.name %></td>
     <td><%=h reception_contact.phone %></td>
     <td><%=h reception_contact.address %></td>

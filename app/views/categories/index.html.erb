@@ -14,7 +14,7 @@
 <% for category in @categories %>
   <tr class="<%= cycle("even", "odd") %>" height="30">
     <td><%= category.name  %></td>
-    <td><%= right_link ("categorie", "edit", "upravit", edit_category_path(category) ) %></td>
+    <td><%= right_link ("categories", "edit", "upravit", edit_category_path(category) ) %></td>
   </tr>
 <% end %>
 </table>

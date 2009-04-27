@@ -26,6 +26,30 @@
     <%= f.text_area  :note, :cols=>60, :rows=>5 %>
   </p>
 
+
+		<div>
+	   	<div><%= label :reception_contact, 'role', 'vyberte profese uživatele', :required => false %></div>
+
+				<div class="column">
+				<% n = 0 %>
+				<% reception_categories = ReceptionCategory.find(:all, :order => :name) %>
+				<% column_size = (reception_categories.size - reception_categories.size%3)/3 + 1 %>
+				<% column_size = 7 if column_size < 7 %>
+			   <% for reception_category in reception_categories %>
+						<% if n % column_size == 0 %>
+							</div>
+							<div class="column">
+						<% end %>
+							<div class="category">
+			                <%= check_box_tag "reception_contact[reception_category_ids][]", reception_category.id, @reception_contact.reception_categories.include?(reception_category) %>
+			                <%= reception_category.name %>	
+							</div>
+						<% n += 1 %>
+			   <% end %>
+				</div>
+				<div class="clear_both"></div>
+		</div>
+
   <p>
 	<% if controller.action_name == "new" %>
     	<%= f.submit "přidat" %>

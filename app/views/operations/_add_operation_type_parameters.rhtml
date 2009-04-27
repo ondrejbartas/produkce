@@ -58,19 +58,19 @@
 
             <% elsif @operation_type.value == 2 %>
 
-               počet kusů:<%= text_field :operation, :count , :size => 3 %>
+               počet kusů:<%= text_field :operation, :count, :size => 3 %>
 
             <% elsif @operation_type.value == 3%>
                použitý materiál : <%= collection_select(:operation, :tape_type_id ,
                     TapeType.find(:all),
                     :id, :name, {:include_blank => true} )%>,
-                    počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :value => "1", :size => 3}  %>
+                    počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :size => 3}  %>
                     vlastní materiál:<%= check_box :operation,:their_tape,  :value => "true" %>
 			 <% elsif (@operation_type.value == 5 || @operation_type.value == 6)%>
                použitý materiál : <%= collection_select(:operation, :tape_type_id ,
                     TapeType.find(:all),
                     :id, :name, {:include_blank => true} )%>,
-                    počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :value => "1", :size => 3}  %>
+                    počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :size => 3}  %>
             <% elsif @operation_type.value == 4 %>
                <% machines = Machine.find(:all) %>
                 ze stroje:  <%= collection_select(:operation, :player_machine_id ,
@@ -83,7 +83,7 @@
                 -> použitý materiál: <%= collection_select(:operation, :tape_type_id ,
                     TapeType.find(:all),
                     :id, :name, {:include_blank => true} )%><br />
-                počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :value => "1", :size => 3}  %><br />
+                počet kusů:<%= text_field :operation, :count ,  {:type =>"text", :size => 3}  %><br />
                 vlastní materiál:<%= check_box :operation, :their_tape, :value => "true" %><br />
                 délka přepisu:<%= select :operation, :value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
 

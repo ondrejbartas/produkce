@@ -2,7 +2,7 @@ class PurchaseCartsController < ApplicationController
   # GET /purchase_carts
   # GET /purchase_carts.xml
   def index
-    @purchase_carts = PurchaseCart.find(:all)
+    @purchase_carts = PurchaseCart.find(:all, :order => "created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb

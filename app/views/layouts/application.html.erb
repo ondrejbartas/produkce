@@ -85,7 +85,6 @@
 	              	<% elsif @activePage == "menu_reception" %>
 							<li><%= sub_menu( "reception_contacts", "index", 'kontakty recepce', reception_contacts_path )%></li>
 							<li><%= sub_menu( "reception_events", "index", 'události recepce', reception_events_path )%></li>
-							<li>kalendar recepce</li>
 					  	<% elsif @activePage == "menu_accountant" %>
                    	 <li><%= sub_menu( "invoices", "finished_projects", 'ukončené projekty', finished_projects_invoices_path )%></li>
                       <li><%= sub_menu( "invoices", "index", 'zakázky k fakturaci', invoices_path )%></li>
@@ -105,6 +104,7 @@
                       <li><%= sub_menu( "job_types", "index", 'typy činností', job_types_path ) %></li>
                       <li><%= sub_menu( "places", "index", 'pracovní místa', places_path ) %></li>
                       <li><%= sub_menu( "categories", "index", 'kategorie', categories_path ) %></li>
+						    <li><%= sub_menu( "reception_categories", "index", "kategorie pro kontakt recepce", reception_categories_path ) %></td>
                       <li><%= sub_menu( "rights", "index", 'práva k stránkám', rights_path ) %></li>
                    <%  end %>
                 </ul>

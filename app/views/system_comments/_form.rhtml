@@ -6,7 +6,9 @@
 	<% if !@system_comment_id.blank? %>
   		<%= system_comment_form.hidden_field :system_comment_id, :value=>@system_comment_id %>
 	<% end %>
-  <%= system_comment_form.hidden_field :user_id, :value=>@current_user.id %>
+	<% if system_comment_form.object.user_id.blank? %>
+  		<%= system_comment_form.hidden_field :user_id, :value=>@current_user.id %>
+	<% end %>
   <p>
     <%= system_comment_form.label 'note', 'text' %><br />
     <%= system_comment_form.text_area  :note, :cols=>60, :rows=>5 %>
@@ -17,7 +19,12 @@
 		neřešit: <%= system_comment_form.check_box :storno, :value=>true %>
 	<% end %>
 
+	
   <p>
-    <%= system_comment_form.submit "přidat" %>
+	<% if controller.action_name == "edit" %>
+    	<%= system_comment_form.submit "upravit" %>
+	<% else %>
+    	<%= system_comment_form.submit "přidat" %>
+	<% end %>
   </p>
 <% end -%>

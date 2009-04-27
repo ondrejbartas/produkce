@@ -9,7 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090426222723) do
+ActiveRecord::Schema.define(:version => 20090427004357) do
+
+  create_table "bordel", :id => false, :force => true do |t|
+    t.string  "name"
+    t.integer "user_id"
+  end
 
   create_table "bought_tapes", :force => true do |t|
     t.integer  "purchase_cart_id"
@@ -205,6 +210,21 @@ ActiveRecord::Schema.define(:version => 20090426222723) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  create_table "reception_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reception_categories_reception_contacts", :id => false, :force => true do |t|
+    t.integer "reception_category_id"
+    t.integer "reception_contact_id"
+  end
+
+  add_index "reception_categories_reception_contacts", ["reception_category_id"], :name => "index_reception_categories_reception_contacts_on_reception_cate"
+  add_index "reception_categories_reception_contacts", ["reception_contact_id"], :name => "index_reception_categories_reception_contacts_on_reception_cont"
 
   create_table "reception_contacts", :force => true do |t|
     t.string   "name"
