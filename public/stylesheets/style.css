@@ -577,8 +577,11 @@ td {
 	background: #F00;
 }
 .second_day {
-	background: #F66;
+	background: #F44;
 }
 .third_day {
-	background: #FAA;
+	background: #F99;
+}
+.forth_day {
+	background: #FCC;
 }

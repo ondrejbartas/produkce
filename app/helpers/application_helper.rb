@@ -238,7 +238,7 @@ end
 				<div  class='calendar_event'>
 				 	 <div class='nooperations' style='width:90px'>
 					  	 <div class='top'></div>
-						 <div class='body'>bez úkonů</div>
+						 <div class='body'>neprovedeno</div>
 						 <div class='bottom'></div>
 					 </div>
 				</div>
@@ -255,7 +255,7 @@ end
 						 <div class='body'>ukončeno</div>
 						 <div class='bottom'></div>
 					 </div>
-				</div>'
+				</div>
 			"
  end
  
@@ -288,7 +288,7 @@ end
  						 <div class='body'>všechny práce hotové</div>
  						 <div class='bottom'></div>
  					 </div>
- 				</div>'
+ 				</div>
  			"
   end
 end

@@ -17,12 +17,14 @@ module SystemCommentsHelper
       	xm << "'>\n"
         if @current_user.id == system_comment.user_id 
       	  xm << "<li class='name mine'>\n"
-      	elsif system_comment.created_at > Time.now - 1.day	  
+      	elsif system_comment.created_at > Time.now - 12.hours	  
       	  xm << "<li class='name first_day'>\n"
-      	elsif system_comment.created_at > Time.now - 2.day	  
+      	elsif system_comment.created_at > Time.now - 1.day	  
       	  xm << "<li class='name second_day'>\n"
-      	elsif system_comment.created_at > Time.now - 3.day	  
+      	elsif system_comment.created_at > Time.now - 2.day	  
       	  xm << "<li class='name third_day'>\n"
+      	elsif system_comment.created_at > Time.now - 3.day	  
+      	  xm << "<li class='name forth_day'>\n"
         else
       	  xm << "<li class='name more_days'>\n"
       	end
