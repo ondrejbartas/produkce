@@ -571,17 +571,17 @@ td {
 }
 
 .more_days {
-	background: #DDD;
+	background: #efefef;
 }
 .first_day {
-	background: #F00;
+	background: #f72323;
 }
 .second_day {
-	background: #F44;
+	background: #f77474;
 }
 .third_day {
-	background: #F99;
+	background: #d59090;
 }
 .forth_day {
-	background: #FCC;
+	background: #dbb0b0;
 }
