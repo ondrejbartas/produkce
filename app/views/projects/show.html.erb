@@ -37,9 +37,15 @@
 
 <h3>
     <% if @project.status == 1 %>
+		<% if !@project.project_id.blank? || @project.projects.size == 0 %>
         <div class="menu_small">
             <%= right_link "works", "new", 'naplánovat práci', new_project_work_path(@project) %>
         </div>
+		<% else %>
+	      <div class="menu_small red">
+	          k hlavnímu projektu se nedá plánovat práce
+	      </div>		
+		<% end %>
     <% else  %>
         <div class="menu_small red">
             projekt nelze naplánovat: není ve stavu <i>zakázka</i>
