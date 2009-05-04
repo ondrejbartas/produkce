@@ -78,7 +78,7 @@
 			<% problem = false-%>
 	   	<% for operation in work.operations -%>
 				<% if operation.finished.blank? -%>
-					<% if work.date.strftime("%s") < Time.now.beginning_of_day.strftime("%s") -%>
+					<% if work.date.strftime("%s") <= Time.now.beginning_of_day.strftime("%s") -%>
 						<% problem = true-%>
 					<% else-%>
 						<% finished = false -%>
