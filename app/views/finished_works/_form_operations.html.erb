@@ -60,6 +60,7 @@
 <% else %>
     <% works = @current_user.works.find(:all, :include => [:operations], :conditions => ["operations.finished_work_id IS null AND operations.finished is true"]).sort_by{ |u| u.date } %>
 	<% date = 0 %>
+	<% length = 0 %>
    <% for work in works %>
         <% first = true %>
 		<% zacatek = "<td rowspan="+work.operations.size.to_s+">" %>
@@ -85,7 +86,8 @@
 						</table>
 							 <p>
 					            <%= label  'finished_work_form['+date.strftime("%s")+']', 'value', 'strávený čas', :required => true %><br />
-					            <%= select 'finished_work_form['+date.strftime("%s")+']',:value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
+					            <%= select 'finished_work_form['+date.strftime("%s")+']',:value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]} , {:selected=>length.to_i}%>
+									<% length = 0 %>
 					        </p>
 					   	<% date = operation.work.date%>
 						   
@@ -151,6 +153,9 @@
                                 <% end %>
 
                             </td>
+
+									<% length = operation.value if !operation.value.blank? && operation.value > length %>
+									
             </tr>
             <% first = false %>
        <% end %>
@@ -160,7 +165,8 @@
 <% if (not date.blank?) && date != 0 %>
 <p>
      <%= label  'finished_work_form['+date.strftime("%s")+']','value', 'strávený čas', :required => true %><br />
-     <%= select 'finished_work_form['+date.strftime("%s")+']',:value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
+     <%= select 'finished_work_form['+date.strftime("%s")+']',:value, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}, {:selected=>length.to_i} %>
+		<% length = 0 %>
 </p>
 <% end %>
  

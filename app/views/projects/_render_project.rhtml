@@ -2,17 +2,20 @@
 <p>
   <% if  @company.users.size > 0 %>
     <%= label :work, 'user_id', 'projekt zadal', :required => true %>
-    <%  if @selected_user.blank? %>
+  	 <% if @selected_user.blank? %>
         <%= collection_select(:project, :user_id ,
           (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
           :id, :fullname, {:include_blank => false} )%>
-    <%  else %>
-        <%= collection_select(:project, :project_id ,
+    <% else %>
+        <%= collection_select(:project, :user_id ,
           (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
           :id, :name, {:selected_value => @selected_user, :include_blank => true})%>
-    <% end %>
+   <% end %>
     
-  <% end %>
+	<% else %>
+			<%= hidden_field :project, :user_id %>
+	   	<div class="red">!!!!!PROBLEM - vybraná firma nemá žádného člena - nelze přidat projekt !!!!!</div>
+   <% end %>
 </p>
 <p>
   <% if  @company.projects.size > 0 %>

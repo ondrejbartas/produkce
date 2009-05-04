@@ -2,44 +2,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-
-
-      if !params[:filter].blank?
-         @filter_role = params[:filter]
-         session[:filter_role] = @filter_role
-       elsif !session[:filter_role].blank?
-          @filter_role = session[:filter_role]
-       else
-         @filter_role = { "1" => "true", "3" => "true","5" => "true","7" => "true","11" => "true", "13" => "true", "17" => "true", "23" => "true" }
-         session[:filter_role] = @filter_role
-      end
-      
-      filter_text = " AND ( "
-      all = false
-      @filter_role.each { |key ,value|
-        if value == "true" 
-          if filter_text.size > 9
-              filter_text += " OR "
-          end 
-          
-          if key == "0"
-            all = true
-          end
-          
-          filter_text += "role % "+key+" = 0 "
-        end
-      }
-      filter_text += " )"
-      
-      filter_text =  "" if filter_text.size < 11 || all == true
-      
-      @users = User.find(:all , :conditions => "deleted is null "+ filter_text).sort_by {|u| u.surname.downcase}
-
-      
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-    end
+    redirect_to ( :action => "list")
   end
 
   def change_atributes
@@ -190,5 +153,40 @@ class UsersController < ApplicationController
         format.xml  { head :ok }
       end
     end
+
+
+ def list
+         if params[:query].blank? 
+            @search_for = ""
+            @search_for_text =""
+         else
+            @search_for = "%#{params[:query]}%"
+            @search_for_text = " AND ( LOWER(companies.name) LIKE '%"+@search_for.downcase+"%' OR "
+            @search_for_text += "LOWER(users.fullname) LIKE '%"+@search_for.downcase+"%' ) "
+         end
+
+
+           if params["sort"].blank?
+             params["sort"] = "fullname"
+           end
+
+         sort = case params['sort']
+                when "fullname"  then "users.fullname"
+                when "fullname_reverse"  then "users.fullname DESC"
+                when "company"  then "companies.name"
+                when "company_reverse"  then "companies.name DESC"
+                end
+
+
+         conditions = [ "users.deleted is null "+@search_for_text]
+
+
+         @users = User.find(:all, :include => [:companies], :order => sort, :conditions => conditions)
+
+         if request.xml_http_request?
+           render :partial => "items_list", :layout => false
+         end
+
+       end
 
 end

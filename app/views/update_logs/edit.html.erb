@@ -1,0 +1,16 @@
+<h1>Editing update_log</h1>
+
+<% form_for(@update_log) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :note %><br />
+    <%= f.text_field :note %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @update_log %> |
+<%= link_to 'Back', update_logs_path %>

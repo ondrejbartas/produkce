@@ -4,7 +4,7 @@
 	<%= render :partial => 'reception_events/calendar' %>
 <% end %>
 
-<% if @current_user.is_worker? %>
+<% if @current_user.worker? %>
 	<h2>
 		<div class="menu_small">
 			<%= link_to 'zaúčtovat hotovou práci', new_finished_work_path %>
@@ -18,7 +18,7 @@
 	
 <% end %>
 
-<% if @current_user.is_produce? %>
+<% if @current_user.produce? %>
 
 	 <h2>Zaúčtované práce ke kontrole</h2>
     	<%= render :partial=>"finished_works/check_finished_works" %>

@@ -1,0 +1,34 @@
+
+<table class="work">
+  <tr>
+	 <th style="width:200px" <%= sort_td_class_helper "company" %>>
+    <%= sort_link_helper "firma", "company" %></th>
+	 <th style="width:220px">kontakt</th>
+  	 <th style="width:150px">členové</th>
+ </tr>
+
+<% for company in @companies %>
+
+			<tr>
+			<td style="text-align:left"> 
+				<%= right_show_link "companies", "show", company.name, company %><br />
+			</td>
+				<td style="text-align:left" >
+				<% for contact in company.contacts %>
+				    <% if contact.deleted.blank? %>
+			        <%=  print_into_cell( contact.phone, "tel") %>
+			        <%=  print_mail_into_cell( contact.email) %>
+			        <%=  print_address_into_cell( contact.address) %>
+			        <%=  print_into_cell( contact.note, "poz.") %>
+					<% end %>
+				<% end %>
+			</td>
+			<td style="text-align:left">
+				<% for user in company.users.sort_by{ |u| u.fullname} %>
+					<%= right_show_link "users", "show", user.surname+" "+user.name, user %><br />
+				<% end %>
+			</td>
+			</tr>
+<% end %>
+</table>
+

@@ -60,9 +60,15 @@
 </ul>
 
 <h3>
-    <div class="menu_small">
-        <%= right_link ("projects", "new", 'přidat projekt', new_company_project_path(@company) ) %>
-    </div>
+		<% if @company.users.size == 0 %>
+	   	  <div class="menu_small red">
+		         nelze přidat projekt k firmě bez člena
+	     	  </div>		
+		<% else %>
+   		 <div class="menu_small">
+		        <%= right_link ("projects", "new", 'přidat projekt', new_company_project_path(@company) ) %>
+		    </div>
+		<% end %>
     projekty firmy</h3>
 <ul>
   <% for project in Project.find(:all,  :conditions => ["project_id is null AND company_id = :comp", {:comp => @company.id}]) %>

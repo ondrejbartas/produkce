@@ -3,12 +3,8 @@ class CompaniesController < ApplicationController
   # GET /companies.xml
   def index
   
-      @companies = Company.find(:all, :conditions => ["deleted is null"]).sort_by {|u| u.name.downcase}
-
-       respond_to do |format|
-         format.html # index.html.erb
-         format.xml  { render :xml => @companies }
-      end
+    redirect_to ( :action => "list")
+    
   end
 
   # GET /companies/1
@@ -96,4 +92,38 @@ class CompaniesController < ApplicationController
          format.xml  { head :ok }
        end
     end
+    
+    
+  def list
+     if params[:query].blank? 
+        @search_for = ""
+        @search_for_text =""
+     else
+        @search_for = "%#{params[:query]}%"
+        @search_for_text = " AND ( LOWER(companies.name) LIKE '%"+@search_for.downcase+"%' OR "
+        @search_for_text += "LOWER(users.fullname) LIKE '%"+@search_for.downcase+"%' ) "
+     end
+
+
+       if params["sort"].blank?
+         params["sort"] = "company"
+       end
+
+     sort = case params['sort']
+            when "company"  then "companies.name"
+            when "company_reverse"  then "companies.name DESC"
+        end
+
+
+     conditions = [ "companies.deleted is null "+@search_for_text]
+
+
+     @companies = Company.find(:all, :include => [:users], :order => sort, :conditions => conditions)
+
+     if request.xml_http_request?
+       render :partial => "items_list", :layout => false
+     end
+
+   end
+
 end

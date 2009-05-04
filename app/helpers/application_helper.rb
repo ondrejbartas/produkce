@@ -34,6 +34,61 @@ def label(model, field_name, label_text, options={})
   # Wrap the <label> tag in a <strong> tag.
   content_tag('strong', label_tag)
 end
+def print_mail_into_cell(value)
+  #Print field if is not blank
+  unless value.blank?
+    out = "<i>mail: </i>"+mail_to(value)+'<br />'
+  else
+    out = ""
+  end
+  out
+end
+def print_into_cell(value,text)
+  #Print field if is not blank
+  unless value.blank?
+    out = "<i>"+text+": </i>"+value+'<br />'
+  else
+    out = ""
+  end
+  out
+end
+def print_address_into_cell(value)
+  #Print field if is not blank
+  unless value.blank?
+    out = address_format(value)
+  else
+    out = ""
+  end
+  out
+end
+
+def print_mail_cell(value)
+  #Print field if is not blank
+  unless value.blank?
+    out = '<td>'+mail_to(value)+'</td>'
+  else
+    out = ""
+  end
+  out
+end
+def print_cell(value)
+  #Print field if is not blank
+  unless value.blank?
+    out = '<td>'+value+'</td>'
+  else
+    out = "<td></td>"
+  end
+  out
+end
+def print_address_cell(value)
+  #Print field if is not blank
+  unless value.blank?
+    out = '<td>'+address_format(value)+'</td>'
+  else
+    out = "<td></td>"
+  end
+  out
+end
 
 def print_field(value, text, warp)
   #Print field if is not blank
@@ -291,4 +346,31 @@ end
  				</div>
  			"
   end
+  
+  
+  
+  
+  def sort_td_class_helper(param)
+    result = 'class="sort"'
+    result = 'class="sortup"' if params[:sort] == param
+    result = 'class="sortdown"' if params[:sort] == param + "_reverse"
+    return result
+  end
+  
+  def sort_link_helper(text, param)
+    key = param
+    key += "_reverse" if params[:sort] == param
+    options = {
+        :url => {:action => 'list', :params => params.merge({:sort => key, :page => nil})},
+        :update => 'table',
+        :before => "Element.show('spinner')",
+        :success => "Element.hide('spinner')"
+    }
+    html_options = {
+      :title => "Sort by this field",
+      :href => url_for(:action => 'list', :params => params.merge({:sort => key, :page => nil}))
+    }
+    link_to_remote(text, options, html_options)
+  end
+  
 end

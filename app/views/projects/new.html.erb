@@ -8,6 +8,8 @@
 
 <% form_for(@project) do |f| %>
 
+<%= f.error_messages %>
+
 <% if !@company.blank? %>
     <%=   f.hidden_field :company_id,  :value=>@company.id %>
     <p>
@@ -17,10 +19,12 @@
             <%= collection_select(:project, :user_id ,
               (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
               :id, :fullname, {:include_blank => false} )%>
-        <%  else %>
+        <%  elsif @company.users.size > 0 %>
             <%= collection_select(:project, :project_id ,
               (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
               :id, :name, {:selected_value => @selected_user, :include_blank => true})%>
+			<% else %>
+				<div class="red">!!!!!PROBLEM - vybraná firma nemá žádného člena - nelze přidat projekt !!!!!</div>
         <% end %>
 
       <% end %>
@@ -58,7 +62,16 @@
       {:onchange => remote_function( :update => 'project_id_container', :url =>
       render_project_projects_path, :with =>
         "'company_id=' +
-          escape(value)" )} )%>
+          escape(value)" ,
+         :before => "Element.show('spinner')",
+         :success => "Element.hide('spinner')"
+			)} )%>
+
+			<%= image_tag("spinner.gif",
+			              :align => "absmiddle",
+			              :border => 0,
+			              :id => "spinner",
+			              :style =>"display: none;" ) %>
   </p>
 
 

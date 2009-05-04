@@ -61,6 +61,7 @@
                        <li><%= sub_menu( "user", "show", "profil: "+current_user.name+" "+current_user.surname , user_path(current_user) ) %></li>
                        <li><%= sub_menu( "user", "change_atributes", "změna nastavení", change_atributes_users_path)  %></li>
                        <li><%= sub_menu( "system_comments", "index", "systémové chyby a možná zlepšení", system_comments_path)  %></li>
+                       <li><%= sub_menu( "update_logs", "index", "updaty", update_logs_path)  %></li>
                    <% elsif @activePage == "menu_contact" %>
                       <li><%= sub_menu( "companies", "new", 'přidat firmu', new_company_path )%></li>
                       <li><%= sub_menu( "users", "new", 'přidat uživatele', new_user_path )%></li>
@@ -120,7 +121,10 @@
 </div> 
 </div>
 <div id="footer">
-              2009 (c) Ondřej Bartas - verze systemu ke dni updatu: 26.4.2009 21:33
+              2009 (c) Ondřej Bartas
+ 				<% if !@current_user.blank? && UpdateLog.count > 0 %>
+ 				  <%= right_show_link( "update_logs", "index", "- verze systemu ke dni updatu: "+my_time(UpdateLog.last.created_at), update_logs_path)  %>
+				<% end %>
 </div>
 
 <% if !@current_user.blank? && @current_user.admin? %>

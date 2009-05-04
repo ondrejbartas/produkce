@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090427065427) do
+ActiveRecord::Schema.define(:version => 20090504173748) do
 
   create_table "bordel", :id => false, :force => true do |t|
     t.string  "name"
@@ -288,6 +288,12 @@ ActiveRecord::Schema.define(:version => 20090427065427) do
     t.datetime "updated_at"
     t.integer  "limit"
     t.integer  "order"
+  end
+
+  create_table "update_logs", :force => true do |t|
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

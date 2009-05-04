@@ -1,0 +1,28 @@
+<h2>
+    Seznam uživatelů
+</h2>
+
+<form name="sform" action="" style="display:inline;">
+<p>
+<label for="item_name">Hledaný výraz : </label>
+<%= text_field_tag("query", params['query'], :size => 20 ) %>
+<%= image_tag("spinner.gif",
+              :align => "absmiddle",
+              :border => 0,
+              :id => "spinner",
+              :style =>"display: none;" ) %>
+</p>
+
+</form>
+
+
+<%= observe_field 'query',  :frequency => 2,
+         :update => 'table',
+         :before => "Element.show('spinner')",
+         :success => "Element.hide('spinner')",
+         :url => {:action => 'list'},
+         :with => 'query' %>
+
+<div id="table">
+<%= render :partial => "items_list" %>
+</div>

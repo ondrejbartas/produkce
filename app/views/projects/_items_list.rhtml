@@ -1,0 +1,50 @@
+
+<table class="work">
+  <tr>
+  	 <th style="width:50px" <%= sort_td_class_helper "date" %>>
+    <%= sort_link_helper "datum", "date" %>
+  	 <th style="width:150px" <%= sort_td_class_helper "company" %>>
+    <%= sort_link_helper "firma", "company" %>
+  	 <th style="width:200px" <%= sort_td_class_helper "name" %>>
+    <%= sort_link_helper "projekt", "name" %>
+  	 <th style="width:60px" <%= sort_td_class_helper "status" %>>
+    <%= sort_link_helper "stav", "status" %>
+    <th style="width:400px" >poznámka</th>
+ </tr>
+
+<% for project in @projects %>
+
+<% finished = true %>
+<% problem = false %>
+<% if project.works.size > 0 %>
+	<% for work in project.works %>
+		<% for operation in work.operations %>
+			<% if operation.finished != true %>
+				<% if work.date.strftime("%s") < Time.now.beginning_of_day.strftime("%s") %>
+					<% problem = true %>
+				<% end %>
+				<% finished = false %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% else %>
+	<% finished = ""%>
+<% end %>
+	<% if problem == true %>
+	 	<tr class="nooperations">
+	<% elsif finished == false %>
+		<tr class="unfinished">
+	<% elsif finished == true %>
+		<tr class="finished">
+	<% else %>
+  		<tr>
+	<% end %>
+    <td class="left_align"><%= my_date project.created_at %></td>
+    <td class="left_align"><%= right_show_link "companies", "show", project.company.name, project.company %></td>
+    <td class="left_align"><%=  right_show_link "projects", "show", project_name(project), project %></td>
+    <td><%= project_status project %></td>
+    <td class="left_align"><%=h project.note %></td>
+      </tr>
+<% end %>
+</table>
+

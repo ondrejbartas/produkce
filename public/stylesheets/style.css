@@ -304,12 +304,29 @@ th {
     border: solid 1px #515151;
     background: #777777;
     color: white;
+	 text-align: left;
+	 padding-left: 20px;
+}
+
+.sort {
+	background: url('../images/sort.png') no-repeat #777777 5px;
+}
+.sortup {
+	background: url('../images/sort_asc.png') no-repeat #777777 5px;
+}
+.sortdown {
+	background: url('../images/sort_desc.png') no-repeat #777777 5px;
 }
 
 th a {
-    color: #eeeeee;
-    text-decoration: underline;
+    color: #ccccff;
+    text-decoration: none;
 }
+th a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
 td {
     padding: 3px;
     text-align: center;

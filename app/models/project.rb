@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   belongs_to :company
   has_many :works
   
-  validates_presence_of :name, :status
+  validates_presence_of :name, :status, :user_id
 
    STATUS_VALUES = {
     0 => "v jednání",

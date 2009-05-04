@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :update_logs
+
   map.resources :reception_categories
 
    
@@ -39,6 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :contacts, :collection => { :render_index => [:get, :post] }
  
   map.resources :projects, :collection => { 
+                :list => [:get, :post] , 
                 :render_sub_project => [:get, :post] , 
                 :render_project => [:get, :post] }, 
                 :has_many => [ :projects, :invoices]
@@ -55,9 +58,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users, :has_many => [:contacts, :works, :system_comments, :finished_works],
                         :member => {:change_role => [:get, :post] },
-                        :collection => { :change_atributes => [:get, :post]}
+                        :collection => { :list => [:get, :post] , 
+                        :change_atributes => [:get, :post]}
 
-  map.resources :companies, :has_many => [:projects, :contacts, :users ]
+  map.resources :companies, :has_many => [:projects, :contacts, :users ], :collection =>{ :list => [:get, :post]}
   map.resources :works
   map.resources :histories
   map.resources :job_types
