@@ -1,6 +1,6 @@
 <h2>Seznam typu pracovních činností
 <div class="menu_small">
-<%= link_to 'vytvořit nový typ pracovní činnosti', new_job_type_path %>
+<%= link_to 'vytvořit nový typ pracovní činnosti', new_job_type_path-%>
 </div>
 </h2>
 <table>
@@ -12,21 +12,21 @@
     <th colspan="2">administrace</th>
   </tr>
 
-<% for job_type in @job_types %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <th><%=h  job_type.name %></th>
-    <td><%=h job_type.note %></td>
-    <td><% for place in job_type.places  %>
-            <%= place.name %>,
-        <% end %>
+<% for job_type in @job_types-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <th><%=h  job_type.name-%></th>
+    <td><%=h job_type.note-%></td>
+    <td><% for place in job_type.places -%>
+            <%= place.name-%>,
+        <% end-%>
     </td>
-    <td><% for operation_type in job_type.operation_types  %>
-            <%= operation_type.name %>,
-        <% end %>
+    <td><% for operation_type in job_type.operation_types -%>
+            <%= operation_type.name-%>,
+        <% end-%>
     </td>
-    <td><%= right_link ( "job_types", "edit",'upravit', edit_job_type_path(job_type)) %></td>
-    <td><%= right_delete_link ("job_types", "delete", 'smazat', job_type ) %></td>
+    <td><%= right_link ( "job_types", "edit",'upravit', edit_job_type_path(job_type))-%></td>
+    <td><%= right_delete_link ("job_types", "delete", 'smazat', job_type )-%></td>
 
   </tr>
-<% end %>
+<% end-%>
 </table>

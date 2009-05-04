@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :tape_sells
+
   map.resources :update_logs
 
   map.resources :reception_categories
@@ -43,6 +45,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :projects, :collection => { 
                 :list => [:get, :post] , 
                 :render_sub_project => [:get, :post] , 
+                :render_sub_project_sell => [:get, :post] , 
                 :render_project => [:get, :post] }, 
                 :has_many => [ :projects, :invoices]
 
@@ -61,7 +64,8 @@ ActionController::Routing::Routes.draw do |map|
                         :collection => { :list => [:get, :post] , 
                         :change_atributes => [:get, :post]}
 
-  map.resources :companies, :has_many => [:projects, :contacts, :users ], :collection =>{ :list => [:get, :post]}
+  map.resources :companies, :has_many => [:projects, :contacts, :users ],
+                            :collection =>{ :list => [:get, :post]}
   map.resources :works
   map.resources :histories
   map.resources :job_types
@@ -71,6 +75,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :roles
   map.resources :warehouse_controls, :collection => { 
                       :show_discarded_tapes => [:get, :post],
+                      :show_used_tapes => [:get, :post],
                       :show_sold_tapes=> [:get, :post]}
   map.resources :purchase_carts
   map.resources :bought_tapes
@@ -78,7 +83,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :invoice_operations
   map.resources :invoices, :collection => { 
                       :finished_projects => [:get, :post] }
-  map.resources :tape_types
+  map.resources :tape_types, :collection => { :render_price => [:get, :post] }
   map.resources :machines
   map.resources :operations, :collection => { :add_operation_type_parameters => [:get, :post] }
   map.resources :categories

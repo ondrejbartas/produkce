@@ -1,16 +1,16 @@
 <h2>Nový uživatel</h2>
 
-<% form_for(@user) do |f| %>
+<% form_for(@user) do |f|-%>
 
-  <%= render :partial => 'users/form', :locals => { :f => f } %>
+  <%= render :partial => 'users/form', :locals => { :f => f }-%>
 
   <div id="contact">
     <h2>Přidání kontaktu (nepovinné)</h2>
     <%= render :partial => 'contacts/form',
-    :locals => {:contact => @contacts} %>
+    :locals => {:contact => @contacts}-%>
   </div>
 
   <p>
-    <%= f.submit "vytvořit" %>
+    <%= f.submit "vytvořit"-%>
   </p>
-<% end %>
+<% end-%>

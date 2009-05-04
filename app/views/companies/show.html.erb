@@ -1,85 +1,85 @@
 <h2>
     <div class="menu_small">
-      <%= right_link ("companies", "edit", "upravit", edit_company_path(@company)) %>
+      <%= right_link ("companies", "edit", "upravit", edit_company_path(@company))-%>
     </div>
-  Firma : <%=h @company.name %>
+  Firma : <%=h @company.name-%>
 </h2>
 
 <p>
   <b>Ico:</b>
-  <%=h @company.ico %>
+  <%=h @company.ico-%>
 </p>
 
 <p>
   <b>Dic:</b>
-  <%=h @company.dic %>
+  <%=h @company.dic-%>
 </p>
 
 <p>
   <b>Account:</b>
-  <%=h @company.account %>
+  <%=h @company.account-%>
 </p>
 
 <h3>
      <div class="menu_small">
-       <%= right_link ("contacts", "new", 'přidat kontakt', new_company_contact_path(@company) ) %>
+       <%= right_link ("contacts", "new", 'přidat kontakt', new_company_contact_path(@company) )-%>
      </div>
      KONTAKT NA FIRMU
  </h3>
 
  <div id="contacts">
-  <% for contact in @company.contacts %>
-    <% if contact.deleted.blank? %>
-     <% if @current_user.mine?(contact) || @current_user.admin? || @current_user.produce? %>
+  <% for contact in @company.contacts-%>
+    <% if contact.deleted.blank?-%>
+     <% if @current_user.mine?(contact) || @current_user.admin? || @current_user.produce?-%>
         <div class="menu_small">
-           <%= right_owner_link ("contacts", "edit", contact.user_id, 'upravit kontakt', edit_company_contact_path(@company, contact)) %>
-           <%= right_delete_link ("contacts", "delete", 'smazat kontakt', company_contact_path(@company, contact) ) %>
+           <%= right_owner_link ("contacts", "edit", contact.user_id, 'upravit kontakt', edit_company_contact_path(@company, contact))-%>
+           <%= right_delete_link ("contacts", "delete", 'smazat kontakt', company_contact_path(@company, contact) )-%>
         </div>
-      <% end %>
+      <% end-%>
       <ul class="odstavec2">
-        <%=  print_field( contact.phone , "telefon: ", "li") %>
-        <%=  print_mail_field( contact.email , "email: ", "li") %>
+        <%=  print_field( contact.phone , "telefon: ", "li")-%>
+        <%=  print_mail_field( contact.email , "email: ", "li")-%>
         <%=  print_address_field(contact.address, "adresa:  ", "li" )%>
-        <%=  print_field( contact.note , "poznámka: ", "li") %>
+        <%=  print_field( contact.note , "poznámka: ", "li")-%>
       </ul>
-    <% end %>
-<% end %>
+    <% end-%>
+<% end-%>
 
  </div>
 
 <h3>
     <div class="menu_small">
-       <%= right_link ("users", "new",  'přidat uživatele', new_company_user_path(@company) )  %>
+       <%= right_link ("users", "new",  'přidat uživatele', new_company_user_path(@company) ) -%>
      </div>
     členové firmy
 </h3>
 <ul>
-<% for user in @company.users.sort_by{|u| u.surname.downcase} %>
-  <li><%= right_show_link ("users", "show",  user.fullname, user ) %></li>
-<% end %>
+<% for user in @company.users.sort_by{|u| u.surname.downcase}-%>
+  <li><%= right_show_link ("users", "show",  user.fullname, user )-%></li>
+<% end-%>
 </ul>
 
 <h3>
-		<% if @company.users.size == 0 %>
+		<% if @company.users.size == 0-%>
 	   	  <div class="menu_small red">
 		         nelze přidat projekt k firmě bez člena
 	     	  </div>		
-		<% else %>
+		<% else-%>
    		 <div class="menu_small">
-		        <%= right_link ("projects", "new", 'přidat projekt', new_company_project_path(@company) ) %>
+		        <%= right_link ("projects", "new", 'přidat projekt', new_company_project_path(@company) )-%>
 		    </div>
-		<% end %>
+		<% end-%>
     projekty firmy</h3>
 <ul>
-  <% for project in Project.find(:all,  :conditions => ["project_id is null AND company_id = :comp", {:comp => @company.id}]) %>
-  <li><%= right_show_link ("projects", "show", project.name, project) %>
-    <% if project.projects.size > 0 %>
+  <% for project in Project.find(:all,  :conditions => ["project_id is null AND company_id = :comp", {:comp => @company.id}])-%>
+  <li><%= right_show_link ("projects", "show", project.name, project)-%>
+    <% if project.projects.size > 0-%>
         <ul>
-            <% for subproject in project.projects %>
-                <li><%= right_show_link ("projects", "show", subproject.name, subproject ) %></li>
-            <% end %>
+            <% for subproject in project.projects-%>
+                <li><%= right_show_link ("projects", "show", subproject.name, subproject )-%></li>
+            <% end-%>
         </ul>
-    <% end %>
+    <% end-%>
   </li>
-<% end %>
+<% end-%>
 </ul>

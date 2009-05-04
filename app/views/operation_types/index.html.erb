@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= right_link "operation_types", "new", 'nový typ úkonu', new_operation_type_path %>
+        <%= right_link "operation_types", "new", 'nový typ úkonu', new_operation_type_path-%>
     </div>
     Seznam úkonů
 </h2>
@@ -15,20 +15,20 @@
     <th colspan="2">administrace</th>
   </tr>
 
-<% for operation_type in @operation_types %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <th><%=h operation_type.name %></th>
-    <td><%=h operation_type.note %></td>
-    <td><%=h value(operation_type) %></td>
-    <td><%=h operation_type.price %></td>
-    <td><% for job_type in operation_type.job_types  %>
-            <%= job_type.name %>,
-        <% end %>
+<% for operation_type in @operation_types-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <th><%=h operation_type.name-%></th>
+    <td><%=h operation_type.note-%></td>
+    <td><%=h value(operation_type)-%></td>
+    <td><%=h operation_type.price-%></td>
+    <td><% for job_type in operation_type.job_types -%>
+            <%= job_type.name-%>,
+        <% end-%>
     </td>
-    <td><%= right_link "operation_types", "edit",  'upravit', edit_operation_type_path(operation_type) %></td>
-    <td><%= right_delete_link "operation_types", "delete",  'smazat', operation_type %></td>
+    <td><%= right_link "operation_types", "edit",  'upravit', edit_operation_type_path(operation_type)-%></td>
+    <td><%= right_delete_link "operation_types", "delete",  'smazat', operation_type-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 
 <br />

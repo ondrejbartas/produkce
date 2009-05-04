@@ -12,13 +12,13 @@
     <th>počet kusů</th>
   </tr>
 
-<% for operation in @operations %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <td><%= my_time  operation.created_at %></td>
-    <td><%=h operation.work.user.name %></td>
-    <td><%=h operation.work.project.project_name %></td>
-    <td><%=h operation.note_operator %></td>
-	 <td><%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name %></td>
-    <td><%= operation.value %></td>
-<% end %>
+<% for operation in @operations-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <td><%= my_time  operation.created_at-%></td>
+    <td><%=h operation.work.user.name-%></td>
+    <td><%=h operation.work.project.project_name-%></td>
+    <td><%=h operation.note_operator-%></td>
+	 <td><%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name-%></td>
+    <td><%= operation.value-%></td>
+<% end-%>
 </table>

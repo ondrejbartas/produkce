@@ -1,19 +1,19 @@
 <div class="missing_tape">
   <p>
-    <%= f.label 'tape_type_id', "kazeta:" %>
+    <%= f.label 'tape_type_id', "kazeta:"-%>
     <%= f.collection_select :tape_type_id ,
           TapeType.find(:all).sort_by {|u| u.order},
-        :id, :name, {:include_blank => true} %>
+        :id, :name, {:include_blank => true}-%>
 
-    <%= f.label 'value', "počet chybějících kusů:" %>
-    <%= f.text_field :value, :size=>5 %>
+    <%= f.label 'value', "počet chybějících kusů:"-%>
+    <%= f.text_field :value, :size=>5-%>
 
-    <% if f.object.new_record? %>
-        <%= link_to_function "Smazat", "$(this).up('.missing_tape').remove(); " %>
-    <% else %>
-        <%= f.hidden_field(:_delete) %>
-        <%= link_to_function "Smazat", "$(this).previous().value = '1'; $(this).up('.missing_tape').hide(); " %>
-    <% end %>
+    <% if f.object.new_record?-%>
+        <%= link_to_function "Smazat", "$(this).up('.missing_tape').remove(); "-%>
+    <% else-%>
+        <%= f.hidden_field(:_delete)-%>
+        <%= link_to_function "Smazat", "$(this).previous().value = '1'; $(this).up('.missing_tape').hide(); "-%>
+    <% end-%>
 
   </p>
 </div>

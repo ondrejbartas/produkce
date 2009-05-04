@@ -1,61 +1,61 @@
-<% if !@company.blank? %>
-    <h2>Nový projekt pro firmu: <%= @company.name %> </h2>
-<% elsif !@project_main.blank? %>
-    <h2>Nový projekt je podprojektem: <%= @project_main.name %> </h2>
-<% else %>
+<% if !@company.blank?-%>
+    <h2>Nový projekt pro firmu: <%= @company.name-%> </h2>
+<% elsif !@project_main.blank?-%>
+    <h2>Nový projekt je podprojektem: <%= @project_main.name-%> </h2>
+<% else-%>
     <h2>Nový projekt</h2>
-<% end %>
+<% end-%>
 
-<% form_for(@project) do |f| %>
+<% form_for(@project) do |f|-%>
 
-<%= f.error_messages %>
+<%= f.error_messages-%>
 
-<% if !@company.blank? %>
-    <%=   f.hidden_field :company_id,  :value=>@company.id %>
+<% if !@company.blank?-%>
+    <%=   f.hidden_field :company_id,  :value=>@company.id-%>
     <p>
-      <% if  @company.users.size > 0 %>
-        <%= label :work, 'user_id', 'projekt zadal', :required => true %>
-        <%  if @selected_user.blank? %>
+      <% if  @company.users.size > 0-%>
+        <%= label :work, 'user_id', 'projekt zadal', :required => true-%>
+        <%  if @selected_user.blank?-%>
             <%= collection_select(:project, :user_id ,
               (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
               :id, :fullname, {:include_blank => false} )%>
-        <%  elsif @company.users.size > 0 %>
-            <%= collection_select(:project, :project_id ,
+        <%  elsif @company.users.size > 0-%>
+            <%= collection_select(:project, :user_id ,
               (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
               :id, :name, {:selected_value => @selected_user, :include_blank => true})%>
-			<% else %>
+			<% else-%>
 				<div class="red">!!!!!PROBLEM - vybraná firma nemá žádného člena - nelze přidat projekt !!!!!</div>
-        <% end %>
+        <% end-%>
 
-      <% end %>
+      <% end-%>
     </p>
     <p>
-        <%= label :project, 'project_id', 'vybrat stávající projekt:', :required => true %>
-        <%= select(:project, "project_id", Project.find(:all, :conditions => "project_id is null AND company_id = "+@company.id.to_s  ).collect {|p| [ p.name, p.id ] }, {:include_blank => ''}) %>
+        <%= label :project, 'project_id', 'vybrat stávající projekt:', :required => true-%>
+        <%= select(:project, "project_id", Project.find(:all, :conditions => "project_id is null AND company_id = "+@company.id.to_s  ).collect {|p| [ p.name, p.id ] }, {:include_blank => ''})-%>
     </p>
 
-<% elsif !@project_main.blank? %>
-    <% @company = @project_main.company %>
+<% elsif !@project_main.blank?-%>
+    <% @company = @project_main.company-%>
     <p>
-      <% if  @company.users.size > 0 %>
-        <%= label :work, 'user_id', 'projekt zadal', :required => true %>
-        <%  if @selected_user.blank? %>
+      <% if  @company.users.size > 0-%>
+        <%= label :work, 'user_id', 'projekt zadal', :required => true-%>
+        <%  if @selected_user.blank?-%>
             <%= collection_select(:project, :user_id ,
               (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
               :id, :fullname, {:include_blank => false} )%>
-        <%  else %>
-            <%= collection_select(:project, :project_id ,
+        <%  else-%>
+            <%= collection_select(:project, :user_id ,
               (@company.blank? ? [] : @company.users.find(:all, :conditions => "deleted is null").sort_by {|u| u.fullname.downcase}),
               :id, :name, {:selected_value => @selected_user, :include_blank => true})%>
-        <% end %>
+        <% end-%>
 
-      <% end %>
+      <% end-%>
     </p>
-      <%=   f.hidden_field :company_id,  :value=>@project_main.company.id %>
-      <%=   f.hidden_field :project_id,  :value=>@project_main.id %>
-<% else %>
+      <%=   f.hidden_field :company_id,  :value=>@project_main.company.id-%>
+      <%=   f.hidden_field :project_id,  :value=>@project_main.id-%>
+<% else-%>
    <p>
-    <%= label :project, 'company_id', 'jméno firmy', :required => true %>
+    <%= label :project, 'company_id', 'jméno firmy', :required => true-%>
         <%= collection_select(:project, :company_id ,
       @companies,
       :id, :name, {:include_blank => true},
@@ -71,23 +71,23 @@
 			              :align => "absmiddle",
 			              :border => 0,
 			              :id => "spinner",
-			              :style =>"display: none;" ) %>
+			              :style =>"display: none;" )-%>
   </p>
 
 
   <span id="project_id_container">
-      <%= render :partial => 'projects/render_sub_project' %>
+      <%= render :partial => 'projects/render_sub_project'-%>
   </span>
 
 
   
-<%  end %>
+<%  end-%>
 
 
-    <%= render :partial => 'projects/form' %>
+    <%= render :partial => 'projects/form'-%>
 
   
   <p>
-    <%= f.submit "vytvořit" %>
+    <%= f.submit "vytvořit"-%>
   </p>
-<% end %>
+<% end-%>

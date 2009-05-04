@@ -1,23 +1,28 @@
 <div class="operation">
   <p>
-    <%= f.label 'opertion_type_id', "úkon" %>
-    <%= f.collection_select :operation_type_id ,
-          OperationType.find(:all),
-        :id, :name, {:include_blank => true} %>
 
-	<% if f.object.finished == true %>
-	   <%= f.label 'note', "poznámka produkce" %>
-	   <%= f.object.note %>
-	<% else %>
-	    <%= f.label 'note', "poznámka produkce" %>
-	    <%= f.text_field :note, :size=>25 %>
-	<% end %>
+	<% if f.object.finished == true-%>
+   	<%= f.hidden_field :operation_type_id %>
+	   <%= f.label 'opertion_type_id', "již provedený úkon" %>
+		<i><%= f.object.operation_type.name %></i>
+	   <%= f.label 'note', "poznámka produkce"-%>
+	   <i><%= f.object.note-%></i>
+	   <%= f.label 'note', "poznámka operátora"-%>
+	   <i><%= f.object.note_operator-%></i>
+	<% else-%>
+	   <%= f.label 'opertion_type_id', "úkon"-%>
+	   <%= f.collection_select :operation_type_id ,
+	         OperationType.find(:all),
+	       :id, :name, {:include_blank => true}-%>
+	    <%= f.label 'note', "poznámka produkce"-%>
+	    <%= f.text_field :note, :size=>25-%>
+	<% end-%>
 
-		<% if f.object.new_record? %>
-        <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>
-		<% elsif f.object.finished != true %>
-        <%= f.hidden_field( :_delete) %>
-        <%= link_to_function "Smazat", "$(this).previous().value = '1'; $(this).up('.operation').hide(); " %>
-		<% end %>
+		<% if f.object.new_record?-%>
+        <%= link_to_function "Smazat", "$(this).up('.operation').remove(); "-%>
+		<% elsif f.object.finished != true-%>
+        <%= f.hidden_field( :_delete)-%>
+        <%= link_to_function "Smazat", "$(this).previous().value = '1'; $(this).up('.operation').hide(); "-%>
+		<% end-%>
   </p>
 </div>

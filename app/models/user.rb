@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
    has_many :finished_works
    has_many :purchase_carts
    has_many :warehouse_controls
+   has_many :tape_sells
    
    has_and_belongs_to_many :categories
    has_and_belongs_to_many :companies, :join_table => "companies_users",  :readonly => true

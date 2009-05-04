@@ -1,0 +1,26 @@
+<h2>
+	<%= right_link "tape_sells", "new", 'přidat rychlý prodej kazet', new_tape_sell_path %>
+	Seznam rychlého prodeje kazet
+</h2>
+
+<table>
+  <tr>
+    <th>datum</th>
+    <th>projekt</th>
+    <th>kazeta</th>
+    <th>počet</th>
+    <th>cena</th>
+    <th>zadal</th>
+  </tr>
+
+<% @tape_sells.each do |tape_sell| %>
+  <tr>
+    <td><%= my_time tape_sell.created_at %></td>
+    <td><%= right_show_link "projects","show", project_name(tape_sell.project), tape_sell.project  %></td>
+    <td><%=h tape_sell.tape_type.name %></td>
+    <td><%=h tape_sell.value %></td>
+    <td><%=h tape_sell.price %></td>
+    <td><%=  right_show_link "users","show", tape_sell.user.fullname, tape_sell.user %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,18 +1,18 @@
 
 <span id="work_user_id_container">
-        <%= render :partial => 'add_user' %>
+        <%= render :partial => 'add_user'-%>
 </span>
 
-<% if not @operation_types.blank? %>
+<% if not @operation_types.blank?-%>
 <h3>úkony</h3>
 <ul id="operations">
-            <%= render :partial => 'add_operation', :locals => {:operation => ""}  %>
+            <%= render :partial => 'add_operation', :locals => {:operation => ""} -%>
 </ul>
 
 <ul><li>    <%= link_to_remote "+ přidat úkon +",
            :url => { :action => "add_operation", :job_type_id => @job_type.id},
-           :update =>  "operations" , :position => :bottom %>
+           :update =>  "operations" , :position => :bottom-%>
 </li></ul>
-<% end %>
+<% end-%>
 
 

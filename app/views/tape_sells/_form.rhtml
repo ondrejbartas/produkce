@@ -1,0 +1,54 @@
+<%= error_messages_for :tape_sell -%>
+
+<p>
+ 	<%= label :tape_sell, 'project_id', 'jméno projektu', :required => true-%>
+   <%= collection_select(:tape_sell, :project_id ,
+   Project.find(:all, :conditions=>["deleted is null AND project_id is null"], :order => "name" ),
+   :id, :name, {:include_blank => false},
+   {:onchange => remote_function( :update => 'project_id_container', :url =>
+   render_sub_project_sell_projects_path, :with =>
+     "'project_id=' +
+       escape(value)" ,
+      :before => "Element.show('spinner')",
+      :success => "Element.hide('spinner')"
+		)} )%>
+
+		<%= image_tag("spinner.gif",
+		              :align => "absmiddle",
+		              :border => 0,
+		              :id => "spinner",
+		              :style =>"display: none;" )-%>
+</p>
+		
+		<div id="project_id_container">
+		</div>
+		
+		
+		<p>
+		 	<%= label :tape_sell, 'tape_type_id', 'kazeta', :required => true-%>
+		   <%= collection_select(:tape_sell, :tape_type_id ,
+		   TapeType.find(:all, :order => "name" ),
+		   :id, :name, {:include_blank => true},
+		   {:onchange => remote_function( :update => 'tape_type_id_container', :url =>
+		   render_price_tape_types_path, :with =>
+		     "'tape_type_id=' +
+		       escape(value)" ,
+		      :before => "Element.show('spinner_tape')",
+		      :success => "Element.hide('spinner_tape')"
+				)} )%>
+
+				<%= image_tag("spinner.gif",
+				              :align => "absmiddle",
+				              :border => 0,
+				              :id => "spinner_tape",
+				              :style =>"display: none;" )-%>
+		</p>
+	
+		<div id="tape_type_id_container">
+		</div>
+		
+		
+		<p>
+			 	<%= label :tape_sell, 'value', 'počet kusů', :required => true-%>
+			   <%= text_field :tape_sell, :value , :size=> 5 %>
+		</p>

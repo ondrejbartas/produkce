@@ -304,17 +304,21 @@ th {
     border: solid 1px #515151;
     background: #777777;
     color: white;
-	 text-align: left;
-	 padding-left: 20px;
 }
 
 .sort {
+	text-align: left;
+	padding-left: 20px;
 	background: url('../images/sort.png') no-repeat #777777 5px;
 }
 .sortup {
+	text-align: left;
+	padding-left: 20px;
 	background: url('../images/sort_asc.png') no-repeat #777777 5px;
 }
 .sortdown {
+	text-align: left;
+	padding-left: 20px;
 	background: url('../images/sort_desc.png') no-repeat #777777 5px;
 }
 
@@ -361,7 +365,7 @@ td {
 }
 .calendar td {
 	text-align:left;
-    font-size: 8pt;
+   font-size: 8pt;
 	padding: 5px;
 }
 
@@ -601,4 +605,8 @@ td {
 }
 .forth_day {
 	background: #dbb0b0;
+}
+
+label {
+	color: #777;
 }

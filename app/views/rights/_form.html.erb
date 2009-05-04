@@ -1,29 +1,29 @@
-<%= error_messages_for :right  %>
+<%= error_messages_for :right -%>
 <p>
-    <%= label :right, 'controller', 'název kontroleru', :required => true %><br />
-    <%= text_field :right, :controller %>
+    <%= label :right, 'controller', 'název kontroleru', :required => true-%><br />
+    <%= text_field :right, :controller-%>
 </p>
 <p>
-    <%= label :user, 'action', 'akce', :required => false %><br />
-    <%= text_field :right, :action %>
+    <%= label :user, 'action', 'akce', :required => false-%><br />
+    <%= text_field :right, :action-%>
 </p>
 <p>
-    <%= label :right, 'sub', 'dodatečné', :required => false %><br />
-    <%= text_field :right, :sub %>
+    <%= label :right, 'sub', 'dodatečné', :required => false-%><br />
+    <%= text_field :right, :sub-%>
 </p>
 	      <p>vlastnik: <%= check_box :right, :mine , :value=> true%></p>
 
-<% for role in Role.find(:all)  %>
+<% for role in Role.find(:all) -%>
     
-    <%  if !@right.blank? && !@right.value.blank?  %>
+    <%  if !@right.blank? && !@right.value.blank? -%>
 
-      <%  if !@right.blank? && @right.value % role.idd == 0  %>
-        <input type="checkbox" name="role<%= role.idd  %>" value="true" checked />: <%= role.comment  %><br />
-      <% else %>
-        <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
-      <% end %>
+      <%  if !@right.blank? && @right.value % role.idd == 0 -%>
+        <input type="checkbox" name="role<%= role.idd -%>" value="true" checked />: <%= role.comment -%><br />
+      <% else-%>
+        <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
+      <% end-%>
 
-    <% else %>
-       <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
-    <% end %>
-<% end %>
+    <% else-%>
+       <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
+    <% end-%>
+<% end-%>

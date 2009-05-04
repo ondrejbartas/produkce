@@ -1,6 +1,6 @@
-<% if @plan_type == "plan" %>
+<% if @plan_type == "plan"-%>
     <p>
-        <%= label 'work', 'user_id', 'operátor', :required => false %>
+        <%= label 'work', 'user_id', 'operátor', :required => false-%>
         <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
               :id, :fullname, {:include_blank => true},
               {:onchange => remote_function( :update => 'calendar_container', :url =>
@@ -12,38 +12,38 @@
                 {:onchange => remote_function( :update => 'work_user_id_container', :url =>
                   add_user_plan_works_path, :with =>
                     "'plan_type=plan&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
-        %>
+       -%>
     </p>
 
-<% elsif @plan_type == "now" %>
+<% elsif @plan_type == "now"-%>
     <p id="user_container">
-        <%= label 'work', 'user_id', 'operátor', :required => false %>
+        <%= label 'work', 'user_id', 'operátor', :required => false-%>
         <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
-              :id, :fullname, {:include_blank => true} ) %>
+              :id, :fullname, {:include_blank => true} )-%>
 
         <%= select_tag "chosed_role", options_for_select({ "externi" => "17", "interní" => "5" }, @chosed_role.to_s),
                 {:onchange => remote_function( :update => 'user_container', :url =>
                   add_user_plan_works_path, :with =>
                     "'plan_type=now&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
-        %>
+       -%>
     </p>
 
-    <% if not @places.blank? %>
-      <% if  @places.size > 0 %>
-        <%= label :work, 'place_id', 'pracovní místo:', :required => false %>
-        <%  if @selected.blank? %>
+    <% if not @places.blank?-%>
+      <% if  @places.size > 0-%>
+        <%= label :work, 'place_id', 'pracovní místo:', :required => false-%>
+        <%  if @selected.blank?-%>
             <%= collection_select(:work, :place_id ,
               @places,
               :id, :name, {:include_blank => false} )%>
-        <%  else %>
+        <%  else-%>
             <%= collection_select(:work, :placet_id ,
               @places,
               :id, :name, {:selected_value => @selected, :include_blank => true})%>
-        <% end %>
-      <% end %>
+        <% end-%>
+      <% end-%>
 
-    <% end %>
+    <% end-%>
 
 
-<% end %>
+<% end-%>
 

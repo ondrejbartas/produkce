@@ -1,111 +1,111 @@
-<%= error_messages_for :user  %>
+<%= error_messages_for :user -%>
 
 <p>
-    <%= label :user, 'name', 'jméno', :required => true %><br />
-    <%= text_field :user, :name %>
+    <%= label :user, 'name', 'jméno', :required => true-%><br />
+    <%= text_field :user, :name-%>
 </p>
 <p>
-    <%= label :user, 'surname', 'přijmení', :required => true %><br />
-    <%= text_field :user, :surname %>
+    <%= label :user, 'surname', 'přijmení', :required => true-%><br />
+    <%= text_field :user, :surname-%>
 </p>
 <p>
-    <%= label :user, 'login', 'přihlašovací jméno', :required => true %> <br />
-    <%= text_field :user, :login %> <i>zadávejte bez háčků a čárek</i>
+    <%= label :user, 'login', 'přihlašovací jméno', :required => true-%> <br />
+    <%= text_field :user, :login-%> <i>zadávejte bez háčků a čárek</i>
 </p>
 
 <p>	
 
-	 <% if @user.password.blank? %>
-		<% password = Digest::SHA1.hexdigest("--#{Time.now.to_s}---")[0,6] %>
-	 <% else %>
-		<% password = "" %>
-	 <% end %> 
+	 <% if @user.password.blank?-%>
+		<% password = Digest::SHA1.hexdigest("--#{Time.now.to_s}---")[0,6]-%>
+	 <% else-%>
+		<% password = ""-%>
+	 <% end-%> 
 	
-    <%= label :user, 'password', 'pro vytvoření či změnu hesla', :required => true %><br />
-    <%= f.password_field :password_new_comf, :value=> password %> <i>náhodné heslo: <%= password  %></i>
+    <%= label :user, 'password', 'pro vytvoření či změnu hesla', :required => true-%><br />
+    <%= f.password_field :password_new_comf, :value=> password-%> <i>náhodné heslo: <%= password -%></i>
 </p>
 
 <p>
-    <%= label :user, 'password_new', 'zadejte heslo podruhé', :required => true %><br />
-    <%= f.password_field  :password_new, :value=> password %>
+    <%= label :user, 'password_new', 'zadejte heslo podruhé', :required => true-%><br />
+    <%= f.password_field  :password_new, :value=> password-%>
 </p>
 
 
 
 
- <% if @current_user.admin? || @current_user.produce? %>
+ <% if @current_user.admin? || @current_user.produce?-%>
 
     <p>
-		  <%= label :user, 'company_id', 'vyberte firmu:', :required => true %><br />
+		  <%= label :user, 'company_id', 'vyberte firmu:', :required => true-%><br />
 		
 		<div id="companies">
-		 <% for company in @user.companies %>
+		 <% for company in @user.companies-%>
 				<div class="company">
 			  		<%= collection_select :user, :company_ids, Company.find(:all, :conditions => "deleted is null"  ).sort_by {|u| u.name.downcase}, :id, :name, { :selected => company.id, :include_blank => true }, {  :name => 'user[company_ids][]' } -%>
 				</div>
-		<% end %>
-		<% if @user.companies.empty? %>
+		<% end-%>
+		<% if @user.companies.empty?-%>
 			<div class="company">
 		  		<%= collection_select :user, :company_ids, Company.find(:all, :conditions => "deleted is null"  ).sort_by {|u| u.name.downcase}, :id, :name, {:include_blank => true }, {  :name => 'user[company_ids][]' } -%>
 			</div>
-		<% end %>
+		<% end-%>
 		</div>
 	</p>
 	<p>
-		<%= add_company_link( f , :companies, "přidat další firmu") %>
+		<%= add_company_link( f , :companies, "přidat další firmu")-%>
     </p>
 
 
     <p>
-        <%= label :user, 'access', 'povolit přístup uživateli do systému?', :required => false %><br />
+        <%= label :user, 'access', 'povolit přístup uživateli do systému?', :required => false-%><br />
         <%= check_box :user , :access , {}, "true" , "false"%>
     </p>
 
 	<div class="user_role_categories">
    	<div class="role"> 
-	    <div><%= label :user, 'role', 'vyberte práva uživatele', :required => true %></div>
+	    <div><%= label :user, 'role', 'vyberte práva uživatele', :required => true-%></div>
 			<div class="column">
-	    <% for role in Role.find(:all)  %>
+	    <% for role in Role.find(:all) -%>
     
-	    <%  if !@user.blank? && !@user.role.blank?  %>
+	    <%  if !@user.blank? && !@user.role.blank? -%>
 
-	      <%  if !@user.blank? && @user.role % role.idd == 0  %>
-	        <input type="checkbox" name="role<%= role.idd  %>" value="true" checked />: <%= role.comment  %><br />
-	      <% else %>
-	        <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
-	      <% end %>
+	      <%  if !@user.blank? && @user.role % role.idd == 0 -%>
+	        <input type="checkbox" name="role<%= role.idd -%>" value="true" checked />: <%= role.comment -%><br />
+	      <% else-%>
+	        <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
+	      <% end-%>
 
-	     <% else %>
-	       <input type="checkbox" name="role<%= role.idd  %>" value="true " />: <%= role.comment  %><br />
-	    <% end %>
-	   <% end %>
+	     <% else-%>
+	       <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
+	    <% end-%>
+	   <% end-%>
 			</div>
 	   </div>
 
 
 		<div class="categories">
-	   	<div><%= label :user, 'role', 'vyberte profese uživatele', :required => false %></div>
+	   	<div><%= label :user, 'role', 'vyberte profese uživatele', :required => false-%></div>
 
 				<div class="column">
-				<% n = 0 %>
-				<% categories = Category.find(:all, :order => :name) %>
-				<% column_size = (categories.size - categories.size%3)/3 + 1 %>
-				<% column_size = 7 if column_size < 7 %>
-			   <% for category in categories %>
-						<% if n % column_size == 0 %>
+				<% n = 0-%>
+				<% categories = Category.find(:all, :order => :name)-%>
+				<% column_size = (categories.size - categories.size%3)/3 + 1-%>
+				<% column_size = 7 if column_size < 7-%>
+			   <% for category in categories-%>
+						<% if n % column_size == 0-%>
 							</div>
 							<div class="column">
-						<% end %>
+						<% end-%>
 							<div class="category">
-			                <%= check_box_tag "user[category_ids][]", category.id, @user.categories.include?(category) %>
-			                <%= category.name %>	
+			                <%= check_box_tag "user[category_ids][]", category.id, @user.categories.include?(category)-%>
+			                <%= category.name-%>	
 							</div>
-						<% n += 1 %>
-			   <% end %>
+						<% n += 1-%>
+			   <% end-%>
 				</div>
 				<div class="clear_both"></div>
 		</div>
 
 		<div class="clear_both"></div>	
 	</div>
-<% end %>
+<% end-%>

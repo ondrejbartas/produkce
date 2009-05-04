@@ -7,18 +7,18 @@
     <th>Deleted</th>
   </tr>
 
-<% for comment in @comments %>
+<% for comment in @comments-%>
   <tr>
-    <td><%=h comment.date %></td>
-    <td><%=h comment.text %></td>
-    <td><%=h comment.deleted %></td>
-    <td><%= link_to 'Show', comment %></td>
-    <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-    <td><%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%=h comment.date-%></td>
+    <td><%=h comment.text-%></td>
+    <td><%=h comment.deleted-%></td>
+    <td><%= link_to 'Show', comment-%></td>
+    <td><%= link_to 'Edit', edit_comment_path(comment)-%></td>
+    <td><%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 
 <br />
 
-<%= link_to 'New comment', new_comment_path %>
+<%= link_to 'New comment', new_comment_path-%>

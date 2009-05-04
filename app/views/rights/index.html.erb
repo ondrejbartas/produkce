@@ -1,6 +1,6 @@
 <h2>Seznam práv pro uživatele</h2>
 <div class="menu_small">
-	<%= right_link "rights", "new", 'přidat práva', new_right_path %>
+	<%= right_link "rights", "new", 'přidat práva', new_right_path-%>
 </div>
 <table>
   <tr>
@@ -8,34 +8,34 @@
 	<th>akce</th>
 	<th>doplněk</th>
 	<th>vlastník</th>
-	<% for role in Role.find(:all)  %>
-      <th><%= role.comment.downcase %></th>
-  	<% end %>
+	<% for role in Role.find(:all) -%>
+      <th><%= role.comment.downcase-%></th>
+  	<% end-%>
   </tr>
 
-<% @rights.each do |right| %>
-  <tr  class="<%= cycle("even", "odd") %>">
+<% @rights.each do |right|-%>
+  <tr  class="<%= cycle("even", "odd")-%>">
 	 <td><%= right.controller -%></td>
 	 <td><%= right.action -%></td>
 	 <td><%= right.sub -%></td>
 	 <td><%= right.mine == true ? "X" : "-" -%></td>
 
-		<% for role in Role.find(:all)  %>
+		<% for role in Role.find(:all) -%>
 			<td>
-	        <%  if !right.value.blank? && right.value % role.idd == 0  %>
+	        <%  if !right.value.blank? && right.value % role.idd == 0 -%>
 	          X
-			  <% else %>
+			  <% else-%>
 				 -
-	        <% end %>
+	        <% end-%>
 			</td>
-      <% end %>
+      <% end-%>
 
 
-    <td><%= right_link "rights", "show", 'zobrazit', right %></td>
-    <td><%= right_link "rights", "edit", 'upravit', edit_right_path(right) %></td>
-    <td><%= right_delete_link "rights", "delete", 'smazat', right %></td>
+    <td><%= right_link "rights", "show", 'zobrazit', right-%></td>
+    <td><%= right_link "rights", "edit", 'upravit', edit_right_path(right)-%></td>
+    <td><%= right_delete_link "rights", "delete", 'smazat', right-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 
 <br />

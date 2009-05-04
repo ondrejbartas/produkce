@@ -1,6 +1,6 @@
 <h2>
 <div class="menu_small">
-<%= right_link "update_logs", "new", 'přidat update', new_update_log_path %>
+<%= right_link "update_logs", "new", 'přidat update', new_update_log_path-%>
 </div>
 Update log
 </h2>
@@ -11,10 +11,10 @@ Update log
     <th style="width:400px;">update</th>
   </tr>
 
-<% @update_logs.each do |update_log| %>
-  <tr  class="<%= cycle("even", "odd") %>">
-  	 <td><%= my_time update_log.created_at %></td>
-    <td  style="text-align:left;"><%=h update_log.note %></td>
+<% @update_logs.each do |update_log|-%>
+  <tr  class="<%= cycle("even", "odd")-%>">
+  	 <td><%= my_time update_log.created_at-%></td>
+    <td  style="text-align:left;"><%=h update_log.note-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>

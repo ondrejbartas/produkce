@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= right_link "warehouse_controls", "new", 'přidat kontrolu skladu' , new_warehouse_control_path  %>
+        <%= right_link "warehouse_controls", "new", 'přidat kontrolu skladu' , new_warehouse_control_path -%>
     </div>
     Seznam kontrol skladu
 </h2>
@@ -13,14 +13,14 @@
     <th>administrace</th>
   </tr>
 
-<% for warehouse_control in @warehouse_controls %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <td><%= my_time  warehouse_control.created_at %></td>
-    <td><%=h warehouse_control.user.name %></td>
-    <%= warehouse_control.missing_tapes.size > 0 ? "<td class='red'>chybí materiál</td>" : "<td>OK</td>" %>
-    <td><%= right_link "warehouse_controls", "show", 'zobrazit', warehouse_control %></td>
+<% for warehouse_control in @warehouse_controls-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <td><%= my_time  warehouse_control.created_at-%></td>
+    <td><%=h warehouse_control.user.name-%></td>
+    <%= warehouse_control.missing_tapes.size > 0 ? "<td class='red'>chybí materiál</td>" : "<td>OK</td>"-%>
+    <td><%= right_link "warehouse_controls", "show", 'zobrazit', warehouse_control-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 
 <br />

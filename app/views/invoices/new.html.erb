@@ -1,7 +1,7 @@
 <h2>Nový podklad k fakturaci</h2>
 
-<% form_for(@invoice) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@invoice) do |f|-%>
+  <%= f.error_messages-%>
 
 
 <table>
@@ -11,55 +11,55 @@
 	<th width="350">parametry</th>
 	<th>cena</th>
 </td>
-	<% for operation_type in OperationType.find(:all, :conditions => [" value != 6 "]) %>
+	<% for operation_type in OperationType.find(:all, :conditions => [" value != 6 "])-%>
 
-		<% if operation_type.value == 3 || operation_type.value == 4  #prepis vysilacka %>
+		<% if operation_type.value == 3 || operation_type.value == 4  #prepis vysilacka-%>
 			<% operations = Operation.find(:all, :include => [:work],:conditions => ["works.project_id = ? AND operations.operation_type_id = ?", @project.id, operation_type.id])%>
-			<% for operation in operations %>
+			<% for operation in operations-%>
 				<tr> 
 					<td> 
-						<%= operation_type.name %>
+						<%= operation_type.name-%>
 					</td>
 
-					  <% if operation_type.value == 3 %>
-                   <td>materiál : <%= show_name operation.tape_type %><%= operation.their_tape == true ? " vlastní" : ""%>,  
-                    počet kusů:<%= operation.value %></td>
-							<% if operation.their_tape == true %>
-								 <td><%=  operation.tape_type.master_price %>
-							<% else %>
-  						 		 <td><%= operation.tape_type.master_price + operation.tape_type.tape_price %></td>	
-							<% end %>
-                 <% elsif operation_type.value == 4 %>
-						<td><%= Machine.find_by_id(operation.player_machine_id).name %>
-                     -><%= Machine.find_by_id(operation.record_machine_id).name %>, 
-                     materiál : <%=  operation.tape_type.name %><%= operation.their_tape == true ? " vlastní" : "" %>, 
-                     kusů:<%= operation.value %></td>
-							<td><%= operation_type.price  %></td>
-                 <% end %>
+					  <% if operation_type.value == 3-%>
+                   <td>materiál : <%= show_name operation.tape_type-%><%= operation.their_tape == true ? " vlastní" : ""%>,  
+                    počet kusů:<%= operation.value-%></td>
+							<% if operation.their_tape == true-%>
+								 <td><%=  operation.tape_type.master_price-%>
+							<% else-%>
+  						 		 <td><%= operation.tape_type.master_price + operation.tape_type.tape_price-%></td>	
+							<% end-%>
+                 <% elsif operation_type.value == 4-%>
+						<td><%= Machine.find_by_id(operation.player_machine_id).name-%>
+                     -><%= Machine.find_by_id(operation.record_machine_id).name-%>, 
+                     materiál : <%=  operation.tape_type.name-%><%= operation.their_tape == true ? " vlastní" : ""-%>, 
+                     kusů:<%= operation.value-%></td>
+							<td><%= operation_type.price -%></td>
+                 <% end-%>
 				</tr>
-			<% end %>
-		<% else %>
+			<% end-%>
+		<% else-%>
 			<% operation_sum = Operation.sum("value", :include => [:work],:conditions => ["works.project_id = ? AND operations.operation_type_id = ?", @project.id, operation_type.id])%>
-			<% if operation_sum > 0 %>
+			<% if operation_sum > 0-%>
 				<tr>
-					<td><%= operation_type.name %></td>
-					<% if operation_type.value == 0 %>
-						<td><%= operation_sum %> minut</td>
-						<td><%= operation_type.price * operation_sum %></td>
-					<% elsif operation_type.value == 1 %>
-						<td><%= ((operation_sum- (operation_sum%60))/60) %>:<%= operation_sum%60 %> hodin</td>
+					<td><%= operation_type.name-%></td>
+					<% if operation_type.value == 0-%>
+						<td><%= operation_sum-%> minut</td>
+						<td><%= operation_type.price * operation_sum-%></td>
+					<% elsif operation_type.value == 1-%>
+						<td><%= ((operation_sum- (operation_sum%60))/60)-%>:<%= operation_sum%60-%> hodin</td>
 						<td><%= operation_type.price * operation_sum / 60%></td>
-					<% elsif operation_type.value == 2 %>
-						<td><%= operation_sum %> kusů</td>
-						<td><%= operation_type.price * operation_sum %></td>
-					<% end %>
+					<% elsif operation_type.value == 2-%>
+						<td><%= operation_sum-%> kusů</td>
+						<td><%= operation_type.price * operation_sum-%></td>
+					<% end-%>
 				</tr>
 			<% end%>
-		<% end %>
-	<% end %>
+		<% end-%>
+	<% end-%>
 </table>
 
   <p>
-    <%= f.submit "vytvořit" %>
+    <%= f.submit "vytvořit"-%>
   </p>
-<% end %>
+<% end-%>

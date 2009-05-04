@@ -1,33 +1,33 @@
 
-<% if not @places.blank? %>
-  <% if  @places.size > 0 %>
-    <%= label :work, 'place_id', 'pracovní místo:', :required => false %>
-    <%  if @selected.blank? %>
+<% if not @places.blank?-%>
+  <% if  @places.size > 0-%>
+    <%= label :work, 'place_id', 'pracovní místo:', :required => false-%>
+    <%  if @selected.blank?-%>
         <%= collection_select(:work, :place_id ,
           @places,
           :id, :name, {:include_blank => true} )%>
-    <%  else %>
+    <%  else-%>
         <%= collection_select(:work, :placet_id ,
           @places,
           :id, :name, {:selected_value => @selected, :include_blank => true})%>
-    <% end %>
-  <% end %>
+    <% end-%>
+  <% end-%>
 
-<% end %>
+<% end-%>
 
 <div class="operation">
     <ul>
         <li>
-          <% cas = Time.now.strftime("%s") %>
+          <% cas = Time.now.strftime("%s")-%>
           úkon:<%= collection_select 'work[operations_attributes][new_'+cas+']', :operation_type_id , @operation_types,
               :id, :name, {:include_blank => true}
-             %>
+            -%>
         </li>
 
          <li>poznámka:<%= text_field 'work[operations_attributes][new_'+cas+']', :note , :size=> 80%></li>
-         <% if @active_plan == "edit" %> <li>hotovo: <%= check_box 'work[operations_attributes][new_'+cas+']', :finished , :vlaue=>"1" %></li><% end %>
+         <% if @active_plan == "edit"-%> <li>hotovo: <%= check_box 'work[operations_attributes][new_'+cas+']', :finished , :vlaue=>"1"-%></li><% end-%>
          <li>
-               <%= link_to_function "smazat úkon", "$(this).up('.operation').remove(); " %>
+               <%= link_to_function "smazat úkon", "$(this).up('.operation').remove(); "-%>
          </li>
 
      </ul>

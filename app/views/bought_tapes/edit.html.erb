@@ -1,32 +1,32 @@
 <h1>Editing bought_tape</h1>
 
-<% form_for(@bought_tape) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@bought_tape) do |f|-%>
+  <%= f.error_messages-%>
 
   <p>
-    <%= f.label :tape_type_id %><br />
-    <%= f.text_field :tape_type_id %>
+    <%= f.label :tape_type_id-%><br />
+    <%= f.text_field :tape_type_id-%>
   </p>
   <p>
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
+    <%= f.label :price-%><br />
+    <%= f.text_field :price-%>
   </p>
   <p>
-    <%= f.label :value %><br />
-    <%= f.text_field :value %>
+    <%= f.label :value-%><br />
+    <%= f.text_field :value-%>
   </p>
   <p>
-    <%= f.label :note %><br />
-    <%= f.text_field :note %>
+    <%= f.label :note-%><br />
+    <%= f.text_field :note-%>
   </p>
   <p>
-    <%= f.label :purchase_date %><br />
-    <%= f.datetime_select :purchase_date %>
+    <%= f.label :purchase_date-%><br />
+    <%= f.datetime_select :purchase_date-%>
   </p>
   <p>
-    <%= f.submit "Update" %>
+    <%= f.submit "Update"-%>
   </p>
-<% end %>
+<% end-%>
 
-<%= link_to 'Show', @bought_tape %> |
-<%= link_to 'Back', bought_tapes_path %>
+<%= link_to 'Show', @bought_tape-%> |
+<%= link_to 'Back', bought_tapes_path-%>

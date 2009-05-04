@@ -1,16 +1,16 @@
 <h2>Typ pracovní činnosti</h2>
 <div class="menu_small">
-  	<%= right_link ( "job_types", "edit",'upravit', edit_job_type_path(@job_type)) %>
-   <%= right_delete_link ("job_types", "delete", 'smazat', @job_type ) %>
+  	<%= right_link ( "job_types", "edit",'upravit', edit_job_type_path(@job_type))-%>
+   <%= right_delete_link ("job_types", "delete", 'smazat', @job_type )-%>
 </div>
 <p>
   <b>název:</b>
-  <%=h @job_type.name %>
+  <%=h @job_type.name-%>
 </p>
 
 <p>
   <b>poznámka:</b>
-  <%=h @job_type.note %>
+  <%=h @job_type.note-%>
 </p>
 
 

@@ -1,19 +1,19 @@
 <h2>Nová kategorie pro kontakt recepce</h2>
 
 
-<% form_for(@reception_category) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@reception_category) do |f|-%>
+  <%= f.error_messages-%>
 
-	<%= error_messages_for :reception_category  %>
+	<%= error_messages_for :reception_category -%>
 	<p>
-	    <%= label :reception_category, 'name', 'název kategorie', :required => true %><br />
-	    <%= text_field :reception_category, :name %>
+	    <%= label :reception_category, 'name', 'název kategorie', :required => true-%><br />
+	    <%= text_field :reception_category, :name-%>
 	</p>
 	<p>
-	    <%= label :reception_category, 'icon', 'ikonka', :required => true %><br />
-	    <%= text_field :reception_category, :icon %>
+	    <%= label :reception_category, 'icon', 'ikonka', :required => true-%><br />
+	    <%= text_field :reception_category, :icon-%>
 	</p>
   <p>
-    <%= f.submit "vytvořit" %>
+    <%= f.submit "vytvořit"-%>
   </p>
-<% end %>
+<% end-%>

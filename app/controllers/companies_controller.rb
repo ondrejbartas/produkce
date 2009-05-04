@@ -95,25 +95,32 @@ class CompaniesController < ApplicationController
     
     
   def list
-     if params[:query].blank? 
-        @search_for = ""
-        @search_for_text =""
-     else
+     if params[:query].blank? && session["company_query"].blank?
+          session["company_query"] = ""
+          @search_for = ""
+          @search_for_text =""
+       else
+          if params[:query].blank?
+            params[:query] = session["company_query"]
+          end
         @search_for = "%#{params[:query]}%"
         @search_for_text = " AND ( LOWER(companies.name) LIKE '%"+@search_for.downcase+"%' OR "
         @search_for_text += "LOWER(users.fullname) LIKE '%"+@search_for.downcase+"%' ) "
      end
 
 
-       if params["sort"].blank?
+      if params["sort"].blank? && !session["company_sort"].blank?
+           params["sort"] = session["company_sort"]
+      elsif params["sort"].blank?
          params["sort"] = "company"
-       end
+      end
 
      sort = case params['sort']
             when "company"  then "companies.name"
             when "company_reverse"  then "companies.name DESC"
         end
-
+      
+      session["company_sort"] = sort
 
      conditions = [ "companies.deleted is null "+@search_for_text]
 

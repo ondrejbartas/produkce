@@ -1,0 +1,9 @@
+  <% if  @project.projects.size > 0-%>
+	<p>
+     <%= label :tape_sell, 'sub_project_id', 'pod projekt', :required => false-%>
+     <%= collection_select(:tape_sell, :sub_project_id, (@project.blank? ? [] : @project.projects.sort_by{|u| u.name}), :id, :name, :include_blank => false)-%>
+	</p>
+  <% else-%>
+        <%= hidden_field :tape_sell, :sub_project_id, :value=> ""-%>
+  <% end-%>
+

@@ -1,38 +1,38 @@
   
 <h2> 
      <div class="menu_small">
-      <%= right_owner_link "users", "edit", @user.id , 'upravit', edit_user_path(@user) %>
-      <%= right_delete_link "user", "delete", 'smazat', @user %>
+      <%= right_owner_link "users", "edit", @user.id , 'upravit', edit_user_path(@user)-%>
+      <%= right_delete_link "user", "delete", 'smazat', @user-%>
      </div>
-   UŽIVATEL: <%= @user.name.blank? ? "" : @user.name  %> <%= @user.surname.blank? ? "" : @user.surname  %>
+   UŽIVATEL: <%= @user.name.blank? ? "" : @user.name -%> <%= @user.surname.blank? ? "" : @user.surname -%>
 </h2>
  <ul>
- 	<% for company in @user.companies  %>
+ 	<% for company in @user.companies -%>
 	 	<li>firma:
-		       <b><%= right_show_link "companies", "show",  company.name, company %></b>
+		       <b><%= right_show_link "companies", "show",  company.name, company-%></b>
 	 	</li>
-	 <% end %>
+	 <% end-%>
      <li>práva uživatele:
-        <% for role in Role.find(:all)  %>
-          <%  if !@user.blank? && @user.role % role.idd == 0  %>
-            <%= role.comment.downcase %>,
-          <% end %>
-        <% end %>
+        <% for role in Role.find(:all) -%>
+          <%  if !@user.blank? && @user.role % role.idd == 0 -%>
+            <%= role.comment.downcase-%>,
+          <% end-%>
+        <% end-%>
       </li>
       <li>kategorie:
-        <% for category in @user.categories  %>
-            <%= category.name %>,
-        <% end %>
+        <% for category in @user.categories -%>
+            <%= category.name-%>,
+        <% end-%>
       </li>
  </ul>
 
  <h2>
      <div class="menu_small">
-       <%= right_owner_link "contacts", "new", @user.id, 'přidat kontakt', new_user_contact_path(@user)  %>
+       <%= right_owner_link "contacts", "new", @user.id, 'přidat kontakt', new_user_contact_path(@user) -%>
      </div>
    KONTAKT NA UŽIVATELE
  </h2>
  
- <div id="contacts"><%= link_to_remote "zobrazit", :update => 'contacts', :url => { :controller => 'contacts', :action => 'render_index', :id => @user.id } %></div>
+ <div id="contacts"><%= link_to_remote "zobrazit", :update => 'contacts', :url => { :controller => 'contacts', :action => 'render_index', :id => @user.id }-%></div>
 
   

@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-      <%= right_link ("reception_categories", "new", 'přidat kategorii', new_reception_category_path ) %>
+      <%= right_link ("reception_categories", "new", 'přidat kategorii', new_reception_category_path )-%>
     </div>
     Seznam kategorií
 </h2>
@@ -11,13 +11,13 @@
     <th>administrace</th>
   </tr>
 
-<% for reception_category in @reception_categories %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <td><%= reception_category.name  %></td>
-    <td><%= reception_category.icon  %></td>
-    <td><%= right_link ("reception_categories", "edit", "upravit", edit_reception_category_path(reception_category) ) %></td>
+<% for reception_category in @reception_categories-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <td><%= reception_category.name -%></td>
+    <td><%= reception_category.icon -%></td>
+    <td><%= right_link ("reception_categories", "edit", "upravit", edit_reception_category_path(reception_category) )-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 
 <br />

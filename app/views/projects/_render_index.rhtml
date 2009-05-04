@@ -1,22 +1,22 @@
-<% if  @company.projects.size > 0 %>
-    <% for proj in @company.projects %>
-        <h3>Projekt: <%=h proj.name %>
+<% if  @company.projects.size > 0-%>
+    <% for proj in @company.projects-%>
+        <h3>Projekt: <%=h proj.name-%>
             <div class="menu_small">
-                <%= right_link "projects", "edit", 'upravit projekt', edit_project_path(proj) %>
+                <%= right_link "projects", "edit", 'upravit projekt', edit_project_path(proj)-%>
             </div>
         </h3>
             <table class="odstavec2">
                 <tr><td>poznámka: </td><td><strong>
-                    <%=h proj.note %>
+                    <%=h proj.note-%>
                 </strong></td></tr>
-                <tr><td>Stav: </td><td><strong><%=h proj.status %></strong></td></tr>
+                <tr><td>Stav: </td><td><strong><%=h proj.status-%></strong></td></tr>
             </table>
 
 
             <h3>PRÁCE</h3>
-              <%= render :partial => 'works/index',:locals => {:works => proj.works} %>
+              <%= render :partial => 'works/index',:locals => {:works => proj.works}-%>
 
             <h3>Source information &amp; media</h3>
             <div><a href="">documentation.pdf</a>, <a href="">video.iso</a></div>
-    <% end %>
-<% end %>
+    <% end-%>
+<% end-%>

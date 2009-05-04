@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  date: 2009-05-04 22:32:24
+  project_id: 1
+  tape_type_id: 1
+  value: 
+  user_id: 1
+  note: MyString
+
+two:
+  date: 2009-05-04 22:32:24
+  project_id: 1
+  tape_type_id: 1
+  value: 
+  user_id: 1
+  note: MyString

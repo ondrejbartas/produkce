@@ -1,24 +1,24 @@
 <div class="user_list">
 
-<% if @current_user.admin? %>
-	<%= render (:partial => 'users/filter') %>
-<% end %>
+<% if @current_user.admin?-%>
+	<%= render (:partial => 'users/filter')-%>
+<% end-%>
 
-<% letter = "z" %>
-<% for user in users %>
-      <% if letter.downcase != user.surname[0,1].downcase %>
-    <% if letter != "z" %> </ul> <% end %>
-        <%  letter = user.surname[0,1] %>
-        <h3> <%=  letter.capitalize %></h3>
+<% letter = "z"-%>
+<% for user in users-%>
+      <% if letter.downcase != user.surname[0,1].downcase-%>
+    <% if letter != "z"-%> </ul> <% end-%>
+        <%  letter = user.surname[0,1]-%>
+        <h3> <%=  letter.capitalize-%></h3>
         <ul>
-      <% end %>
-      <li><%= right_show_link "users", "show", user.surname+" "+user.name, user %>
+      <% end-%>
+      <li><%= right_show_link "users", "show", user.surname+" "+user.name, user-%>
 					<span id="contacts_<%= user.id%>">
 							<%= link_to_remote "- kontakt", 
 										:update => "contacts_"+user.id.to_s, 
 										:url => { :controller => 'contacts', 
-														:action => 'render_index', :id => user.id } %>
+														:action => 'render_index', :id => user.id }-%>
 					</span>
   		</li>
-<% end %>
+<% end-%>
 </ul>

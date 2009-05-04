@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090504173748) do
+ActiveRecord::Schema.define(:version => 20090504203224) do
 
   create_table "bordel", :id => false, :force => true do |t|
     t.string  "name"
@@ -276,6 +276,17 @@ ActiveRecord::Schema.define(:version => 20090504173748) do
     t.integer  "system_comment_id"
     t.boolean  "storno"
     t.boolean  "archiv"
+  end
+
+  create_table "tape_sells", :force => true do |t|
+    t.datetime "date"
+    t.integer  "project_id"
+    t.integer  "tape_type_id"
+    t.integer  "value"
+    t.integer  "user_id"
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tape_types", :force => true do |t|

@@ -9,15 +9,15 @@
     <th>poznámka</th>
   </tr>
 
-<% for contact in @contacts %>
+<% for contact in @contacts-%>
   <tr>
-    <td><%= right_owner_link ( "contacts", "show", contact.user_id, contact.user.name, contact) %></td>
-    <td><%=h contact.address %></td>
-    <td><%=h contact.email %></td>
-    <td><%=h contact.phone %></td>
-    <td><%=h contact.note %></td>
+    <td><%= right_owner_link ( "contacts", "show", contact.user_id, contact.user.name, contact)-%></td>
+    <td><%=h contact.address-%></td>
+    <td><%=h contact.email-%></td>
+    <td><%=h contact.phone-%></td>
+    <td><%=h contact.note-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 
 <br />

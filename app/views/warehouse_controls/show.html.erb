@@ -1,17 +1,17 @@
 <h2>Kontrola skladu</h2>
 <p>
   <b>provedl:</b>
-  <%=h @warehouse_control.user.name %>
+  <%=h @warehouse_control.user.name-%>
 </p>
 
 <p>
   <b>čas kontroly:</b>
-  <%= my_time  @warehouse_control.created_at %>
+  <%= my_time  @warehouse_control.created_at-%>
 </p>
 
 <p>
   <b>poznámka:</b>
-  <%= @warehouse_control.note %>
+  <%= @warehouse_control.note-%>
 </p>
 
 <table>
@@ -19,10 +19,10 @@
         <th>typ kazety</th>
         <th>počet kusů</th>
     </tr>
-  <% @warehouse_control.missing_tapes.each do |missing_tape| %>
+  <% @warehouse_control.missing_tapes.each do |missing_tape|-%>
       <tr>
-        <th><%= TapeType.find_by_id(missing_tape.tape_type_id).name %></th>
-        <td class="red">-<%= missing_tape.value %></td>
+        <th><%= TapeType.find_by_id(missing_tape.tape_type_id).name-%></th>
+        <td class="red">-<%= missing_tape.value-%></td>
     </tr>
-  <% end %>
+  <% end-%>
 </table>

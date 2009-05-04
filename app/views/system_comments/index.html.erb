@@ -1,14 +1,14 @@
 <h2>
 <div class="menu_small">
-<%= right_link "system_comments", "new", 'přidat koment', new_system_comment_path %>
+<%= right_link "system_comments", "new", 'přidat koment', new_system_comment_path-%>
 </div>
 komenty k systému</h2>
 
 <ul class="comments">
-<% @system_comments.each do |system_comment| %>
-	<% if system_comment.showed != true %>
-		<% id = system_comment.get_parrent %>
-		<%= system_comment_show( id, false) %>
-	<% end %>
-<% end %>
+<% @system_comments.each do |system_comment|-%>
+	<% if system_comment.showed != true-%>
+		<% id = system_comment.get_parrent-%>
+		<%= system_comment_show( id, false)-%>
+	<% end-%>
+<% end-%>
 </ul>

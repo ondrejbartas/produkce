@@ -8,6 +8,15 @@ class ProjectsController < ApplicationController
     end
     render(:layout=>false)
   end
+
+  # GET /projects/render_sub_project
+  def render_sub_project_sell
+    unless params[:project_id].blank?
+      @project = Project.find_by_id(params[:project_id])
+    end
+    render(:layout=>false)
+  end
+
  # GET /projects/render_project
   def render_project
     unless params[:company_id].blank?
@@ -147,10 +156,14 @@ class ProjectsController < ApplicationController
            @filter = params[:filter]
         end
 
-       if params[:query].blank? 
+       if params[:query].blank? && session["project_query"].blank?
+          session["project_query"] = ""
           @search_for = ""
           @search_for_text =""
        else
+          if params[:query].blank?
+            params[:query] = session["project_query"]
+          end
           @search_for = "%#{params[:query]}%"
           @search_for_text = " AND ( LOWER(companies.name) LIKE '%"+@search_for.downcase+"%' OR "
           @search_for_text += "LOWER(projects.note) LIKE '%"+@search_for.downcase+"%' OR "
@@ -167,9 +180,14 @@ class ProjectsController < ApplicationController
              filter_text += "projects.status = "+key
            end
          }
-         if params["sort"].blank?
+         
+         
+         if params["sort"].blank? && !session["project_sort"].blank?
+           params["sort"] = session["project_sort"]
+         elsif params["sort"].blank? 
            params["sort"] = "name"
          end
+         
 
        sort = case params['sort']
               when "name"  then "name"
@@ -181,6 +199,8 @@ class ProjectsController < ApplicationController
               when "status"  then "projects.status"
               when "status_reverse"  then "projects.status DESC"
               end
+      
+        session["project_sort"] = sort
 
        
        conditions = [ "projects.deleted is null"+@search_for_text+" "]

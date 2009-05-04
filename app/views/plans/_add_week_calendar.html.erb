@@ -1,20 +1,20 @@
-<h3><%= my_date Time.now.beginning_of_week + @start_date.days %> - <%= my_date Time.now.beginning_of_week + @start_date.days + 7.days %> </h3>
+<h3><%= my_date Time.now.beginning_of_week + @start_date.days-%> - <%= my_date Time.now.beginning_of_week + @start_date.days + 7.days-%> </h3>
 
 <table class="calendar">
 
     <tr>
         <th width="70">datum</th>
 
-        <% for place in @places %>
+        <% for place in @places-%>
             <th width="90">
 					<div class="div_with_float">
 						<a onMouseOver="show_float_div('float_place_<%= place.id -%>_<%= @start_date -%>');" onMouseOut="show_float_div('float_place_<%= place.id -%>_<%= @start_date  -%>');">
-							<%= place.name %>
+							<%= place.name-%>
 						</a>
 						<div style="margin-top:15px;margin-left:-60px;display:none" class="floating_div" id="float_place_<%= place.id -%>_<%= @start_date  -%>">
 							<div class='floating_div_top'></div>
 							<div class='floating_div_body'>
-								<%= place.note %>
+								<%= place.note-%>
 							</div>
 							<div class='floating_div_bottom'></div>
 						</div>
@@ -25,27 +25,27 @@
 
 
 				</th>
-        <% end %>
+        <% end-%>
     </tr>
 
-    <%  7.times { |n|  %>
-        <% table_day = Time.now.beginning_of_week + @start_date.days + n.days %>
+    <%  7.times { |n| -%>
+        <% table_day = Time.now.beginning_of_week + @start_date.days + n.days-%>
         <tr height="30" >
             <th <% if Time.today ==  table_day -%>
 		                class="today"
 		            <%  elsif n > 4 -%>
 		                class="weekend"
 		            <% end -%>
-				><%= day_names(n) %> <%= my_date table_day %> </th>
-            <% for place in @places %>
-                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND date = :table_date ', {:place => place.id, :table_date => table_day }]).sort_by {|u| u.time} %>
-							<% day_place_id = "calendar_"+table_day.strftime("%s")+"_"+place.id.to_s %>
-                    <td id="<%= day_place_id %>">
-                        <% if planed_works.size > 0 %>
-                            <% for planed_work in planed_works %>
-                                <%= render :partial => 'plans/add_cell', :locals => {:planed_work => planed_work} %>
-                            <% end %>
-                        <% end %>
+				><%= day_names(n)-%> <%= my_date table_day-%> </th>
+            <% for place in @places-%>
+                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND date = :table_date ', {:place => place.id, :table_date => table_day }]).sort_by {|u| u.time}-%>
+							<% day_place_id = "calendar_"+table_day.strftime("%s")+"_"+place.id.to_s-%>
+                    <td id="<%= day_place_id-%>">
+                        <% if planed_works.size > 0-%>
+                            <% for planed_work in planed_works-%>
+                                <%= render :partial => 'plans/add_cell', :locals => {:planed_work => planed_work}-%>
+                            <% end-%>
+                        <% end-%>
                     </td>
 							<%= drop_receiving_element(day_place_id,                             # The id of the receiving element
 							  :accept => "planed_work_"+place.job_types[0].id.to_s,                                         # The CSS class of the dropped element
@@ -62,8 +62,8 @@
 							  					:show_type => @filtr_show_type }                          # The action to call
 							)%>
 
-            <% end %>
+            <% end-%>
 
         </tr>
-    <% } %>
+    <% }-%>
 </table>

@@ -20,10 +20,28 @@ class WarehouseControlsController < ApplicationController
     end
   end
 
+  def show_used_tapes
+    operation_types = OperationType.find(:all, :conditions => ["value = 3 OR value = 4 "])
+    
+    conditions = ""
+    for operation_type in operation_types 
+        conditions += " OR " if conditions.size > 4
+        conditions += "operation_type_id = "+operation_type.id.to_s
+    end
+    
+    @operations = Operation.find(:all, :conditions => conditions, :order => "created_at DESC")
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @warehouse_controls }
+    end
+  end
+
   def show_sold_tapes
      operation_type = OperationType.find(:all, :conditions => ["value = 5"]).first
      @operations = Operation.find(:all, :conditions => ["operation_type_id = "+operation_type.id.to_s], :order => "created_at DESC")
 
+     @tape_sells = TapeSell.find(:all ,:order => "created_at DESC")
      respond_to do |format|
        format.html # index.html.erb
        format.xml  { render :xml => @warehouse_controls }

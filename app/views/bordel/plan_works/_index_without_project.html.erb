@@ -10,17 +10,17 @@
 	
 <% for work in Work.find(:all, :conditions => ["project_id is null"])%>
 	<tr>
-		<td><%= my_time work.created_at %></td>
-		<td><%= work.user.name %></td>
-		<td><%= work.note %></td>
+		<td><%= my_time work.created_at-%></td>
+		<td><%= work.user.name-%></td>
+		<td><%= work.note-%></td>
 		<td>
-			<% for operation in work.operations %>
-				<%= operation.operation_type.name %>,
-			<% end %>
+			<% for operation in work.operations-%>
+				<%= operation.operation_type.name-%>,
+			<% end-%>
 		</td>
 		<td>
 			<%= link_to "upravit", edit_without_project_plan_work_path(work)%>
 		</td>
 	</tr>	
-<% end %>
+<% end-%>
 </table>

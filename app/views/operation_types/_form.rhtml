@@ -1,27 +1,27 @@
-<%= error_messages_for :operation_type  %>
+<%= error_messages_for :operation_type -%>
 <p>
-    <%= label :operation_type, 'name', 'název pracovního úkonu', :required => true %><br />
-    <%= text_field :operation_type, :name %>
+    <%= label :operation_type, 'name', 'název pracovního úkonu', :required => true-%><br />
+    <%= text_field :operation_type, :name-%>
 </p>
 <p>
-      <%= label :operation_type, 'value', 'typ úkonu', :required => true %><br />
+      <%= label :operation_type, 'value', 'typ úkonu', :required => true-%><br />
       <%= select :operation_type, :value, OperationType::TYPE_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
 </p>
 <p>
-    <%= label :operation_type, 'price', 'cena úkonu', :required => true %><br />
-    <%= text_field :operation_type, :price %>
+    <%= label :operation_type, 'price', 'cena úkonu', :required => true-%><br />
+    <%= text_field :operation_type, :price-%>
 </p>
 <p>
-    <%= label :operation_type, 'note', 'poznámka', :required => false %><br />
-    <%= text_field :operation_type, :note %>
+    <%= label :operation_type, 'note', 'poznámka', :required => false-%><br />
+    <%= text_field :operation_type, :note-%>
 </p>
 
 
-<% if @current_user.admin? || @current_user.produce? %>
-    <%= label :place, 'role', 'vyberte typy pracovních činností', :required => false %><br />
+<% if @current_user.admin? || @current_user.produce?-%>
+    <%= label :place, 'role', 'vyberte typy pracovních činností', :required => false-%><br />
 
-   <% for job_type in JobType.find(:all, :order => :name) %>
-                <%= check_box_tag "operation_type[job_type_ids][]", job_type.id, @operation_type.job_types.include?(job_type) %>
-                <%= job_type.name %>
-   <% end %>
-<% end %>
+   <% for job_type in JobType.find(:all, :order => :name)-%>
+                <%= check_box_tag "operation_type[job_type_ids][]", job_type.id, @operation_type.job_types.include?(job_type)-%>
+                <%= job_type.name-%>
+   <% end-%>
+<% end-%>

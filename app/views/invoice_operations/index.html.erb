@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= right_link "invoice_operatons", "new",'nový předdefinovaný úkon k fakturaci', new_invoice_operation_path %>
+        <%= right_link "invoice_operatons", "new",'nový předdefinovaný úkon k fakturaci', new_invoice_operation_path-%>
     </div>
     Seznam předdefinovaných úkonů k fakturaci
 </h2>
@@ -13,14 +13,14 @@
     <th colspan="2">administrace</th>
   </tr>
 
-<% for invoice_operation in @invoice_operations %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <td><%=h invoice_operation.name %></td>
-    <td><%=h invoice_operation.price %></td>
-    <td><%=h invoice_operation.note %></td>
+<% for invoice_operation in @invoice_operations-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <td><%=h invoice_operation.name-%></td>
+    <td><%=h invoice_operation.price-%></td>
+    <td><%=h invoice_operation.note-%></td>
     <td><%= right_link ("invoice_operatons", "edit", 'upravit', edit_invoice_operation_path(invoice_operation) )%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 
 <br />

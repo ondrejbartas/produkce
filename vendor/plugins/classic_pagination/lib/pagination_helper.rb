@@ -3,8 +3,8 @@ module ActionView
     # Provides methods for linking to ActionController::Pagination objects using a simple generator API.  You can optionally
     # also build your links manually using ActionView::Helpers::AssetHelper#link_to like so:
     #
-    # <%= link_to "Previous page", { :page => paginator.current.previous } if paginator.current.previous %>
-    # <%= link_to "Next page", { :page => paginator.current.next } if paginator.current.next %>
+    # <%= link_to "Previous page", { :page => paginator.current.previous } if paginator.current.previous-%>
+    # <%= link_to "Next page", { :page => paginator.current.next } if paginator.current.next-%>
     module PaginationHelper
       unless const_defined?(:DEFAULT_OPTIONS)
         DEFAULT_OPTIONS = {

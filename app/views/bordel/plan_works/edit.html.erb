@@ -1,22 +1,22 @@
-<% if @add_operation == false %>
+<% if @add_operation == false-%>
 <h2>Upravit naplánovanou práci</h2>
 
-<% form_for(@plan_work) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@plan_work) do |f|-%>
+  <%= f.error_messages-%>
 <ul>
-    <li>projekt: <%= project_name  @plan_work.project %>
+    <li>projekt: <%= project_name  @plan_work.project-%>
     </li>
 </ul>
 
 	<span id="work_user_id_container">
 
-	    <% if @plan_work.user.role % 5 == 0 %>
-	        <%  @chosed_role = 5 %>
-	    <% else %>
-	        <% @chosed_role = 17  %>
-	    <% end %>
+	    <% if @plan_work.user.role % 5 == 0-%>
+	        <%  @chosed_role = 5-%>
+	    <% else-%>
+	        <% @chosed_role = 17 -%>
+	    <% end-%>
 	    <p>
-	        <%= label 'work', 'user_id', 'operátor', :required => false %>
+	        <%= label 'work', 'user_id', 'operátor', :required => false-%>
 	        <%= f.collection_select( :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ),
 	              :id, :fullname, {:include_blank => true} )%>
 
@@ -25,19 +25,19 @@
 	                {:onchange => remote_function( :update => 'work_user_id_container', :url =>
 	                  add_user_plan_works_path, :with =>
 	                    "'job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
-	        %>
+	       -%>
 	    </p>
 	</span>
 
 	<ul>
-	      <% @plan_work.date = @plan_work.time.beginning_of_day %>
-	      <% @time2 = @plan_work.time.strftime("%H").to_i * 60 +  @plan_work.time.strftime("%M").to_i %>
+	      <% @plan_work.date = @plan_work.time.beginning_of_day-%>
+	      <% @time2 = @plan_work.time.strftime("%H").to_i * 60 +  @plan_work.time.strftime("%M").to_i-%>
 	      <li>od:
 	          <select id="work_time" name="work[time]">
-	            <%=   options_for_select(Work::TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]}, @time2) %>
+	            <%=   options_for_select(Work::TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]}, @time2)-%>
 	          </select>
 	      </li>
-	      <li>na:<%= f.select  :length, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]} %></li>
+	      <li>na:<%= f.select  :length, Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]}-%></li>
 	      <li>rezervace:<%= f.check_box  :reserved , :value=> true%></li>
 	</ul>
 
@@ -45,71 +45,71 @@
 
 	<div id="calendar_container">
 	<ul >
-	    <li>datum: <%= my_date @plan_work.date  %></li>
-	    <li>místo: <%= @plan_work.place.name %>  </li>
+	    <li>datum: <%= my_date @plan_work.date -%></li>
+	    <li>místo: <%= @plan_work.place.name-%>  </li>
 	    <li> <%= link_to_remote "upravit místo a čas",
 	           :url => { :action => "add_edit_calendar", :work_id => @plan_work.id , :start_date=> 0 },
-	           :update =>  'calendar_container', :with => "'user_id='+ document.getElementById(\'work_user_id\').value" %>
+	           :update =>  'calendar_container', :with => "'user_id='+ document.getElementById(\'work_user_id\').value"-%>
 
 	    </li>
 	</ul>
-	<%= f.hidden_field( :place_id, :value=> @plan_work.place_id ) %>
-	<%= f.hidden_field( :date, :value=> @plan_work.date ) %>
+	<%= f.hidden_field( :place_id, :value=> @plan_work.place_id )-%>
+	<%= f.hidden_field( :date, :value=> @plan_work.date )-%>
 
 
 	</div>
 	<h3>úkony</h3>
-	<% if not @operation_types.blank? %>
+	<% if not @operation_types.blank?-%>
 	<ul id="operations">
-	        <% for operation in @plan_work.operations  %>
-	            <%= render :partial => 'add_operation', :locals => { :operation => operation } %>
-	        <% end %>
+	        <% for operation in @plan_work.operations -%>
+	            <%= render :partial => 'add_operation', :locals => { :operation => operation }-%>
+	        <% end-%>
 
 	</ul>
 
 	<ul><li>    <%= link_to_remote "+ přidat úkon +",
 	           :url => { :action => "add_operation", :job_type_id => @job_type.id, :operation=>""},
-	           :update =>  "operations" , :position => :bottom %>
+	           :update =>  "operations" , :position => :bottom-%>
 	</li></ul>
-	<% end %>
-	<%= f.submit "upravit" %>
+	<% end-%>
+	<%= f.submit "upravit"-%>
 
 
-	<% end %>
-<% else %>
+	<% end-%>
+<% else-%>
 
 <h2>Přidat úkony k práci</h2>
 
-<% form_for(@plan_work) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@plan_work) do |f|-%>
+  <%= f.error_messages-%>
 <ul>
-    <li>projekt: <%= project_name  @plan_work.project %>
+    <li>projekt: <%= project_name  @plan_work.project-%>
     </li>
 </ul>
 
-	<%= hidden_field_tag( :add_operation,  "true" ) %>
-	<%= f.hidden_field( :place_id, :value=> @plan_work.place_id ) %>
-	<%= f.hidden_field( :time, :value=> (@plan_work.time.strftime("%H").to_i * 60 +  @plan_work.time.strftime("%M").to_i ) ) %>
-	<%= f.hidden_field( :date, :value=> @plan_work.date ) %>
+	<%= hidden_field_tag( :add_operation,  "true" )-%>
+	<%= f.hidden_field( :place_id, :value=> @plan_work.place_id )-%>
+	<%= f.hidden_field( :time, :value=> (@plan_work.time.strftime("%H").to_i * 60 +  @plan_work.time.strftime("%M").to_i ) )-%>
+	<%= f.hidden_field( :date, :value=> @plan_work.date )-%>
 
 	<h3>úkony</h3>
-	<% if not @operation_types.blank? %>
+	<% if not @operation_types.blank?-%>
 	<ul id="operations">
-	            <%= render :partial => 'add_finished_operation'  %>
+	            <%= render :partial => 'add_finished_operation' -%>
 
 	</ul>
 
 	<ul>
 			<li>    <%= link_to_remote "+ přidat úkon +",
 	      	     :url => { :action => "add_finished_operation", :job_type_id => @job_type.id, :operation=>""},
-		           :update =>  "operations" , :position => :bottom %>
+		           :update =>  "operations" , :position => :bottom-%>
 			</li>
 	</ul>
-<% end %>
+<% end-%>
 
-<%= f.submit "přidat" %>
+<%= f.submit "přidat"-%>
 
 
-<% end %>
-<% end %>
+<% end-%>
+<% end-%>
 

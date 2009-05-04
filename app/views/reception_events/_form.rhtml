@@ -1,43 +1,43 @@
-<% form_for(@reception_event) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@reception_event) do |f|-%>
+  <%= f.error_messages-%>
 
   <p>
     <%= label 'reception_event', "name" ,"titulek"%><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name-%>
   </p>
   <p>
-    <%= label 'reception_event', "note", "poznámka" %><br />
-    <%= f.text_area  :note, :cols=>60, :rows=>5 %>
-  </p>
-
-  <p>
-    <%= label 'reception_event', "from", "od" %><br />
-    <%= f.date_select :from %>
-  </p>
-  <p>
-    <%= label 'reception_event', "to", "do" %><br />
-    <%= f.date_select :to %>
+    <%= label 'reception_event', "note", "poznámka"-%><br />
+    <%= f.text_area  :note, :cols=>60, :rows=>5-%>
   </p>
 
   <p>
-    <%= label 'reception_event', "parking", "parkování" %><br />
-    <%= f.check_box :parking , {} , "true", "false" %>
+    <%= label 'reception_event', "from", "od"-%><br />
+    <%= f.date_select :from-%>
   </p>
   <p>
-    <%= label 'reception_event', "alert", "problém" %><br />
-    <%= f.check_box :alert , {} , "true", "false" %>
+    <%= label 'reception_event', "to", "do"-%><br />
+    <%= f.date_select :to-%>
+  </p>
+
+  <p>
+    <%= label 'reception_event', "parking", "parkování"-%><br />
+    <%= f.check_box :parking , {} , "true", "false"-%>
   </p>
   <p>
-    <%= label 'reception_event', "notice", "upoznornění" %><br />
-    <%= f.check_box :notice , {} , "true", "false" %>
+    <%= label 'reception_event', "alert", "problém"-%><br />
+    <%= f.check_box :alert , {} , "true", "false"-%>
+  </p>
+  <p>
+    <%= label 'reception_event', "notice", "upoznornění"-%><br />
+    <%= f.check_box :notice , {} , "true", "false"-%>
   </p>
 
 
   <p>
-	<% if controller.action_name == "new" %>
-    	<%= f.submit "přidat" %>
-	<% elsif controller.action_name == "edit" %>
-   	<%= f.submit "upravit" %>
+	<% if controller.action_name == "new"-%>
+    	<%= f.submit "přidat"-%>
+	<% elsif controller.action_name == "edit"-%>
+   	<%= f.submit "upravit"-%>
 	<% end -%>
   </p>
 <% end -%>

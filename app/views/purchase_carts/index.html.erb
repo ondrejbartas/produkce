@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= right_link "purchase_carts", "new", 'nový nákup', new_purchase_cart_path %>
+        <%= right_link "purchase_carts", "new", 'nový nákup', new_purchase_cart_path-%>
     </div>
     Nákupy kazet
 </h2>
@@ -15,18 +15,18 @@
     <th colspan="3">administrace</th>
   </tr>
 
-<% for purchase_cart in @purchase_carts %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <td><%=h purchase_cart.store %></td>
-    <td><%=h purchase_cart.url %></td>
-    <td><%= my_date(purchase_cart.purchase_date) %></td>
-    <td><%= link_to purchase_cart.user.fullname, purchase_cart.user %></td>
-    <td><%=h purchase_cart.note %></td>
-    <td><%= right_link "purchase_carts", "show", 'zobrazit', purchase_cart %></td>
-    <td><%= right_link "purchase_carts", "edit", 'upravit', edit_purchase_cart_path(purchase_cart) %></td>
-    <td><%= right_delete_link "purchase_carts", "delete", 'smazat', purchase_cart %></td>
+<% for purchase_cart in @purchase_carts-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <td><%=h purchase_cart.store-%></td>
+    <td><%=h purchase_cart.url-%></td>
+    <td><%= my_date(purchase_cart.purchase_date)-%></td>
+    <td><%= link_to purchase_cart.user.fullname, purchase_cart.user-%></td>
+    <td><%=h purchase_cart.note-%></td>
+    <td><%= right_link "purchase_carts", "show", 'zobrazit', purchase_cart-%></td>
+    <td><%= right_link "purchase_carts", "edit", 'upravit', edit_purchase_cart_path(purchase_cart)-%></td>
+    <td><%= right_delete_link "purchase_carts", "delete", 'smazat', purchase_cart-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 
 <br />

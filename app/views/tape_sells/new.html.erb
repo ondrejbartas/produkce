@@ -1,0 +1,10 @@
+<h2>přidat prodej kazet</h2>
+<% form_for(@tape_sell) do |f|-%>
+  <%= f.error_messages-%>
+
+  <%= render :partial => 'tape_sells/form'-%>
+
+  <p>
+    <%= f.submit 'přidat'-%>
+  </p>
+<% end-%>

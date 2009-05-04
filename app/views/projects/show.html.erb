@@ -1,56 +1,56 @@
 <h2>
     <div class="menu_small">
-        <%= right_link "projects", "edit", 'upravit projekt', edit_project_path(@project) %>
+        <%= right_link "projects", "edit", 'upravit projekt', edit_project_path(@project)-%>
     </div>
     Projekt: <%=h project_name(@project)%>
 </h2>
 <table>
-    <% if not @project.project.blank? %>
-        <tr><td>Hlavní projekt: </td><td><strong>  <%= link_to @project.project.name, @project.project %></strong></td></tr>
-    <% end %>
-    <tr><td>firma: </td><td><strong>  <%= link_to @project.company.name, @project.company %></strong></td></tr>
-    <tr><td>zadal: </td><td><strong>  <%= link_to @project.user.fullname, @project.user %></strong></td></tr>
-    <tr><td>Stav: </td><td><strong><%= project_status @project %></strong></td></tr>
+    <% if not @project.project.blank?-%>
+        <tr><td>Hlavní projekt: </td><td><strong>  <%= link_to @project.project.name, @project.project-%></strong></td></tr>
+    <% end-%>
+    <tr><td>firma: </td><td><strong>  <%= link_to @project.company.name, @project.company-%></strong></td></tr>
+    <tr><td>zadal: </td><td><strong>  <%= (link_to @project.user.fullname, @project.user) if !@project.user_id.blank? -%></strong></td></tr>
+    <tr><td>Stav: </td><td><strong><%= project_status @project-%></strong></td></tr>
     <tr><td>poznámka: </td><td>
-        <%=h @project.note %>
+        <%=h @project.note-%>
     </td></tr>
  </table>
 
 
-<% if @project.project_id.blank? %>
+<% if @project.project_id.blank?-%>
 <h3>
     <div class="menu_small">
-        <%= right_link "projects", "new", 'přidat podprojekt', new_project_project_path(@project) %>
+        <%= right_link "projects", "new", 'přidat podprojekt', new_project_project_path(@project)-%>
     </div>
     Seznam subprojektů
 </h3>
 <ul>
- <% for proj in @project.projects %>
-      <li><%= link_to proj.name, proj  %></li>
+ <% for proj in @project.projects-%>
+      <li><%= link_to proj.name, proj -%></li>
 
-<% end %>
+<% end-%>
 </ul>
 
-<% end %>
+<% end-%>
 
 
 
 <h3>
-    <% if @project.status == 1 %>
-		<% if !@project.project_id.blank? || @project.projects.size == 0 %>
+    <% if @project.status == 1-%>
+		<% if !@project.project_id.blank? || @project.projects.size == 0-%>
         <div class="menu_small">
-            <%= right_link "works", "new", 'naplánovat práci', new_project_work_path(@project) %>
+            <%= right_link "works", "new", 'naplánovat práci', new_project_work_path(@project)-%>
         </div>
-		<% else %>
+		<% else-%>
 	      <div class="menu_small red">
 	          k hlavnímu projektu se nedá plánovat práce
 	      </div>		
-		<% end %>
-    <% else  %>
+		<% end-%>
+    <% else -%>
         <div class="menu_small red">
             projekt nelze naplánovat: není ve stavu <i>zakázka</i>
         </div>
-    <% end %>
+    <% end-%>
     Práce
 </h3>
 
@@ -68,50 +68,50 @@
 
   </tr>
 
-<% for work in @project.works.find(:all, :conditions => ["deleted is null"], :order => "time") %>
-	<% if  work.reserved == true %>
+<% for work in @project.works.find(:all, :conditions => ["deleted is null"], :order => "time")-%>
+	<% if  work.reserved == true-%>
 	    <tr class="reserved">
-	  <% elsif work.operations.size == 0 %>
+	  <% elsif work.operations.size == 0-%>
  		 <tr class="nooperations">
-	  <% else %>
-			<% finished = true %>
-			<% problem = false %>
+	  <% else-%>
+			<% finished = true-%>
+			<% problem = false-%>
 	   	<% for operation in work.operations -%>
 				<% if operation.finished.blank? -%>
-					<% if work.date < Time.now.beginning_of_day %>
-						<% problem = true %>
-					<% else %>
+					<% if work.date.strftime("%s") < Time.now.beginning_of_day.strftime("%s") -%>
+						<% problem = true-%>
+					<% else-%>
 						<% finished = false -%>
-					<% end %>
+					<% end-%>
 				<% end -%>
 			<% end -%>
-			<% if problem == true %>
+			<% if problem == true-%>
  		 		<tr class="nooperations">
-			<% elsif finished == true %>
+			<% elsif finished == true-%>
 				<tr class="finished">
- 			<% else %>
+ 			<% else-%>
 				<tr class="unfinished">
-			<% end %>
-	  <%  end %>
+			<% end-%>
+	  <%  end-%>
 	
-    <td><%= my_date work.date  %></td>
-    <td><%= my_hour work.get_from  %> -
-        <%= my_hour work.get_to %></td>
-    <td><%=h work.user.blank? ? "" : work.user.fullname %></td>
-    <td><%=h work.job_type.blank? ? "" : work.job_type.name %></td>
-    <td><%=h work.place.blank? ? "" : work.place.name %></td>
+    <td><%= my_date work.date -%></td>
+    <td><%= my_hour work.get_from -%> -
+        <%= my_hour work.get_to-%></td>
+    <td><%=h work.user.blank? ? "" : work.user.fullname-%></td>
+    <td><%=h work.job_type.blank? ? "" : work.job_type.name-%></td>
+    <td><%=h work.place.blank? ? "" : work.place.name-%></td>
     <td>
-        <% for operation in work.operations %>
-            <%= operation.operation_type.name %>,
-        <% end %>
+        <% for operation in work.operations-%>
+            <%= operation.operation_type.name-%>,
+        <% end-%>
     </td>
-    <td><%= work.reserved == true ? "rezervováno" : " " %></td>
+    <td><%= work.reserved == true ? "rezervováno" : " "-%></td>
 
-    <td><%= right_link "works", "edit", "upravit", edit_project_work_path(@project.id , work.id) %></td>
+    <td><%= right_link "works", "edit", "upravit", edit_project_work_path(@project.id , work.id)-%></td>
 
   </tr>
 
-<% end %>
+<% end-%>
 </table>
 
 

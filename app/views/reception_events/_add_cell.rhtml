@@ -1,5 +1,5 @@
-<% id = "receptioln_event_"+event.id.to_s %>
-<div id="<%= id %>" >
+<% id = "receptioln_event_"+event.id.to_s-%>
+<div id="<%= id-%>" >
 	<div class="calendar_event">
 		
 	  <div class="unfinished">
@@ -7,25 +7,25 @@
 		
 			<div class="body">
 			      <div class="div_with_float">
-						<div onClick="show_float_div('float_<%= id %>');">
-							<%= event.name %>
+						<div onClick="show_float_div('float_<%= id-%>');">
+							<%= event.name-%>
 							<div class='floating_no_user'>
-								<%= image_tag( "alert_small_icon.png", :alt => 'bez operátora') if event.alert == true %>
-								<%= image_tag( "notice_small_icon.png", :alt => 'bez operátora') if event.notice == true %>
-								<%= image_tag( "parking_small_icon.png", :alt => 'bez operátora') if event.parking == true %>
+								<%= image_tag( "alert_small_icon.png", :alt => 'bez operátora') if event.alert == true-%>
+								<%= image_tag( "notice_small_icon.png", :alt => 'bez operátora') if event.notice == true-%>
+								<%= image_tag( "parking_small_icon.png", :alt => 'bez operátora') if event.parking == true-%>
 							</div>	
 							
 						</div>
-						<div class="floating_div" style="display:none" id="float_<%= id %>">
+						<div class="floating_div" style="display:none" id="float_<%= id-%>">
 							<div class='floating_div_top'></div>
 							<div class='floating_div_body'>
-								<div class='floating_div_close'><a onClick="show_float_div('float_<%= id %>');">(X)</a></div>
-								<%= image_tag( "alert_icon.png", :alt => 'bez operátora') if event.alert == true %>
-								<%= image_tag( "notice_icon.png", :alt => 'bez operátora') if event.notice == true %>
-								<%= image_tag( "parking_icon.png", :alt => 'bez operátora') if event.parking == true %><br />
-								<b><%= event.name %></b><br />
-								<b><%= my_date event.from %> - <%= my_date event.to %></b><br />
-								<i><%= event.note %></i>
+								<div class='floating_div_close'><a onClick="show_float_div('float_<%= id-%>');">(X)</a></div>
+								<%= image_tag( "alert_icon.png", :alt => 'bez operátora') if event.alert == true-%>
+								<%= image_tag( "notice_icon.png", :alt => 'bez operátora') if event.notice == true-%>
+								<%= image_tag( "parking_icon.png", :alt => 'bez operátora') if event.parking == true-%><br />
+								<b><%= event.name-%></b><br />
+								<b><%= my_date event.from-%> - <%= my_date event.to-%></b><br />
+								<i><%= event.note-%></i>
 							</div>
 							<div class='floating_div_bottom'></div>
 						</div>

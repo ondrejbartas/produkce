@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= right_link "machines", "new", 'New machine', new_machine_path %>
+        <%= right_link "machines", "new", 'New machine', new_machine_path-%>
     </div>
     Seznam strojů
 </h2>
@@ -13,13 +13,13 @@
     <th colspan="2">administrace</th>
   </tr>
 
-<% for machine in @machines %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <th><%=h machine.name %></th>
-    <td><%=h machine.note %></td>
-    <td><%=h machine.price %></td>
-    <td><%= right_link "machines", "edit", 'upravit', edit_machine_path(machine) %></td>
-    <td><%= right_delete_link "machines", "delete", 'smazat', machine %></td>
+<% for machine in @machines-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <th><%=h machine.name-%></th>
+    <td><%=h machine.note-%></td>
+    <td><%=h machine.price-%></td>
+    <td><%= right_link "machines", "edit", 'upravit', edit_machine_path(machine)-%></td>
+    <td><%= right_delete_link "machines", "delete", 'smazat', machine-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>

@@ -1,67 +1,67 @@
 
 <h2>Kalendář</h2>
 
-<% form_tag(week_plans_path, :method => :post) do %>
+<% form_tag(week_plans_path, :method => :post) do-%>
 
-	<% for job_type in JobType.find(:all) %>
-		<% if !@filtr_type[job_type.id.to_s].blank? %>
-			<%= job_type.name %>:<%= check_box_tag('job_type['+ job_type.id.to_s+']', 'true', true) %>    &nbsp;&nbsp;&nbsp;
-		<% else %>
-		<%= job_type.name %>:<%= check_box_tag('job_type['+ job_type.id.to_s+']', 'true') %>   &nbsp;&nbsp;&nbsp;
-		<% end %>
-	<% end %>
+	<% for job_type in JobType.find(:all)-%>
+		<% if !@filtr_type[job_type.id.to_s].blank?-%>
+			<%= job_type.name-%>:<%= check_box_tag('job_type['+ job_type.id.to_s+']', 'true', true)-%>    &nbsp;&nbsp;&nbsp;
+		<% else-%>
+		<%= job_type.name-%>:<%= check_box_tag('job_type['+ job_type.id.to_s+']', 'true')-%>   &nbsp;&nbsp;&nbsp;
+		<% end-%>
+	<% end-%>
 
 
 	<br />
-	<% if !@filtr_show_type["1"].blank? %>
-		projekty:<%= check_box_tag('show_type[1]', 'true', true) %>    &nbsp;&nbsp;&nbsp;
-	<% else %>
-		projekty:<%= check_box_tag('show_type[1]', 'true') %>    &nbsp;&nbsp;&nbsp;
-	<% end %>
+	<% if !@filtr_show_type["1"].blank?-%>
+		projekty:<%= check_box_tag('show_type[1]', 'true', true)-%>    &nbsp;&nbsp;&nbsp;
+	<% else-%>
+		projekty:<%= check_box_tag('show_type[1]', 'true')-%>    &nbsp;&nbsp;&nbsp;
+	<% end-%>
 
-	<% if !@filtr_show_type["2"].blank? %>
-		operátoři:<%= check_box_tag('show_type[2]', 'true', true) %>    &nbsp;&nbsp;&nbsp;
-	<% else %>
-		operátoři:<%= check_box_tag('show_type[2]', 'true') %>    &nbsp;&nbsp;&nbsp;
-	<% end %>
+	<% if !@filtr_show_type["2"].blank?-%>
+		operátoři:<%= check_box_tag('show_type[2]', 'true', true)-%>    &nbsp;&nbsp;&nbsp;
+	<% else-%>
+		operátoři:<%= check_box_tag('show_type[2]', 'true')-%>    &nbsp;&nbsp;&nbsp;
+	<% end-%>
 
-	<% if !@filtr_show_type["3"].blank? %>
-		čas:<%= check_box_tag('show_type[3]', 'true', true) %>    &nbsp;&nbsp;&nbsp;
-	<% else %>
-		čas:<%= check_box_tag('show_type[3]', 'true') %>    &nbsp;&nbsp;&nbsp;
-	<% end %>
-	<% if !@filtr_show_type["4"].blank? %>
-		poznámka:<%= check_box_tag('show_type[4]', 'true', true) %>    &nbsp;&nbsp;&nbsp;
-	<% else %>
-		poznámka:<%= check_box_tag('show_type[4]', 'true') %>    &nbsp;&nbsp;&nbsp;
-	<% end %>
+	<% if !@filtr_show_type["3"].blank?-%>
+		čas:<%= check_box_tag('show_type[3]', 'true', true)-%>    &nbsp;&nbsp;&nbsp;
+	<% else-%>
+		čas:<%= check_box_tag('show_type[3]', 'true')-%>    &nbsp;&nbsp;&nbsp;
+	<% end-%>
+	<% if !@filtr_show_type["4"].blank?-%>
+		poznámka:<%= check_box_tag('show_type[4]', 'true', true)-%>    &nbsp;&nbsp;&nbsp;
+	<% else-%>
+		poznámka:<%= check_box_tag('show_type[4]', 'true')-%>    &nbsp;&nbsp;&nbsp;
+	<% end-%>
 	
 
-	<%= submit_tag 'filtrovat' %>
-<% end %>
+	<%= submit_tag 'filtrovat'-%>
+<% end-%>
 
 
 <h2>
 	<%= link_to_remote "+ přidat předchozí týden +",
            :url => { :action => "add_week_calendar", 'substract_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
-           :update =>  "calendar_container" , :position => :top %>
+           :update =>  "calendar_container" , :position => :top-%>
 </h2>
 
 
 	
 <div id="calendar_container">
-	<% count = 0 %>
-	<% ((session[:calendar_end_date]*(-1) + session[:calendar_start_date] + 7 )/7).times do %>
-		<% @start_date = session[:calendar_end_date] + count * 7 %>
-		<%= render :partial => 'plans/add_week_calendar' %>
-		<% count += 1 %>
-	<% end %>
+	<% count = 0-%>
+	<% ((session[:calendar_end_date]*(-1) + session[:calendar_start_date] + 7 )/7).times do-%>
+		<% @start_date = session[:calendar_end_date] + count * 7-%>
+		<%= render :partial => 'plans/add_week_calendar'-%>
+		<% count += 1-%>
+	<% end-%>
 
 </div>
 
 <h2>
 	<%= link_to_remote "+ přidat týden +",
            :url => { :action => "add_week_calendar", 'add_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
-           :update =>  "calendar_container" , :position => :bottom %>
+           :update =>  "calendar_container" , :position => :bottom-%>
 </h2>
 

@@ -1,27 +1,27 @@
-<%= error_messages_for :place  %>
+<%= error_messages_for :place -%>
 <p>
-    <%= label :place, 'name', 'název místa', :required => true %><br />
-    <%= text_field :place, :name %>
+    <%= label :place, 'name', 'název místa', :required => true-%><br />
+    <%= text_field :place, :name-%>
 </p>
   <p>
-     <%= label :place, 'note', 'poznámka', :required => false %><br />
-     <%= text_field :place, :note %>
+     <%= label :place, 'note', 'poznámka', :required => false-%><br />
+     <%= text_field :place, :note-%>
   </p>
   <p>
-     <%= label :place, 'startDate', 'datum od kdy je možné místo využít', :required => false %><br />
-    <%= datetime_select :place, :startDate %>
+     <%= label :place, 'startDate', 'datum od kdy je možné místo využít', :required => false-%><br />
+    <%= datetime_select :place, :startDate-%>
   </p>
   <p>
-     <%= label :place, 'endDate', 'datum do kdy se místo může využívat', :required => false %><br />
+     <%= label :place, 'endDate', 'datum do kdy se místo může využívat', :required => false-%><br />
    
-        <%= datetime_select :place, :endDate, :default => 10.years.from_now %>
+        <%= datetime_select :place, :endDate, :default => 10.years.from_now-%>
    </p>
 
-   <% if @current_user.admin? || @curent_user.produce? %>
-    <%= label :place, 'role', 'vyberte typy pracovních činností které lze provádět', :required => false %><br />
+   <% if @current_user.admin? || @curent_user.produce?-%>
+    <%= label :place, 'role', 'vyberte typy pracovních činností které lze provádět', :required => false-%><br />
 
-   <% for job_type in JobType.find(:all, :order => :name) %>
-                <%= check_box_tag "place[job_type_ids][]", job_type.id, @place.job_types.include?(job_type) %>
-                <%= job_type.name %>
-   <% end %>
-<% end %>
+   <% for job_type in JobType.find(:all, :order => :name)-%>
+                <%= check_box_tag "place[job_type_ids][]", job_type.id, @place.job_types.include?(job_type)-%>
+                <%= job_type.name-%>
+   <% end-%>
+<% end-%>

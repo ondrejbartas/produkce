@@ -1,38 +1,38 @@
-<%= error_messages_for :purchase_cart %>
+<%= error_messages_for :purchase_cart-%>
 
 <% form_for @purchase_cart do |purchase_cart_form| -%>
 
 
-  <%= purchase_cart_form.hidden_field :user_id, :value=>@current_user.id %>
+  <%= purchase_cart_form.hidden_field :user_id, :value=>@current_user.id-%>
   <p>
-    <%= purchase_cart_form.label 'store', "jméno obchodu:" %>
-    <%= purchase_cart_form.text_field :store %>
+    <%= purchase_cart_form.label 'store', "jméno obchodu:"-%>
+    <%= purchase_cart_form.text_field :store-%>
   </p>
   <p>
-    <%= purchase_cart_form.label 'url', "web obchodu:" %>
-    <%= purchase_cart_form.text_field :url %>
+    <%= purchase_cart_form.label 'url', "web obchodu:"-%>
+    <%= purchase_cart_form.text_field :url-%>
   </p>
 
   <p>
-    <%= purchase_cart_form.label 'purchase_date', "datum nákupu:" %>
-    <%= purchase_cart_form.date_select :purchase_date %>
+    <%= purchase_cart_form.label 'purchase_date', "datum nákupu:"-%>
+    <%= purchase_cart_form.date_select :purchase_date-%>
   </p>
 
   <div id="bought_tapes">
-    <% purchase_cart_form.fields_for :bought_tapes do |bought_tape_form| %>
-      <%= render :partial => 'bought_tape', :locals => { :f => bought_tape_form } %>
-    <% end %>
+    <% purchase_cart_form.fields_for :bought_tapes do |bought_tape_form|-%>
+      <%= render :partial => 'bought_tape', :locals => { :f => bought_tape_form }-%>
+    <% end-%>
   </div>
   <p>
-    <%= purchase_add_record_link purchase_cart_form, :bought_tapes, 'přidat další položku' %>
+    <%= purchase_add_record_link purchase_cart_form, :bought_tapes, 'přidat další položku'-%>
   </p>
 
   <p>
-    <%= purchase_cart_form.label 'note', 'poznámka' %><br />
-    <%= purchase_cart_form.text_area  :note, :cols=>30, :rows=>5 %>
+    <%= purchase_cart_form.label 'note', 'poznámka'-%><br />
+    <%= purchase_cart_form.text_area  :note, :cols=>30, :rows=>5-%>
   </p>
 
   <p>
-    <%= purchase_cart_form.submit "přidat" %>
+    <%= purchase_cart_form.submit "přidat"-%>
   </p>
 <% end -%>

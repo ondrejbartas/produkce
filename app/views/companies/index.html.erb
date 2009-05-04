@@ -3,16 +3,16 @@
 </h2>
 
 <div class="company_list">
-<% letter = "z" %>
-<% for company in @companies %>
-      <% if letter.downcase != company.name[0,1].downcase %>
-    <% if letter != "z" %> </ul> <% end %>
-        <%  letter = company.name[0,1] %>
-        <h3> <%=  letter.capitalize %></h3>
+<% letter = "z"-%>
+<% for company in @companies-%>
+      <% if letter.downcase != company.name[0,1].downcase-%>
+    <% if letter != "z"-%> </ul> <% end-%>
+        <%  letter = company.name[0,1]-%>
+        <h3> <%=  letter.capitalize-%></h3>
         <ul>
-      <% end %>
-      <li><%=  right_show_link ("companies", "show", company.name, company) %></li>
-<% end %>
+      <% end-%>
+      <li><%=  right_show_link ("companies", "show", company.name, company)-%></li>
+<% end-%>
 </ul>
 
 

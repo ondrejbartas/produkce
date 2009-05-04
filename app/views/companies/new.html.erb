@@ -1,16 +1,16 @@
 <h2>Nová firma</h2>
 
-<% form_for(@company) do |f| %>
+<% form_for(@company) do |f|-%>
 
-  <%= render :partial => 'companies/form' %>
+  <%= render :partial => 'companies/form'-%>
 
   <div id="contact">
     <h2>Přidání kontaktu (povinné)</h2>
     <%= render :partial => 'contacts/form',
-    :locals => {:contact => @contacts} %>
+    :locals => {:contact => @contacts}-%>
   </div>
 
   <p>
-    <%= f.submit "vytvořit" %>
+    <%= f.submit "vytvořit"-%>
   </p>
-<% end %>
+<% end-%>

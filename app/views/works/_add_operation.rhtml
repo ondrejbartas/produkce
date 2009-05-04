@@ -1,18 +1,18 @@
-<% if @operation_types.blank? %>
-	<% if operation_types.nil? %>
-		<% @job_type = job_type %>
-		<% @operation_types = @job_type.operation_types %>
-	<% else %>
-		<% @operation_types = operation_types %>
-	<% end %>
-<% end %>
-<% cas = Time.now.strftime("%s") %>
-<% index = "work[operations_attributes][new_"+cas+"]" %>
+<% if @operation_types.blank?-%>
+	<% if operation_types.nil?-%>
+		<% @job_type = job_type-%>
+		<% @operation_types = @job_type.operation_types-%>
+	<% else-%>
+		<% @operation_types = operation_types-%>
+	<% end-%>
+<% end-%>
+<% cas = Time.now.strftime("%s")-%>
+<% index = "work[operations_attributes][new_"+cas+"]"-%>
 <div class="operation">
   <p>
-    <%= label index, 'opertion_type_id', "úkon" %>
+    <%= label index, 'opertion_type_id', "úkon"-%>
 
-	<% if @from_user == true %>
+	<% if @from_user == true-%>
 		<%= collection_select index, :operation_type_id , @operation_types,
            :id, :name, {:include_blank => true},
            {:onchange => remote_function( :update => "operation_type_id_container_"+cas, :url =>
@@ -20,24 +20,24 @@
                      "'index="+index+"&operation_type_id=' +
                    escape(value)" )}%>
 
-       <span id="operation_type_id_container_<%= cas %>">
+       <span id="operation_type_id_container_<%= cas-%>">
        </span>
-	<% else %>
+	<% else-%>
     <%= collection_select index,:operation_type_id ,
           @operation_types,
-        :id, :name, {:include_blank => true} %>
+        :id, :name, {:include_blank => true}-%>
 
-	<% end %>
-	<% if @current_user.produce? || @current_user.admin? %>
-    <%= label index, 'note', "poznámka produkce" %>
-    <%= text_field index, :note, :size=>25 %>
-	<% else %>
-	   <%= label index, 'note_operator', "poznámka operátora" %>
-	   <%= text_field index, :note_operator, :size=>25 %>
-	<% end %>
+	<% end-%>
+	<% if @current_user.produce? || @current_user.admin?-%>
+    <%= label index, 'note', "poznámka produkce"-%>
+    <%= text_field index, :note, :size=>25-%>
+	<% else-%>
+	   <%= label index, 'note_operator', "poznámka operátora"-%>
+	   <%= text_field index, :note_operator, :size=>25-%>
+	<% end-%>
 	   
-		<%= hidden_field index, :finished, :value=>true %>
+		<%= hidden_field index, :finished, :value=>true-%>
 		
-    <%= link_to_function "Smazat", "$(this).up('.operation').remove(); " %>
+    <%= link_to_function "Smazat", "$(this).up('.operation').remove(); "-%>
   </p>
 </div>

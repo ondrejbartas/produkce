@@ -1,25 +1,25 @@
 <h2>úpravy profilového nastavení</h2>
 
-<% form_for(@current_user) do |f| %>
+<% form_for(@current_user) do |f|-%>
    <p>
-      <%= label :user, 'active_role', 'aktivní role', :required => true %><br />
-      <% sql = " " %>
-      <% for role in Role.find(:all) %>
-         <% if @current_user.role % role.idd == 0 %>
+      <%= label :user, 'active_role', 'aktivní role', :required => true-%><br />
+      <% sql = " "-%>
+      <% for role in Role.find(:all)-%>
+         <% if @current_user.role % role.idd == 0-%>
               <% sql.size > 2 ? sql += " OR " : " "%>
-              <% sql += " idd % "+role.idd.to_s+ " = 0 " %>
-          <% end %>
-      <% end %>
-      <%=  f.collection_select( :active_role, Role.find(:all, :conditions => sql), :idd, :comment, :include_blank => false) %>
+              <% sql += " idd % "+role.idd.to_s+ " = 0 "-%>
+          <% end-%>
+      <% end-%>
+      <%=  f.collection_select( :active_role, Role.find(:all, :conditions => sql), :idd, :comment, :include_blank => false)-%>
 
    </p>
 
 
    <p>
-      <%= label :user, 'logout_time', 'změna času odhlášení', :required => true %><br />
+      <%= label :user, 'logout_time', 'změna času odhlášení', :required => true-%><br />
       <%= f.select :logout_time, User::LOGOUT_TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]}%>
    </p>
    <p>
-      <%= f.submit "upravit" %>
+      <%= f.submit "upravit"-%>
    </p>
-<% end %>
+<% end-%>

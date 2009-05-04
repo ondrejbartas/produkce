@@ -1,32 +1,32 @@
-<%= error_messages_for :warehouse_control %>
+<%= error_messages_for :warehouse_control-%>
 
 <% form_for @warehouse_control do |warehouse_control_form| -%>
 
   <p>
-      kontrolu provedl: <%= @current_user.fullname %>
+      kontrolu provedl: <%= @current_user.fullname-%>
   </p>
   <p>
-      datum kontroly: <%= my_time Time.now %>
+      datum kontroly: <%= my_time Time.now-%>
   </p>
 
-  <%= warehouse_control_form.hidden_field :user_id, :value=>@current_user.id %>
+  <%= warehouse_control_form.hidden_field :user_id, :value=>@current_user.id-%>
 
 <h3>chybějící kazety</h3>
   <div id="missing_tapes">
-    <% warehouse_control_form.fields_for :missing_tapes do |missing_tape_form| %>
-      <%= render :partial => 'missing_tape', :locals => { :f => missing_tape_form } %>
-    <% end %>
+    <% warehouse_control_form.fields_for :missing_tapes do |missing_tape_form|-%>
+      <%= render :partial => 'missing_tape', :locals => { :f => missing_tape_form }-%>
+    <% end-%>
   </div>
   <p>
-    <%= purchase_add_record_link warehouse_control_form, :missing_tapes, 'přidat další položku' %>
+    <%= purchase_add_record_link warehouse_control_form, :missing_tapes, 'přidat další položku'-%>
   </p>
 
   <p>
-    <%= warehouse_control_form.label 'note', 'poznámka' %><br />
-    <%= warehouse_control_form.text_area  :note, :cols=>30, :rows=>5 %>
+    <%= warehouse_control_form.label 'note', 'poznámka'-%><br />
+    <%= warehouse_control_form.text_area  :note, :cols=>30, :rows=>5-%>
   </p>
 
   <p>
-    <%= warehouse_control_form.submit "zadat kontrolu" %>
+    <%= warehouse_control_form.submit "zadat kontrolu"-%>
   </p>
 <% end -%>

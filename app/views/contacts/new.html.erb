@@ -1,20 +1,20 @@
-<% if not @user.blank? %>
-    <h2>Nový kontakt pro uživatele: <%= @user.fullname %></h2>
-<% elsif not @company.blank? %>
-    <h2>Nový kontakt pro firmu: <%= @company.name %></h2>
-<% end %>
+<% if not @user.blank?-%>
+    <h2>Nový kontakt pro uživatele: <%= @user.fullname-%></h2>
+<% elsif not @company.blank?-%>
+    <h2>Nový kontakt pro firmu: <%= @company.name-%></h2>
+<% end-%>
 
-<% form_for(@contact) do |f| %>
+<% form_for(@contact) do |f|-%>
 
-  <%= render :partial => 'contacts/form' %>
+  <%= render :partial => 'contacts/form'-%>
 
 <p>
-    <%= f.submit "přidat" %>
-<% if not @user.blank? %>
-    <%= f.hidden_field :user_id %>
-<% elsif not @company.blank? %>
-    <%= f.hidden_field :company_id %>
-<% end %>
+    <%= f.submit "přidat"-%>
+<% if not @user.blank?-%>
+    <%= f.hidden_field :user_id-%>
+<% elsif not @company.blank?-%>
+    <%= f.hidden_field :company_id-%>
+<% end-%>
 
 </p>
-<% end %>
+<% end-%>

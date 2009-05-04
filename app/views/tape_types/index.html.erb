@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-        <%= right_link "tape_types", "new", 'přidat typ kazety', new_tape_type_path %>
+        <%= right_link "tape_types", "new", 'přidat typ kazety', new_tape_type_path-%>
     </div>
     Seznam typů kazet
 </h2>
@@ -17,18 +17,18 @@
     <th colspan="2">administrace</th>
   </tr>
 
-<% for tape_type in @tape_types %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <td><%=h tape_type.order %></td>
-    <td><%=h tape_type.name %></td>
-    <td><%=h tape_type.note %></td>
-    <td><%=h tape_type.limit %></td>
-    <td><%=h tape_type.tape_price %></td>
-    <td><%=h tape_type.master_price %></td>
-    <td><%=h tape_type.master %></td>
-    <td><%= right_link "tape_types", "edit", 'upravit', edit_tape_type_path(tape_type) %></td>
-    <td><%= right_delete_link "tape_types", "delete", 'smazat', tape_type %></td>
+<% for tape_type in @tape_types-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <td><%=h tape_type.order-%></td>
+    <td><%=h tape_type.name-%></td>
+    <td><%=h tape_type.note-%></td>
+    <td><%=h tape_type.limit-%></td>
+    <td><%=h tape_type.tape_price-%></td>
+    <td><%=h tape_type.master_price-%></td>
+    <td><%=h tape_type.master-%></td>
+    <td><%= right_link "tape_types", "edit", 'upravit', edit_tape_type_path(tape_type)-%></td>
+    <td><%= right_delete_link "tape_types", "delete", 'smazat', tape_type-%></td>
   </tr>
-<% end %>
+<% end-%>
 </table>
 

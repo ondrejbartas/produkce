@@ -1,27 +1,27 @@
 
-<% if @current_user.worker? || @current_user.admin? || @current_user.produce? || @current_user.recepce? %>
+<% if @current_user.worker? || @current_user.admin? || @current_user.produce? || @current_user.recepce?-%>
 <h2>kalendář recepce</h2>
-	<%= render :partial => 'reception_events/calendar' %>
-<% end %>
+	<%= render :partial => 'reception_events/calendar'-%>
+<% end-%>
 
-<% if @current_user.worker? %>
+<% if @current_user.worker?-%>
 	<h2>
 		<div class="menu_small">
-			<%= link_to 'zaúčtovat hotovou práci', new_finished_work_path %>
-			<%= link_to 'seznam zaúčtované práce', finished_works_path %>
+			<%= link_to 'zaúčtovat hotovou práci', new_finished_work_path-%>
+			<%= link_to 'seznam zaúčtované práce', finished_works_path-%>
 		</div>
 		Seznam úkonů
 	</h2>
 
-    <%= render :partial=>"finished_works/form_operations", :locals => { :type => "home" } %>
+    <%= render :partial=>"finished_works/form_operations", :locals => { :type => "home" }-%>
 	
 	
-<% end %>
+<% end-%>
 
-<% if @current_user.produce? %>
+<% if @current_user.produce?-%>
 
 	 <h2>Zaúčtované práce ke kontrole</h2>
-    	<%= render :partial=>"finished_works/check_finished_works" %>
+    	<%= render :partial=>"finished_works/check_finished_works"-%>
 
 
     <h2>Chybějící kazety</h2>
@@ -31,20 +31,20 @@
             <th width="70">sklad</th>
             <th width="70">do limitu chybí</th>
         </tr>
-    <% for tape_type in TapeType.find(:all) %>
+    <% for tape_type in TapeType.find(:all)-%>
            <% bought_tapes = tape_type.bought_tapes -%>
            <% operation_tapes_sum = Operation.sum("count" ,:conditions=> [ "finished is true AND tape_type_id = :id AND their_tape IS NOT true ", {:id => tape_type.id}] ) -%>
            <% bought_tapes_sum = bought_tapes.sum("value") -%>
            <% missing_tapes_sum = MissingTape.sum("value" ,:conditions=> [ "tape_type_id = :id ", {:id => tape_type.id}] ) -%>
-           <% sum = bought_tapes_sum - operation_tapes_sum - missing_tapes_sum %>
-           <% if sum < tape_type.limit  %>
-               <tr class="<%= cycle("even", "odd") %>">
-                   <th><%= tape_type.name %></th>
-                   <td><%= sum %></td>
-                   <td><%=  tape_type.limit - sum   %></td>
+           <% sum = bought_tapes_sum - operation_tapes_sum - missing_tapes_sum-%>
+           <% if sum < tape_type.limit -%>
+               <tr class="<%= cycle("even", "odd")-%>">
+                   <th><%= tape_type.name-%></th>
+                   <td><%= sum-%></td>
+                   <td><%=  tape_type.limit - sum  -%></td>
                </tr>
-           <% end %>
-    <% end %>
+           <% end-%>
+    <% end-%>
     </table>
 
-<% end %>
+<% end-%>

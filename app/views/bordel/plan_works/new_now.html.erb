@@ -1,12 +1,12 @@
 <h2>Naplánování práce na teď</h2>
 
 
-<% form_for(@plan_work) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@plan_work) do |f|-%>
+  <%= f.error_messages-%>
 
- <% if @plan_work.project_id.blank? %>
+ <% if @plan_work.project_id.blank?-%>
       <p>
-         <%= f.label 'project_id', 'projekt', :required => true %>
+         <%= f.label 'project_id', 'projekt', :required => true-%>
                 <%= f.collection_select :project_id ,
                   Project.find(:all, :conditions=> "status = 1 AND project_id IS null"),
                   :id, :name, {:include_blank => true },
@@ -14,39 +14,39 @@
                   render_sub_project_projects_path, :with =>
                     "'project_id=' +
                       escape(value)" )}
-                %>
+               -%>
 
       </p>
       <span id="sub_project_id_container">
 
       </span>
 
-<%  else %>
+<%  else-%>
     <p>
-        plánujete práci pro projekt: <b><%= project_name(@plan_work.project) %><b>
-        <% @main_project = Project.find_by_id(@plan_work.project.id) %>
-        <% if not @main_project.project.blank? %>
-            <%= f.hidden_field(:project_id, :value=> @main_project.project_id ) %>
-            <%= f.hidden_field(:sub_project_id, :value=> @plan_work.project_id ) %>
-        <% else %>
-            <%= f.hidden_field(:project_id, :value=> @plan_work.project_id) %>
-            <%= f.hidden_field(:sub_project_id, :value=> "" ) %>
-        <% end %>
+        plánujete práci pro projekt: <b><%= project_name(@plan_work.project)-%><b>
+        <% @main_project = Project.find_by_id(@plan_work.project.id)-%>
+        <% if not @main_project.project.blank?-%>
+            <%= f.hidden_field(:project_id, :value=> @main_project.project_id )-%>
+            <%= f.hidden_field(:sub_project_id, :value=> @plan_work.project_id )-%>
+        <% else-%>
+            <%= f.hidden_field(:project_id, :value=> @plan_work.project_id)-%>
+            <%= f.hidden_field(:sub_project_id, :value=> "" )-%>
+        <% end-%>
     </p>
-<%  end %>
+<%  end-%>
 
 <ul>
-    <% cas = Time.now.strftime("%s") %>
-    <% myTime = (((Time.now - Time.now.beginning_of_day)/30.minutes).round ) * 30 %>
-    <%= hidden_field_tag "days["+cas+"][date]", Time.now.beginning_of_day  %>
-    <li>od: <%= time_values myTime %> <%= hidden_field_tag "days["+cas+"][time]", myTime %></li>
-    <li>na: 30 minut <%= hidden_field_tag "days["+cas+"][length]", '30' %></li>
+    <% cas = Time.now.strftime("%s")-%>
+    <% myTime = (((Time.now - Time.now.beginning_of_day)/30.minutes).round ) * 30-%>
+    <%= hidden_field_tag "days["+cas+"][date]", Time.now.beginning_of_day -%>
+    <li>od: <%= time_values myTime-%> <%= hidden_field_tag "days["+cas+"][time]", myTime-%></li>
+    <li>na: 30 minut <%= hidden_field_tag "days["+cas+"][length]", '30'-%></li>
 
 </ul>
 
 
 <p>
-    <%= f.label 'job_type_id', 'typ práce', :required => true %>
+    <%= f.label 'job_type_id', 'typ práce', :required => true-%>
     <%= f.collection_select( :job_type_id , JobType.find(:all),
           :id, :name, {:include_blank => true},
           {:onchange => remote_function( :update => 'job_type_container', :plan_type=> "now" , :url =>
@@ -60,7 +60,7 @@
 
 </div>
 
-<%= f.submit "naplánovat na teď" %>
+<%= f.submit "naplánovat na teď"-%>
 
 
-<% end %>
+<% end-%>

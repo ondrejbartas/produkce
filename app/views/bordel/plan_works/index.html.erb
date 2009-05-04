@@ -7,16 +7,16 @@
         <th>úkony</th>
     </tr>
 
-    <% for work in @project.works %>
+    <% for work in @project.works-%>
         <tr>
-            <td><%= my_time work.time %> - <%= my_time work.time+work.length.minutes %> <%= my_date work.time %> </td>
-            <td><%= work.user.fullname %>  </td>
-            <td><%= work.place.name %>  </td>
-            <td><%= work.note %>  </td>
-            <td><% for operation in work.operations %>
+            <td><%= my_time work.time-%> - <%= my_time work.time+work.length.minutes-%> <%= my_date work.time-%> </td>
+            <td><%= work.user.fullname-%>  </td>
+            <td><%= work.place.name-%>  </td>
+            <td><%= work.note-%>  </td>
+            <td><% for operation in work.operations-%>
                 <%=  operation.name -%>,
-                <% end %>
+                <% end-%>
             </td>
         </tr>
-    <% end %>
+    <% end-%>
 </table>

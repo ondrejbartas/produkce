@@ -12,13 +12,39 @@
     <th>počet kusů</th>
   </tr>
 
-<% for operation in @operations %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
-    <td><%= my_time  operation.created_at %></td>
-    <td><%=h operation.work.user.name %></td>
-    <td><%=h operation.work.project.project_name %></td>
-    <td><%=h operation.note_operator %></td>
-	 <td><%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name %></td>
-    <td><%= operation.value %></td>
+<% for operation in @operations-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
+    <td><%= my_time  operation.created_at-%></td>
+    <td><%=h operation.work.user.name-%></td>
+    <td><%=h operation.work.project.project_name-%></td>
+    <td><%=h operation.note_operator-%></td>
+	 <td><%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name-%></td>
+    <td><%= operation.value-%></td>
+<% end-%>
+</table>
+
+<h2>
+	Seznam rychlého prodeje kazet
+</h2>
+
+<table>
+  <tr>
+    <th>datum</th>
+    <th>projekt</th>
+    <th>kazeta</th>
+    <th>počet</th>
+    <th>cena</th>
+    <th>zadal</th>
+  </tr>
+
+<% @tape_sells.each do |tape_sell| %>
+  <tr>
+    <td><%= my_time tape_sell.created_at %></td>
+    <td><%= right_show_link "projects","show", project_name(tape_sell.project), tape_sell.project  %></td>
+    <td><%=h tape_sell.tape_type.name %></td>
+    <td><%=h tape_sell.value %></td>
+    <td><%=h tape_sell.price %></td>
+    <td><%=  right_show_link "users","show", tape_sell.user.fullname, tape_sell.user %></td>
+  </tr>
 <% end %>
 </table>

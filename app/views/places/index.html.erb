@@ -1,6 +1,6 @@
 <h2>
     <div class="menu_small">
-      <%= right_link "places", "new", 'vytvořit nové místo', new_place_path %>
+      <%= right_link "places", "new", 'vytvořit nové místo', new_place_path-%>
     </div>
     Pracovní místa
 </h2>
@@ -14,17 +14,17 @@
     <th colspan="2">administrace</th>
   </tr>
 
-<% for place in @places %>
-  <tr class="<%= cycle("even", "odd") %>" height="30">
+<% for place in @places-%>
+  <tr class="<%= cycle("even", "odd")-%>" height="30">
     <th><%=h  place.name%></th>
-    <td><%=h place.note %></td>
-    <td><% for job_type in place.job_types  %>
-            <%= job_type.name %>,
-        <% end %>
+    <td><%=h place.note-%></td>
+    <td><% for job_type in place.job_types -%>
+            <%= job_type.name-%>,
+        <% end-%>
     </td>
-    <td><%= right_link "places", "edit", 'upravit', edit_place_path(place) %></td>
-    <td><%= right_delete_link "places", "delete", 'smazat', place %></td>
+    <td><%= right_link "places", "edit", 'upravit', edit_place_path(place)-%></td>
+    <td><%= right_delete_link "places", "delete", 'smazat', place-%></td>
 
   </tr>
-<% end %>
+<% end-%>
 </table>

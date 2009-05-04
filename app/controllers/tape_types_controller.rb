@@ -82,4 +82,10 @@ class TapeTypesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+  def render_price 
+    @tape_type = TapeType.find(params[:tape_type_id])
+    render :partial => "render_price", :layout => false    
+  end
 end
