@@ -12,6 +12,8 @@
 		       <b><%= right_show_link "companies", "show",  company.name, company-%></b>
 	 	</li>
 	 <% end-%>
+	
+	<% if @current_user.produce? || @current_user.admin? %>
      <li>práva uživatele:
         <% for role in Role.find(:all) -%>
           <%  if !@user.blank? && @user.role % role.idd == 0 -%>
@@ -19,6 +21,7 @@
           <% end-%>
         <% end-%>
       </li>
+	<% end %>
       <li>kategorie:
         <% for category in @user.categories -%>
             <%= category.name-%>,
@@ -33,6 +36,8 @@
    KONTAKT NA UŽIVATELE
  </h2>
  
- <div id="contacts"><%= link_to_remote "zobrazit", :update => 'contacts', :url => { :controller => 'contacts', :action => 'render_index', :id => @user.id }-%></div>
+ <div id="contacts">
+	<%= render :partial => 'contacts/index' -%>
+ </div>
 
   

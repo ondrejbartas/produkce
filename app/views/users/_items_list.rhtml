@@ -1,4 +1,3 @@
-
 <table class="work">
   <tr>
   	 <th style="width:200px" <%= sort_td_class_helper "fullname"-%>>
@@ -6,6 +5,7 @@
   	 <th style="width:150px" <%= sort_td_class_helper "company"-%>>
     <%= sort_link_helper "firma", "company"-%></th>
 	 <th style="width:220px" >kontakt</th>
+	 <th style="width:350px" >kategorie</th>
  </tr>
 
 <% for user in @users-%>
@@ -14,7 +14,7 @@
 			<td style="text-align:left"><%= right_show_link "users", "show", user.surname+" "+user.name, user-%></td>
 
 			<td style="text-align:left"> 
-				<% for company in user.companies.sort_by{ |u| u.name}-%>
+				<% for company in user.companies.find(:all).sort_by{ |u| u.name}-%>
 					<%= right_show_link "companies", "show", company.name, company-%><br />
 				<% end-%>
 			</td>
@@ -25,6 +25,11 @@
 			        <%=  print_mail_into_cell( contact.email)-%>
 			        <%=  print_into_cell( contact.note, "poz.")-%>
 					<% end-%>
+				<% end-%>
+			</td>
+			<td style="text-align:left" >
+				<% for category in user.categories.find(:all).sort_by{|u| u.name }-%>
+				   <%= category.name %>,
 				<% end-%>
 			</td>
 			</tr>

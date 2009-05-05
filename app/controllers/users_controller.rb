@@ -164,9 +164,17 @@ class UsersController < ApplicationController
              if params[:query].nil?
                params[:query] = session["user_query"]
              end
-            @search_for = "%#{params[:query]}%"
-            @search_for_text = " AND ( LOWER(companies.name) LIKE '%"+@search_for.downcase+"%' OR "
-            @search_for_text += "LOWER(users.fullname) LIKE '%"+@search_for.downcase+"%' ) "
+              params[:query] = params[:query].downcase.gsub(/[^a-z ]/, '').gsub(/ /, ' ')
+             
+             @search_for_text = "AND ( "
+              params[:query].split(' ').each{ |word|
+                @search_for = "%#{word}%"
+                @search_for_text.size > 7 ?  @search_for_text += " OR " : " " 
+                @search_for_text += "LOWER(companies.name) LIKE '%"+@search_for.downcase+"%' OR "
+                @search_for_text += "LOWER(users.fullname) LIKE '%"+@search_for.downcase+"%' OR "
+                @search_for_text += "LOWER(categories.name) LIKE '%"+@search_for.downcase+"%' "
+            }
+              @search_for_text.size > 10 ?  @search_for_text += " ) " :  @search_for_text = " " 
          end
 
 
@@ -188,7 +196,7 @@ class UsersController < ApplicationController
          conditions = [ "users.deleted is null "+@search_for_text]
 
 
-         @users = User.find(:all, :include => [:companies], :order => sort, :conditions => conditions)
+         @users = User.find(:all, :include => [:companies, :categories], :order => sort, :conditions => conditions)
 
          if request.xml_http_request?
            render :partial => "items_list", :layout => false

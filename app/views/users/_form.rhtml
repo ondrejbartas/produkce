@@ -67,17 +67,34 @@
 			<div class="column">
 	    <% for role in Role.find(:all) -%>
     
-	    <%  if !@user.blank? && !@user.role.blank? -%>
+			<% if (role.idd == 3 || role.idd == 7)  && @current_user.admin?%>
+				<%  if !@user.blank? && @user.role % role.idd == 0 -%>
+		        <input type="checkbox" name="role<%= role.idd -%>" value="true" checked />: <%= role.comment -%><br />
+		      <% else-%>
+		        <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
+		      <% end-%>
+			
+			
+			<% elsif (role.idd == 3 || role.idd == 7)  && !@current_user.admin? %>
+					<%  if !@user.blank? && @user.role % role.idd == 0 -%>
+			        <input type="hidden" name="role<%= role.idd -%>" value="true" checked />
+			      <% else-%>
+			        <input type="hidden" name="role<%= role.idd -%>" value="true " />
+			      <% end-%>
+			<% else %>
+		
+			    <%  if !@user.blank? && !@user.role.blank? -%>
 
-	      <%  if !@user.blank? && @user.role % role.idd == 0 -%>
-	        <input type="checkbox" name="role<%= role.idd -%>" value="true" checked />: <%= role.comment -%><br />
-	      <% else-%>
-	        <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
-	      <% end-%>
+			      <%  if !@user.blank? && @user.role % role.idd == 0 -%>
+			        <input type="checkbox" name="role<%= role.idd -%>" value="true" checked />: <%= role.comment -%><br />
+			      <% else-%>
+			        <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
+			      <% end-%>
 
-	     <% else-%>
-	       <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
-	    <% end-%>
+			     <% else-%>
+			       <input type="checkbox" name="role<%= role.idd -%>" value="true " />: <%= role.comment -%><br />
+			    <% end-%>
+			<% end %>
 	   <% end-%>
 			</div>
 	   </div>

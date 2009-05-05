@@ -24,7 +24,7 @@
 				<% end-%>
 			</td>
 			<td style="text-align:left">
-				<% for user in company.users.sort_by{ |u| u.fullname}-%>
+				<% for user in company.users.find(:all).sort_by{ |u| u.fullname}-%>
 					<%= right_show_link "users", "show", user.surname+" "+user.name, user-%><br />
 				<% end-%>
 			</td>

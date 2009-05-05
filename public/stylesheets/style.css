@@ -22,7 +22,7 @@ h4{
 h2 {
     margin-top: 15px;
     padding: 3px;
-    background: #eee;
+    background: #ccc;
 }
 h3 {
     margin-left: 2em;
@@ -44,17 +44,19 @@ a:hover{
 	color: white;
 	background-color: gray;
 	border: 1px solid gray;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 	padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 2px;
+    padding-bottom: 	2px;
 }
 #header h1{
-	color: white;
+	padding-left: 120px;
+	color: #CCC;
 }
 #role{
+	background-color: gray;
 	border-bottom: 1px solid gray;
-	padding: 0 20px 0;
+	padding: 0 20px 0 140px;
 }
 #role span{
 	margin-right: 5px;
@@ -70,23 +72,26 @@ a:hover{
 	border-top: 1px solid gray;
 	border-bottom: 1px solid white;
 	background-color: white;
+	
 }
 #role span.inactive{
 	position:relative;
 	top: -1px;
 	border: 1px solid rgb(200,200,200);
-	border-bottom-color: white;
+	border-bottom-color: #CCC;
 	padding: 1px 5px 0px;
-	background-color: white;
+	background: #CCC;	
 }
 #role span.inactive a{
-	color: rgb(200,200,200);
+	color: rgb(0,0,0);
 }
 #role span.inactive:hover{
 	
 }
 
 .change_role {
+	margin-top:7px;
+	margin-right:20px;
 	float:right;
 }
 
@@ -99,25 +104,40 @@ a:hover{
     min-height: 500px;
     background: url(../images/pokrokman2.jpg) no-repeat bottom right;
 }
+#menu h2{
+	background: white;
+}
+
 #menu{
+	background: #CCC;
 	float: left;
 	padding-top: 1px;
-	width: 150px;
-	padding-left: 25px;
+	width: 130px;
+	padding-left: 10px;
+	min-height: 500px;
 }
 #page{
-	margin: 0px 100px 20px 200px;
+	margin: 0px 20px 20px 155px;
 	padding-top: 1px;
 }
 #user_info{
 	float: right;
-	color: gray;
+	color: white;
+}
+
+#user_info a{
+	color: white;
 }
 #footer{
 	border-top: 1px solid gray;
 	text-align: center;
 	padding: 10px;
-	color: gray;
+	color: white;
+	background: gray;
+}
+
+#footer a{
+	color: white;
 }
 .top{
 	vertical-align: top;
@@ -171,12 +191,15 @@ div.menu_in a, div.menu_small a{
 #menu li a{
 	display: block;
 	padding: 10px 0px 10px 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	text-decoration: none;
-	color: gray;
+	color: black;
 	font-weight: bold;
+	background: white;
 }
 #menu li a:hover{
-	background: rgb(230,230,230);
+	background: rgb(180,180,250);
 }
 #menu ul{
 	padding: 0;

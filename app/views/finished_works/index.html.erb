@@ -5,6 +5,7 @@
 		<tr>
 			<th rowspan="2">datum zaúčtování</th>
 			<th rowspan="2">čas</th>
+			<th rowspan="2">datum práce</th>
 			<th colspan="5">úkony</th>
 			<th rowspan="2">admin.</th>
 		</tr>
@@ -31,6 +32,9 @@
 				                  <%= length_values work.value-%>
 				              </td>
                  		<% end-%>
+			              	<td>
+			                  <%= my_date operation.work.date-%>
+			              </td>
 			              <td >
 			                  <%= operation.work.project_id.blank? ?  "<span class='red'>bez udání projektu</span>" : project_name(operation.work.project) -%>
 			              </td>
