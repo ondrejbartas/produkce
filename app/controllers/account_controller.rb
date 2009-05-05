@@ -49,7 +49,6 @@ class AccountController < ApplicationController
    def menu_home
     session[:activePage] = "menu_home"
     @activePage = session[:activePage]
-    @finished_work = FinishedWork.new
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @categories }

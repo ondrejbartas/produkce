@@ -10,10 +10,17 @@
                   Project.find(:all, :conditions=> "status = 1 AND project_id IS null"),
                   :id, :name, {:include_blank => true },
                   {:onchange => remote_function( :update => 'sub_project_id_container', :url =>
-                  render_sub_project_projects_path, :with =>
-                    "'project_id=' +
-                      escape(value)" )}
-               -%>
+                  render_sub_project_projects_path,
+						:before => "Element.show('spinner_project')",
+			         :success => "Element.hide('spinner_project')",
+ 						:with => "'project_id=' + escape(value)" )}  -%>
+			<%= image_tag("spinner.gif",
+			              :align => "absmiddle",
+			              :border => 0,
+			              :id => "spinner_project",
+			              :style =>"display: none;" )-%>
+			
+			<%= right_link "projects", "new", 'pokud neexistuje tak přidat nový projekt', new_project_path-%>
       </p>
       <span id="sub_project_id_container">
       </span>
@@ -38,9 +45,16 @@
 	    <%= work_form.label 'job_type_id', 'typ práce', :required => true-%>
 	    <%= work_form.collection_select( :job_type_id , JobType.find(:all),
 	          :id, :name, {:include_blank => true},
-	          {:onChange => remote_function( :update => 'job_type_container' ,:url =>
-	          add_user_works_path, :with =>
-	            "'type_create=false&job_type_id=' + escape(value)")} )%>
+	          {:onChange => remote_function( :update => 'job_type_container' ,
+					:before => "Element.show('spinner_job')",
+		         :success => "Element.hide('spinner_job')",
+					:url => add_user_works_path, :with =>
+	            "'now="+@now.to_s+"&type_create=false&job_type_id=' + escape(value)")} )%>
+			<%= image_tag("spinner.gif",
+              :align => "absmiddle",
+              :border => 0,
+              :id => "spinner_job",
+              :style =>"display: none;" )-%>
 	</p>
 <% else-%>
 	<p>
@@ -63,6 +77,13 @@
 	</p>
 <% end-%>
 
+<% finished = false %>
+<% for operation in @work.operations %>
+	<% finished = true if operation.finished == true %>
+<% end %>
+
+
+<% if finished == false %>
 <div id="job_type_container">
 	<% if !@work.job_type_id.blank?-%>	
 		<% if !@work.user_id.blank? && @work.user.is_worker?-%>
@@ -73,6 +94,11 @@
 		<%= render :partial => "add_user", :locals =>{ :job_type => @work.job_type, :user_id => @work.user_id, :chosed_role => chosed_role, :type_create => false }-%>
 	<% end-%>
 </div>
+<% else %>
+	<%= label 'work', 'user_id', 'operátor', :required => false-%>
+	<%=  @work.user.fullname -%> <i class="red">operátora nelze změnit > již vykonal nějakou práci</i>
+
+<% end %>
 
 <div id="operations">
   <% work_form.fields_for :operations do |operation_form|-%>

@@ -95,12 +95,12 @@ class CompaniesController < ApplicationController
     
     
   def list
-     if params[:query].blank? && session["company_query"].blank?
+     if params[:query].nil? && session["company_query"].blank?
           session["company_query"] = ""
           @search_for = ""
           @search_for_text =""
        else
-          if params[:query].blank?
+          if params[:query].nil?
             params[:query] = session["company_query"]
           end
         @search_for = "%#{params[:query]}%"
@@ -120,8 +120,8 @@ class CompaniesController < ApplicationController
             when "company_reverse"  then "companies.name DESC"
         end
       
-      session["company_sort"] = sort
-
+      session["company_sort"] = params['sort']
+      session["company_query"] = params['query']
      conditions = [ "companies.deleted is null "+@search_for_text]
 
 

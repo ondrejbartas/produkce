@@ -1,0 +1,17 @@
+<p>
+      <%= label 'work', 'place_id', 'pracovní místo', :required => true -%>
+		<%= select_tag "days[2222][place_id]", options_from_collection_for_select(@job_type.places, 'id', 'name')%>
+</p>
+
+
+<%= link_to_remote "+ přidat úkon +",
+           :url => { :action => "add_operation", :job_type_id => @job_type.id, :from_user=>"true" },
+           :update =>  "operations" , :position => :bottom  -%>
+
+	<% if @work.blank?-%>
+		<%= render :partial => 'add_operation' , :locals => { :operation_types => @job_type.operation_types }-%>
+	<% end-%>
+	
+	<div id="operations">
+	
+	</div>

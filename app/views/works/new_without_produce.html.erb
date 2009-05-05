@@ -1,0 +1,52 @@
+<h2>Přidat práci bez produkčního</h2>
+
+
+<% form_for(@work) do |f|-%>
+  <%= f.error_messages-%>
+
+
+
+
+		<% cas = Time.now  - Time.now.beginning_of_day  %>
+		<% start = (cas-  (cas % 1800)) / 1800 * 30 %>
+		<%= hidden_field_tag "days[2222][time]", start %><br />	
+		<%= hidden_field_tag "days[2222][length]", 30 %>
+	   <%= hidden_field_tag "days[2222][reserved]" ,  false %>
+	   <%= hidden_field_tag "days[2222][date]", Time.now.beginning_of_day -%>
+<p>
+ 		<%= label 'work', 'user_id', 'operátor', :required => true -%>
+		<%= @current_user.fullname-%> <%= f.hidden_field :user_id, :value=> @current_user.id-%> </li>
+</p>
+
+<p>
+    <%= f.label  'note', 'zadejte jméno a kontakt na objednavatele práce', :required => false-%><br />
+    <%= f.text_area  :note, :cols=>30, :rows=>5-%>
+</p>
+
+<p>
+    <%= f.label 'job_type_id', 'typ práce', :required => true-%>
+    <%= f.collection_select( :job_type_id , JobType.find(:all),
+          :id, :name, {:include_blank => true},
+          {:onchange => remote_function( :update => 'job_type_container',
+					:before => "Element.show('spinner_job')",
+		         :success => "Element.hide('spinner_job')",
+					:url =>	add_place_finished_operation_works_path,
+					:with => "'job_type_id=' + escape(value)")} )%>
+					<%= image_tag("spinner.gif",
+		              :align => "absmiddle",
+		              :border => 0,
+		              :id => "spinner_job",
+		              :style =>"display: none;" )-%>
+</p>
+
+
+<div id="job_type_container">
+
+
+</div>
+
+
+<%= f.submit "přidat"-%>
+
+
+<% end-%>

@@ -20,16 +20,16 @@
 	<% for work in project.works-%>
 		<% for operation in work.operations-%>
 			<% if operation.finished != true-%>
-				<% if work.date.strftime("%s") <= Time.now.beginning_of_day.strftime("%s")-%>
+				<% if work.date < Time.now.beginning_of_day -%>
 					<% problem = true-%>
-				<% end-%>
+				<% end -%>
 				<% finished = false-%>
-			<% end-%>
-		<% end-%>
-	<% end-%>
-<% else-%>
-	<% finished = ""%>
-<% end-%>
+			<% end -%>
+		<% end -%>
+	<% end -%>
+<% else -%>
+	<% finished = "" -%>
+<% end -%>
 	<% if problem == true-%>
 	 	<tr class="nooperations">
 	<% elsif finished == false-%>

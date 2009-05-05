@@ -16,40 +16,94 @@
 	<% @type_create = false	-%>
 <% end-%>
 
+
+
 <p id="user_container">
+	<% if @now == "true" %>
+	<p>
+			<% cas = Time.now  - Time.now.beginning_of_day  %>
+			<% start = (cas-  (cas % 1800)) / 1800 * 30 %>
+			<%= hidden_field_tag "days[2222][time]", start %><br />	
+			<%= hidden_field_tag "days[2222][length]", 30 %>
+		   <%= hidden_field_tag "days[2222][reserved]" ,  false %>
+	      <%= label 'work', 'place_id', 'pracovní místo', :required => true -%>
+			<%= select_tag "days[2222][place_id]", options_from_collection_for_select(@job_type.places, 'id', 'name')%>
+		   <%= hidden_field_tag "days[2222][date]", Time.now.beginning_of_day -%>	
+	</p>
 	
-	<% if controller.action_name != "edit" && @no_calendar == false%>
+	  <%= label 'work', 'user_id', 'operátor', :required => false-%>
+	   <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
+	         :id, :fullname, {:include_blank => true ,:selected => @user_id }  )-%>
+
+	   <%= select_tag "chosed_role", options_for_select({ "interní" => "5" , "externi" => "17", }, @chosed_role.to_s),
+	           {:onchange => remote_function( :update => 'user_container',
+					:url => add_user_works_path,
+					:before => "Element.show('spinner_calendar')",
+		      	:success => "Element.hide('spinner_calendar')",
+					:with => "'no_calendar=true&change_user=true&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
+	  -%>					
+			<%= image_tag("spinner.gif",
+				       :align => "absmiddle",
+			          :border => 0,
+			          :id => "spinner_calendar",
+			          :style =>"display: none;" )-%>
+	
+	<% elsif controller.action_name != "edit" && @no_calendar == false 	 %>
 	
       <%= label 'work', 'user_id', 'operátor', :required => false-%>
       <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
             :id, :fullname, {:include_blank => true ,:selected => @user_id } ,
-				 {:onchange => remote_function( :update => 'calendar_container', :url =>
-              add_calendar_work_plans_path, :with =>
+				 {:onchange => remote_function( :update => 'calendar_container',
+					:before => "Element.show('spinner_calendar')",
+		         :success => "Element.hide('spinner_calendar')",
+				   :url => add_calendar_work_plans_path, :with =>
                 "'start_date=0&job_type_id="+@job_type.id.to_s+"&user_id=' + escape(value) + '&project_id='+ document.getElementById(\'work_project_id\').value+ '&sub_project_id='+ document.getElementById(\'work_sub_project_id\').value")} )-%>
 
       <%= select_tag "chosed_role", options_for_select({ "interní" => "5" , "externi" => "17", }, @chosed_role.to_s),
-              {:onchange => remote_function( :update => 'user_container', :url =>
-                add_user_works_path, :with =>
+              {:onchange => remote_function( :update => 'user_container',
+					:before => "Element.show('spinner_calendar')",
+		         :success => "Element.hide('spinner_calendar')",
+					:url => add_user_works_path, :with =>
                   "'change_user=true&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
      -%>
 	
 		<%= link_to_remote "+práce bez zadání operátora+", 
 					:url => { :controller => "plans", :action => "add_calendar_work"
 					 }, :update => "calendar_container", 
+					:before => "Element.show('spinner_calendar')",
+		         :success => "Element.hide('spinner_calendar')",
 					 :with =>
 	                "'start_date=0&no_user=true&job_type_id="+@job_type.id.to_s+"&project_id='+ document.getElementById(\'work_project_id\').value+ '&sub_project_id='+ document.getElementById(\'work_sub_project_id\').value"
 				-%>
+				
+		<%= image_tag("spinner.gif",
+          :align => "absmiddle",
+          :border => 0,
+          :id => "spinner_calendar",
+          :style =>"display: none;" )-%>
 	<% else-%>
+		
+	
+	
+	
+	
 	   <%= label 'work', 'user_id', 'operátor', :required => false-%>
 	   <%= collection_select( :work, :user_id , User.find(:all, :conditions => ["role % :rol = 0", { :rol => @chosed_role }] ).sort_by {|u| u.surname.downcase},
 	         :id, :fullname, {:include_blank => true ,:selected => @user_id }  )-%>
 
 	   <%= select_tag "chosed_role", options_for_select({ "interní" => "5" , "externi" => "17", }, @chosed_role.to_s),
-	           {:onchange => remote_function( :update => 'user_container', :url =>
-	             add_user_works_path, :with =>
-	               "'no_calendar=true&change_user=true&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
-	  -%>
-	
+	           {:onchange => remote_function( :update => 'user_container',
+					:url => add_user_works_path,
+					:before => "Element.show('spinner_calendar')",
+		      	:success => "Element.hide('spinner_calendar')",
+					:with => "'no_calendar=true&change_user=true&job_type_id="+@job_type.id.to_s+"&chosed_role=' + escape(value)")}
+	  -%>					
+			<%= image_tag("spinner.gif",
+				       :align => "absmiddle",
+			          :border => 0,
+			          :id => "spinner_calendar",
+			          :style =>"display: none;" )-%>
+
 	<% end-%>
 	
 </p>

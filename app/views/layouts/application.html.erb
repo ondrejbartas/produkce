@@ -68,10 +68,10 @@
                       <li><%= sub_menu( "companies", "index",'seznam firem', companies_path)-%></li>
                       <li><%= sub_menu( "users", "index", 'seznam uživatelů',  users_path )-%></li>
                    <% elsif @activePage == "menu_plan"-%>
-                  	<li>naplanovat praci bez produkcniho /pracovnik</li>
-                  	<li>naplanovat praci na ted /admin</li>
 						 	 <li><%= sub_menu( "plans", "week", 'kalednář', week_plans_path)-%></li>
                       <li><%= sub_menu( "works", "new", 'naplánovat práci', new_work_path)-%></li>
+                      <li><%= sub_menu( "works", "new_now", 'naplánovat práci na teď', new_now_works_path)-%></li>
+                      <li><%= sub_menu( "works", "new_without_produce", 'naplánovat práci bez produkčního', new_without_produce_works_path)-%></li>
 							 <%= legend-%>
                    <% elsif @activePage == "menu_project"-%>
                       <li><%= sub_menu( "projects", "new", 'přidat projekt', new_project_path)-%></li>

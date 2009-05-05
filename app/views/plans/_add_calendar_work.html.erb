@@ -29,6 +29,12 @@
     </div>
 <%= my_date Time.now.beginning_of_week + @start_date.days-%> - <%= my_date Time.now.beginning_of_week + @start_date.days + 7.days-%> </h3>
 
+
+<% if params[:no_user].blank?-%>
+	<%= hidden_field :work , :no_user, :value => "true" %>
+<% end %>
+
+
 <table class="calendar">
 
     <tr>

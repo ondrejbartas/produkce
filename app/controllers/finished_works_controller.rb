@@ -92,7 +92,6 @@ class FinishedWorksController < ApplicationController
       if @finished_work.update_attributes(params[:finished_work])
         flash[:notice] = 'FinishedWork was successfully updated.'
         redirect_to session['saved_location']
-        
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -112,4 +111,31 @@ class FinishedWorksController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+  def change_value
+     @finished_work = FinishedWork.find(params[:id])
+
+      if !params[:value].blank?
+         @finished_work.value = params[:value]
+         @finished_work.save
+      end
+      
+      if request.xml_http_request?
+         render :partial => "change_value", :layout => false
+       end
+       
+   end
+   
+   def correct
+      @finished_work = FinishedWork.find(params[:id])
+
+
+        @finished_work.status = 1
+        @finished_work.save
+        if request.xml_http_request?
+           render :partial => "correct", :layout => false
+         end
+
+    end
 end

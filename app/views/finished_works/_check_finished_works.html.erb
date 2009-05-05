@@ -1,40 +1,79 @@
+	<%= image_tag("spinner.gif",
+       :align => "absmiddle",
+       :border => 0,
+       :id => "spinner_correct",
+       :style =>"display: none;" )-%>
 <table>
       <tr>
 		 	 <th rowspan="2">správně</th>
-		 	 <th rowspan="2">upravit</th>
           <th rowspan="2">datum zaúčtování</th>
+          <th rowspan="2">datum naplánování</th>
           <th rowspan="2">projekt</th>
           <th rowspan="2">operátor</th>
           <th rowspan="2">doba</th>
-          <th width="400" colspan="4">úkony</th>
+          <th width="460" colspan="5">úkony</th>
       </tr>
       <tr>
           <th width="80">úkon</th>
           <th width="120">parametry</th>
           <th width="100">poznámka prod.</th>
           <th width="100">poznámka oper.</th>
+          <th width="60">opravit úkon</th>
       </tr>
 
 		<% for finished_work in FinishedWork.find(:all , :conditions => "status = 0")-%>
 			<% first = true-%>
 			<% first_td = "<td rowspan='"+finished_work.operations.size.to_s+"'>"-%>
+			<% text =  "class='"+ cycle("even", "odd")+"'" %>
+			<tbody  id="finished_work_id_<%= finished_work.id.to_s -%>">
 			<% for operation in finished_work.operations-%>
-			
-				<tr>
+				<tr <%= text %> >
 					<% if first-%>
-						<%= first_td-%></td>
-						<%= first_td-%>
-								<%= right_link "finished_works", "edit", "upravit", edit_finished_work_path(finished_work.id)-%>
+						<%= first_td-%><%=  %>
+						
+						
+							<%= link_to_remote "správně", 
+										:url => { :controller => "finished_works", :action => "correct", :id => finished_work.id },
+										:update => "finished_work_id_"+finished_work.id.to_s, 
+										:before => "Element.show('spinner_correct')",
+							         :success => "Element.hide('spinner_correct');" ,
+										:after =>  "Effect.BlindUp('finished_work_id_"+finished_work.id.to_s+"', {duration:1.5});"
+									-%>
+
+						
+						
+						
 						</td>
 						<%= first_td-%><%= my_date finished_work.created_at-%></td>
 						<%= first_td-%>
-							<%= operation.work.project.blank? ? "" :  ( link_to project_name(operation.work.project), operation.work.project )-%>
+							<%= my_date operation.work.date -%>
+						</td>
+						<%= first_td-%>
+							<%= operation.work.project.blank? ? right_show_link( "works", "edit", "<b class='red'>není zadán projekt</b>", edit_work_path(operation.work)) :  ( right_show_link( "projects", "show", project_name(operation.work.project), operation.work.project) )-%>
 						</td>
 						<%= first_td-%>
 							<%= right_show_link "users", "show", finished_work.user.fullname, finished_work.user-%>
 						</td>
 						<%= first_td-%>
-							<%= length_values finished_work.value-%>
+
+								<%= select 'finished_work_form['+finished_work.id.to_s+']',:value,
+										Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]} ,
+										{:selected=>finished_work.value.to_i},
+										{:onchange => remote_function( 
+											:url => change_value_finished_work_path(finished_work),
+											:before => "Element.show('spinner"+finished_work.id.to_s+"')",
+								         :success => "Element.hide('spinner"+finished_work.id.to_s+"')",
+											:confirm => "chcete opravdu provést změnu z: "+length_values(finished_work.value.to_i),
+											:with => "'value=' + escape(value)")}
+
+										%>
+										
+								
+										<%= image_tag("spinner.gif",
+										              :align => "absmiddle",
+										              :border => 0,
+										              :id => "spinner"+finished_work.id.to_s,
+										              :style =>"display: none;" )-%>
      					</td>
 						
 					<% end-%>
@@ -64,10 +103,15 @@
 					  </td>
 					  <td><%= operation.note_operator-%>
 					  </td>
+					  <td><%= right_link "operations", "edit", 'opravit', edit_operation_path(operation) -%>
+					  </td>
+					
+              	
 					
 				</tr>
 			<% first = false-%>
 			<% end-%>
+			</tbody>
 		<% end-%>
 
 </table>

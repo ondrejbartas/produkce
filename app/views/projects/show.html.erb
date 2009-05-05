@@ -9,7 +9,7 @@
         <tr><td>Hlavní projekt: </td><td><strong>  <%= link_to @project.project.name, @project.project-%></strong></td></tr>
     <% end-%>
     <tr><td>firma: </td><td><strong>  <%= link_to @project.company.name, @project.company-%></strong></td></tr>
-    <tr><td>zadal: </td><td><strong>  <%= (link_to @project.user.fullname, @project.user) if !@project.user_id.blank? -%></strong></td></tr>
+    <tr><td>zadal: </td><td><strong>  <%= if !@project.user_id.blank? then (link_to @project.user.fullname, @project.user) end -%></strong></td></tr>
     <tr><td>Stav: </td><td><strong><%= project_status @project-%></strong></td></tr>
     <tr><td>poznámka: </td><td>
         <%=h @project.note-%>
@@ -40,6 +40,7 @@
 		<% if !@project.project_id.blank? || @project.projects.size == 0-%>
         <div class="menu_small">
             <%= right_link "works", "new", 'naplánovat práci', new_project_work_path(@project)-%>
+            <%= right_link "works", "new_now", 'naplánovat práci na teď', new_now_project_works_path(@project)-%>
         </div>
 		<% else-%>
 	      <div class="menu_small red">
@@ -48,7 +49,7 @@
 		<% end-%>
     <% else -%>
         <div class="menu_small red">
-            projekt nelze naplánovat: není ve stavu <i>zakázka</i>
+            nelze naplánovat: není ve stavu <i>zakázka</i>
         </div>
     <% end-%>
     Práce
@@ -56,63 +57,117 @@
 
 
 <table class="work">
-  <tr>
-    <th>datum</th>
-    <th width="90">od - do</th>
-    <th width="100">pracovnik</th>
-    <th>typ prace</th>
-    <th>pracoviště</th>
-    <th width="250">úkony</th>
-    <th>rezervace</th>
-    <th>upravit</th>
+      <tr>
+          <th rowspan="2">datum</th>
+          <th rowspan="2">od - do</th>
+          <th rowspan="2">operátor</th>
+          <th width="400" colspan="4">úkony</th>
+      </tr>
+      <tr>
+          <th width="80">úkon</th>
+          <th width="120">parametry</th>
+          <th width="100">poznámka prod.</th>
+          <th width="100">poznámka oper.</th>
+      </tr>
 
-  </tr>
-
-<% for work in @project.works.find(:all, :conditions => ["deleted is null"], :order => "time")-%>
-	<% if  work.reserved == true-%>
-	    <tr class="reserved">
-	  <% elsif work.operations.size == 0-%>
- 		 <tr class="nooperations">
-	  <% else-%>
-			<% finished = true-%>
-			<% problem = false-%>
-	   	<% for operation in work.operations -%>
-				<% if operation.finished.blank? -%>
-					<% if work.date.strftime("%s") <= Time.now.beginning_of_day.strftime("%s") -%>
-						<% problem = true-%>
+		<% for work in @project.works.sort_by{|u| u.date}.reverse -%>
+			<% first = true-%>
+			<% if work.operations.size > 1 %>
+				<% first_td = "<td rowspan='"+work.operations.size.to_s+"'>"-%>
+			<% else %>
+				<% first_td = "<td>" %>
+			<% end %>
+			<% if  work.reserved == true-%>
+			    <% tr_class = "class='reserved'" %>
+			<% else-%>
+					<% finished = true-%>
+			   	<% for operation in work.operations -%>
+						<% if operation.finished.blank? -%>
+							<% finished = false -%>
+						<% end -%>
+					<% end -%>
+					<% if finished == true-%>
+						<% tr_class = "class='finished'" %>
+					<% elsif work.date < Time.now.beginning_of_day-%>
+						<% tr_class = "class='nooperations'" %>
 					<% else-%>
-						<% finished = false -%>
+						<% tr_class = "class='unfinished'" %>
 					<% end-%>
-				<% end -%>
-			<% end -%>
-			<% if problem == true-%>
- 		 		<tr class="nooperations">
-			<% elsif finished == true-%>
-				<tr class="finished">
- 			<% else-%>
-				<tr class="unfinished">
-			<% end-%>
-	  <%  end-%>
+			  <%  end-%>
+			
+			
+		<tr <%= tr_class %> >
+				<%= first_td-%>
+					<%= my_date work.date -%>
+				</td>						
+				<%= first_td-%>
+					<%= my_hour work.get_from -%> -	<%= my_hour work.get_to -%>  
+				</td>						
+				<%= first_td-%>
+					<% if !work.user_id.blank?  %>
+						<%= right_show_link("users", "show", work.user.fullname, work.user) -%>
+					<% end %>
+				</td>						
 	
-    <td><%= my_date work.date -%></td>
-    <td><%= my_hour work.get_from -%> -
-        <%= my_hour work.get_to-%></td>
-    <td><%=h work.user.blank? ? "" : work.user.fullname-%></td>
-    <td><%=h work.job_type.blank? ? "" : work.job_type.name-%></td>
-    <td><%=h work.place.blank? ? "" : work.place.name-%></td>
-    <td>
-        <% for operation in work.operations-%>
-            <%= operation.operation_type.name-%>,
-        <% end-%>
-    </td>
-    <td><%= work.reserved == true ? "rezervováno" : " "-%></td>
+		   <% if work.operations.size == 0 %>
+				</tr>		
+			<% end %>
+			
+			
+			<% for operation in work.operations-%>				
+					
+				<% if first != true -%>
+					<tr>
+				<% end %>
 
-    <td><%= right_link "works", "edit", "upravit", edit_project_work_path(@project.id , work.id)-%></td>
+								<% finished = true-%>
+								<% if operation.finished.blank? -%>
+										<% finished = false -%>
+								<% end -%>
+								<% if finished == true-%>
+									<% tr_op_class = "class='finished'" %>
+								<% elsif work.date < Time.now.beginning_of_day-%>
+									<% tr_op_class = "class='nooperations'" %>
+								<% elsif  work.reserved == true -%>
+							    	<% tr_op_class = "class='reserved'" %>
+								<% else-%>
+									<% tr_op_class = "class='unfinished'" %>
+								<% end-%>
 
-  </tr>
+					
+					  <td <%= tr_op_class %>>
+	                  <%= operation.operation_type.name-%>
+	              </td>
+					
+					 <td style="text-align:left" <%= tr_op_class %>>
+	               <% if operation.finished == true %>
+	                 <%  if operation.operation_type.value == 0-%>
+	                     počet minut: <%= operation.value-%>
+	                  <% elsif operation.operation_type.value == 1-%>
+	                     čas: <%= length_values operation.value-%>
+	                  <% elsif operation.operation_type.value == 2-%>
+	                     počet kusů: <%= operation.count-%>
+	                 <% elsif operation.operation_type.value == 3-%>
+	                     použitý materiál : <%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name-%><%= operation.their_tape == true ? " vlastní" : ""%><br />
+	                     počet kusů: <%= operation.count-%>
+	                  <% elsif operation.operation_type.value == 4-%>
+	                      	  <%= operation.player_machine_id.blank? ? " " : Machine.find_by_id(operation.player_machine_id).name-%>
+                           -><%= operation.record_machine_id.blank? ? " " : Machine.find_by_id(operation.record_machine_id).name-%><br />
+                           materiál : <%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name-%><%= operation.their_tape == true ? " vlastní" : ""-%><br />
+                           kusů:<%= operation.count-%>
+	                  <% end-%>
+                  <% end-%>
+	              </td>
+					  <td <%= tr_op_class %>><%= operation.note-%>
+					  </td>
+					  <td <%= tr_op_class %>><%= operation.note_operator-%>
+					  </td>
+					
 
-<% end-%>
+
+				</tr>
+				<% first = false-%>
+			<% end-%>
+		<% end-%>
+
 </table>
-
-
-

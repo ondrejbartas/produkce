@@ -28,7 +28,7 @@ class WarehouseControlsController < ApplicationController
         conditions += " OR " if conditions.size > 4
         conditions += "operation_type_id = "+operation_type.id.to_s
     end
-    
+    conditions = "finished = true AND ("+conditions +")"
     @operations = Operation.find(:all, :conditions => conditions, :order => "created_at DESC")
 
     respond_to do |format|

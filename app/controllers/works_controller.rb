@@ -30,15 +30,36 @@ class WorksController < ApplicationController
          @work.project_id = params[:project_id]
     end
     
+    @now = false
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @work }
     end
   end
 
+  # GET /works/new
+  # GET /works/new.xml
+  def new_now
+    @work = Work.new
+    
+    if not params[:project_id].blank?
+         @work.project_id = params[:project_id]
+    end
+
+    @now = true
+  end
+  
+  # GET /works/new
+   # GET /works/new.xml
+   def new_without_produce
+     @work = Work.new
+   end
+
   # GET /works/1/edit
   def edit
     @work = Work.find(params[:id])
+    @now = false
     
   end
 
@@ -100,7 +121,7 @@ class WorksController < ApplicationController
     respond_to do |format|
       if @work.update_attributes(params[:work])
         flash[:notice] = 'Work was successfully updated.'
-        if !params[:add_operation_from_user].blank?
+        if !params[:add_operation_from_user].blank? 
           format.html { redirect_to :controller => "account", :action => "menu_home" }
           format.xml  { head :ok }
         else
@@ -174,7 +195,18 @@ class WorksController < ApplicationController
             @no_calendar = params[:no_calendar]
          end
          @user_id = "0"
+         @now = params[:now]
          @plan_type = params[:plan_type]
+         render(:layout=>false)
+      else
+         render  :inline =>"chyba při zadávání! Nechte si znovu stránku načíst."
+      end
+  end
+  
+  def add_place_finished_operation
+     @from_user = true
+     if not params[:job_type_id].blank?
+         @job_type = JobType.find_by_id(params[:job_type_id])
          render(:layout=>false)
       else
          render  :inline =>"chyba při zadávání! Nechte si znovu stránku načíst."

@@ -12,9 +12,9 @@ class Work < ActiveRecord::Base
   validates_presence_of :time
   validates_numericality_of :length, :greater_than => 0
 
-  attr_accessor :sub_project_id, :without_project
+  attr_accessor :sub_project_id, :without_project, :no_user
 
-  before_validation :project_validation
+  before_validation :project_validation, :no_user_validation
 
   TIME_VALUES = {
       540 => "09:00", 570 => "09:30",
@@ -56,6 +56,11 @@ class Work < ActiveRecord::Base
         self.project_id = self.sub_project_id
       end
    end
+   def no_user_validation
+       if self.no_user == true
+         self.user_id = ""
+       end
+    end
 
    def get_from
      return self.date+self.time.minutes

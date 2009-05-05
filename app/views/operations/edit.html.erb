@@ -20,7 +20,7 @@
 
 <b>úkon: <%= @operation.operation_type.name-%></b>
         <% @operation_type = @operation.operation_type-%>
-        <% if @operation.finished == true-%>
+        <% if @operation.finished == true && !@current_user.produce? -%>
                <%  if @operation.operation_type.value == 0-%>
                    počet minut:<%= @operation.value-%>
                 <% elsif @operation.operation_type.value == 1-%>
@@ -44,6 +44,7 @@
             hotovo, čeká na zapsání celkové doby
              <%= operation_form.hidden_field :finished , :value=>""-%>
              <%= operation_form.submit 'opravit' -%>
+
         <% else-%>
          <%= operation_form.hidden_field :finished , :value=>"true"-%>
 

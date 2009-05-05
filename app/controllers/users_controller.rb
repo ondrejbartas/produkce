@@ -156,12 +156,12 @@ class UsersController < ApplicationController
 
 
  def list
-         if params[:query].blank? && session["user_query"].blank?
+         if params[:query].nil? && session["user_query"].blank?
              session["user_query"] = ""
              @search_for = ""
              @search_for_text =""
           else
-             if params[:query].blank?
+             if params[:query].nil?
                params[:query] = session["user_query"]
              end
             @search_for = "%#{params[:query]}%"
@@ -182,7 +182,8 @@ class UsersController < ApplicationController
                 when "company"  then "companies.name"
                 when "company_reverse"  then "companies.name DESC"
                 end
-         session["user_sort"] = sort
+         session["user_sort"] = params['sort']
+         session["user_query"] = params['query']
 
          conditions = [ "users.deleted is null "+@search_for_text]
 

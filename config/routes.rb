@@ -54,9 +54,13 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :works, :has_many => [:operations],
-                        :collection => { :add_operation => [:get, :post],
-                                    :add_user => [:get, :post] },
-                        :member => { :add_operation_from_worker => [:get, :post] 
+                        :collection => { 
+                                    :add_operation => [:get, :post],
+                                    :add_user => [:get, :post],
+                                    :new_now => [:get, :post] ,
+                                    :new_without_produce => [:get, :post],
+                                    :add_place_finished_operation => [:get, :post] },
+                              :member => { :add_operation_from_worker => [:get, :post] 
                         }
 
   map.resources :users, :has_many => [:contacts, :works, :system_comments, :finished_works],
@@ -87,7 +91,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :machines
   map.resources :operations, :collection => { :add_operation_type_parameters => [:get, :post] }
   map.resources :categories
-  map.resources :finished_works
+  map.resources :finished_works, :member => {:change_value => [:get, :post], :correct => [:get, :post]  }
   map.resources :rights
 
   map.root :controller => 'account', :action => "login"

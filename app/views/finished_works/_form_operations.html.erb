@@ -31,7 +31,11 @@
                                 <%= zacatek-%><%= my_hour work.get_from -%> -
                                     <%= my_hour work.get_to-%></td>
                                 <%= zacatek-%>
-												<%= right_show_link "projects", "show", project_name(work.project), work.project -%>
+												<% if !work.project_id.blank? %>
+													<%= right_show_link "projects", "show", project_name(work.project), work.project -%>
+												<% else %>
+													<b class="red">není zadán projekt</b>
+												<% end %>
 										  </td>
                                 <%= zacatek-%><%=h work.place.blank? ? "" : work.place.name-%></td>
                             <%  end-%>
@@ -122,7 +126,7 @@
                                 <% end-%>
                                 <%= zacatek-%><%= my_hour work.get_from -%> -
                                     <%= my_hour  work.get_to-%></td>
-                                <%= zacatek-%><%= work.project.blank? ? "" :  ( link_to project_name(work.project), work.project )-%></td>
+                                <%= zacatek-%><%= work.project.blank? ? "<b class='red'>není zadán projekt</b>" :  ( link_to project_name(work.project), work.project )-%></td>
                             <%  end-%>
                             <td >
                                 <%= operation.operation_type.name-%>

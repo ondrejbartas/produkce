@@ -8,6 +8,7 @@
         <th rowspan="2">datum zaúčtování</th>
         <th rowspan="2">projekt</th>
         <th width="400" colspan="4">úkony</th>
+        <th rowspan="2">admin.</th>
     </tr>
     <tr>
         <th width="80">úkon</th>
@@ -20,7 +21,7 @@
 		
 			<tr height="30">
              <td><%= my_date operation.work.date -%></td>
-             <td><%= operation.work.project.blank? ? "" :  ( link_to project_name(operation.work.project), operation.work.project )-%></td>
+             <td><%= operation.work.project.blank? ? "<b class='red'>není zadán projekt</b>" :  ( link_to project_name(operation.work.project), operation.work.project )-%></td>
 
              <td >
                  <%= operation.operation_type.name-%>
@@ -53,6 +54,10 @@
                  <% end-%>
 
              </td>
+
+				<td>
+					<%= right_link "operations", "edit",  "upravit", edit_operation_path(operation.id)-%>
+				</td>
         </tr>
            <% first = false-%>
    <% end-%>

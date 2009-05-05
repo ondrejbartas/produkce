@@ -156,12 +156,12 @@ class ProjectsController < ApplicationController
            @filter = params[:filter]
         end
 
-       if params[:query].blank? && session["project_query"].blank?
+       if params[:query].nil? && session["project_query"].blank?
           session["project_query"] = ""
           @search_for = ""
           @search_for_text =""
        else
-          if params[:query].blank?
+          if params[:query].nil?
             params[:query] = session["project_query"]
           end
           @search_for = "%#{params[:query]}%"
@@ -200,8 +200,8 @@ class ProjectsController < ApplicationController
               when "status_reverse"  then "projects.status DESC"
               end
       
-        session["project_sort"] = sort
-
+        session["project_sort"] = params['sort']
+        session["project_query"] = params['query']
        
        conditions = [ "projects.deleted is null"+@search_for_text+" "]
 
