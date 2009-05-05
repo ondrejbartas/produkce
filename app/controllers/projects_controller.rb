@@ -132,7 +132,6 @@ class ProjectsController < ApplicationController
   def destroy
   
       @project = Project.find(params[:id])
-      @project.destroy
       if @project.deleted
         @project.deleted = false
       else

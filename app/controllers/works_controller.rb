@@ -139,7 +139,14 @@ class WorksController < ApplicationController
   # DELETE /works/1.xml
   def destroy
     @work = Work.find(params[:id])
-    @work.destroy
+      
+      if @work.deleted
+        @work.deleted = false
+      else
+        @work.deleted = true
+      end
+     @work.save
+
 
     respond_to do |format|
       format.html { redirect_to(works_url) }

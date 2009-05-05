@@ -1,4 +1,6 @@
 class JobType < ActiveRecord::Base
+  default_scope :conditions => 'deleted is not true'
+  
   has_many :works
   has_and_belongs_to_many :places, :order=>'name'
   has_and_belongs_to_many :operation_types

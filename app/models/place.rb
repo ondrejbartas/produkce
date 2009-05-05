@@ -1,4 +1,7 @@
 class Place < ActiveRecord::Base
+  
+  default_scope :conditions => 'deleted is not true'
+  
   has_many :works
   has_and_belongs_to_many :job_types
   validates_presence_of :name
