@@ -16,8 +16,8 @@
 
 <% finished = true-%>
 <% problem = false-%>
-<% if project.works.size > 0-%>
-	<% for work in project.works-%>
+<% if project.works.find(:all, :conditions => ['deleted is not true']).size > 0-%>
+	<% for work in project.works.find(:all, :conditions => ['deleted is not true'])-%>
 		<% for operation in work.operations-%>
 			<% if operation.finished != true-%>
 				<% if work.date < Time.now.beginning_of_day -%>

@@ -75,7 +75,7 @@
 					<% if params[:no_user].blank?-%>
 					
 	                <td>
-	                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND user_id = :user AND date = :table_date ', {:user => @user.id, :table_date => table_day }]).sort_by {|u| u.time}-%>
+	                    <% planed_works = Work.find(:all , :conditions => ['deleted is not true AND user_id = :user AND date = :table_date ', {:user => @user.id, :table_date => table_day }]).sort_by {|u| u.time}-%>
 
 	                    <% if planed_works.size > 0-%>
 	                        <% for planed_work in planed_works-%>
@@ -88,7 +88,7 @@
                 
 
 					 <td>
-                    <% planed_works_project = Work.find(:all , :conditions => ['deleted is null AND project_id = :project AND date = :table_date', {:project => @project.id, :table_date => table_day  }]).sort_by {|u| u.time}-%>
+                    <% planed_works_project = Work.find(:all , :conditions => ['deleted is not true AND project_id = :project AND date = :table_date', {:project => @project.id, :table_date => table_day  }]).sort_by {|u| u.time}-%>
 
                     <% if planed_works_project.size > 0-%>
                         <% for planed_work in planed_works_project-%>

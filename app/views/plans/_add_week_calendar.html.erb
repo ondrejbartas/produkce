@@ -38,7 +38,7 @@
 		            <% end -%>
 				><%= day_names(n)-%> <%= my_date table_day-%> </th>
             <% for place in @places-%>
-                    <% planed_works = Work.find(:all , :conditions => ['deleted is null AND place_id = :place AND date = :table_date ', {:place => place.id, :table_date => table_day }]).sort_by {|u| u.time}-%>
+                    <% planed_works = Work.find(:all , :conditions => ['deleted is not true AND place_id = :place AND date = :table_date ', {:place => place.id, :table_date => table_day }]).sort_by {|u| u.time}-%>
 							<% day_place_id = "calendar_"+table_day.strftime("%s")+"_"+place.id.to_s-%>
                     <td id="<%= day_place_id-%>">
                         <% if planed_works.size > 0-%>
