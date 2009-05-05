@@ -55,7 +55,7 @@
 							<%= right_show_link "users", "show", finished_work.user.fullname, finished_work.user-%>
 						</td>
 						<%= first_td-%>
-
+						<form>
 								<%= select 'finished_work_form['+finished_work.id.to_s+']',:value,
 										Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]} ,
 										{:selected=>finished_work.value.to_i},
@@ -67,7 +67,7 @@
 											:with => "'value=' + escape(value)")}
 
 										%>
-										
+						</form>				
 								
 										<%= image_tag("spinner.gif",
 										              :align => "absmiddle",
