@@ -23,7 +23,11 @@
 
 		<% for finished_work in FinishedWork.find(:all , :conditions => "status = 0")-%>
 			<% first = true-%>
-			<% first_td = "<td rowspan='"+finished_work.operations.size.to_s+"'>"-%>
+			<% if finished_work.operations.size > 1 %>
+				<% first_td = "<td rowspan='"+finished_work.operations.size.to_s+"'>"-%>
+			<% else %>
+				<% first_td = "<td >"-%>
+			<% end %>
 			<% text =  "class='"+ cycle("even", "odd")+"'" %>
 			<tbody  id="finished_work_id_<%= finished_work.id.to_s -%>">
 			<% for operation in finished_work.operations-%>
@@ -55,7 +59,6 @@
 							<%= right_show_link "users", "show", finished_work.user.fullname, finished_work.user-%>
 						</td>
 						<%= first_td-%>
-						<form>
 								<%= select 'finished_work_form['+finished_work.id.to_s+']',:value,
 										Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]} ,
 										{:selected=>finished_work.value.to_i},
@@ -66,8 +69,7 @@
 											:confirm => "chcete opravdu provést změnu z: "+length_values(finished_work.value.to_i),
 											:with => "'value=' + escape(value)")}
 
-										%>
-						</form>				
+										%>				
 								
 										<%= image_tag("spinner.gif",
 										              :align => "absmiddle",
