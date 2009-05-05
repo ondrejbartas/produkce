@@ -2,8 +2,8 @@
        :align => "absmiddle",
        :border => 0,
        :id => "spinner_correct",
-       :style =>"display: none;" )-%>
-<table>
+       :style =>"display: none;" ) %>
+<table class="work">
       <tr>
 		 	 <th rowspan="2">správně</th>
           <th rowspan="2">datum zaúčtování</th>
@@ -37,7 +37,7 @@
 										:update => "finished_work_id_"+finished_work.id.to_s, 
 										:before => "Element.show('spinner_correct')",
 							         :success => "Element.hide('spinner_correct');" ,
-										:after =>  "Effect.BlindUp('finished_work_id_"+finished_work.id.to_s+"', {duration:1.5});"
+										:after =>  "Effect.BlindUp('finished_work_id_"+finished_work.id.to_s+"', {duration:0.5});"
 									-%>
 
 						
