@@ -47,12 +47,12 @@
 			                     počet kusů: <%= operation.count-%>
 			                 <% elsif operation.operation_type.value == 3-%>
 			                     použitý materiál : <%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name-%><%= operation.their_tape == true ? " vlastní" : ""%><br />
-			                     počet kusů: <%= operation.value-%>
+			                     počet kusů: <%= operation.count -%>
 			                  <% elsif operation.operation_type.value == 4-%>
 			                      	  <%= operation.player_machine_id.blank? ? " " : Machine.find_by_id(operation.player_machine_id).name-%>
                                  -><%= operation.record_machine_id.blank? ? " " : Machine.find_by_id(operation.record_machine_id).name-%><br />
                                  materiál : <%=  operation.tape_type_id.blank? ? " " : operation.tape_type.name-%><%= operation.their_tape == true ? " vlastní" : ""-%><br />
-                                 kusů:<%= operation.value-%>
+                                 kusů:<%= operation.count -%>
 			                  <% end-%>
 			              </td>
 							  <td><%= operation.note-%>

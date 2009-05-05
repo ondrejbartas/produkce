@@ -68,11 +68,18 @@ class WorksController < ApplicationController
   def create
     flash[:notice] = ""
     saved = true
+    oldest = Time.now + 10.years
+    newest = Time.now - 10.years
+    
     if !params[:days].blank?
         params[:days].each { |key ,day|
           params[:work][:length] = day[:length].to_i
           params[:work][:time] = day[:time].to_i
           params[:work][:date] = Time.parse(day[:date])
+          oldest > Time.parse(day[:date]) ? oldest = Time.parse(day[:date]) : " "
+          newest < Time.parse(day[:date]) ? newest = Time.parse(day[:date]) : " "
+          
+          
           params[:work][:place_id] = day[:place_id]
           params[:work][:reserved] = day[:reserved]
           @work = Work.new(params[:work])
@@ -100,9 +107,9 @@ class WorksController < ApplicationController
         
         flash[:notice] = 'Work was successfully created.'
         if params[:commit] == "přidat"
-          format.html { redirect_to :controller => "plans", :action => "week" }
+          format.html { redirect_to :controller => "plans", :action => "week", :job_type=> @work.job_type_id , :newest => newest , :oldest => oldest }
         else 
-          format.html { redirect_to :controller => "works", :action => "new", :job_type=> { @work.job_type_id => true } }
+          format.html { redirect_to :controller => "works", :action => "new" }
         end
         format.xml  { render :xml => @work, :status => :created, :location => @work }
       else

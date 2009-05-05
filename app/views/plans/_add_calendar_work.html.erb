@@ -123,7 +123,16 @@
 
 	                        <%= link_to_remote "+",
 	                           :url => { :controller => "plans", :action => "add_date", :place_id => place.id, :date => table_day },
-	                           :position => "bottom" ,:update =>  "calendar_"+table_day.strftime("%s")+"_"+place.id.to_s-%>
+	                           :position => "bottom" ,
+										:before => "Element.show('spinner_calendar_"+table_day.strftime("%s")+"_"+place.id.to_s+"')",
+							         :success => "Element.hide('spinner_calendar_"+table_day.strftime("%s")+"_"+place.id.to_s+"')",
+										:update =>  "calendar_"+table_day.strftime("%s")+"_"+place.id.to_s-%>
+	
+										<%= image_tag("spinner.gif",
+										              :align => "absmiddle",
+										              :border => 0,
+										              :id => "spinner_calendar_"+table_day.strftime("%s")+"_"+place.id.to_s,
+										              :style =>"display: none;" )-%>
                     </td>
             <% end-%>
 

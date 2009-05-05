@@ -15,6 +15,19 @@ class PlansController < ApplicationController
           @start_date = 0
        end
        
+       if !params[:newest].blank?
+
+         now = Time.now.beginning_of_week
+         oldest = Time.parse(params[:oldest]).beginning_of_week
+         newest = Time.parse(params[:newest]).beginning_of_week + 7.days
+         
+        
+         session[:calendar_start_date] =  ((newest - now - 7.days) / 7.days ).ceil*7
+         session[:calendar_end_date] = ((now - oldest) / 7.days).ceil*7
+         
+       end
+       
+       
        if !params[:job_type].blank? 
          @filtr_type = params[:job_type]
        elsif !session[:job_type].blank?
@@ -22,6 +35,10 @@ class PlansController < ApplicationController
        else   
          @filtr_type = { "1" => "true" }
        end
+       if !params[:job_type_id].blank?
+         @filtr_type[params[:job_type_id].to_i] = true
+       end
+       
        session[:job_type] = @filtr_type
        
        
