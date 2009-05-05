@@ -11,14 +11,14 @@
           <th rowspan="2">projekt</th>
           <th rowspan="2">operátor</th>
           <th rowspan="2">doba</th>
-          <th width="460" colspan="5">úkony</th>
+          <th colspan="5">úkony</th>
       </tr>
       <tr>
-          <th width="80">úkon</th>
-          <th width="120">parametry</th>
-          <th width="100">poznámka prod.</th>
-          <th width="100">poznámka oper.</th>
-          <th width="60">opravit úkon</th>
+          <th style="width:80px">úkon</th>
+          <th style="width:120px">parametry</th>
+          <th style="width:80px">poznámka prod.</th>
+          <th style="width:80px">poznámka oper.</th>
+          <th style="width:60px">opravit úkon</th>
       </tr>
 
 		<% for finished_work in FinishedWork.find(:all , :conditions => "status = 0")-%>
