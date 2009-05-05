@@ -315,7 +315,9 @@ ul {
     margin-top: 4px;
     margin-bottom: 4px;
 }
-
+tbody {
+	border:solid red 2px;
+}
 table {
     margin-top: 1em;
     border-collapse: collapse;
