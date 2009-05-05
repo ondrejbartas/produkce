@@ -315,18 +315,29 @@ ul {
     margin-top: 4px;
     margin-bottom: 4px;
 }
-tbody {
-	border:solid red 2px;
-}
-
-tbody td {
-	border:solid red 2px;
-}
 table {
     margin-top: 1em;
     border-collapse: collapse;
     border: solid 1px #515151;
 }
+
+.no_borders {
+	padding: 0px;
+	margin: 0px;
+}
+
+.no_borders table {
+	padding: 0px;
+	margin: 0px;
+}
+
+.no_borders td {
+	border-left: 1px solid #515151;
+	border-right: 1px solid #515151;
+	border-top: none;
+	border-bottom: 1px solid #515151;
+}
+
 
 th {
     padding: 3px;
