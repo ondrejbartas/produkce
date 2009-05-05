@@ -318,6 +318,10 @@ ul {
 tbody {
 	border:solid red 2px;
 }
+
+tbody td {
+	border:solid red 2px;
+}
 table {
     margin-top: 1em;
     border-collapse: collapse;
