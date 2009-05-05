@@ -29,7 +29,6 @@
 				<% first_td = "<td >"-%>
 			<% end %>
 			<% text =  "class='"+ cycle("even", "odd")+"'" %>
-			<tbody  id="finished_work_id_<%= finished_work.id.to_s -%>">
 			<% for operation in finished_work.operations-%>
 				<tr <%= text %> >
 					<% if first-%>
@@ -113,7 +112,7 @@
 				</tr>
 			<% first = false-%>
 			<% end-%>
-			</tbody>
+		
 		<% end-%>
 
 </table>
