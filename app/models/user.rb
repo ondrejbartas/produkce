@@ -2,7 +2,6 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   
-  default_scope :conditions => 'deleted is not true'
   
    has_many :projects
    has_many :contacts

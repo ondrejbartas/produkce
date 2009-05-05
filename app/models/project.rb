@@ -1,7 +1,6 @@
 class Project < ActiveRecord::Base
 
-  default_scope :conditions => 'deleted is not true'
-
+  
   has_many :projects
   belongs_to :project
   has_one :invoice

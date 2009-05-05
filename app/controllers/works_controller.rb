@@ -2,7 +2,7 @@ class WorksController < ApplicationController
   # GET /works
   # GET /works.xml
   def index
-    @works = Work.find(:all)
+    @works = Work.find(:all, :conditions => ['deleted is null'])
 
     respond_to do |format|
       format.html # index.html.erb

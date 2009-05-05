@@ -3,7 +3,7 @@ class CreateJobTypes < ActiveRecord::Migration
     create_table :job_types do |t|
       t.string :name
       t.string :note
-      t.string :deleted
+      t.boolean :deleted
 
       t.timestamps
     end

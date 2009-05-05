@@ -70,7 +70,7 @@
           <th width="100">poznámka oper.</th>
       </tr>
 
-		<% for work in @project.works.sort_by{|u| u.date}.reverse -%>
+		<% for work in @project.works.find(:all, :conditions => "deleted is not true").sort_by{|u| u.date}.reverse -%>
 			<% first = true-%>
 			<% if work.operations.size > 1 %>
 				<% first_td = "<td rowspan='"+work.operations.size.to_s+"'>"-%>

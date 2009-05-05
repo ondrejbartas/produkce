@@ -1,8 +1,6 @@
 class Work < ActiveRecord::Base
 
 
-  default_scope :conditions => 'deleted is not true'
-
   belongs_to :project
   belongs_to :user
   belongs_to :job_type

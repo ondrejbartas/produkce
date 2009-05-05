@@ -64,7 +64,7 @@ class OperationsController < ApplicationController
     @operation = Operation.find(params[:id])
 
     if !params[:work].blank? 
-      @work = Work.find(@operation.work_id)
+      @work = Work.find(@operation.work_id, :conditions => ['deleted is null'])
       @work.update_attributes(params[:work])
     end
     respond_to do |format|
