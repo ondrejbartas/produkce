@@ -13,6 +13,8 @@
   <%= label :project, 'status', 'stav projektu', :required => true-%><br />
   <%= select :project, :status, Project::STATUS_VALUES.invert.sort {|a,b| a[1]<=>b[1]}%>
 </p>
+
+
 <p>
   <%= label :project, 'note', 'poznámka'-%><br />
   <%= text_area :project, :note, :cols=>30, :rows=>5-%>

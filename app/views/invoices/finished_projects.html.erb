@@ -10,13 +10,15 @@
     <th>administrace</th>
  </tr>
 
-<% for project in @projects-%>
+<% for project in @projects -%>
+	<% if !(project.project_id.blank? && project.works.find(:all, :conditions => ["deleted is not true"]).size == 0 ) %>
   <tr>
     <td><%= right_show_link ( "companies", "show", project.company.name, project.company )%></td>
     <td class="left_align"><%= right_show_link ( "users", "show", project.user.fullname, project.user )-%></td>
     <td class="left_align"><%= right_show_link ( "projects", "show", project_name(project), project )%></td>
     <td><%= right_link ( "invoices", "new", "vytvořit podklad k fakturaci", new_project_invoice_path(project) )%></td>
    </tr>
+	<% end %>
 <% end-%>
 </table>
 

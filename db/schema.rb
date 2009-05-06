@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090504203224) do
+ActiveRecord::Schema.define(:version => 20090506114307) do
 
   create_table "bordel", :id => false, :force => true do |t|
     t.string  "name"
@@ -114,9 +114,9 @@ ActiveRecord::Schema.define(:version => 20090504203224) do
   create_table "job_types", :force => true do |t|
     t.string   "name"
     t.string   "note"
-    t.string   "deleted"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted"
   end
 
   create_table "job_types_operation_types", :id => false, :force => true do |t|
@@ -197,8 +197,10 @@ ActiveRecord::Schema.define(:version => 20090504203224) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",     :default => 0
+    t.integer  "status",            :default => 0
     t.integer  "user_id"
+    t.string   "project_path_ds"
+    t.string   "project_path_avid"
   end
 
   create_table "purchase_carts", :force => true do |t|
@@ -279,7 +281,6 @@ ActiveRecord::Schema.define(:version => 20090504203224) do
   end
 
   create_table "tape_sells", :force => true do |t|
-    t.datetime "date"
     t.integer  "project_id"
     t.integer  "tape_type_id"
     t.integer  "value"
@@ -287,6 +288,7 @@ ActiveRecord::Schema.define(:version => 20090504203224) do
     t.string   "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "price"
   end
 
   create_table "tape_types", :force => true do |t|
