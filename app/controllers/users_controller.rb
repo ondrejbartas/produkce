@@ -72,13 +72,13 @@ class UsersController < ApplicationController
 
          if params[:user][:active_role].blank?
             @user.role = 1
-            if !params[:role3].blank? && params[:role3] == "true" then @user.role *= 3 end
-            if !params[:role5].blank? && params[:role5] == "true"  then @user.role *= 5 end
-            if !params[:role7].blank? && params[:role7] == "true"  then @user.role *= 7 end
-            if !params[:role11].blank? && params[:role11] == "true"  then @user.role *= 11 end
-            if !params[:role13].blank? && params[:role13] == "true"  then @user.role *= 13 end
-            if !params[:role17].blank? && params[:role17] == "true"  then @user.role *= 17 end
-            if !params[:role23].blank? && params[:role23] == "true"  then @user.role *= 23 end
+            if !params[:role3].blank? then @user.role *= 3 end
+            if !params[:role5].blank? then @user.role *= 5 end
+            if !params[:role7].blank?  then @user.role *= 7 end
+            if !params[:role11].blank?  then @user.role *= 11 end
+            if !params[:role13].blank?  then @user.role *= 13 end
+            if !params[:role17].blank?  then @user.role *= 17 end
+            if !params[:role23].blank?  then @user.role *= 23 end
          end
 
       respond_to do |format|
