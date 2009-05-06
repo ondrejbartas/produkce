@@ -194,5 +194,9 @@ class User < ActiveRecord::Base
          self.logout_time = 10
       end
     end
+    
+     def get_history_text
+       self.name+";"+self.surname+";"+self.fullname+";"+self.login+";"+self.password+";"+self.role+";"+self.access+";"+self.active_role+";"+self.logout_time+";"+self.deleted
+     end
 end
 

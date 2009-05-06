@@ -36,4 +36,20 @@
    <span id="sub_project_id_container">
    </span>
 </p>
+
+
+<h3>Již vytvořené projekty</h3>
+<ul>
+  <% for proj in @company.projects.find(:all,  :conditions => ["project_id is null AND (status = 0 OR status = 1 ) AND deleted is not true"]) -%>
+	  <li><%= right_show_link ("projects", "show", proj.name, proj)-%>
+	    <% if proj.projects.size > 0-%>
+	        <ul>
+	            <% for subproject in proj.projects.find(:all,  :conditions => ["(status = 0 OR status = 1 ) AND deleted is not true"])-%>
+	                <li><%= right_show_link ("projects", "show", subproject.name, subproject )-%></li>
+	            <% end-%>
+	        </ul>
+	    <% end-%>
+	  </li>
+	<% end-%>
+</ul>
 <% end-%>

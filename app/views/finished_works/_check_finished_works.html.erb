@@ -10,10 +10,10 @@
       <tr>
 		 	 <th rowspan="2">správně</th>
           <th rowspan="2">datum zaúčtování</th>
-          <th rowspan="2" style="width:80px">datum naplánování</th>
-          <th rowspan="2" style="width:100px">projekt</th>
           <th rowspan="2" style="width:80px">operátor</th>
           <th rowspan="2" style="width:80px">doba</th>
+          <th rowspan="2" style="width:100px">projekt</th>
+          <th rowspan="2" style="width:80px">datum naplánování</th>
           <th colspan="5">úkony</th>
       </tr>
       <tr>
@@ -39,41 +39,39 @@
 									-%>
 						</td>
 						<td><%= my_date finished_work.created_at-%></td>
+						<td style="width:80px">
+							<%= right_show_link "users", "show", finished_work.user.fullname, finished_work.user-%>
+						</td>
+						<td style="width:80px">
+								<%= select 'finished_work_form['+finished_work.id.to_s+']',:value,
+										Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]} ,
+										{:selected=>finished_work.value.to_i},
+										{:onchange => remote_function( 
+											:url => change_value_finished_work_path(finished_work),
+											:before => "Element.show('spinner"+finished_work.id.to_s+"')",
+								         :success => "Element.hide('spinner"+finished_work.id.to_s+"')",
+											:confirm => "chcete opravdu provést změnu z: "+length_values(finished_work.value.to_i),
+											:with => "'value=' + escape(value)")}
+
+										%>				
+							
+										<%= image_tag("spinner.gif",
+										              :align => "absmiddle",
+										              :border => 0,
+										              :id => "spinner"+finished_work.id.to_s,
+										              :style =>"display: none;" )-%>
+     					</td>
 						
 						<td colspan="9"  class="no_borders">
 						<table>
 						<% for operation in finished_work.operations-%>
 						<tr>
-							<td style="width:80px">
-								<%= my_date operation.work.date -%>
-							</td>
 							<td style="width:101px">
 								<%= operation.work.project.blank? ? right_show_link( "works", "edit", "<b class='red'>není zadán projekt</b>", edit_work_path(operation.work)) :  ( right_show_link( "projects", "show", project_name(operation.work.project), operation.work.project) )-%>
 							</td>
 							<td style="width:80px">
-								<%= right_show_link "users", "show", finished_work.user.fullname, finished_work.user-%>
+								<%= my_date operation.work.date -%>
 							</td>
-							<td style="width:80px">
-									<%= select 'finished_work_form['+finished_work.id.to_s+']',:value,
-											Work::LENGTH_VALUES.invert.sort{|a,b| a[1]<=>b[1]} ,
-											{:selected=>finished_work.value.to_i},
-											{:onchange => remote_function( 
-												:url => change_value_finished_work_path(finished_work),
-												:before => "Element.show('spinner"+finished_work.id.to_s+"')",
-									         :success => "Element.hide('spinner"+finished_work.id.to_s+"')",
-												:confirm => "chcete opravdu provést změnu z: "+length_values(finished_work.value.to_i),
-												:with => "'value=' + escape(value)")}
-
-											%>				
-								
-											<%= image_tag("spinner.gif",
-											              :align => "absmiddle",
-											              :border => 0,
-											              :id => "spinner"+finished_work.id.to_s,
-											              :style =>"display: none;" )-%>
-	     					</td>
-						
-						
 						  <td style="width:80px">
 		                  <%= operation.operation_type.name-%>
 		              </td>

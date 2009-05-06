@@ -1,5 +1,12 @@
 <h2>
     <div class="menu_small">
+		<% if @project.works.find(:all, :conditions => ["deleted is not true"]).size > 0 %>
+			<b class="red">projekt nelze smazat!!! má v sobě práce </b>
+		<% elsif @project.projects.find(:all, :conditions => ["deleted is not true"]).size > 0 %>
+			<b class="red">projekt nelze smazat!!! má v sobě podprojekty </b>
+		<% else %>
+		  <%= right_delete_link "projects", "delete", 'smazat', @project -%>
+		<% end %>
         <%= right_link "projects", "edit", 'upravit projekt', edit_project_path(@project)-%>
     </div>
     Projekt: <%=h project_name(@project)%>
@@ -25,7 +32,7 @@
     Seznam subprojektů
 </h3>
 <ul>
- <% for proj in @project.projects-%>
+ <% for proj in @project.projects.find(:all, :conditions => ["deleted is not true"])-%>
       <li><%= link_to proj.name, proj -%></li>
 
 <% end-%>
@@ -37,7 +44,7 @@
 
 <h3>
     <% if @project.status == 1-%>
-		<% if !@project.project_id.blank? || @project.projects.size == 0-%>
+		<% if !@project.project_id.blank? || @project.projects.find(:all, :conditions => ["deleted is not true"]).size == 0-%>
         <div class="menu_small">
             <%= right_link "works", "new", 'naplánovat práci', new_project_work_path(@project)-%>
             <%= right_link "works", "new_now", 'naplánovat práci na teď', new_now_project_works_path(@project)-%>

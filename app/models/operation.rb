@@ -38,4 +38,8 @@ class Operation < ActiveRecord::Base
       end         
     end
   end
+  
+   def get_history_text
+     self.work_id+";"+self.value+";"+self.finished+";"+self.note+";"+self.operation_type+";"+self.tape_type_id+";"+self.player_machine_id+";"+self.record_machine_id+";"+self.their_tape+";"+self.finished_work_id+";"+self.note_operator+";"+self.count
+   end
 end

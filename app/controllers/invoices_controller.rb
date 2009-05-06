@@ -100,16 +100,12 @@ class InvoicesController < ApplicationController
      }
 
      @projects = Project.find(:all, :conditions => "projects.deleted is null AND ("+ filter_text+")").sort_by {|u| u.project_name.downcase}
-      if not (@current_user.admin? || @current_user.produce? || @current_user.worker?)
-           flash[:error] = 'Nemáte oprávnění vidět danou stránku! Pokud si myslíte, že je to chyba napište administrátorovi: ondrej.bartas@pokrok.com'
-           redirect_to @current_user
-      else
 
          respond_to do |format|
            format.html # index.html.erb
            format.xml  { render :xml => @projects }
          end
-     end
+
    end
   
 end

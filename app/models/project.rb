@@ -44,4 +44,8 @@ class Project < ActiveRecord::Base
       end
   end
    
+   
+    def get_history_text
+      self.name+";"+self.company_id+";"+self.project_id+";"+self.status+";"+self.deleted+";"+self.user_id+";"+self.note
+    end
 end

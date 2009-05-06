@@ -70,4 +70,8 @@ class Work < ActiveRecord::Base
    def get_to
      return self.date+self.time.minutes + self.length.minutes
    end
+   
+    def get_history_text
+      self.note+";"+self.length+";"+self.reserved+";"+self.edited+";"+self.project_id+";"+self.job_type_id+";"+self.user_id+";"+self.place_id+";"+self.time+";"+self.date
+    end
 end
