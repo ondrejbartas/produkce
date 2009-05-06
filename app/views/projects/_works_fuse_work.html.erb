@@ -1,0 +1,47 @@
+<% id = "work_"+Time.now.strftime("%s")+"_"+work.id.to_s-%>
+<div id="<%= id-%>" class="work">
+	<div class="calendar_event">
+		
+	  <% if  work.reserved == true-%>
+	    <div class="reserved">
+		 <% movable = true-%>
+	  <% else-%>
+			<% finished = true-%>
+	   	<% for operation in work.operations -%>
+				<% if operation.finished.blank? -%>
+					<% finished = false -%>
+				<% end -%>
+			<% end -%>
+			<% if finished == true-%>
+				<div class="finished">
+  			   <% movable = false-%>
+			<% elsif work.date < Time.now.beginning_of_day-%>
+			  	<div class="nooperations">
+				<% movable = true-%>
+			<% else-%>
+				<div class="unfinished">
+			   <% movable = true-%>
+			<% end-%>
+	  <%  end-%>	
+		  <div class="top"></div>
+		
+			<div class="body">
+			      <div class="div_with_float">
+						<div>
+								<%= work.user_id.blank? ? " " : work.user.fullname-%><br />
+								<%= my_hour work.get_from-%> - <%= my_hour work.get_to-%><br />
+							<div class='floating_no_user'>
+								<%= image_tag( "no_user_icon.png", :alt => 'bez operátora') if work.user_id.blank? || work.operations.size == 0 || work.project_id.blank? -%>
+							</div>	
+							
+						</div>
+
+					</div>
+				</div>
+			<div class="bottom"></div>
+		</div>
+	</div>
+</div>	
+<% if edited != true %>
+	<%= right_show "works", "edit", draggable_element(id,  :revert=> true , :ghosting=> true )-%> 
+<% end %>

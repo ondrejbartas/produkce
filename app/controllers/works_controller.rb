@@ -229,5 +229,19 @@ class WorksController < ApplicationController
   
   
   
+  def change_project
+      
+     
+     
+      @work = Work.find(params[:work_id])
+      
+      @work.project_id = params[:project_id].to_i
+      
+      
+      
+      @work.save
+      render :partial => 'projects/works_fuse_work', :locals => {:work => @work, :edited => true}
+                  
+  end
   
 end

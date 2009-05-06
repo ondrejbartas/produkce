@@ -100,12 +100,13 @@
                       <li><%= sub_menu( "purchase_carts", "new", 'přidat nákup kazet', new_purchase_cart_path )%></li>
                       <li><%= sub_menu( "purchase_carts", "index", 'seznam nákupů kazet', purchase_carts_path )%></li>
                    <% elsif @activePage == "menu_admin"-%>
+                   	 <li><%= sub_menu( "projects", "works_fuse", 'FUZE projektu', works_fuse_projects_path )-%></li>
+                   	 <li><%= sub_menu( "invoice_operations", "index", 'fakturační úkony', invoice_operations_path )-%></li>
                       <li><%= sub_menu( "operation_types", "index", 'typ pracovních úkonů', operation_types_path )-%></li>
-                      <li><%= sub_menu( "invoice_operations", "index", 'fakturační úkony', invoice_operations_path )-%></li>
                       <li><%= sub_menu( "tape_types", "index", 'typ kazet', tape_types_path )-%></li>
-                      <li><%= sub_menu( "machines", "index", 'stroje', machines_path )-%></li>
                       <li><%= sub_menu( "job_types", "index", 'typy činností', job_types_path )-%></li>
                       <li><%= sub_menu( "places", "index", 'pracovní místa', places_path )-%></li>
+                      <li><%= sub_menu( "machines", "index", 'stroje', machines_path )-%></li>
                       <li><%= sub_menu( "categories", "index", 'kategorie', categories_path )-%></li>
 						    <li><%= sub_menu( "reception_categories", "index", "kategorie pro kontakt recepce", reception_categories_path )-%></td>
                       <li><%= sub_menu( "rights", "index", 'práva k stránkám', rights_path )-%></li>

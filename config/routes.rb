@@ -44,6 +44,9 @@ ActionController::Routing::Routes.draw do |map|
  
   map.resources :projects, :collection => { 
                 :list => [:get, :post] , 
+                :works_fuse => [:get, :post] , 
+                :works_fuse_from => [:get, :post] , 
+                :works_fuse_to => [:get, :post] , 
                 :render_sub_project => [:get, :post] , 
                 :render_sub_project_sell => [:get, :post] , 
                 :render_project => [:get, :post] }, 
@@ -55,6 +58,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :works, :has_many => [:operations],
                         :collection => { 
+                                    :change_project => [:get, :post],
                                     :add_operation => [:get, :post],
                                     :add_user => [:get, :post],
                                     :new_now => [:get, :post] ,

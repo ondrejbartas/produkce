@@ -1,0 +1,48 @@
+<h2>přesun prací z projektu do projektu</h2>
+
+
+<div id="from_project">
+<%= label :project, 'project_id_from', 'jméno projektu ze kterého budete přesouvat', :required => true-%>
+      <%= collection_select(:project, :project_id_from,
+		Project.find(:all, :conditions => ["deleted is not true AND ( status = 0 OR status = 1 OR status = 2 )"]).sort_by{|u| u.project_name},
+    :id, :project_name, {:include_blank => true},
+    {:onchange => remote_function( :update => 'from_project_works', :url =>
+    works_fuse_from_projects_path, :with =>
+      "'project_id_from=' +
+        escape(value)" ,
+       :before => "Element.show('spinner_from')",
+       :success => "Element.hide('spinner_from')"
+			)} )%>
+
+			<%= image_tag("spinner.gif",
+			              :align => "absmiddle",
+			              :border => 0,
+			              :id => "spinner_from",
+			              :style =>"display: none;" )-%>
+		<div id="from_project_works">
+		</div>
+		
+</div>
+
+<div id="to_project">
+<%= label :project, 'project_id_to', 'jméno projektu ze kterého budete přesouvat', :required => true-%>
+      <%= collection_select(:project, :project_id_to,
+		Project.find(:all, :conditions => ["deleted is not true AND ( status = 0 OR status = 1 OR status = 2 )"]).sort_by{|u| u.project_name},
+    :id, :project_name, {:include_blank => true},
+    {:onchange => remote_function( :update => 'to_project_works', :url =>
+    works_fuse_to_projects_path, :with =>
+      "'project_id_to=' +
+        escape(value)" ,
+       :before => "Element.show('spinner_to')",
+       :success => "Element.hide('spinner_to')"
+			)} )%>
+
+			<%= image_tag("spinner.gif",
+			              :align => "absmiddle",
+			              :border => 0,
+			              :id => "spinner_to",
+			              :style =>"display: none;" )-%>
+		<div id="to_project_works">
+		</div>
+
+</div>

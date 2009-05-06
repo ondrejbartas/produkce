@@ -566,8 +566,24 @@ td {
 	background: url('../images/date_unfinished_bottom.png');
 }
 
+#from_project, #to_project {
+	float:left;
+	width:300px;
+}
 
 
+.project_from_to {
+	margin-top: 10px;
+	width: 120px;
+	min-height: 300px;
+	background: #ccF;
+	padding: 10px;
+ 	border: 1px solid #669;
+	
+}
+.project_to_dropable_hover {
+	background: #cFc;
+}
 
 .floating_div_top {
 	height: 33px;

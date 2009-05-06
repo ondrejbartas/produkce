@@ -1,0 +1,6 @@
+<div  class="project_from_to" >
+<% for work in @project.works.find(:all, :conditions => ["deleted is not true"]).sort_by{|u| u.date} %>
+	<%= render :partial => 'projects/works_fuse_work' , :locals => {:work => work, :edited => false}%>
+<% end %>
+
+</div>

@@ -33,6 +33,25 @@ class ProjectsController < ApplicationController
     end
     render(:layout=>false)
   end
+  
+  # GET /projects/render_index
+   def works_fuse_from
+     if !params[:project_id_from].blank?
+       @project = Project.find(params[:project_id_from])
+       render(:layout=>false)
+     else
+        render  :inline =>"vyberte projekt"
+     end
+   end
+   # GET /projects/render_index
+    def works_fuse_to
+      if !params[:project_id_to].blank?
+        @project = Project.find(params[:project_id_to])
+        render(:layout=>false)
+      else
+         render  :inline =>"vyberte projekt"
+      end
+    end
 
   # GET /projects
   # GET /projects.xml

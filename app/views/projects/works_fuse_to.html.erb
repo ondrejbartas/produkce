@@ -1,0 +1,17 @@
+<div id="project_to_dropable" class="project_from_to" >
+<% for work in @project.works.find(:all, :conditions => ["deleted is not true"]).sort_by{|u| u.date} %>
+	<%= render :partial => 'projects/works_fuse_work' , :locals => {:work => work, :edited => true}%>
+<% end %>
+
+
+</div>
+<%= drop_receiving_element("project_to_dropable",                             # The id of the receiving element
+  :accept => "work",                                         # The CSS class of the dropped element
+  :update => "project_to_dropable",
+  :position => "bottom",
+  :hoverclass => "project_to_dropable_hover",
+  :loading => visual_effect(:fade),							
+  :with   => "'work_id=' + (element.id.split('_').last())",     # The query string parameters
+  :url    => {:controller => :works, :action=>:change_project, 
+					:project_id => @project.id }                          # The action to call
+)%>
