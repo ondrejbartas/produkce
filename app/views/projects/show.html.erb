@@ -69,6 +69,7 @@
           <th rowspan="2">od - do</th>
           <th rowspan="2">operátor</th>
           <th width="400" colspan="4">úkony</th>
+          <th rowspan="2" width="80">admin.</th>
       </tr>
       <tr>
           <th width="80">úkon</th>
@@ -170,6 +171,8 @@
 					  <td <%= tr_op_class %>><%= operation.note_operator-%>
 					  </td>
 					
+					  <td <%= tr_op_class %>><%= right_link "works", "edit", "upravit", edit_operation_path(operation) -%>
+					  </td>
 
 
 				</tr>

@@ -8,9 +8,9 @@
 </h2>
 <table class="work">
       <tr>
-		 	 <th rowspan="2">správně</th>
-          <th rowspan="2">datum zaúčtování</th>
-          <th rowspan="2" style="width:80px">operátor</th>
+		 	 <th rowspan="2"style="width:50px">správně</th>
+          <th rowspan="2" style="width:70px">datum zaúčtování</th>
+          <th rowspan="2" style="width:120px">operátor</th>
           <th rowspan="2" style="width:80px">doba</th>
           <th rowspan="2" style="width:100px">projekt</th>
           <th rowspan="2" style="width:80px">datum naplánování</th>
@@ -65,7 +65,7 @@
 						<td colspan="9"  class="no_borders">
 						<table>
 						<% for operation in finished_work.operations-%>
-						<tr>
+						<tr style="height:30px">
 							<td style="width:101px">
 								<%= operation.work.project.blank? ? right_show_link( "works", "edit", "<b class='red'>není zadán projekt</b>", edit_work_path(operation.work)) :  ( right_show_link( "projects", "show", project_name(operation.work.project), operation.work.project) )-%>
 							</td>
