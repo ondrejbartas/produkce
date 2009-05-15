@@ -55,12 +55,13 @@ class OperatorPlansController < ApplicationController
     def create
        flash[:notice] = ""
        saved = true
-
+       @value = 1
        if !params[:op_plans].blank?
            params[:op_plans].each { |key ,plan|
 
              @operator_plan = OperatorPlan.new(params[:op_plans][key][:operator_plan])
              if !@operator_plan.save
+               @value = @operator_plan.value
                @operator_plan_error = @operator_plan
                saved = false
              else
@@ -76,7 +77,11 @@ class OperatorPlansController < ApplicationController
        end 
        respond_to do |format|
          if saved == true
+            if @value == 1
              format.html { redirect_to :controller => "operator_plans", :action => "index" }
+            else 
+              format.html { redirect_to :controller => "operator_plans", :action => "index_recepce" }
+            end
          else
            @type =  1
            @users = User.find(:all, :conditions => "role % 5 = 0", :order => "fullname")

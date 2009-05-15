@@ -105,7 +105,7 @@
 					id="<%= "day_"+table_day.to_s %>"
 					>
 	
-			<% operator_plans = OperatorPlan.find(:all , :conditions => ['"date" = ? ',  table_day.strftime("%Y-%m-%d") ]).sort_by{|u| u.from} %>
+			<% operator_plans = OperatorPlan.find(:all , :conditions => ['"date" = ? AN value = ? ',  table_day.strftime("%Y-%m-%d"), @value ]).sort_by{|u| u.from} %>
 			    <% if operator_plans.size > 0 %>
 			        <% for operator_plan in operator_plans %>
 			            <%= render :partial => 'operator_plans/add_cell', :locals => {:operator_plan => operator_plan} %>
