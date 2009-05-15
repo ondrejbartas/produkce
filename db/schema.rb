@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090506114307) do
+ActiveRecord::Schema.define(:version => 20090514195618) do
 
   create_table "bordel", :id => false, :force => true do |t|
     t.string  "name"
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(:version => 20090506114307) do
   add_index "categories_users", ["user_id"], :name => "index_categories_users_on_user_id"
 
   create_table "comments", :force => true do |t|
-    t.datetime "date"
+    t.integer  "user_id"
     t.string   "text"
-    t.boolean  "deleted"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -177,6 +177,17 @@ ActiveRecord::Schema.define(:version => 20090506114307) do
     t.integer  "count"
   end
 
+  create_table "operator_plans", :force => true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.integer  "from"
+    t.integer  "to"
+    t.string   "note"
+    t.integer  "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "places", :force => true do |t|
     t.string   "name"
     t.string   "note"
@@ -189,6 +200,15 @@ ActiveRecord::Schema.define(:version => 20090506114307) do
     t.datetime "updated_at"
   end
 
+  create_table "project_paths", :force => true do |t|
+    t.string   "path"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.integer  "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.string   "note"
@@ -197,10 +217,8 @@ ActiveRecord::Schema.define(:version => 20090506114307) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",            :default => 0
+    t.integer  "status",     :default => 0
     t.integer  "user_id"
-    t.string   "project_path_ds"
-    t.string   "project_path_avid"
   end
 
   create_table "purchase_carts", :force => true do |t|
@@ -329,6 +347,17 @@ ActiveRecord::Schema.define(:version => 20090506114307) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "note"
+  end
+
+  create_table "workflow_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "workflow_comment_id"
+    t.string   "note"
+    t.boolean  "finished"
+    t.boolean  "archiv"
+    t.boolean  "storno"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "works", :force => true do |t|

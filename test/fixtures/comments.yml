@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  date: 2008-12-14 18:57:01
+  user_id: 1
   text: MyString
-  deleted: false
+  project_id: 1
 
 two:
-  date: 2008-12-14 18:57:01
+  user_id: 1
   text: MyString
-  deleted: false
+  project_id: 1

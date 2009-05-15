@@ -7,8 +7,10 @@ class Project < ActiveRecord::Base
   belongs_to :user
   belongs_to :company
   has_many :works
+  has_many :comments
   has_many :tape_sells
   
+  has_many :project_paths
   
   validates_presence_of :name, :status, :user_id
 

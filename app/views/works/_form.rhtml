@@ -7,7 +7,7 @@
       <p>
          <%= work_form.label 'project_id', 'projekt', :required => true-%>
                 <%= work_form.collection_select :project_id ,
-                  Project.find(:all, :conditions=> "status = 1 AND project_id IS null"),
+                  Project.find(:all, :conditions=> "status = 1 AND project_id IS null").sort_by{|u| u.name.downcase},
                   :id, :name, {:include_blank => true },
                   {:onchange => remote_function( :update => 'sub_project_id_container', :url =>
                   render_sub_project_projects_path,
@@ -106,6 +106,15 @@
   <% end-%>
 </div>
 
+
+<% if !@work.blank? && !@work.job_type_id.blank?-%>
+	<h3>	
+		<%= link_to_remote "+ přidat úkon +",
+		           :url => { :action => "add_operation", :job_type_id => @job_type.id},
+		           :update =>  "operations" , :position => :bottom-%>
+	</h3>	
+<% end -%>
+
 <div id="calendar_container">
 	<% if !@work.user_id.blank?-%>
 		<% if controller.action_name != "edit"-%>
@@ -119,8 +128,8 @@
 
 
 <p>
-   <%= label :work, 'note', 'poznámka v kalendáři', :required => false-%>
-   <%= work_form.text_field :note-%>
+   <%= label :work, 'note', 'poznámka v kalendáři', :required => false-%><br />
+   <%= work_form.text_area :note , :rows => 3, :cols=>40-%>
 </p>
 <p>
 	<% if controller.action_name == "edit"-%>

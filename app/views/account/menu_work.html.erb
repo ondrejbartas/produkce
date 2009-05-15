@@ -1,1 +1,15 @@
-neco k zalozce MENU PRACE
+
+
+<% if @current_user.worker?-%>
+	<h2>
+		<div class="menu_small">
+			<%= link_to 'zaúčtovat hotovou práci', new_finished_work_path-%>
+			<%= link_to 'seznam zaúčtované práce', finished_works_path-%>
+		</div>
+		Seznam úkonů
+	</h2>
+
+    <%= render :partial=>"finished_works/form_operations", :locals => { :type => "home" }-%>
+	
+	
+<% end-%>

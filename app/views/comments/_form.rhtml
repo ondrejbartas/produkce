@@ -1,0 +1,13 @@
+
+<% form_for(@comment) do |f|-%>
+  <%= f.error_messages-%>
+
+	<p>
+	    <%= f.text_area :text ,:class=> "textarea_comment_project" -%>
+	    <%= f.hidden_field :user_id, :value=> @current_user.id -%>
+	    <%= f.hidden_field :project_id, :value=> project.id -%>
+	</p>
+  <p>
+    <%= f.submit "poslat" -%>
+  </p>
+<% end-%>

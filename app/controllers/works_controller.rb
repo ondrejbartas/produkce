@@ -147,7 +147,7 @@ class WorksController < ApplicationController
   def destroy
     @work = Work.find(params[:id])
       
-      if @work.deleted
+      if @work.deleted == true
         @work.deleted = false
       else
         @work.deleted = true
@@ -155,10 +155,7 @@ class WorksController < ApplicationController
      @work.save
 
 
-    respond_to do |format|
-      format.html { redirect_to(works_url) }
-      format.xml  { head :ok }
-    end
+     redirect_to session['saved_location']
   end
   
   

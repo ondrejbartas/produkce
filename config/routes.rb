@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :project_paths
+
+
+  map.resources :comments
+
+
   map.resources :tape_sells
 
   map.resources :update_logs
@@ -25,9 +31,15 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :reception_events
 
   map.resources :reception_contacts
+
+  map.resources :operator_plans, :collection => {:add_new_user_plan => [:get, :post], :index_recepce => [:get, :post], :new_recepce => [:get, :post]}
  
   map.resources :system_comments, :has_many => [ :system_comments ],
                                   :member => [:add_form, :finished, :storno, :archiv ]
+  map.resources :workflow_comments, :has_many => [ :system_comments ],
+                                     :member => [:add_form, :finished, :storno, :archiv ]
+
+  map.resources :contacts, :collection => { :render_index => [:get, :post] }
 
   map.resources :plans, :collection => { 
               :week => [:get, :post] , 
@@ -40,7 +52,6 @@ ActionController::Routing::Routes.draw do |map|
               :add_calendar_work => [:get, :post]  }
               
 
-  map.resources :contacts, :collection => { :render_index => [:get, :post] }
  
   map.resources :projects, :collection => { 
                 :list => [:get, :post] , 
@@ -67,7 +78,7 @@ ActionController::Routing::Routes.draw do |map|
                               :member => { :add_operation_from_worker => [:get, :post] 
                         }
 
-  map.resources :users, :has_many => [:contacts, :works, :system_comments, :finished_works],
+  map.resources :users, :has_many => [:contacts, :works, :system_comments, :workflow_comments, :finished_works],
                         :member => {:change_role => [:get, :post] },
                         :collection => { :list => [:get, :post] , 
                         :change_atributes => [:get, :post]}
@@ -77,9 +88,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :works
   map.resources :histories
   map.resources :job_types
-  map.resources :places
-  map.resources :comments
-  map.resources :contacts
+  map.resources :places 
   map.resources :roles
   map.resources :warehouse_controls, :collection => { 
                       :show_discarded_tapes => [:get, :post],

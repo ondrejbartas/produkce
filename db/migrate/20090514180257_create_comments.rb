@@ -1,9 +1,9 @@
 class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments do |t|
-      t.timestamp :date
+      t.integer :user_id
       t.string :text
-      t.boolean :deleted
+      t.integer :project_id
 
       t.timestamps
     end

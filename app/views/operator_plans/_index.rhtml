@@ -1,0 +1,34 @@
+<table>
+
+    <tr style="height:30px" >
+    <%  9.times { |n|  %>
+        <% table_day = Time.now.beginning_of_week + n.days %>
+            <th style="width:100px"  <% if Time.today ==  table_day -%>
+		                class="today"
+		            <%  elsif n%7 > 4 -%>
+		                class="weekend"
+		            <% end -%>
+				><%= day_names(n%7) %> <%= my_date table_day %> </th>
+	 <% } %>
+	</tr>
+	<tr style="height:40px">
+    <%  9.times { |n|  %>
+    	<% table_day = Time.now.beginning_of_week + n.days %>
+
+			<% operator_plans = OperatorPlan.find(:all , :conditions => ['"date" = ? AND value = ?',  table_day.strftime("%Y-%m-%d"), value ]).sort_by{|u| u.from} %>
+			<td   <% if Time.today ==  table_day -%>
+	                class="today"
+	            <%  elsif n%7 > 4 -%>
+	                class="weekend"
+	            <% end -%>>
+			    <% if operator_plans.size > 0 %>
+			        <% for operator_plan in operator_plans %>
+			            <%= render :partial => 'operator_plans/add_cell', :locals => {:operator_plan => operator_plan} %>
+			        <% end %>
+			    <% end %>
+			&nbsp;
+			</td>
+
+    <% } %>
+   </tr>
+</table>

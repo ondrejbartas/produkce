@@ -1,0 +1,19 @@
+<% id = "user_"+user.id.to_s-%>
+<div id="<%= id-%>" class="user">
+	<div class="calendar_event">
+		
+	  <div class="unfinished">
+	  	  <div class="top"></div>
+		
+			<div class="body">
+			      <div class="div_with_float">
+						<div>
+							<%= user.fullname-%>	
+						</div>
+					</div>
+				</div>
+			<div class="bottom"></div>
+		</div>
+	</div>
+</div>
+<%= right_show "operator_plans", "new", draggable_element(id,  :revert=> true , :ghosting=> true )-%>

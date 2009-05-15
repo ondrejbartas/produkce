@@ -1,0 +1,129 @@
+<h2>Naplánovat služby operátoru</h2>
+
+
+<h3>vyberte technika</h3>
+<table>
+	<% count = 1 %>
+    <tr><% if @users.size > 0 %>
+        <% for user in @users %>
+				<% if count % 7 == 0 %> </tr><tr><% end %>
+				<td><%= render :partial => 'operator_plans/add_user', :locals => {:user => user} %></td>
+				<% count += 1 %>
+        <% end %>
+    <% end %>
+
+	<% (count % 7).times { %> <td></td> <% } %>
+	</tr>
+</table>
+
+<h3>přesuňte technika na datum</h3>
+
+<% form_for(OperatorPlan.new) do |f|-%>
+
+<%  3.times { |t|  %>
+
+<table>
+    <tr style="height:30px" >
+    <%  7.times { |n|  %>
+        <% table_day = Time.now.beginning_of_week + n.days + (t.days * 7 ) %>
+            <th style="width:100px"  <% if Time.today ==  table_day -%>
+		                class="today"
+		            <%  elsif n%7 > 4 -%>
+		                class="weekend"
+		            <% end -%>
+				><%= day_names(n%7) %> <%= my_date table_day %> </th>
+	 <% } %>
+	</tr>
+	<tr style="height:8px">
+    	<%  7.times { |n|  %>
+      	<% table_day = (Time.now.beginning_of_week + n.days + (t.days* 7 )).to_s %>
+			<td id="wholeday_<%= table_day %>"> celý den</td>
+			
+				<%= drop_receiving_element("wholeday_"+table_day,                             # The id of the receiving element
+					  :accept => "user",                                         # The CSS class of the dropped element
+					  :update => "day_"+table_day,
+					  :position => "bottom",
+					  :hoverclass => "clanedar_hover",						
+					  :with   => "'user_id=' + (element.id.split('_').last())",     # The query string parameters
+					  :url    => {:action=>:add_new_user_plan,
+										:preset => "wholeday", 
+										:value => @value,
+										:date => table_day
+										}                          # The action to call
+					)%>
+		<% } %>
+	<tr>
+	<tr style="height:8x">
+    	<%  7.times { |n|  %>
+			<% table_day = (Time.now.beginning_of_week + n.days + (t.days* 7 )).to_s %>
+			<td id="startday_<%= table_day %>"> dopoledne</td>
+			
+				<%= drop_receiving_element("startday_"+table_day,                             # The id of the receiving element
+					  :accept => "user",                                         # The CSS class of the dropped element
+					  :update => "day_"+table_day,
+					  :position => "bottom",
+					  :hoverclass => "clanedar_hover",						
+					  :with   => "'user_id=' + (element.id.split('_').last())",     # The query string parameters
+					  :url    => {:action=>:add_new_user_plan,
+										:preset => "startday", 
+										:value => @value,
+										:date => table_day
+										}                          # The action to call
+					)%>
+		<% } %>
+	<tr>
+	<tr style="height:8px">
+    	<%  7.times { |n|  %>
+			<% table_day = (Time.now.beginning_of_week + n.days + (t.days * 7 )).to_s %>
+			<td id="endday_<%= table_day %>">odpoledne</td>
+			
+				<%= drop_receiving_element("endday_"+table_day,                             # The id of the receiving element
+					  :accept => "user",                                         # The CSS class of the dropped element
+					  :update => "day_"+table_day,
+					  :position => "bottom",
+					  :hoverclass => "clanedar_hover",						
+					  :with   => "'user_id=' + (element.id.split('_').last())",     # The query string parameters
+					  :url    => {:action=>:add_new_user_plan,
+										:preset => "endday", 
+										:value => @value,
+										:date => table_day
+										}                          # The action to call
+					)%>
+		<% } %>
+	<tr>
+
+	<tr style="height:40px">
+    <%  7.times { |n|  %>
+    	<% table_day = Time.now.beginning_of_week + n.days + (t.days* 7 ) %>
+
+			<td   <% if Time.today ==  table_day -%>
+	                class="today"
+	            <%  elsif n%7 > 4 -%>
+	                class="weekend"
+	            <% end -%>
+	
+					id="<%= "day_"+table_day.to_s %>"
+					>
+	
+			<% operator_plans = OperatorPlan.find(:all , :conditions => ['"date" = ? ',  table_day.strftime("%Y-%m-%d") ]).sort_by{|u| u.from} %>
+			    <% if operator_plans.size > 0 %>
+			        <% for operator_plan in operator_plans %>
+			            <%= render :partial => 'operator_plans/add_cell', :locals => {:operator_plan => operator_plan} %>
+			        <% end %>
+			    <% end %>
+			&nbsp;
+			</td>
+
+    <% } %>
+   </tr>
+</table>
+<% } %>
+
+
+<p>
+  <%= f.submit "naplánovat"-%>
+</p>
+
+<% end -%>
+
+

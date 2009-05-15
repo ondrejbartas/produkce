@@ -25,9 +25,11 @@ h2 {
     background: #ccc;
 }
 h3 {
-    margin-left: 2em;
+    margin-left: 0em;
+    margin-top: 2em;
     padding: 3px;
     background: #ccc;
+	 color: #444;
 }
 .odstavec2 {
     margin-left: 3em;
@@ -241,34 +243,42 @@ div.overdue:hover{
 	color: black;
 }
 /* ------------- comments -------------- */
-.comment{
+.comment_project{
 	margin-top: 20px;
 }
-.comment_author{
+.comment_author_project{
 	float: left;
-	width: 80px;
-	text-align: center;
+	width: 120px;
+	text-align: right;
 }
-.comment_text{
-	margin-left: 90px;
+.comment_text_project{
+	margin-left: 130px;
 	padding: 10px 20px 9px;
 	width: 400px;
-	background-image: url('../pages/comment.gif');
+	background-image: url('../images/comment.gif');
 	text-align: justify;
+	white-space: pre;
 }
-.comment_label{
+.comment_label_project{
 	color: gray;
 	font-size: 10px;
 	margin-top: 5px;
 }
-textarea.textarea_comment{
+textarea.textarea_comment_project{
 	padding: 3px;
 	font-family: Arial, Helvetica, sans;
 	font-size: small;
-	width: 517px;
-	height: 70px;
+	width: 550px;
+	height: 50px;
 }
 
+textarea.textarea_project_path_project {
+	padding: 3px;
+	font-family: Arial, Helvetica, sans;
+	font-size: small;
+	width: 550px;
+	height: 20px;
+}
 
 #errorExplanation {
   width: 400px;
@@ -380,6 +390,10 @@ td {
 .red {
     color: #ff0000;
 }
+.blue {
+    color: #3333FF;
+}
+
 .today {
     background: #7777ff;
 }
@@ -616,6 +630,8 @@ td {
 }
 .comments .text {
 	padding: 4px;
+	white-space: pre;
+	
 }
 
 .comments .odkazy a {
@@ -661,6 +677,11 @@ td {
 }
 .forth_day {
 	background: #dbb0b0;
+}
+
+.user {
+	display:table-cell;
+	padding-right: 5px;
 }
 
 label {

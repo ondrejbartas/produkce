@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
    has_many :contacts
    has_many :jobs
    has_many :system_comments
+   has_many :workflow_comments
    has_many :comments
    has_many :histories
    has_many :works
@@ -14,6 +15,9 @@ class User < ActiveRecord::Base
    has_many :purchase_carts
    has_many :warehouse_controls
    has_many :tape_sells
+   has_many :operator_plans
+   has_many :comments
+   has_many :project_paths
    
    has_and_belongs_to_many :categories
    has_and_belongs_to_many :companies, :join_table => "companies_users",  :readonly => true

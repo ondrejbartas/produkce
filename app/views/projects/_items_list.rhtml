@@ -40,8 +40,8 @@
   		<tr>
 	<% end-%>
     <td class="left_align"><%= my_date project.created_at-%></td>
-    <td class="left_align"><%= right_show_link "companies", "show", project.company.name, project.company-%></td>
-    <td class="left_align"><%=  right_show_link "projects", "show", project_name(project), project-%></td>
+    <td class="left_align"><%= right_show_link "companies", "show", shorten((project.company.name), 25), project.company-%></td>
+    <td class="left_align"><%=  right_show_link "projects", "show", shorten(project_name(project), 36), project-%></td>
     <td><%= project_status project-%></td>
     <td class="left_align"><%=h project.note-%></td>
       </tr>

@@ -63,6 +63,7 @@
                        <li><%= sub_menu( "user", "change_atributes", "změna nastavení vašeho profilu", change_atributes_users_path) -%></li>
                        <li><%= sub_menu( "system_comments", "index", "systémové chyby a možná zlepšení", system_comments_path) -%></li>
                        <li><%= sub_menu( "update_logs", "index", "updaty systému", update_logs_path) -%></li>
+                       <li><%= sub_menu( "workflow_comments", "index", "chyby a připomínky ke strojům, vybavní, zapojení Studa Pokrok", workflow_comments_path) -%></li>
                    <% elsif @activePage == "menu_contact"-%>
                       <li><%= sub_menu( "companies", "new", 'přidat firmu', new_company_path )%></li>
                       <li><%= sub_menu( "users", "new", 'přidat uživatele', new_user_path )%></li>
@@ -74,6 +75,7 @@
                       <li><%= sub_menu( "works", "new", 'naplánovat práci', new_work_path)-%></li>
                       <li><%= sub_menu( "works", "new_now", 'naplánovat práci na teď', new_now_works_path)-%></li>
                       <li><%= sub_menu( "works", "new_without_produce", 'naplánovat práci bez produkčního', new_without_produce_works_path)-%></li>
+						 	 <li><%= sub_menu( "operator_plans", "index", 'kalednář služeb techniků', operator_plans_path)-%></li>
                    <% elsif @activePage == "menu_project"-%>
                       <li><%= sub_menu( "projects", "new", 'přidat projekt', new_project_path)-%></li>
                       <li><%= sub_menu( "projects", "index", 'seznam projektů', projects_path)-%></li>
@@ -86,6 +88,7 @@
 	              	<% elsif @activePage == "menu_reception"-%>
 							<li><%= sub_menu( "reception_contacts", "index", 'kontakty recepce', reception_contacts_path )%></li>
 							<li><%= sub_menu( "reception_events", "index", 'události recepce', reception_events_path )%></li>
+						 	<li><%= sub_menu( "operator_plans", "index_recepce", 'kalednář služeb recepčních', index_recepce_operator_plans_path)-%></li>
 					  	<% elsif @activePage == "menu_accountant"-%>
                    	 <li><%= sub_menu( "invoices", "finished_projects", 'ukončené projekty', finished_projects_invoices_path )%></li>
                       <li><%= sub_menu( "invoices", "index", 'zakázky k fakturaci', invoices_path )%></li>

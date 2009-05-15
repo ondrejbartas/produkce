@@ -29,6 +29,7 @@
 			      <div class="div_with_float">
 						<div>
 								<%= work.user_id.blank? ? " " : work.user.fullname-%><br />
+								<%= work.place.name -%> 
 								<%= my_date work.date -%> 
 								<%= my_hour work.get_from-%> - <%= my_hour work.get_to-%><br />
 							<div class='floating_no_user'>

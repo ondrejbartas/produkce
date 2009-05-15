@@ -68,8 +68,8 @@
           <th rowspan="2">datum</th>
           <th rowspan="2">od - do</th>
           <th rowspan="2">operátor</th>
-          <th width="400" colspan="4">úkony</th>
           <th rowspan="2" width="80">admin.</th>
+          <th width="400" colspan="4">úkony</th>
       </tr>
       <tr>
           <th width="80">úkon</th>
@@ -117,6 +117,17 @@
 					<% end %>
 				</td>						
 	
+			  <%= first_td-%>
+					<%= right_link "works", "edit", "upravit", edit_work_path(work) -%>
+					
+					<% if work.operations.size == 0-%>
+							<%= right_delete_link "works", "delete", 'smazat', work-%>
+			    
+					<% else %>
+						<%= right_show "works", "delete", "<br /><b class='red'>nelze smazat!</b>" %>
+					<% end-%>
+			  </td>
+
 		   <% if work.operations.size == 0 %>
 				</tr>		
 			<% end %>
@@ -170,14 +181,37 @@
 					  </td>
 					  <td <%= tr_op_class %>><%= operation.note_operator-%>
 					  </td>
-					
-					  <td <%= tr_op_class %>><%= right_link "works", "edit", "upravit", edit_operation_path(operation) -%>
-					  </td>
-
-
 				</tr>
 				<% first = false-%>
 			<% end-%>
+			
+			
 		<% end-%>
 
 </table>
+<h3>
+<div class="menu_small">
+	<a onClick="show_float_div('project_path_form_show');"> přidat cestu </a>
+</div>
+Cesty</h3>
+<% @project_path = ProjectPath.new %>
+<div id="project_path_form_show" style="display:none">
+<%= render :partial => 'project_paths/form' , :locals => { :project => @project } -%>
+</div>
+<%= render :partial => 'project_paths/list' , :locals => { :project_paths => @project.project_paths.sort{|u,z| z.created_at <=> u.created_at} } -%>
+	
+	
+
+<h3>
+<div class="menu_small">
+	<a onClick="show_float_div('comment_form_show');"> přidat komentář </a>
+</div>
+Komentáře</h3>
+<% @comment = Comment.new %>
+<div id="comment_form_show" style="display:none">
+<%= render :partial => 'comments/form' , :locals => { :project => @project } -%>
+</div>
+<%= render :partial => 'comments/list' , :locals => { :comments => @project.comments.sort{|u,z| z.created_at <=> u.created_at} } -%>
+
+
+

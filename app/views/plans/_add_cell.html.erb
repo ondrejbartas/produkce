@@ -82,7 +82,7 @@
 									<% end -%>
 									<% if planed_work.operations.size == 0-%>
 								  
-										<%= right_show "works", "edit", link_to_remote( "smazat!!!!",
+										<%= right_show "works", "delete", link_to_remote( "smazat!!!!",
 										   :url    => {:action => :delete_work, 
 															:work_id => planed_work.id,
  															},
@@ -90,7 +90,7 @@
 													:loading => visual_effect(:fade),
 													:confirm => "chcete opravdu smazat naplánovanou práci?")
 													-%>
-									<% end-%>
+									<% end -%>
 									
 									<%= right_link "works","edit", "upravit" , edit_work_path(planed_work.id)-%>
 								</div>

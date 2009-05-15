@@ -1,0 +1,28 @@
+<div class="calendar_event">
+	
+  <div class="unfinished">
+  	  <div class="top"></div>
+	
+		<div class="body">
+		      <div class="div_with_float">
+					<div>
+				
+					<% cas = Time.now.strftime("%s")-%>
+					<div class="add_user"> 
+							<b><%= @user.fullname %></b><br />
+							<%= hidden_field_tag "op_plans["+cas+"][operator_plan][user_id]", @user.id -%>
+							<%= hidden_field_tag "op_plans["+cas+"][operator_plan][value]", @value -%>
+					      od:<%= select_tag "op_plans["+cas+"][operator_plan][from]", options_for_select(OperatorPlan::TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]}, @selected_from)%><br />
+					      do:<%= select_tag "op_plans["+cas+"][operator_plan][to]", options_for_select(OperatorPlan::TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]}, @selected_to)%>
+					      <%= hidden_field_tag "op_plans["+cas+"][operator_plan][date]", @date -%>
+					      <%= link_to_function "smazat", "$(this).up('.add_user').remove(); "-%>
+					</div>				
+				
+					</div>
+				</div>
+			</div>
+		<div class="bottom"></div>
+	</div>
+</div>
+
+

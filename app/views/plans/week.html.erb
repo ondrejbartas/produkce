@@ -39,11 +39,11 @@
 <% end-%>
 
 
-<h2>
+<h3>
 	<%= link_to_remote "+ přidat předchozí týden +",
            :url => { :action => "add_week_calendar", 'substract_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
            :update =>  "calendar_container" , :position => :top-%>
-</h2>
+</h3>
 
 
 	
@@ -57,9 +57,9 @@
 
 </div>
 
-<h2>
+<h3>
 	<%= link_to_remote "+ přidat týden +",
            :url => { :action => "add_week_calendar", 'add_week' => true, :job_type => @filtr_type, :show_type => @filtr_show_type},
            :update =>  "calendar_container" , :position => :bottom-%>
-</h2>
+</h3>
 

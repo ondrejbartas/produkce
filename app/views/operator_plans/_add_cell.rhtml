@@ -1,0 +1,20 @@
+<% id = "operator_plan_"+operator_plan.id.to_s-%>
+<div id="<%= id-%>" >
+	<div class="calendar_event">
+		
+	  <div class="finished">
+	  	  <div class="top"></div>
+		
+			<div class="body">
+			      <div class="div_with_float">
+						<div>
+							<b><%= operator_plan.user.fullname-%></b><br />
+							<%= my_hour operator_plan.get_from -%>-
+							<%= my_hour operator_plan.get_to -%>	
+						</div>
+					</div>
+				</div>
+			<div class="bottom"></div>
+		</div>
+	</div>
+</div>

@@ -21,23 +21,23 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test "should show comment" do
-    get :show, :id => comments(:one).id
+    get :show, :id => comments(:one).to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, :id => comments(:one).id
+    get :edit, :id => comments(:one).to_param
     assert_response :success
   end
 
   test "should update comment" do
-    put :update, :id => comments(:one).id, :comment => { }
+    put :update, :id => comments(:one).to_param, :comment => { }
     assert_redirected_to comment_path(assigns(:comment))
   end
 
   test "should destroy comment" do
     assert_difference('Comment.count', -1) do
-      delete :destroy, :id => comments(:one).id
+      delete :destroy, :id => comments(:one).to_param
     end
 
     assert_redirected_to comments_path

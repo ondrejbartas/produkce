@@ -1,0 +1,17 @@
+
+<% form_for(@project_path) do |f|-%>
+  <%= f.error_messages-%>
+
+	<p>
+	  <%= label :project_path, 'type', 'typ cesty', :required => true-%><br />
+	  <%= f.select :value, ProjectPath::VALUES.invert.sort {|a,b| a[1]<=>b[1]}%>
+	</p>
+	<p>
+	    <%= f.text_area :path ,:class=> "textarea_project_path_project" -%>
+	    <%= f.hidden_field :user_id, :value=> @current_user.id -%>
+	    <%= f.hidden_field :project_id, :value=> project.id -%>
+	</p>
+  <p>
+    <%= f.submit "přidat" -%>
+  </p>
+<% end-%>

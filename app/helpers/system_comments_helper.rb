@@ -46,7 +46,7 @@ module SystemCommentsHelper
       	xm << ", "+my_time(system_comment.created_at)
       	xm << "<span class='odkazy'>"
       	if !(system_comment.finished == true || finished == true)
-      	  xm << " "+right_show ("system_comments", "new", link_to_remote("odpovědět", :url => { :action => "add_form", :id => system_comment.id}, :update =>  "comment_"+system_comment.id.to_s , :position => :bottom)).to_s
+      	  xm << " "+right_show("system_comments", "new", link_to_remote("odpovědět", :url => { :action => "add_form", :id => system_comment.id}, :update =>  "comment_"+system_comment.id.to_s , :position => :bottom)).to_s
       	else 
       	  finished = true
       	end

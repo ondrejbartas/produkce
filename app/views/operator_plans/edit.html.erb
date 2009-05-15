@@ -1,0 +1,12 @@
+<h1>Editing operator_plan</h1>
+
+<% form_for(@operator_plan) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @operator_plan %> |
+<%= link_to 'Back', operator_plans_path %>

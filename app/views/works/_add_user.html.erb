@@ -126,13 +126,14 @@
 
   <% end-%>
 
-<%= link_to_remote "+ přidat úkon +",
-           :url => { :action => "add_operation", :job_type_id => @job_type.id},
-           :update =>  "operations" , :position => :bottom-%>
-
 	<% if @work.blank?-%>
-		<%= render :partial => 'add_operation' , :locals => { :operation_types => @job_type.operation_types }-%>
-	<% end-%>
-	
-	
+		<div id="operations_2">
+			<%= render :partial => 'add_operation' , :locals => { :operation_types => @job_type.operation_types }-%>
+		</div>
+		<h3>	
+			<%= link_to_remote "+ přidat úkon +",
+			           :url => { :action => "add_operation", :job_type_id => @job_type.id},
+			           :update =>  "operations_2" , :position => :bottom-%>
+		</h3>	
+	<% end -%>
 <% end-%>
