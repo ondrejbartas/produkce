@@ -1,6 +1,5 @@
 <% id = "operator_plan_"+operator_plan.id.to_s-%>
-<div id="<%= id-%>" >
-	<div class="calendar_event">
+	<div class="calendar_event" id="<%= id-%>">
 		
 	  <div class="finished">
 	  	  <div class="top"></div>
@@ -10,11 +9,24 @@
 						<div>
 							<b><%= operator_plan.user.fullname-%></b><br />
 							<%= my_hour operator_plan.get_from -%>-
-							<%= my_hour operator_plan.get_to -%>	
+							<%= my_hour operator_plan.get_to -%>
+							<% if edit == true %>
+							<br />
+								<%= right_show "operator_plans", "delete", link_to_remote( "smazat",
+								   :url    => {:controller=>:operator_plans , :action => :delete_operator_plan, 
+													:operator_plan_id => operator_plan.id,
+													},
+											:update =>  id,
+											:loading => visual_effect(:fade),
+											:confirm => "chcete opravdu smazat naplánovanou službu?")
+											-%>
+
+							
+							<%= right_link "operator_plans", "edit", "upravit" , edit_operator_plan_path(operator_plan.id)-%>
+							<% end %>
 						</div>
 					</div>
 				</div>
 			<div class="bottom"></div>
 		</div>
 	</div>
-</div>

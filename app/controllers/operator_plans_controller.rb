@@ -43,7 +43,27 @@ class OperatorPlansController < ApplicationController
       format.xml  { render :xml => @operator_plan }
     end
   end
-
+  
+  # GET /operator_plans/new
+   # GET /operator_plans/new.xml
+   def edit_operator
+     @value = 1
+     respond_to do |format|
+       format.html # show.html.erb
+       format.xml  { render :xml => @operator_plan }
+     end
+   end
+   
+   # GET /operator_plans/new
+    # GET /operator_plans/new.xml
+    def edit_recepce
+      @value = 0
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @operator_plan }
+      end
+    end
+    
   # GET /operator_plans/1/edit
   def edit
     @operator_plan = OperatorPlan.find(params[:id])
@@ -100,8 +120,11 @@ class OperatorPlansController < ApplicationController
     respond_to do |format|
       if @operator_plan.update_attributes(params[:operator_plan])
         flash[:notice] = 'OperatorPlan was successfully updated.'
-        format.html { redirect_to(@operator_plan) }
-        format.xml  { head :ok }
+        if @operator_plan.value == 1
+         format.html { redirect_to :controller => "operator_plans", :action => "index" }
+        else 
+          format.html { redirect_to :controller => "operator_plans", :action => "index_recepce" }
+        end
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @operator_plan.errors, :status => :unprocessable_entity }
@@ -119,6 +142,16 @@ class OperatorPlansController < ApplicationController
       format.html { redirect_to(operator_plans_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  
+  # DELETE /operator_plans/1
+  # DELETE /operator_plans/1.xml
+  def delete_operator_plan
+    @operator_plan = OperatorPlan.find(params[:operator_plan_id])
+    @operator_plan.destroy
+
+    render  :inline =>"smazano"
   end
   
   

@@ -1,0 +1,56 @@
+<% if @value == 0 %>
+	<h2>Úprava služby recepce</h2>
+<% elsif @value == 1 %>
+	<h2>Úprava služby techniků</h2>
+<% end %>
+
+
+
+<%  4.times { |t|  %>
+
+
+<table>
+    <tr style="height:30px" >
+    <%  7.times { |n|  %>
+        <% table_day = Time.now.beginning_of_week + n.days + (t.days * 7 ) - 7.days %>
+            <th style="width:100px"  <% if Time.today ==  table_day -%>
+		                class="today"
+		            <%  elsif n%7 > 4 -%>
+		                class="weekend"
+		            <% end -%>
+				><%= day_names(n%7) %> <%= my_date table_day %> </th>
+	 <% } %>
+	</tr>
+
+
+	<tr style="height:40px">
+    <%  7.times { |n|  %>
+    	<% table_day = Time.now.beginning_of_week + n.days + (t.days* 7 ) - 7.days  %>
+
+			<td   <% if Time.today ==  table_day -%>
+	                class="today"
+	            <%  elsif n%7 > 4 -%>
+	                class="weekend"
+	            <% end -%>
+	
+					id="<%= "day_"+table_day.to_s %>"
+					>
+	
+			<% operator_plans = OperatorPlan.find(:all , :conditions => ['"date" = ? AND value = ?',  table_day.strftime("%Y-%m-%d"), @value ]).sort_by{|u| u.from} %>
+			    <% if operator_plans.size > 0 %>
+			        <% for operator_plan in operator_plans %>
+			            <%= render :partial => 'operator_plans/add_cell', :locals => {:operator_plan => operator_plan, :edit => true} %>
+			        <% end %>
+			    <% end %>
+			&nbsp;
+			</td>
+
+    <% } %>
+   </tr>
+</table>
+<% } %>
+
+
+
+
+

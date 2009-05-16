@@ -23,7 +23,7 @@
 	            <% end -%>>
 			    <% if operator_plans.size > 0 %>
 			        <% for operator_plan in operator_plans %>
-			            <%= render :partial => 'operator_plans/add_cell', :locals => {:operator_plan => operator_plan} %>
+			            <%= render :partial => 'operator_plans/add_cell', :locals => {:operator_plan => operator_plan, :edit => false} %>
 			        <% end %>
 			    <% end %>
 			&nbsp;

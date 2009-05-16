@@ -1,12 +1,24 @@
-<h1>Editing operator_plan</h1>
+<h2>Úprava naplánované služby</h2>
+<% form_for(@operator_plan) do |f|-%>
+  <%= f.error_messages-%>
 
-<% form_for(@operator_plan) do |f| %>
-  <%= f.error_messages %>
+<p>
+  <b>pracovník:</b> <%= @operator_plan.user.fullname %>
+</p>
+<p>
+  <b>datum:</b> <%= my_date @operator_plan.date %>
+</p>
+
+<p>
+    <%= label :operator_plan, "from", 'od', :required => true-%><br />
+	 <%= f.select  :from, OperatorPlan::TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]}-%>
+</p>
+<p>
+    <%= label :operator_plan, "to", 'do', :required => true-%><br />
+	 <%= f.select  :to, OperatorPlan::TIME_VALUES.invert.sort{|a,b| a[1]<=>b[1]}-%>
+</p>
 
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit 'upravit'-%>
   </p>
-<% end %>
-
-<%= link_to 'Show', @operator_plan %> |
-<%= link_to 'Back', operator_plans_path %>
+<% end-%>

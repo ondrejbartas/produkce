@@ -18,15 +18,15 @@
    <% end-%>
 </p>
 <p>
-  <% if  @company.projects.size > 0-%>
+  <% if  @company.projects.find(:all :conditions =>["deleted is not true"] ).size > 0-%>
     <%= label :work, 'project_id', 'hlavní projekt', :required => true-%>
     <%  if @selected.blank?-%>
         <%= collection_select(:project, :project_id ,
-          (@company.blank? ? [] : @company.projects.find(:all, :conditions => "deleted is null AND project_id is null")),
+          (@company.blank? ? [] : @company.projects.find(:all, :conditions => "deleted is not true AND project_id is null")),
           :id, :name, {:include_blank => true} )%>
     <%  else-%>
         <%= collection_select(:project, :project_id ,
-          (@company.blank? ? [] : @company.projects.find(:all, :conditions => "deleted is null AND project_id is null")),
+          (@company.blank? ? [] : @company.projects.find(:all, :conditions => "deleted is not true AND project_id is null")),
           :id, :name, {:selected_value => @selected, :include_blank => true})%>
     <% end-%>
     <i> vybrat hlavní projekt nebo zadat název projektu na další řádce</i>
@@ -40,7 +40,7 @@
 
 <h3>Již vytvořené projekty</h3>
 <ul>
-  <% for proj in @company.projects.find(:all,  :conditions => ["project_id is null AND (status = 0 OR status = 1 ) AND deleted is not true"]) -%>
+  <% for proj in @company.projects.find(:all,  :conditions => ["project_id is not true AND (status = 0 OR status = 1 ) AND deleted is not true"]) -%>
 	  <li><%= right_show_link ("projects", "show", proj.name, proj)-%>
 	    <% if proj.projects.size > 0-%>
 	        <ul>

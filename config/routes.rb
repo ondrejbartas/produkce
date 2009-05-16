@@ -32,7 +32,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :reception_contacts
 
-  map.resources :operator_plans, :collection => {:add_new_user_plan => [:get, :post], :index_recepce => [:get, :post], :new_recepce => [:get, :post]}
+  map.resources :operator_plans, :collection => {:add_new_user_plan => [:get, :post],
+                                                :index_recepce => [:get, :post],
+                                                :edit_operator => [:get, :post],
+                                                :edit_recepce => [:get, :post],
+                                                :delete_operator_plan => [:get, :post],
+                                                :new_recepce => [:get, :post]}
  
   map.resources :system_comments, :has_many => [ :system_comments ],
                                   :member => [:add_form, :finished, :storno, :archiv ]
