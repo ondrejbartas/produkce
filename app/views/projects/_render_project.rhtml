@@ -40,7 +40,7 @@
 
 <h3>Již vytvořené projekty</h3>
 <ul>
-  <% for proj in @company.projects.find(:all,  :conditions => ["project_id is not true AND (status = 0 OR status = 1 ) AND deleted is not true"]) -%>
+  <% for proj in @company.projects.find(:all,  :conditions => ["project_id is null AND (status = 0 OR status = 1 ) AND deleted is not true"]) -%>
 	  <li><%= right_show_link ("projects", "show", proj.name, proj)-%>
 	    <% if proj.projects.size > 0-%>
 	        <ul>
