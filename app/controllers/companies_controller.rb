@@ -43,6 +43,7 @@ class CompaniesController < ApplicationController
         @contacts = Contact.new(params[:contact])
 
       end
+      @company.write_history(@current_user)
 
        respond_to do |format|
          if @company.save
@@ -61,6 +62,8 @@ class CompaniesController < ApplicationController
   # PUT /companies/1.xml
   def update
        @company = Company.find(params[:id])
+
+       @company.write_history(@current_user)
 
        respond_to do |format|
          if @company.update_attributes(params[:company])
@@ -86,6 +89,7 @@ class CompaniesController < ApplicationController
       end
       @company.save
 
+      @company.write_history(@current_user)
 
        respond_to do |format|
          format.html { redirect_to(companies_url) }
@@ -103,7 +107,6 @@ class CompaniesController < ApplicationController
           if params[:query].nil?
             params[:query] = session["company_query"]
           end
-          params[:query] = params[:query].downcase.gsub(/[^a-z ]/, '').gsub(/ /, ' ')
           
         @search_for = "%#{params[:query]}%"
         @search_for_text = " AND ( LOWER(companies.name) LIKE '%"+@search_for.downcase+"%' OR "

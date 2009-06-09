@@ -164,7 +164,6 @@ class UsersController < ApplicationController
              if params[:query].nil?
                params[:query] = session["user_query"]
              end
-              params[:query] = params[:query].downcase.gsub(/[^a-z ]/, '').gsub(/ /, ' ')
              
              @search_for_text = "AND ( "
               params[:query].split(' ').each{ |word|

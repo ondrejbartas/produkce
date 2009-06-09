@@ -15,7 +15,7 @@
         </tr>
 
 
-    <% works = @current_user.works.find(:all, :include => [:operations], :conditions => ["deleted is not true AND operations.finished_work_id IS null AND date < ? ", (Time.now.beginning_of_day+ 3.days).strftime("%Y-%m-%d")]).sort_by{ |u| u.date }-%>
+    <% works = user.works.find(:all, :include => [:operations], :conditions => ["deleted is not true AND operations.finished_work_id IS null AND date < ? ", (Time.now.beginning_of_day+ 3.days).strftime("%Y-%m-%d")]).sort_by{ |u| u.date }-%>
 
     <% for work in works-%>
         <% first = true-%>
@@ -64,7 +64,7 @@
 	<% end-%>
 	</table>
 <% else-%>
-    <% works = @current_user.works.find(:all, :include => [:operations], :conditions => ["deleted is not true AND operations.finished_work_id IS null AND operations.finished is true"]).sort_by{ |u| u.date }-%>
+    <% works = user.works.find(:all, :include => [:operations], :conditions => ["deleted is not true AND operations.finished_work_id IS null AND operations.finished is true"]).sort_by{ |u| u.date }-%>
 	<% date = 0-%>
 	<% length = 0-%>
    <% for work in works-%>

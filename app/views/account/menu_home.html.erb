@@ -13,7 +13,7 @@
 		Seznam úkonů
 	</h2>
 
-    <%= render :partial=>"finished_works/form_operations", :locals => { :type => "home" }-%>
+    <%= render :partial=>"finished_works/form_operations", :locals => { :type => "home", :user => @current_user }-%>
 	
 	
 <% end-%>

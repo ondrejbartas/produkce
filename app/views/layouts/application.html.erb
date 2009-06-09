@@ -82,8 +82,7 @@
                    <% elsif @activePage == "menu_work"-%>
 							 <li><%= sub_menu( "finished_works", "new", 'zaúčtovat hotovou práci', new_finished_work_path )%></li>
                     	 <li><%= sub_menu( "finished_works", "index", 'seznam zaúčtované práce', finished_works_path )%></li>
-							<li>splnit praci /admin</li>
-							<li>zauctovat praci /admin</li>
+                    	 <li><%= sub_menu( "finished_works", "chose_user_as_produce", 'provést a zaúčtovat práci za operátora', chose_user_as_produce_finished_works_path )%></li>
 							<li>vyuctovani prace /admin</li>
 	              	<% elsif @activePage == "menu_reception"-%>
 							<li><%= sub_menu( "reception_contacts", "index", 'kontakty recepce', reception_contacts_path )%></li>

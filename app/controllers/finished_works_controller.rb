@@ -2,13 +2,49 @@ class FinishedWorksController < ApplicationController
   # GET /finished_works
   # GET /finished_works.xml
   def index
-    @finished_works = FinishedWork.find(:all)
 
+    @user = @current_user
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @finished_works }
     end
   end
+
+
+  def chose_user_as_produce
+
+     @users = User.find(:all, :conditions  => [" MOD(role, 5) = 0 OR  MOD(role, 17) = 0"])
+    
+     @finished_work = FinishedWork.new
+     
+      if !session["act_as_user_id"].blank?
+        @user = User.find(session["act_as_user_id"])
+      end
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @finished_works }
+      end
+    end
+
+
+  def finish_operation_as_produce
+     if params[:act_as_user_id].blank? && session["act_as_user_id"].blank?
+      render  :inline =>"vyberte operátora"
+     elsif params[:act_as_user_id].blank?
+       params[:act_as_user_id] = session["act_as_user_id"]
+     else 
+       session["act_as_user_id"] = params[:act_as_user_id]
+     end
+     if !params[:act_as_user_id].blank?
+       @user = User.find(params[:act_as_user_id])
+       @finished_work = FinishedWork.new
+       render :partial=>"finished_works/finish_operation_as_produce" 
+     else
+       render  :inline =>"vyberte uživatele"
+     end
+  end
+
+
 
   # GET /finished_works/1
   # GET /finished_works/1.xml
@@ -69,7 +105,7 @@ class FinishedWorksController < ApplicationController
     respond_to do |format|
       if saved
         flash[:notice] = 'FinishedWork was successfully created.'
-        format.html { redirect_to(menu_home_url) }
+        format.html { redirect_to session['saved_location'] }
         format.xml  { render :xml => @finished_work, :status => :created, :location => @finished_work }
       else
         format.html { redirect_to(menu_home_url) }

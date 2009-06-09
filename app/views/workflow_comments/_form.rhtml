@@ -3,6 +3,8 @@
 <% form_for @workflow_comment do |workflow_comment_form| -%>
 
 
+	
+
 	<% if !@workflow_comment_id.blank?-%>
   		<%= workflow_comment_form.hidden_field :workflow_comment_id, :value=>@workflow_comment_id-%>
 	<% end-%>

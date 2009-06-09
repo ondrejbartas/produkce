@@ -182,7 +182,7 @@ class ProjectsController < ApplicationController
           if params[:query].nil?
             params[:query] = session["project_query"]
           end
-          params[:query] = params[:query].downcase.gsub(/[^a-z ]/, '').gsub(/ /, ' ')
+          #params[:query] = params[:query].downcase.gsub(/[^a-z ]/, '').gsub(/ /, ' ')
           
           @search_for = "%#{params[:query]}%"
           @search_for_text = " AND ( LOWER(companies.name) LIKE '%"+@search_for.downcase+"%' OR "

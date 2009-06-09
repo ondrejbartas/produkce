@@ -1,0 +1,17 @@
+<h2>
+	Seznam neprovedených a nezaúčtovaných úkonů
+</h2>
+
+ <%= render :partial=>"finished_works/form_operations", :locals => { :type => "home", :user => @user }-%>
+
+<h2>
+	Seznam provedených úkonů k zaúčtování
+</h2>
+<% form_for(@finished_work) do |finished_work_form|-%>
+  <%= finished_work_form.error_messages-%>
+
+    <%= render :partial=>"finished_works/form_operations", :locals => { :type => "works", :user => @user, :finished_work_form => finished_work_form }-%>
+      
+         <%= finished_work_form.submit 'zaúčtovat' -%>
+
+<% end-%>

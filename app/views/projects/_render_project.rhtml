@@ -13,14 +13,14 @@
    <% end-%>
     
 	<% else-%>
-			<%= hidden_field :project, :user_id-%>
+			<%= hidden_field :project, :user_id -%>
 	   	<div class="red">!!!!!PROBLEM - vybraná firma nemá žádného člena - nelze přidat projekt !!!!!</div>
    <% end-%>
 </p>
 <p>
-  <% if  @company.projects.find(:all, :conditions =>["deleted is not true"] ).size > 0-%>
-    <%= label :work, 'project_id', 'hlavní projekt', :required => true-%>
-    <%  if @selected.blank?-%>
+  <% if  @company.projects.find(:all, :conditions =>["deleted is not true"] ).size > 0 -%>
+    <%= label :work, 'project_id', 'hlavní projekt', :required => true -%>
+    <%  if @selected.blank? -%>
         <%= collection_select(:project, :project_id ,
           (@company.blank? ? [] : @company.projects.find(:all, :conditions => "deleted is not true AND project_id is null")),
           :id, :name, {:include_blank => true} )%>

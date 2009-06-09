@@ -61,7 +61,7 @@ module SystemCommentsHelper
       	  xm << " "+ right_link("system_comments", "archiv", 'archivovat', archiv_system_comment_path(system_comment)).to_s
       	end
       	xm << "</span></li>\n"
-      	xm << "<li class='text'>"+system_comment.note+"</li>\n"
+      	xm << "<li class='text'>"+system_comment.get_note+"</li>\n"
         xm << "<div class='add_comment' id='comment_"+system_comment.id.to_s+"'></div>"
     
         if system_comment.system_comments.size > 0

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090514195618) do
+ActiveRecord::Schema.define(:version => 20090519083556) do
 
   create_table "bordel", :id => false, :force => true do |t|
     t.string  "name"
@@ -92,6 +92,9 @@ ActiveRecord::Schema.define(:version => 20090514195618) do
     t.boolean  "deleted"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "model"
+    t.text     "history"
   end
 
   create_table "invoice_operations", :force => true do |t|
@@ -183,7 +186,7 @@ ActiveRecord::Schema.define(:version => 20090514195618) do
     t.integer  "from"
     t.integer  "to"
     t.string   "note"
-    t.integer  "type"
+    t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -204,7 +207,7 @@ ActiveRecord::Schema.define(:version => 20090514195618) do
     t.string   "path"
     t.integer  "project_id"
     t.integer  "user_id"
-    t.integer  "type"
+    t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

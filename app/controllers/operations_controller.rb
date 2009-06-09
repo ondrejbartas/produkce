@@ -70,7 +70,7 @@ class OperationsController < ApplicationController
     respond_to do |format|
       if @operation.update_attributes(params[:operation])
         flash[:notice] = 'Operation was successfully updated.'
-        format.html { redirect_to(menu_home_url) }
+        format.html { redirect_to session['saved_location'] }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

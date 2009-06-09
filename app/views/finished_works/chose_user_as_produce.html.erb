@@ -1,0 +1,42 @@
+<form name="sform" action="" style="display:inline;">
+
+<p>
+
+<%= label 'act_as_user_id', 'id','operátor', :required => true-%>
+<% if @user.blank? %>
+            <%= collection_select :act_as_user_id , 'id',
+              @users.sort_by{|u| u.fullname},
+              :id, :get_name_and_works, { :prompt => 'vyberte operátora'},
+              {:onchange => remote_function( :update => 'selected_user_operations', :url =>
+              finish_operation_as_produce_finished_works_path,
+					:before => "Element.show('spinner')",
+		         :success => "Element.hide('spinner')",
+					:with => "'act_as_user_id=' + escape(value)" )}  -%>
+<% else %>
+				<%= collection_select :act_as_user_id , 'id',
+				  @users.sort_by{|u| u.fullname},
+				  :id, :get_name_and_works, {:prompt => 'vyberte operátora', :selected => @user.id },
+				  {:onchange => remote_function( :update => 'selected_user_operations', :url =>
+				  finish_operation_as_produce_finished_works_path,
+					:before => "Element.show('spinner')",
+				   :success => "Element.hide('spinner')",
+					:with => "'act_as_user_id=' + escape(value)" )}  -%>
+
+<% end %>
+
+		<%= image_tag("spinner.gif",
+              :align => "absmiddle",
+              :border => 0,
+              :id => "spinner",
+              :style =>"display: none;" )-%>
+
+  </p>
+</form>
+  <div id="selected_user_operations">
+	
+	<% if !@user.blank? %>
+
+		<%= render :partial=>"finished_works/finish_operation_as_produce" %>
+	<% end %>	
+
+  </div>

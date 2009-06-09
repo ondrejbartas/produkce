@@ -188,6 +188,11 @@ class User < ActiveRecord::Base
       end
     end
 
+
+    def get_name_and_works
+      self.fullname + " (" +self.works.find(:all, :include => [:operations], :conditions => ["deleted is not true AND operations.finished_work_id IS null AND date < ? ", (Time.now.beginning_of_day+ 3.days).strftime("%Y-%m-%d")]).size.to_s+")"
+    end
+    
     def fill_fullname
       self.fullname = surname + " " + name
     end

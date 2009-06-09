@@ -85,7 +85,8 @@ class OperatorPlansController < ApplicationController
                @operator_plan_error = @operator_plan
                saved = false
              else
-               flash[:notice] +="provedeno naplanovani sluzby na cas: "+ Time.parse(plan[:operator_plan][:date]).strftime("%d.%m.%Y")+" pro: "+@operator_plan.user.fullname+"<br />" 
+               @value = @operator_plan.value
+               flash[:notice] += "provedeno naplanovani sluzby na cas: "+ Time.parse(plan[:operator_plan][:date]).strftime("%d.%m.%Y")+" pro: "+@operator_plan.user.fullname+"<br />" 
              end
            }
        else 

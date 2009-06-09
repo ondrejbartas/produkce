@@ -1,6 +1,8 @@
 <h2>Seznam vyúčtování</h2>
 
-    <% finished_works = @current_user.finished_works.find(:all,  :order => "created_at DESC")-%>
+<% if @user.blank? then @user = user end %>
+
+    <% finished_works = @user.finished_works.find(:all,  :order => "created_at DESC")-%>
 	<table>
 		<tr>
 			<th rowspan="2">datum zaúčtování</th>

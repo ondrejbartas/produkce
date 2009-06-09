@@ -15,5 +15,9 @@ class WorkflowComment < ActiveRecord::Base
        self.id
      end
    end
+   
+   def get_note
+        self.note.gsub(/\n/, '<br>')
+   end
 
 end

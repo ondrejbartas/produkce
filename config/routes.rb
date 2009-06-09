@@ -109,7 +109,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :machines
   map.resources :operations, :collection => { :add_operation_type_parameters => [:get, :post] }
   map.resources :categories
-  map.resources :finished_works, :member => {:change_value => [:get, :post], :correct => [:get, :post]  }
+  map.resources :finished_works, :member => {
+                        :change_value => [:get, :post],
+                        :correct => [:get, :post]  },    
+                    :collection => { 
+                        :finish_work_as_produce => [:get, :post],
+                        :finish_operation_as_produce => [:get, :post],
+                        :chose_user_as_produce => [:get, :post]}
+                        
   map.resources :rights
 
   map.root :controller => 'account', :action => "login"

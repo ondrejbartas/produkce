@@ -61,7 +61,7 @@ module WorkflowCommentsHelper
       	  xm << " "+ right_link("workflow_comments", "archiv", 'archivovat', archiv_workflow_comment_path(workflow_comment)).to_s
       	end
       	xm << "</span></li>\n"
-      	xm << "<li class='text'>"+workflow_comment.note+"</li>\n"
+      	xm << "<li class='text'>"+workflow_comment.get_note+"</li>\n"
         xm << "<div class='add_comment' id='comment_"+workflow_comment.id.to_s+"'></div>"
     
         if workflow_comment.workflow_comments.size > 0

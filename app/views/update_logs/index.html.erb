@@ -7,14 +7,14 @@ Update log
 
 <table>
   <tr>
-    <th>datum</th>
+    <th style="width:150px;">datum</th>
     <th style="width:400px;">update</th>
   </tr>
 
 <% @update_logs.each do |update_log|-%>
   <tr  class="<%= cycle("even", "odd")-%>">
   	 <td><%= my_time update_log.created_at-%></td>
-    <td  style="text-align:left;"><%=h update_log.note-%></td>
+    <td style="text-align:left;"><%=h update_log.get_note-%></td>
   </tr>
 <% end-%>
 </table>

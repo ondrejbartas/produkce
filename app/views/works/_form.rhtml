@@ -7,7 +7,7 @@
       <p>
          <%= work_form.label 'project_id', 'projekt', :required => true-%>
                 <%= work_form.collection_select :project_id ,
-                  Project.find(:all, :conditions=> "status = 1 AND project_id IS null").sort_by{|u| u.name.downcase},
+                  Project.find(:all, :conditions=> "status = 1 AND project_id IS null",:order => "UPPER(name)"),
                   :id, :name, {:include_blank => true },
                   {:onchange => remote_function( :update => 'sub_project_id_container', :url =>
                   render_sub_project_projects_path,
